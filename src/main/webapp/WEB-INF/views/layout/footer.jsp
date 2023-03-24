@@ -4,7 +4,7 @@
 <html>
 <style>
 .foot_container{
-	width:100%; height:100px; border: 1px solid #ddd;
+	width:100%; height:100px; border: 1px solid #ddd; background-color: #ddd;
 }
 </style>
 <head>
@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="foot_container">
-	
+	footer
 </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ li{list-style: none;}
 }
 .title_container{
 	width:100%; height:550px; border: 1px solid tomato;
+	background-color: skyblue;
 
 	
 }
@@ -24,9 +25,7 @@ li{list-style: none;}
 	margin-right: 10px;  float:right;
 
 }
-.loginLink::after{
-	display:block; clear:both;content:''; 
-}
+
 
 .main_title{
 	width: 100%; height:40%; text-align:center; 
@@ -51,7 +50,7 @@ li{list-style: none;}
 	 
 }
 .catalog{
-	width: 10%; height:90%; border: 1px solid gray;
+	width: 7%; height:90%; border: 1px solid gray;
 	vertical-align: middle; margin:15px 0px 0px 17px; 
 
 }
