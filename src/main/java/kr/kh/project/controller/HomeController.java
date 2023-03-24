@@ -15,7 +15,7 @@ public class HomeController {
 	public ModelAndView home(ModelAndView mv) {
 		
 
-		mv.setViewName("/main/home2");
+		mv.setViewName("/main/home");
 		
 		return mv;
 	}

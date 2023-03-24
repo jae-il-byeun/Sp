@@ -2,72 +2,219 @@
     pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <html>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+  <!-- Link Swiper's CSS -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
 
+
+    
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
+a{text-decoration:none;}
+
 .main_container{
-	width:100%; height:100%; border:1px solid purple; 
+	width: 100%; height:1980px; box-sizing:border-box;
 	
 }
 .title_container{
-	width:100%; height:550px; border: 1px solid tomato;
-	background-color: skyblue;
-
+	width: 100%; height:23%; box-sizing:border-box; box-shadow: 0 2px 4px #ddd;
+	border: 1px solid #ddd;  border-radius: 5px;
+	
 	
 }
 .login_box{
-	width:100%; height:80px;
-	  margin-top: 15px; 
+	width: 10%; height:15%; 
+	margin-top:10px; display:flex;  float: right;
 }
-.loginLink{
-	width:5%; height:100%; border: 1px solid tan; 
-	margin-right: 10px;  float:right;
-
+.login_link{
+	width:28%; height:95%;  
+	margin-right:10px; 
 }
-
-
-.main_title{
-	width: 100%; height:40%; text-align:center; 
-	
-}
-.title{ 
-	cursor: pointer; font-size: 130px; 
-}
-.main_search_box{
-	width:100%; height:13%; border: 1px solid royalblue;
-	text-align: center;
-}
-.main_search{
-	width: 30%; height:75%; border: 1px solid #000;  border-radius: 8px;
-	margin-top: 10px;
+.login_link *{cursor:pointer;
 }
 
-.blink{width:21%; height:100%;}
-.catalogLink_box{
-	width:100%; height: 35%; border: 1px solid green; 
-	display: flex; 
-	 
+.login_link span{
+	display:block;
+}
+.title_box{ 
+	width:100%; height:50%; box-sizing: border-box;
+	 text-align: center; line-height: 250px; padding: 50px 300px 0px;
+
+}
+#title_text{font-size: 100px; font-weight: bold; }
+
+.main_searchBox{
+	width: 100%; height:13%; 
+	text-align: center; box-sizing: border-box; padding: 0px 500px; margin-top:30px;
+}
+#main_search{margin-top: 5px;
+	width:70%; height:75%; border:1px solid #ddd; border-radius: 7px;
+}
+.catalog_container{
+	width:100%; height: 30%; 
+	box-sizing: border-box; padding:10px 300px;
+}
+.catalog_box{
+	width:100%; height:100%; 
+	box-sizing: border-box; padding:10px 300px;
+	display:flex; text-align: center;
 }
 .catalog{
-	width: 7%; height:90%; border: 1px solid gray;
-	vertical-align: middle; margin:15px 0px 0px 17px; 
+	width:20%; height:70%
+}
+.catalog_link span{
+	display:block;
+}
 
+
+
+
+.content_container{
+	width:100%; height:77%; 
+	box-sizing: border-box; padding: 40px 150px;
+	position:relative;
 }
-.catalog_icon{
-	width: 100%; height:70%; border: 1px solid aqua;
+.content_container h2 h3{
+	font-size: 40px;
+}
+
+.content_product{
+	width:100%; height: 15%;
+}
+.content_product li{
+	margin-bottom: 100px;
+}
+
+.content_product li swiper-container {background: none;
+     width: 100%; height: 100%; 
+     box-sizing: border-box;  box-shadow: 0 2px 2px #ddd;
+     border-radius: 5px;
+    }
+
+swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+     
+ }
+
+swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+}
+.content_coupon{
 	
+	width:84.5%; height:5%; box-sizing:border-box;
+	
+	 position: absolute; top:1100px; 
 }
-.catalog span{
-display: block; text-align: center; font-size: 20px;
+
+
+
+.autoplay-progress {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: var(--swiper-theme-color);
+    }
+
+    .autoplay-progress svg {
+      --progress: 0;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      stroke-width: 4px;
+      stroke: var(--swiper-theme-color);
+      fill: none;
+      stroke-dashoffset: calc(125.6 * (1 - var(--progress)));
+      stroke-dasharray: 125.6;
+      transform: rotate(-90deg);
+    }
+    
+
+    
+    /* 모달 스타일 */
+.modal {
+  display: none; /* 초기에는 모달이 보이지 않도록 설정합니다. */
+  position: absolute; /* 스크롤과 상관없이 화면에 고정되도록 설정합니다. */
+  z-index: 1; /* 모달이 다른 요소 위에 표시되도록 설정합니다. */
+  left: 360px;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* 모달 외부를 어둡게 처리합니다. */
 }
-.ad_container{
-	width: 100%; height:100%; border:1px solid blue;
-	min-width:1580px; position: relative;
+
+/* 모달 콘텐츠 스타일 */
+.modal-content {
+ position: relative; /* 모달 내부 요소들의 위치를 상대적으로 지정하기 위해 추가 */
+  background-color: #fefefe;
+  margin: 5px;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  height: 98%;
+  max-width: 600px;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
-.ad_box{
-	width: 80%; height: 30%; border: 1px solid red;
-	margin: 50px 0px 0px 200px; 
+
+/* 모달 닫기 버튼 스타일 */
+.close {
+  color: #aaaaaa;
+  position: absolute;
+  top: 10;
+  right: 20;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.ml_box{
+	width:98%; height:50%; box-sizing: border-box; 
+	padding-left: 60px;
+}
+.ml_title{
+	margin: 30px 0px 20px 55px;
+}
+.ml_box input{
+	display: block; width:85%; height: 30%; 
+	margin-top:20px; padding-left:5px; font-size: 20px; 
+	border-radius: 10px; border:1px solid gray;
+}
+#ml_login_keep{
+	width:5%; height: 10%; margin-top: 10px; display: inline-block;
+}
+#ml_btn{
+	width:60%; height:20%; text-align: center;
+	font-size: 25px; border:1px solid #ddd; border-radius: 10px;
+	background-color: green; color: #fff; 
+	margin-left: 90px; 
+	
 }
 </style>
 <head>
@@ -76,76 +223,200 @@ display: block; text-align: center; font-size: 20px;
 <body>
 <div class="main_container">
 	<div class="title_container">
-		<ul class="login_box" >
-			<li class="loginLink">
-				<a class="basket_link">
-					<img alt="" src="">
+		<ul class="login_box">
+			<li class="login_link">
+				<a href="#">
+					<img alt="" src="">장바구니
+					
 				</a>
 			</li>
-			<li class="loginLink">
-				<a class="member_link">
-					<img alt="" src="">
-				</a>
+			<li class="login_link">
+				<label>
+					<a class="m_login" id="m_modal">
+						<img alt="" src="">
+						<span>회원</span>
+					</a>
+				</label>		
 			</li>
-			<li class="loginLink">
-				<a class="entrepreneur_link">
-					<img alt="" src="">
+			<li class="login_link">
+				<a class="p_login" id="p_modal">
+					<label>
+						<img alt="" src="">
+						<span>사업자</span>
+					</label>
 				</a>
 			</li>
 		</ul>
-		<div class="main_title">
-			<a href="#" class="title">title</a>
+		<div class="title_box">
+			<a href="#">
+				<span id="title_text">Repose</span>
+			</a>
 		</div>
-		<div class="main_search_box">
-			<input type="text" class="main_search">
+		<div class="main_searchBox">
+			<input type="text" id="main_search">
 			<img alt="" src="">
 		</div>
-		<ul class="catalogLink_box">
-			<li class="blink"></li>
-			<li class="catalog">
-				<label>
-					<img alt="" src="" class="catalog_icon">
-					<span>호텔</span>
-				</label>
-			</li>
-			<li class="catalog">
-				<label>
-					<img alt="" src="" class="catalog_icon">
-					<span>모텔</span>
-				</label>
-			</li>
-			<li class="catalog">
-				<label>
-					<img alt="" src="" class="catalog_icon">
-					<span>펜션</span>
-				</label>
-			</li>
-			<li class="catalog">
-				<label>
-					<img alt="" src="" class="catalog_icon">
-					<span>고속버스</span>
-				</label>
-			</li>
-			<li class="catalog">
-				<label>
-					<img alt="" src="" class="catalog_icon">
-					<span>게시판</span>
-				</label>
-			</li>
-		</ul>
+		<div class="catalog_container">
+			<ul class="catalog_box">
+				<li class="catalog">
+					<label>
+						<a href="#" class="catalog_link">
+							<img alt="" src="" class="catalog_icon">
+							<span>호텔</span>
+						</a>
+					</label>
+				</li>
+				<li class="catalog">
+					<label>
+						<a href="#" class="catalog_link">
+							<img alt="" src="" class="catalog_icon">
+							<span>모텔</span>
+						</a>
+					</label>
+				</li>
+				<li class="catalog">
+					<label>
+						<a href="#" class="catalog_link">
+							<img alt="" src="" class="catalog_icon">
+							<span>펜션</span>
+						</a>
+					</label>
+				</li>
+				<li class="catalog">
+					<label>
+						<a href="#" class="catalog_link">
+							<img alt="" src="" class="catalog_icon">
+							<span>교통</span>
+						</a>
+					</label>
+				</li>
+				<li class="catalog">
+					<label>
+						<a href="#" class="catalog_link">
+							<img alt="" src="" class="catalog_icon">
+							<span>게시판</span>
+						</a>
+					</label>
+				</li>
+			</ul>
+			
+		</div>
 	</div>
-	<div class="ad_container">
-		<div class="ad_box">
+	<div class="content_container">
+		<ul class="content_product">
+			<li class="">
+				<h2>인기여행지</h2>
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				    slides-per-view="4">
+				    <swiper-slide>Slide 1</swiper-slide>
+				    <swiper-slide>Slide 2</swiper-slide>
+				    <swiper-slide>Slide 3</swiper-slide>
+				    <swiper-slide>Slide 4</swiper-slide>
+				    <swiper-slide>Slide 5</swiper-slide>
+				    <swiper-slide>Slide 6</swiper-slide>
+				    <swiper-slide>Slide 7</swiper-slide>
+				    <swiper-slide>Slide 8</swiper-slide>
+				    <swiper-slide>Slide 9</swiper-slide>
+				  </swiper-container>
+			</li>
+			<li class="">
+				<h2>추천지</h2>
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				    slides-per-view="4">
+				    <swiper-slide>Slide 1</swiper-slide>
+				    <swiper-slide>Slide 2</swiper-slide>
+				    <swiper-slide>Slide 3</swiper-slide>
+				    <swiper-slide>Slide 4</swiper-slide>
+				    <swiper-slide>Slide 5</swiper-slide>
+				    <swiper-slide>Slide 6</swiper-slide>
+				    <swiper-slide>Slide 7</swiper-slide>
+				    <swiper-slide>Slide 8</swiper-slide>
+				    <swiper-slide>Slide 9</swiper-slide>
+				  </swiper-container>
+			</li>
+			<li class="">
+				<h2>여긴?</h2>
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				    slides-per-view="4">
+				    <swiper-slide>Slide 1</swiper-slide>
+				    <swiper-slide>Slide 2</swiper-slide>
+				    <swiper-slide>Slide 3</swiper-slide>
+				    <swiper-slide>Slide 4</swiper-slide>
+				    <swiper-slide>Slide 5</swiper-slide>
+				    <swiper-slide>Slide 6</swiper-slide>
+				    <swiper-slide>Slide 7</swiper-slide>
+				    <swiper-slide>Slide 8</swiper-slide>
+				    <swiper-slide>Slide 9</swiper-slide>
+				  </swiper-container>
+			</li>
+			
+		</ul>
+		<figure class="content_coupon">
+			<h3 >이달의 쿠폰</h3>
+			<swiper-container class="mySwiper" pagination="false" pagination-clickable="false" navigation="false" space-between="30"
+			    centered-slides="false" autoplay-delay="4000" autoplay-disable-on-interaction="false"
+			    style=" border:1px solid #ddd; border-radius: 45px;">
+			    <swiper-slide>Slide 1</swiper-slide>
+			    <swiper-slide>Slide 2</swiper-slide>
+			    <swiper-slide>Slide 3</swiper-slide>
+			    <div class="autoplay-progress" slot="container-end">
+			      <svg viewBox="0 0 48 48">
+			        <circle cx="24" cy="24" r="20"></circle>
+			      </svg>
+			      <span></span>
+			    </div>
+			  </swiper-container>
+		</figure>
 		
-		</div>
-		<div class="ad_box">
+
 		
-		</div>
-		<div class="ad_box">
-		
-		</div>
+	</div>
+	
+
+	  <!-- 모달 -->
+	<div id="modal" class="modal">
+	  <!-- 모달 콘텐츠 -->
+	  <div class="modal-content" id="modal_content">
+	    <span class="close">&times;</span>
+	    <h2 class="ml_title">회원 로그인</h2>
+	    <div class="ml_box">
+	    	<input type="text" class="ml_id" placeholder="아이디">
+	    	<input type="text" class="ml_pw" placeholder="비밀번호">
+	    	<input type="checkbox" id="ml_login_keep"> <span>아이디 유지</span>
+	    </div>
+	    <button type="button" id="ml_btn">로그인</button>
+	  </div>
 	</div>
 </div>
+
 <%@ include file = "/WEB-INF/views/layout/footer.jsp" %>
 </body>
+<script>
+// dialog 열기
+// 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
+document.getElementById("m_modal").onclick = function() {
+  document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+  document.getElementById("modal").style.left = "37%";
+  document.getElementById("modal").style.height = "50%";
+  document.getElementById("modal").style.top = "24%";
+  document.getElementById("modal").style.padding = "9px 10px 5px";
+  document.getElementById("modal").style.overflow = "hidden";
+  document.getElementById("modal_content").style.width = "100%";
+  document.getElementById("modal_content").style.margin = "0px";
+  
+}
+
+// 모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
+document.getElementsByClassName("close")[0].onclick = function() {
+  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+}
+
+// 모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
+window.onclick = function(event) {
+  if (event.target == document.getElementById("modal")) {
+    document.getElementById("modal").style.display = "none";
+  }
+}
+</script>
 </html>
+
