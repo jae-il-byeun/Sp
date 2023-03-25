@@ -19,5 +19,21 @@ public class HomeController {
 		
 		return mv;
 	}
+	@RequestMapping(value = "/join/member", method = RequestMethod.GET)
+	public ModelAndView memberJoin(ModelAndView mv) {
+		
+
+		mv.setViewName("/join/memberJoin");
+		
+		return mv;
+	}
+	@RequestMapping(value = "/join/ep", method = RequestMethod.GET)
+	public ModelAndView EpJoin(ModelAndView mv) {
+		
+
+		mv.setViewName("/join/EntrepreneurJoin");
+		
+		return mv;
+	}
 	
 }
