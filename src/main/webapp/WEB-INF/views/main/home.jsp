@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <html>
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -12,6 +13,14 @@
 *{margin:0px; padding:0px;}
 li{list-style: none;}
 a{text-decoration:none;}
+body{ font-family: 'GyeonggiTitleM';}
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 .main_container{
 	width: 100%; height:1980px; box-sizing:border-box;
@@ -19,7 +28,8 @@ a{text-decoration:none;}
 }
 .title_container{
 	width: 100%; height:23%; box-sizing:border-box; box-shadow: 0 2px 4px #ddd;
-	border: 1px solid #ddd;  border-radius: 5px;
+	  color:#fff;
+	background-image:url("resources/img/night_sky.jpg");
 	
 	
 }
@@ -35,8 +45,11 @@ a{text-decoration:none;}
 }
 
 .login_link span{
-	display:block;
+	display:block; text-align: center; font-size:12px;
 }
+.login_icon{width:50%; vertical-align:middle; margin-left:13px;}
+
+
 .title_box{ 
 	width:100%; height:50%; box-sizing: border-box;
 	 text-align: center; line-height: 250px; padding: 50px 300px 0px;
@@ -51,8 +64,8 @@ a{text-decoration:none;}
 #main_search{
 	width:65%; height:75%;
 	margin-top: 5px; margin-left:10px; padding-left: 5px; 
-	border:1px solid #ddd; border-radius: 7px;
-	
+	border:1px solid #ddd; border-radius: 7px; color:#fff; font-size: 17px;
+	 background-color: transparent;
 }
 .catalog_container{
 	width:100%; height: 30%; 
@@ -67,9 +80,11 @@ a{text-decoration:none;}
 	width:20%; height:70%
 }
 .catalog_link span{
-	display:block;
+	display:block; color:#fff;
 }
-
+.catalog_icon{
+	width:49%;
+}
 
 
 
@@ -259,14 +274,14 @@ swiper-slide img {
 		<ul class="login_box">
 			<li class="login_link">
 				<a href="#">
-					<img alt="" src="">장바구니
+					<img alt="" src="resources/img/basket.png" class="login_icon">
 					
 				</a>
 			</li>
 			<li class="login_link">
 				<label>
 					<a class="m_login" id="m_modal">
-						<img alt="" src="">
+						<img alt="" src="resources/img/member.png" class="login_icon mc"> 
 						<span>회원</span>
 					</a>
 				</label>		
@@ -274,7 +289,7 @@ swiper-slide img {
 			<li class="login_link">
 				<a class="p_login" id="p_modal">
 					<label>
-						<img alt="" src="">
+						<img alt="" src="resources/img/boss.png" class="login_icon">
 						<span>사업자</span>
 					</label>
 				</a>
@@ -294,7 +309,7 @@ swiper-slide img {
 				<li class="catalog">
 					<label>
 						<a href="#" class="catalog_link">
-							<img alt="" src="" class="catalog_icon">
+							<img alt="" src="resources/img/hotel.png" class="catalog_icon">
 							<span>호텔</span>
 						</a>
 					</label>
@@ -302,7 +317,7 @@ swiper-slide img {
 				<li class="catalog">
 					<label>
 						<a href="#" class="catalog_link">
-							<img alt="" src="" class="catalog_icon">
+							<img alt="" src="resources/img/motel.png" class="catalog_icon">
 							<span>모텔</span>
 						</a>
 					</label>
@@ -310,7 +325,7 @@ swiper-slide img {
 				<li class="catalog">
 					<label>
 						<a href="#" class="catalog_link">
-							<img alt="" src="" class="catalog_icon">
+							<img alt="" src="resources/img/pension.png" class="catalog_icon">
 							<span>펜션</span>
 						</a>
 					</label>
@@ -318,7 +333,7 @@ swiper-slide img {
 				<li class="catalog">
 					<label>
 						<a href="#" class="catalog_link">
-							<img alt="" src="" class="catalog_icon">
+							<img alt="" src="resources/img/bus.png" class="catalog_icon">
 							<span>교통</span>
 						</a>
 					</label>
@@ -326,7 +341,7 @@ swiper-slide img {
 				<li class="catalog">
 					<label>
 						<a href="#" class="catalog_link">
-							<img alt="" src="" class="catalog_icon">
+							<img alt="" src="resources/img/board.png" class="catalog_icon">
 							<span>게시판</span>
 						</a>
 					</label>
@@ -417,7 +432,7 @@ swiper-slide img {
 	    	<label>
 	    		<input type="checkbox" id="ml_login_keep">
 	    		<span>아이디 유지</span>
-	    	</label>
+	    	</label>	
 	    	
 	    	<a href="#" id="ml_loss" >아이디·비번찾기</a>
 	    	
@@ -469,10 +484,13 @@ document.getElementById("m_modal").onclick = function() {
 }
 
 // 모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
-document.getElementsByClassName("close")[0].onclick = function() {
-  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
-}
-
+//document.getElementsByClassName("close")[0].onclick = function() {
+//  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+//}
+$(".close").click(function(e) {
+	  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+	
+});
 // 모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
   if (event.target == document.getElementById("modal")) {
@@ -496,9 +514,10 @@ document.getElementById("p_modal").onclick = function() {
 }
 
 //모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
-document.getElementsByClassName("close")[0].onclick = function() {
+document.getElementsByClassName("close")[1].onclick = function() {
 	document.getElementById("p-modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
 }
+
 
 //모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {

@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-
+<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
 </head>
 <style>
 th{text-align: left; padding-left: 5px; }
@@ -55,7 +59,7 @@ input{
 <div class="join_container">
 	<div class="join_box">
 		<h1>회원가입</h1>
-		<form action="" class="join_form">
+		<form action="<c:url value='/join/member'></c:url>" method="post" class="join_form">
 			<table class="join_table">
 				<tr>
 					<th>아이디</th>
@@ -181,6 +185,19 @@ input{
 						<input type="text" placeholder="인증번호란">
 					</td>
 				</tr>
+				<tr>
+					<th>회원이메일</th>
+				</tr>
+						
+				<tr>	
+					<td>
+						<input type="text">
+						<span>@</span>
+						<input type="text">
+						<select>
+							<option>naver.com</option>
+						</select>
+					</td>
 				<tr>
 					<td>
 						<button>작성완료</button>

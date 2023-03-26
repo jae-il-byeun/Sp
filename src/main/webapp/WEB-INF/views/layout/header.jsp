@@ -6,6 +6,12 @@
 *{margin:0; padding:0; list-style: none;}
 a{text-decoration: none; margin-left: 20px;}
 span{margin: 0px 5px 0px 15px;}
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .header_container{
 	width:100%; height:140px; 

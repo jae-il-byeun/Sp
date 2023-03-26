@@ -19,7 +19,7 @@ input{
 	}
 .join_container{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:30px 450px;
+	box-sizing: border-box; padding:30px 350px;
 	margin-bottom:80px;
 }
 .join_box{
@@ -47,8 +47,13 @@ input{
 }
 
 #year{width:20%;}
-.gender{width:3%; }
-.g_text{display:inline-block; vertical-align: middle;}
+.gender{width:3%; margin-left: 5px;}
+#gender_box{displah:flex;}
+.g_text{
+	display:inline-block; vertical-align: middle; 
+	position:relative; top:-17px;
+	margin-left:0px; 
+}
 </style>
 <body>
 <%@ include file = "/WEB-INF/views/layout/header.jsp" %>
@@ -155,7 +160,7 @@ input{
 					<th>성별</th>
 				</tr>
 				<tr>
-					<td>
+					<td id="gender_box">
 						<label>
 							<input type="radio" class="gender" >
 							<span class="g_text">남자</span>
@@ -181,12 +186,66 @@ input{
 						<input type="text" placeholder="인증번호란">
 					</td>
 				</tr>
+
+						
+			</table>
+			<table class="join_table">
+				<tr>
+					<th>사업자등록번호</th>
+				</tr>
+						
+				<tr>	
+					<td>
+						<input type="text">
+					</td>
+				</tr>
+				<tr>
+					<th>사업자이메일</th>
+				</tr>
+						
+				<tr>	
+					<td>
+						<input type="text">
+						<span>@</span>
+						<input type="text">
+						<select>
+							<option>naver.com</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>사업자주소</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="password">
+					</td>
+				</tr>
+				<tr>
+					<th>집주소</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text">
+					</td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text">
+					</td>
+				</tr>
+				
 				<tr>
 					<td>
 						<button>작성완료</button>
 					</td>
 				</tr>	
-						
+				
+				
+				
 			</table>
 		</form>
 	</div>
