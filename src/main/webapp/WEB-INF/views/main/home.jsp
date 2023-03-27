@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <html>
-<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
