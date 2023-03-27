@@ -14,6 +14,7 @@
 th{text-align: left; padding-left: 5px; }
 td{width:80%;}
 tr{width:100%;}
+body{ font-family: 'GyeonggiTitleM';}
 @font-face {
     font-family: 'GyeonggiTitleM';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
@@ -27,11 +28,11 @@ input{
 .join_container{
 	width:100%; height:100%; 
 	box-sizing: border-box; padding:30px 500px;
-	margin-bottom:80px;
+	 margin-bottom:80px;
 }
 .join_box{
-	width:100%; height:100%; 
-	box-sizing: border-box; padding:10px 200px;
+	width:100%; height:100%;  
+	box-sizing: border-box; padding:10px 200px; margin-top: 130px; 
 }
 .join_form{display:flex; margin-top:15px;}
 .join_table{
@@ -56,7 +57,7 @@ input{
 	width:46%; margin-right: 0px;
 }
 
-#year{width:20%;}
+.year{width:20%;}
 .gender{width:3%; }
 .g_text{display:inline-block; vertical-align: middle;
 	position: relative; bottom:17px;margin-left: 0px;
@@ -80,7 +81,7 @@ input{
 						
 				<tr>	
 					<td>
-						<input type="text">
+						<input type="text" id="me_id">
 					</td>
 				</tr>
 				<tr>
@@ -88,7 +89,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="password">
+						<input type="password" id="me_pw">
 					</td>
 				</tr>
 				<tr>
@@ -96,7 +97,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="password">
+						<input type="password" id="me_pwcheck">
 					</td>
 				</tr>
 				<tr>
@@ -104,7 +105,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="text">
+						<input type="text" id="me_name">
 					</td>
 				</tr>
 				<tr>
@@ -112,9 +113,9 @@ input{
 				</tr>
 				<tr id="rrn_area">
 					<td  class="rrn_box">
-						<input type="text" class="rrn_text">
+						<input type="text" class="rrn_text" id="me_rrnFront">
 							<span>- </span>
-						<input type="password" class="rrn_text" >
+						<input type="password" class="rrn_text" id="me_rrnBack">
 					</td>
 				</tr>
 					<tr>
@@ -122,7 +123,7 @@ input{
 				</tr>
 				<tr>
 					<td class="year_box">
-						<input type="text" placeholder="년(4자)" id="year">
+						<input type="text" placeholder="년(4자)" classs="year" id="me_year">
 						<select >
 							<option>월</option>
 							<option>1</option>
@@ -151,7 +152,17 @@ input{
 							<option>9</option>
 							<option>10</option>
 							<option>11</option>
-							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							<option>19</option>
+							<option>20</option>
+							<option>21</option>
+			
+							
 						</select>
 						
 					</td>
@@ -168,11 +179,11 @@ input{
 				<tr>
 					<td>
 						<label>
-							<input type="radio" class="gender" >
+							<input type="radio" name="g_check"class="gender" value="1">
 							<span class="g_text">남자</span>
 						</label>
 						<label>
-							<input type="radio"  class="gender">
+							<input type="radio" name="g_check"  class="gender" value="2">
 							<span class="g_text">여자</span>
 						</label>
 					</td>
@@ -221,4 +232,29 @@ input{
 </div>
 
 </body>
+<script>
+	$('form').validate({
+		rules:{
+			me_id : {
+					required :true,
+					regex : /^[a-zA-Z][a-zA-Z0-9-_]{5,20}$/
+			},
+			me_pw : {
+					required : true,
+					regex : /^[a-zA-Z0-9!@]{8,16}$/
+				
+			}
+		}
+	});
+	$('.gender').click(function(){
+		var genderCheck = $(this).find($('.gender:radio'));
+		if(genderCheck.attr("checked") == "checked"){
+			
+			genderCheck.removeAttr("checked");
+			
+		}else{
+			genderCheck.attr("checked","checked");
+		}
+	});
+</script>
 </html>

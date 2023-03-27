@@ -4,11 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html> 
 <html>
-<head>
-	
-	<script src="/project/resources/js/jquery.min.js"></script>
-	<script src="/project/resources/js/popper.min.js"></script>
-
+                         
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>

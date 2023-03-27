@@ -272,11 +272,14 @@ swiper-slide img {
 <div class="main_container">
 	<div class="title_container">
 		<ul class="login_box">
+		
 			<li class="login_link">
-				<a href="#">
-					<img alt="" src="resources/img/basket.png" class="login_icon">
-					
-				</a>
+				<label>
+					<a href="#">
+						<img alt="" src="resources/img/basket.png" class="login_icon">
+						<span style="color:#fff;">장바구니</span>
+					</a>
+				</label>
 			</li>
 			<li class="login_link">
 				<label>

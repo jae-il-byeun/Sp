@@ -38,6 +38,7 @@ public class HomeController {
 			mv.setViewName("redirect:/");
 		}
 		mv.setViewName("redirect:/join/member");
+		
 		return mv;
 	}
 	@RequestMapping(value = "/join/business", method = RequestMethod.GET)
@@ -48,5 +49,9 @@ public class HomeController {
 		
 		return mv;
 	}
-	
+	@RequestMapping(value = "/product/hotel", method = RequestMethod.GET)
+	public ModelAndView hotel(ModelAndView mv) {
+		mv.setViewName("/product/hotel");
+		return mv;
+	}
 }
