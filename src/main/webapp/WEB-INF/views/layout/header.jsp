@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <style>
 *{margin:0; padding:0; list-style: none;}
 a{text-decoration: none; margin-left: 20px;}
 span{margin: 0px 5px 0px 15px;}
-@font-face {
-    font-family: 'GyeonggiTitleM';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 .header_container{
 	width:100%; height:140px; 
@@ -21,6 +17,7 @@ span{margin: 0px 5px 0px 15px;}
 	width:100%; height:130px; 
 	
 	box-sizing: border-box; padding: 2px 150px;
+
 	
 }
 #header_menu{
@@ -28,7 +25,7 @@ span{margin: 0px 5px 0px 15px;}
 	border: 1px solid purple; border-radius: 2px;
 	box-shadow: 5px 5px 5px #ddd; box-sizing: border-box; padding: 10px 50px;
 	display: flex;
-	
+	background-image:url("resources/img/night_sky.jpg");
 }
 #home_link{
 	line-height: 80px; margin-right: 20%; font-size: 30px;

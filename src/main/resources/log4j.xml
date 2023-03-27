@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="kr.kh.spring">
+	<logger name="kr.kh.project">
 		<level value="info" />
 	</logger>
 	

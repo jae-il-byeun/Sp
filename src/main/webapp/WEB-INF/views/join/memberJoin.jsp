@@ -8,37 +8,40 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
-<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
+
 </head>
 <style>
 th{text-align: left; padding-left: 5px; }
 td{width:80%;}
 tr{width:100%;}
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 input{
-	width:80%; height:42px; font-size: 15px;
+	width:99%; height:42px; font-size: 15px;
 	margin:3px 0px 10px; box-sizing: border-box; padding-left:10px;
 	}
 .join_container{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:30px 450px;
+	box-sizing: border-box; padding:30px 500px;
 	margin-bottom:80px;
 }
 .join_box{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:10px 50px;
+	box-sizing: border-box; padding:10px 200px;
 }
 .join_form{display:flex; margin-top:15px;}
 .join_table{
 	width:100%; height:100%;
 }
 .join_table tr td select{
-	width:30%; height: 46px;
+	width:30%; height: 46px; font-size: 15px;
 }
 .year_box{
-	width:30%;
+	width:35%;
 }
 #rrn_area{
 	width:20%;
@@ -46,16 +49,26 @@ input{
 .rrn_box{
 	width:20%;
 }
+.rrn_box span{
+	display: inline-block; margin-left: 3px;
+}
 .rrn_text{
-	width:36%; margin-right: 0px;
+	width:46%; margin-right: 0px;
 }
 
 #year{width:20%;}
 .gender{width:3%; }
-.g_text{display:inline-block; vertical-align: middle;}
+.g_text{display:inline-block; vertical-align: middle;
+	position: relative; bottom:17px;margin-left: 0px;
+}
+#email_box span{margin:0px;}
+#email_box select{width:20%; margin-left:-4px; }
+#email_id{
+	width:50%;
+}
+#email_domain{width:20%;}
 </style>
 <body>
-<%@ include file = "/WEB-INF/views/layout/header.jsp" %>
 <div class="join_container">
 	<div class="join_box">
 		<h1>회원가입</h1>
@@ -83,7 +96,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="text">
+						<input type="password">
 					</td>
 				</tr>
 				<tr>
@@ -104,13 +117,7 @@ input{
 						<input type="password" class="rrn_text" >
 					</td>
 				</tr>
-				
-				
-				
-				
-			</table>
-			<table class="join_table">
-				<tr>
+					<tr>
 					<th>생년월일</th>
 				</tr>
 				<tr>
@@ -180,8 +187,8 @@ input{
 				</tr>		
 				<tr>	
 					<td>
-						<input type="text">
-						<button type="button">인증번호</button>
+						<input type="text" id="phone_text">
+						<button type="button">인증번호 발송</button>
 						<input type="text" placeholder="인증번호란">
 					</td>
 				</tr>
@@ -190,10 +197,10 @@ input{
 				</tr>
 						
 				<tr>	
-					<td>
-						<input type="text">
+					<td id="email_box">
+						<input type="text" id="email_id">
 						<span>@</span>
-						<input type="text">
+						<input type="text" id="email_domain">
 						<select>
 							<option>naver.com</option>
 						</select>
@@ -203,13 +210,15 @@ input{
 						<button>작성완료</button>
 					</td>
 				</tr>	
-						
+				
+				
+				
 			</table>
+		
 		</form>
 	</div>
 	
 </div>
 
-<%@ include file = "/WEB-INF/views/layout/footer.jsp" %>
 </body>
 </html>

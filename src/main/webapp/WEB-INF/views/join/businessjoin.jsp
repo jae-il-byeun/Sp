@@ -56,7 +56,7 @@ input{
 }
 </style>
 <body>
-<%@ include file = "/WEB-INF/views/layout/header.jsp" %>
+
 <div class="join_container">
 	<div class="join_box">
 		<h1>사업자가입</h1>
@@ -252,6 +252,5 @@ input{
 	
 </div>
 
-<%@ include file = "/WEB-INF/views/layout/footer.jsp" %>
 </body>
 </html>

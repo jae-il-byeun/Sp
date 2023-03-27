@@ -6,13 +6,19 @@
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
+@font-face {
+    font-family: 'GyeonggiTitleM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiTitleM.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 .main_container{
 	width:100%; height:100%; border:1px solid purple; 
 	
 }
 .title_container{
 	width:100%; height:550px; border: 1px solid tomato;
-	background-color: skyblue;
+
 
 	
 }

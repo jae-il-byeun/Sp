@@ -35,7 +35,7 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/JI/Desktop/kh/eclipse/mybatis-3.5.11/mybatis-3.5.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/JI/Desktop/kh/eclipse/lombok.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bree/Desktop/kh/java-10-24/Sp/src/main/webapp/resources/mybatis-3.5.11/mybatis-3.5.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/bree/Desktop/kh/java-10-24/Sp/src/main/webapp/resources/lombok.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
