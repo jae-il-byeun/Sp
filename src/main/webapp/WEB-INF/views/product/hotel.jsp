@@ -47,25 +47,45 @@ width:100%; height:35%;
 	width:100%; height:100%;
 	box-sizing: border-box; padding: 2px 10px 2px 10px; display:flex;
 }
+.product_mapBox{
+	width:50%; height:80%;
+	box-sizing: border-box; padding-top:1.6%; margin-right: 5px;
+}
+
 .product_listBox{
-	width:100%; height:100%;
-	box-sizing: border-box;  margin-right: 5px;
+	width:50%; height:100%;
+	box-sizing: border-box; 
+}
+.product_split{
+ float:right; margin-bottom:5px; font-size:20px;
 }
 .product{
 	width:100%; height:100%; 
-	border:1px solid #ddd; border-radius:5px; box-shadow: 1px 1px 3px #ddd;
-	display: flex;
+	border:1px solid #ddd; border-radius:10px; box-shadow: 5px 5px 7px #ddd;
+	display: flex; margin-bottom:10px;
 }
+.product_imege{
+	width:35%; height:25%; border-radius:10px;
+	box-sizing: border-box; padding: 4px; 
+}
+#like_icon{
+	width:7.5%; height:7.5%;
+	vertical-align: middle;
+}
+
 .product_semi{
-	width:100%; height:100%;
-}
-
-.product_mapBox{
-	width:100%; height:100%; border: 1px solid #ddd;
-	box-sizing: border-box; background-color: #ddd;
+	width:50%; height:100%; display:block;
+	box-sizing: border-box; padding: 10px 0px;
 }
 
 
+
+.map_imege{
+	width:100%; height:100%;  border: 1px solid #ddd; border-radius: 10px;
+}
+.product_title{
+	font-size: 25px;
+}
 </style>
 <head>
 
@@ -73,7 +93,6 @@ width:100%; height:35%;
 <body>
 <div class="product_Boxcontainer">
 	<div class="product_container">
-	
 		<div class="product_titleBox">
 			<h1 id="ht_title">호텔</h1>
 			<div class="product_placeBox">
@@ -99,6 +118,9 @@ width:100%; height:35%;
 		</div>
 		
 		<div class="product_contentBox">
+			<div class="product_mapBox">
+						<img alt="" src="/project/resources/img/ex_map.png" class="map_imege">
+			</div>
 			<div class="product_listBox">
 				<div class="product_split">
 					<span>정렬기준</span>
@@ -110,13 +132,53 @@ width:100%; height:35%;
 						
 					</select>
 				</div>
-
+				
 				<div class="product_list">
 					
 					<div class="product_list_content">
 						<ul>
 							<li class="product">
-								<img alt="" src="">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<div class="product_semi">
+									<a class="product_title">파라다이스 시티</a>
+									<img alt="" src="/project/resources/img/nomal_like.png" id="like_icon">
+									<img alt="" src="" >호텔별점
+									<span>평점</span>
+									<span>호텔가격</span>
+								
+								</div>
+									
+							</li>
+							<li class="product">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<div class="product_semi">
+									<a>호텔이름</a>
+									<img alt="" src="">좋아요
+									<img alt="" src="" >호텔별점
+									<span>평점</span>
+									<span>호텔가격</span>
+								
+								</div>
+								<table>
+									<tr>
+										<th>파라다이스 시티</th>
+									</tr>
+								</table>	
+							</li>
+							<li class="product">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<div class="product_semi">
+									<a>호텔이름</a>
+									<img alt="" src="">좋아요
+									<img alt="" src="" >호텔별점
+									<span>평점</span>
+									<span>호텔가격</span>
+								
+								</div>
+									
+							</li>
+							<li class="product">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
 								<div class="product_semi">
 									<a>호텔이름</a>
 									<img alt="" src="">좋아요
@@ -133,9 +195,7 @@ width:100%; height:35%;
 					</div>
 				</div>
 			</div>
-			<div class="product_mapBox">
-						
-			</div>
+			
 		</div>
 	</div>
 </div>

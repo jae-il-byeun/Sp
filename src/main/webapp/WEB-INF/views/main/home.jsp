@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
 
@@ -229,7 +230,7 @@ swiper-slide img {
 	 position: absolute; top: 119px;
 }
 #ml_login_keep{
-	width:5%; height: 10%; margin-top: 10px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 14px; margin-right:5px; display: inline-block;
 }
 
 #ml_btn{
@@ -239,7 +240,7 @@ swiper-slide img {
 	margin-left: 100px; 
 	
 }
-#ml_join{ width: 12%; padding-left: 2px;
+#ml_join{ width: 11%; padding-left: 2px;
 	position: absolute; top: 100px; left:360px; font-size: 15px;
 	background-color: green; color: #fff;  border-radius: 15px;
 }
@@ -247,7 +248,7 @@ swiper-slide img {
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
 #mp_login_keep{
-	width:5%; height: 10%; margin-top: 10px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 14px; margin-right:5px; display: inline-block;
 }
 
 #mp_btn{
@@ -257,7 +258,7 @@ swiper-slide img {
 	margin-left: 100px; 
 	
 }
-#mp_join{ width: 12%; padding-left: 2px;
+#mp_join{ width: 11%; padding-left: 2px;
 	position: absolute; top: 100px; left:360px; font-size: 15px;
 	background-color: teal; color: #fff;  border-radius: 15px;
 }
@@ -283,7 +284,7 @@ swiper-slide img {
 			</li>
 			<li class="login_link">
 				<label>
-					<a class="m_login" id="m_modal">
+					<a  class="m_login" id="m_modal">
 						<img alt="" src="resources/img/member.png" class="login_icon mc"> 
 						<span>회원</span>
 					</a>
@@ -428,7 +429,7 @@ swiper-slide img {
 	  <div class="modal-content" id="modal_content">
 	    <span class="close">&times;</span>
 	    <h2 class="ml_title">회원 로그인</h2>
-	    <a type="button" href="#" id="ml_join">회원가입</a>
+	    <a type="button" href="<c:url value="/join/member"></c:url>" id="ml_join">회원가입</a>
 	    <div class="ml_box">
 	    	<input type="text" class="ml_id" placeholder="아이디">
 	    	<input type="text" class="ml_pw" placeholder="비밀번호">
@@ -449,7 +450,7 @@ swiper-slide img {
 	  <div class="modal-content" id="p-modal_content">
 	    <span class="close">&times;</span>
 	    <h2 class="ml_title">사업자 로그인</h2>
-	    <a type="button" href="#" id="mp_join">회원가입</a>
+	    <a type="button" href="<c:url value="/join/business"></c:url>" id="mp_join">회원가입</a>
 	    <div class="ml_box">
 	    	<input type="text" class="ml_id" placeholder="아이디">
 	    	<input type="text" class="ml_pw" placeholder="비밀번호">
@@ -487,13 +488,10 @@ document.getElementById("m_modal").onclick = function() {
 }
 
 // 모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
-//document.getElementsByClassName("close")[0].onclick = function() {
-//  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
-//}
-$(".close").click(function(e) {
-	  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
-	
-});
+document.getElementsByClassName("close")[0].onclick = function() {
+  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+}
+
 // 모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
   if (event.target == document.getElementById("modal")) {
@@ -504,7 +502,7 @@ window.onclick = function(event) {
 //dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
-	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
 	document.getElementById("p-modal").style.left = "37%";
 	document.getElementById("p-modal").style.height = "50%";
 	document.getElementById("p-modal").style.top = "24%";

@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 
 <html>
@@ -28,7 +28,7 @@ input{
 .join_container{
 	width:100%; height:100%; 
 	box-sizing: border-box; padding:30px 500px;
-	 margin-bottom:80px;
+	margin-bottom:80px;
 }
 .join_box{
 	width:100%; height:100%;  
@@ -51,10 +51,10 @@ input{
 	width:20%;
 }
 .rrn_box span{
-	display: inline-block; margin-left: 3px;
+	display: inline-block; margin-left: 3px; margin-right: 3px;
 }
 .rrn_text{
-	width:46%; margin-right: 0px;
+	width:46.6%; margin-right: 0px;
 }
 
 .year{width:20%;}
@@ -64,9 +64,7 @@ input{
 }
 #email_box span{margin:0px;}
 #email_box select{width:20%; margin-left:-4px; }
-#email_id{
-	width:50%;
-}
+#email_id{	width:50%;}
 #email_domain{width:20%;}
 </style>
 <body>
@@ -123,7 +121,7 @@ input{
 				</tr>
 				<tr>
 					<td class="year_box">
-						<input type="text" placeholder="년(4자)" classs="year" id="me_year">
+						<input type="text" placeholder="년(4자)" class="year" id="me_year">
 						<select >
 							<option>월</option>
 							<option>1</option>
@@ -193,7 +191,9 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<select></select>
+						<select>
+							<option>대한민국 +82</option>
+						</select>
 					</td>
 				</tr>		
 				<tr>	
@@ -233,19 +233,7 @@ input{
 
 </body>
 <script>
-	$('form').validate({
-		rules:{
-			me_id : {
-					required :true,
-					regex : /^[a-zA-Z][a-zA-Z0-9-_]{5,20}$/
-			},
-			me_pw : {
-					required : true,
-					regex : /^[a-zA-Z0-9!@]{8,16}$/
-				
-			}
-		}
-	});
+/*
 	$('.gender').click(function(){
 		var genderCheck = $(this).find($('.gender:radio'));
 		if(genderCheck.attr("checked") == "checked"){
@@ -256,5 +244,6 @@ input{
 			genderCheck.attr("checked","checked");
 		}
 	});
+	*/
 </script>
 </html>
