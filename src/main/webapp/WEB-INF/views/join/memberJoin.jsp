@@ -79,7 +79,8 @@ input{
 						
 				<tr>	
 					<td>
-						<input type="text" id="me_id">
+						<input type="text" name="me_id">
+						<button type="button" name="me_idCheck">중복확인</button>
 					</td>
 				</tr>
 				<tr>
@@ -87,7 +88,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="password" id="me_pw">
+						<input type="password" name="me_pw">
 					</td>
 				</tr>
 				<tr>
@@ -95,7 +96,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="password" id="me_pwcheck">
+						<input type="password" name="me_pwcheck">
 					</td>
 				</tr>
 				<tr>
@@ -103,7 +104,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="text" id="me_name">
+						<input type="text" name="me_name">
 					</td>
 				</tr>
 				<tr>
@@ -111,9 +112,9 @@ input{
 				</tr>
 				<tr id="rrn_area">
 					<td  class="rrn_box">
-						<input type="text" class="rrn_text" id="me_rrnFront">
+						<input type="text" class="rrn_text" name="me_rrnFront">
 							<span>- </span>
-						<input type="password" class="rrn_text" id="me_rrnBack">
+						<input type="password" class="rrn_text" name="me_rrnBack">
 					</td>
 				</tr>
 					<tr>
@@ -121,7 +122,7 @@ input{
 				</tr>
 				<tr>
 					<td class="year_box">
-						<input type="text" placeholder="년(4자)" class="year" id="me_year">
+						<input type="text" placeholder="년(4자)" class="year" name="me_year">
 						<select >
 							<option>월</option>
 							<option>1</option>
@@ -230,10 +231,86 @@ input{
 	</div>
 	
 </div>
+<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
 
 </body>
+
 <script>
-/*
+	$('form').validate({
+		rules:{
+			me_id : {
+				required: true;
+				regex : /^[a-zA-Z][a-zA-Z0-9-_]{5,20}$/
+			},
+			me_pw : {
+				required :true,
+				regex : /^[a-zA-Z0-9]{8,20}$/
+			},
+			me_pwcheck : {
+				equalTo: pw
+			},
+			me_email : {
+				required :true,
+				email : true
+			},
+			me_gender : {
+				required : true,
+				checked : true
+			},
+			me_rrnFront : {
+					required: true,
+					regex : /^[0-9]{6,6}$/
+					
+			},
+			me_rrnBack : {
+				required: true,
+				regex : /^[0-9]{7,7}$/
+				
+			}
+		},
+		messages:{
+			me_id : {
+				required : '필수 항목입니다.',
+				regex : '아이디는 영문자로 시작하며, 영문, 숫자, 특수기호 -,_ 를 이용하여 5~20자 까지 가능합니다.'
+			},
+			me_pw : {
+				required : '필수 항목입니다.',
+				regex : '비밀번호는 영문, 숫자, 특수기호를 이용하여 8~20자 까지 가능합니다.'
+			},
+			me_pwcheck : {
+				equalTo: '비밀번호와 일치하지 않습니다.'
+			},
+			me_email : {
+				required : '필수 항목입니다.',
+				reqex : '잘못된 이메일주소입니다.'
+			},
+			me_gender : {
+				required : true,
+				checked : '성별이 선택되지 않았습니다.'
+			},
+			me_rrnFront : {
+				required : true,				
+				regex : '잘못된 번호입니다.'
+			},
+			me_rrnBack : {
+				required : true,
+				regex : '잘못된 번호입니다.'
+				
+			}
+
+		}
+	});
+	
+	$.validator.addMethod(
+			"regex",
+			function(value, element, regexp) {
+				var re = new RegExp(regexp);
+				return this.optional(element) || re.test(value);
+			},
+			"Please check your input."
+		);
 	$('.gender').click(function(){
 		var genderCheck = $(this).find($('.gender:radio'));
 		if(genderCheck.attr("checked") == "checked"){
@@ -244,6 +321,6 @@ input{
 			genderCheck.attr("checked","checked");
 		}
 	});
-	*/
+	
 </script>
 </html>

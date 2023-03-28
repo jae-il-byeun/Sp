@@ -122,7 +122,7 @@ width:100%; height:35%;
 <div class="product_Boxcontainer">
 	<div class="product_container">
 		<div class="product_titleBox">
-			<h1 id="ht_title">호텔</h1>
+			<h1 id="ht_title">모텔</h1>
 			<div class="product_placeBox">
 				<ul class="product_search_mainPlace">
 				<li>

@@ -174,19 +174,23 @@ swiper-slide img {
   display: none; /* 초기에는 모달이 보이지 않도록 설정합니다. */
   position: absolute; /* 스크롤과 상관없이 화면에 고정되도록 설정합니다. */
   z-index: 1; /* 모달이 다른 요소 위에 표시되도록 설정합니다. */
-  left: 360px;
-  top: 0;
-  width: 26%;
+  left: 37%;
+  top: 24%;
+  width: 27%; height:50%;
+  padding: 0px;
   height: 100%;
   border-radius: 15px;
   background-color: rgba(0,0,0,0.1); /* 모달 외부를 어둡게 처리합니다. */
+  overflow: hidden;
 }
+
+
 
 /* 모달 콘텐츠 스타일 */
 .modal-content {
  position: relative; /* 모달 내부 요소들의 위치를 상대적으로 지정하기 위해 추가 */
   background-color: #fefefe;
-  margin: 5px;
+  margin: 0px;
   padding: 20px;
   border: 1px solid #888;
   width: 100%;
@@ -230,7 +234,7 @@ swiper-slide img {
 	 position: absolute; top: 119px;
 }
 #ml_login_keep{
-	width:5%; height: 10%; margin-top: 14px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 19px; margin-right:5px; display: inline-block;
 }
 
 #ml_btn{
@@ -248,7 +252,7 @@ swiper-slide img {
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
 #mp_login_keep{
-	width:5%; height: 10%; margin-top: 14px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 19px; margin-right:5px; display: inline-block;
 }
 
 #mp_btn{
@@ -300,7 +304,7 @@ swiper-slide img {
 			</li>
 		</ul>
 		<div class="title_box">
-			<a href="#">
+			<a  href="<c:url value="/"></c:url>">
 				<span id="title_text">Repose</span>
 			</a>
 		</div>
@@ -312,7 +316,7 @@ swiper-slide img {
 			<ul class="catalog_box">
 				<li class="catalog">
 					<label>
-						<a href="#" class="catalog_link">
+						<a  href="<c:url value="/product/hotel"></c:url>" class="catalog_link">
 							<img alt="" src="resources/img/hotel.png" class="catalog_icon">
 							<span>호텔</span>
 						</a>
@@ -320,7 +324,7 @@ swiper-slide img {
 				</li>
 				<li class="catalog">
 					<label>
-						<a href="#" class="catalog_link">
+						<a href="<c:url value="/product/motel"></c:url>" class="catalog_link">
 							<img alt="" src="resources/img/motel.png" class="catalog_icon">
 							<span>모텔</span>
 						</a>
@@ -328,7 +332,7 @@ swiper-slide img {
 				</li>
 				<li class="catalog">
 					<label>
-						<a href="#" class="catalog_link">
+						<a href="<c:url value="/product/pention"></c:url>" class="catalog_link">
 							<img alt="" src="resources/img/pension.png" class="catalog_icon">
 							<span>펜션</span>
 						</a>
@@ -358,10 +362,14 @@ swiper-slide img {
 		<ul class="content_product">
 			<li class="">
 				<h2>인기여행지</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
 				    slides-per-view="4">
-				    <swiper-slide>Slide 1</swiper-slide>
-				    <swiper-slide>Slide 2</swiper-slide>
+				    <swiper-slide>
+				    	<img src="/project/resources/img/night_sky.jpg">
+					</swiper-slide>
+				    <swiper-slide>
+						<img src="/project/resources/img/night_sky.jpg">
+					</swiper-slide>
 				    <swiper-slide>Slide 3</swiper-slide>
 				    <swiper-slide>Slide 4</swiper-slide>
 				    <swiper-slide>Slide 5</swiper-slide>
@@ -373,7 +381,7 @@ swiper-slide img {
 			</li>
 			<li class="">
 				<h2>추천지</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
 				    slides-per-view="4">
 				    <swiper-slide>Slide 1</swiper-slide>
 				    <swiper-slide>Slide 2</swiper-slide>
@@ -388,7 +396,7 @@ swiper-slide img {
 			</li>
 			<li class="">
 				<h2>여긴?</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
 				    slides-per-view="4">
 				    <swiper-slide>Slide 1</swiper-slide>
 				    <swiper-slide>Slide 2</swiper-slide>
@@ -503,14 +511,7 @@ window.onclick = function(event) {
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
 	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
-	document.getElementById("p-modal").style.left = "37%";
-	document.getElementById("p-modal").style.height = "50%";
-	document.getElementById("p-modal").style.top = "24%";
-	document.getElementById("p-modal").style.width = "27%";
-	document.getElementById("p-modal").style.padding = "0px";
-	document.getElementById("p-modal").style.overflow = "hidden";
-	document.getElementById("p-modal_content").style.width = "100%";
-	document.getElementById("p-modal_content").style.margin = "0px";
+
 
 }
 

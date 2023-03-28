@@ -32,7 +32,7 @@ a{text-decoration: none; margin-left: 20px;}
 	line-height: 70px; margin-right: 20%; font-size: 30px;
 }
 .h_link{
-	margin-right:1%; width:10%; text-align:center;
+	margin-right:1%; width:10%; text-align:center; cursor:pointer;
 }
 .h_link_text{display:block; margin-left:25px; font-size:15px;}
 .h_link_textboard{display:block; margin-left:23px; font-size:15px; text-align:center;}
@@ -40,7 +40,7 @@ a{text-decoration: none; margin-left: 20px;}
 #h_link_board{
 	margin-right:25%;
 }
-.h_login{width:60px; box-sizing:border-box; padding-top:15px; margin-right: 8px;}
+.h_login{width:60px; box-sizing:border-box; padding-top:15px; margin-right: 8px; cursor:pointer;}
 .h_login span{color:#fff}
 .hl_link{margin-left:8px; }
 .header_loginIcon{ margin-right:17px; width:67%; box-sizing: border-box;}
@@ -111,7 +111,7 @@ a{text-decoration: none; margin-left: 20px;}
 	 position: absolute; top: 119px;
 }
 #ml_login_keep{
-	width:5%; height: 10%; margin-top: 4px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
 }
 
 #ml_btn{
@@ -129,7 +129,7 @@ a{text-decoration: none; margin-left: 20px;}
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
 #mp_login_keep{
-	width:5%; height: 10%; margin-top: 4px; margin-right:5px; display: inline-block;
+	width:5%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
 }
 
 #mp_btn{
@@ -156,25 +156,25 @@ a{text-decoration: none; margin-left: 20px;}
 	<div id="header_box">
 		<ul id="header_menu">
 			<li class="h_link">
-				<a href="#" id="home_link" >
+				<a  href="<c:url value="/"></c:url>" id="home_link" >
 				<span>Repose</span> 
 				</a>
 			</li>	
 			
 			<li class="h_link">
-				<a href="#" >
+				<a href="<c:url value="/product/hotel"></c:url>" >
 					<img alt="" src="/project/resources/img/hotel.png" class="h_linkIcon">
 					<span class="h_link_text">호텔</span> 
 				</a>
 			</li>	
 			<li class="h_link">
-				<a href="#">
+				<a href="<c:url value="/product/motel"></c:url>">
 					<img alt="" src="/project/resources/img/motel.png" class="h_linkIcon">
 					<span class="h_link_text">모텔</span> 
 				</a>
 			</li>
 			<li class="h_link">
-				<a href="#" >
+				<a href="<c:url value="/product/pention"></c:url>" >
 					<img alt="" src="/project/resources/img/pension.png" class="h_linkIcon">
 					<span class="h_link_text">펜션</span> 
 				</a>

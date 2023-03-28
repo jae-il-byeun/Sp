@@ -54,4 +54,14 @@ public class HomeController {
 		mv.setViewName("/product/hotel");
 		return mv;
 	}
+	@RequestMapping(value = "/product/motel", method = RequestMethod.GET)
+	public ModelAndView motel(ModelAndView mv) {
+		mv.setViewName("/product/motel");
+		return mv;
+	}
+	@RequestMapping(value = "/product/pention", method = RequestMethod.GET)
+	public ModelAndView pention(ModelAndView mv) {
+		mv.setViewName("/product/pention");
+		return mv;
+	}
 }

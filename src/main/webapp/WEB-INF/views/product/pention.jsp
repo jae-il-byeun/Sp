@@ -122,11 +122,11 @@ width:100%; height:35%;
 <div class="product_Boxcontainer">
 	<div class="product_container">
 		<div class="product_titleBox">
-			<h1 id="ht_title">호텔</h1>
+			<h1 id="ht_title">펜션</h1>
 			<div class="product_placeBox">
 				<ul class="product_search_mainPlace">
 				<li>
-					<span>서울</span>
+					<span>강원도</span>
 				</li>
 				<li>
 					
@@ -134,7 +134,7 @@ width:100%; height:35%;
 			</ul>
 			<ul class="product_search_subPlace">
 				<li>
-					<span>종로/명동/을지로</span>
+					<span>가평/원주/문막</span>
 				</li>
 			</ul>
 			<div class="product_search_calender">
