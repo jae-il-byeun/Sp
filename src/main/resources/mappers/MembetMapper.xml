@@ -7,4 +7,5 @@
     insert into member(me_id, me_pw, me_name, me_email, me_gender, me_phone, me_birth, me_rrn)
        		values(#{member.me_id}, #{member.me_pw}, #{member.me_name}, #{member.me_email}, #{member.me_gender}, #{member.me_phone}, #{member.me_birth}, #{member.me_rrn})
   </insert>
+
 </mapper>

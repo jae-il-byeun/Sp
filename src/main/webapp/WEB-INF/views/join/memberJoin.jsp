@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 
 <html>
-
+<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
@@ -23,8 +26,12 @@ body{ font-family: 'GyeonggiTitleM';}
 }
 input{
 	width:99%; height:42px; font-size: 15px;
-	margin:3px 0px 10px; box-sizing: border-box; padding-left:10px;
-	}
+	margin:3px 0px 10px; box-sizing: border-box; padding-left:10px; 
+	border-radius : 5px; border: 1px solid gray; box-shadow : 1px 1px 4px gray;
+}
+select{
+	border-radius : 5px; border: 1px solid gray; box-shadow : 1px 1px 4px gray;
+}
 .join_container{
 	width:100%; height:100%; 
 	box-sizing: border-box; padding:30px 500px;
@@ -41,6 +48,17 @@ input{
 .join_table tr td select{
 	width:30%; height: 46px; font-size: 15px;
 }
+[name=me_id]{
+	width:84.5%;
+}
+[name=me_idCheck]{
+	height:43px; 
+	font-size:12px; 
+	border:1px solid green; border-radius: 7px;
+	background-color: green; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px green;
+	}
 .year_box{
 	width:35%;
 }
@@ -58,14 +76,33 @@ input{
 }
 
 .year{width:20%;}
-.gender{width:3%; }
+.gender{width:20%; box-shadow : none;}
 .g_text{display:inline-block; vertical-align: middle;
 	position: relative; bottom:17px;margin-left: 0px;
 }
 #email_box span{margin:0px;}
 #email_box select{width:20%; margin-left:-4px; }
 #email_id{	width:50%;}
-#email_domain{width:20%;}
+#email_domain{width:22.2%; margin-right:3px;}
+[name = me_sendEmailCheck]{
+	width:74.5%;
+}
+#me_sendEmail{
+	height: 43px;
+	border:1px solid green; border-radius: 7px;
+	background-color: green; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px green;
+}
+[name = me_complete]{
+	height: 43px;
+	float:right;
+	font-size: 17px;
+	border:1px solid green; border-radius: 7px;
+	background-color: green; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px green;
+}
 </style>
 <body>
 <div class="join_container">
@@ -80,7 +117,7 @@ input{
 				<tr>	
 					<td>
 						<input type="text" name="me_id">
-						<button type="button" name="me_idCheck">중복확인</button>
+						<button type="button" class="idCheck" name="me_idCheck">중복확인</button>
 					</td>
 				</tr>
 				<tr>
@@ -88,7 +125,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="password" name="me_pw">
+						<input type="password" name="me_pw" id="me_pw">
 					</td>
 				</tr>
 				<tr>
@@ -200,8 +237,8 @@ input{
 				<tr>	
 					<td>
 						<input type="text" id="phone_text">
-						<button type="button">인증번호 발송</button>
-						<input type="text" placeholder="인증번호란">
+						<input type="text" name="me_sendEmailCheck" placeholder="인증번호란">
+						<button type="button" id="me_sendEmail">인증번호 발송</button>
 					</td>
 				</tr>
 				<tr>
@@ -213,13 +250,13 @@ input{
 						<input type="text" id="email_id">
 						<span>@</span>
 						<input type="text" id="email_domain">
-						<select>
+						<select id="email_domainKind">
 							<option>naver.com</option>
 						</select>
 					</td>
 				<tr>
 					<td>
-						<button>작성완료</button>
+						<button name="me_complete">작성완료</button>
 					</td>
 				</tr>	
 				
@@ -231,9 +268,7 @@ input{
 	</div>
 	
 </div>
-<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
+
 
 </body>
 
@@ -241,15 +276,15 @@ input{
 	$('form').validate({
 		rules:{
 			me_id : {
-				required: true;
+				required: true,
 				regex : /^[a-zA-Z][a-zA-Z0-9-_]{5,20}$/
 			},
 			me_pw : {
 				required :true,
-				regex : /^[a-zA-Z0-9]{8,20}$/
+				regex : /^[a-zA-Z0-9!-~]{8,20}$/
 			},
 			me_pwcheck : {
-				equalTo: pw
+				equalTo: me_pw
 			},
 			me_email : {
 				required :true,
@@ -287,19 +322,25 @@ input{
 				reqex : '잘못된 이메일주소입니다.'
 			},
 			me_gender : {
-				required : true,
+				required : '필수 항목입니다.',
 				checked : '성별이 선택되지 않았습니다.'
 			},
 			me_rrnFront : {
-				required : true,				
+				required : '필수 항목입니다.',				
 				regex : '잘못된 번호입니다.'
 			},
 			me_rrnBack : {
-				required : true,
+				required : '필수 항목입니다.',
 				regex : '잘못된 번호입니다.'
-				
 			}
 
+		},
+		submitHandler : function(form){
+			if(!idCheck){
+				alert('아이디 중복체크를 하세요');
+				return false;
+			}
+			return true;
 		}
 	});
 	
@@ -310,8 +351,8 @@ input{
 				return this.optional(element) || re.test(value);
 			},
 			"Please check your input."
-		);
-	$('.gender').click(function(){
+);
+$('.gender').click(function(){
 		var genderCheck = $(this).find($('.gender:radio'));
 		if(genderCheck.attr("checked") == "checked"){
 			
@@ -320,7 +361,31 @@ input{
 		}else{
 			genderCheck.attr("checked","checked");
 		}
+});
+let idCheck = false;
+$('.idCheck').click(function(){
+	let me_id = $('[name=me_id]').val();
+	let obj = { me_id : me_id};
+	$.ajax({
+		async :true,
+		type : 'POST',
+		data : JSON.stringify(obj),
+		url : '<c:url value="/check/id"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		successs : function(data){
+			if(data.res){
+				alert('사용 가능한 아이디입니다.');
+				idCheck = true;
+			}else{
+				alert('이미 사용중인 아이디입니다.');
+			}
+		}
 	});
-	
+});
+$('[name = me_id]').change(function(){
+	idCheck = false;
+});
+
 </script>
 </html>

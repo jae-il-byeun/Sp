@@ -6,6 +6,12 @@ public interface MemberService {
 
 	boolean memberjoin(MemberVO member);
 
+	boolean checkId(MemberVO user);
+
+	void emailAuthentication(String me_id, String me_email);
+
+
+
 	
 
 }
