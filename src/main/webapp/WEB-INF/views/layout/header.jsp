@@ -18,7 +18,7 @@ a{text-decoration: none; margin-left: 20px;}
 }
 #header_box{
 	width:100%; height:130px; 
-	box-sizing: border-box; padding: 2px 150px; margin-top:-2px;
+	box-sizing: border-box; padding: 2px 130px 2px 170px; margin-top:-2px;
 }
 #header_menu{
 	width:100%; height:120px; 

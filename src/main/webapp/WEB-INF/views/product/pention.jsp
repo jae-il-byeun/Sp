@@ -13,19 +13,21 @@ body{font-family: 'GyeonggiTitleM';}
     font-weight: normal;
     font-style: normal;
 }
-.product_Boxcontainer{
+.product_outterContainer{
 	width:100%; height:100%;
-	box-sizing: border-box; padding:2px 150px;
+	box-sizing: border-box; padding:2px 130px 2px 170px;
 }
-.product_container{	
+.product_innerContainer{	
 	width: 100%; height:100%;
 	 box-sizing:border-box; margin-top: 130px; 
 }
 .product_titleBox{
-	width:100%; height:30%;  border-radius: 5px; font-size: 20px;
+	width:100%; height:30%;  
+	border-bottom:1px solid #ddd; border-top: none; border-radius: 5px;
+	box-shadow: 1px 1px 5px gray; font-size: 20px;
 	box-sizing:border-box; padding: 10px 10px 5px 15px; 
 }
-#ht_title{margin:5px 0px 10px 5px;}
+#pt_title{margin:5px 0px 30px 10px;}
 .product_placeBox{
 width:100%; height:35%;  
 	box-sizing:border-box; padding: 0px 10px 5px 15px;  display:flex; text-align: center;
@@ -44,8 +46,9 @@ width:100%; height:35%;
 
 
 .product_contentBox{
-	width:100%; height:100%;
-	box-sizing: border-box; padding: 2px 10px 2px 10px; display:flex;
+	width:100%; height:100%; 
+	display:flex;
+	box-sizing: border-box; padding: 2px 1px; margin-top: 10px; 
 }
 .product_mapBox{
 	width:50%; height:80%;
@@ -55,20 +58,20 @@ width:100%; height:35%;
 
 .product_listBox{
 	width:50%; height:100%;
-	box-sizing: border-box;
-	box-shadow: 5px 5px 7px #gray;
+	box-sizing: border-box; border-top: none;
+	
 }
 .product_list_content{
 	width:100%; 
-	overflow-y:scroll;
-	overflow-x:hidden;
+
 }
 .product_split{
- float:right; margin-bottom:5px; font-size:20px;
+ 	margin-bottom:5px; margin-right: 22px; 
+ 	font-size:20px; text-align: right;
 }
 .product{
-	width:100%; height:100%; 
-	border:1px solid #ddd; border-radius:10px; box-shadow: 5px 5px 7px #ddd;
+	width:99%; height:100%; 
+	border:1px solid #ddd; border-radius:10px; box-shadow: 5px 5px 5px #ddd;
 	display: flex; margin-bottom:10px;
 }
 .product_imege{
@@ -112,17 +115,17 @@ width:100%; height:35%;
 
 
 .map_imege{
-	width:100%;   border: 1px solid #ddd; border-radius: 10px;
+	width:100%;  border-radius: 10px;
 }
 </style>
 <head>
 
 </head>
 <body>
-<div class="product_Boxcontainer">
-	<div class="product_container">
+<div class="product_outterContainer">
+	<div class="product_innerContainer">
 		<div class="product_titleBox">
-			<h1 id="ht_title">펜션</h1>
+			<h1 id="pt_title">펜션</h1>
 			<div class="product_placeBox">
 				<ul class="product_search_mainPlace">
 				<li>

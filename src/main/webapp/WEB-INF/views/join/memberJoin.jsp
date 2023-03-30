@@ -34,7 +34,7 @@ select{
 }
 .join_container{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:30px 500px;
+	box-sizing: border-box; padding:30px 470px 30px 530px;
 	margin-bottom:80px;
 }
 .join_box{
@@ -49,11 +49,11 @@ select{
 	width:30%; height: 46px; font-size: 15px;
 }
 [name=me_id]{
-	width:84.5%;
+	width:84.6%;
 }
 [name=me_idCheck]{
 	height:43px; 
-	font-size:12px; 
+	font-size:14px; 
 	border:1px solid green; border-radius: 7px;
 	background-color: green; color:#fff; 
 	box-sizing: border-box; padding:0px 2px;

@@ -77,6 +77,11 @@ public class HomeController {
 		mv.setViewName("/product/hotel");
 		return mv;
 	}
+	@RequestMapping(value = "/product/hotelIntro", method = RequestMethod.GET)
+	public ModelAndView hotelIntro(ModelAndView mv) {
+		mv.setViewName("/product/hotelIntro");
+		return mv;
+	}
 	@RequestMapping(value = "/product/motel", method = RequestMethod.GET)
 	public ModelAndView motel(ModelAndView mv) {
 		mv.setViewName("/product/motel");
@@ -85,6 +90,11 @@ public class HomeController {
 	@RequestMapping(value = "/product/pention", method = RequestMethod.GET)
 	public ModelAndView pention(ModelAndView mv) {
 		mv.setViewName("/product/pention");
+		return mv;
+	}
+	@RequestMapping(value = "/traffic/search", method = RequestMethod.GET)
+	public ModelAndView trafficMain(ModelAndView mv) {
+		mv.setViewName("/traffic/trafficMain");
 		return mv;
 	}
 }
