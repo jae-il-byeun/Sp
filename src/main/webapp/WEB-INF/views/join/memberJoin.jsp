@@ -58,7 +58,7 @@ select{
 	background-color: green; color:#fff; 
 	box-sizing: border-box; padding:0px 2px;
 	cursor: pointer; box-shadow : 1px 1px 4px green;
-	}
+}
 .year_box{
 	width:35%;
 }
@@ -84,10 +84,10 @@ select{
 #email_box select{width:20%; margin-left:-4px; }
 #email_id{	width:50%;}
 #email_domain{width:22.2%; margin-right:3px;}
-[name = me_sendEmailCheck]{
+[name = me_sendPhoneCheck]{
 	width:74.5%;
 }
-#me_sendEmail{
+#me_sendPhone{
 	height: 43px;
 	border:1px solid green; border-radius: 7px;
 	background-color: green; color:#fff; 
@@ -237,8 +237,8 @@ select{
 				<tr>	
 					<td>
 						<input type="text" id="phone_text">
-						<input type="text" name="me_sendEmailCheck" placeholder="인증번호란">
-						<button type="button" id="me_sendEmail">인증번호 발송</button>
+						<input type="text" name="me_sendPhoneCheck" placeholder="인증번호란">
+						<button type="button" id="me_sendPhone">인증번호 발송</button>
 					</td>
 				</tr>
 				<tr>

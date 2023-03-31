@@ -5,7 +5,9 @@
 <!doctype html> 
 <html>
     <script src="/project/resources/js/jquery.min.js"></script>
-	<script src="/project/resources/js/popper.min.js"></script>                     	
+	<script src="/project/resources/js/popper.min.js"></script>  
+
+	                 	
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>

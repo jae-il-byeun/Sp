@@ -4,7 +4,10 @@
 <!DOCTYPE html>
 
 <html>
-
+<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
 <head>
 <meta charset="UTF-8">
 <title>사업자가입</title>
@@ -12,8 +15,8 @@
 </head>
 <style>
 th{text-align: left; padding-left: 5px; }
-td{width:50%;}
-tr{width:100%;}
+td{width:80%;}
+tr{width:180%;}
 body{ font-family: 'GyeonggiTitleM';}
 @font-face {
     font-family: 'GyeonggiTitleM';
@@ -24,10 +27,11 @@ body{ font-family: 'GyeonggiTitleM';}
 input{
 	width:99%; height:42px; font-size: 15px;
 	margin:3px 0px 10px; box-sizing: border-box; padding-left:10px;
+	border-radius : 5px; border: 1px solid gray; box-shadow : 1px 1px 4px gray; 
 	}
 .join_container{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:30px 500px;
+	box-sizing: border-box; padding:30px 570px 30px 530px;
 	margin-bottom:80px;
 }
 .join_box{
@@ -41,30 +45,42 @@ input{
 .join_table tr td select{
 	width:30%; height: 46px; font-size: 15px;
 }
-.year_box{
-	width:35%;
+[name=bu_id]{
+	width:84.6%;
 }
-#rrn_area{
-	width:20%;
+[name=bu_idCheck]{
+	height:43px; 
+	font-size:14px; 
+	border:1px solid teal; border-radius: 7px;
+	background-color: teal; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px teal;
 }
-.rrn_box{
-	width:20%;
-}
-.rrn_box span{
-	display: inline-block; margin-left: 3px; margin-right: 3px;
-}
-.rrn_text{
-	width:46.6%; margin-right: 0px;
-}
-
-.year{width:20%;}
 
 #email_box span{margin:0px;}
 #email_box select{width:20%; margin-left:-4px; }
 #email_id{width:50%;}
-#email_domain{margin-right:3px; width:20%;}
+#email_domain{margin-right:3px; width:22.3%;}
 #ba_title{line-height: 35px;}
-
+[name = bu_sendPhoneCheck]{
+	width:74.5%;
+}
+#bu_sendPhone{
+	height: 43px;
+	border:1px solid teal; border-radius: 7px;
+	background-color: teal; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px teal;
+}
+[name = bu_complete]{
+	height: 43px;
+	float:right;
+	font-size: 17px;
+	border:1px solid teal; border-radius: 7px;
+	background-color: teal; color:#fff; 
+	box-sizing: border-box; padding:0px 2px;
+	cursor: pointer; box-shadow : 1px 1px 4px teal;
+}
 </style>
 <body>
 
@@ -79,7 +95,8 @@ input{
 						
 				<tr>	
 					<td>
-						<input type="text">
+						<input type="text" name="bu_id">
+						<button type="button" class="idCheck" name="bu_idCheck">중복확인</button>
 					</td>
 				</tr>
 				<tr>
@@ -140,9 +157,9 @@ input{
 				</tr>		
 				<tr>	
 					<td>
-						<input type="text">
-						<button type="button">인증번호</button>
-						<input type="text" placeholder="인증번호란">
+						<input type="text" id="phone_text">
+						<input type="text" name="bu_sendPhoneCheck" placeholder="인증번호란">
+						<button type="button" id="bu_sendPhone">인증번호 발송</button>
 					</td>
 				</tr>
 				<tr>
@@ -188,7 +205,7 @@ input{
 				
 				<tr>
 					<td>
-						<button>작성완료</button>
+						<button name="bu_complete">작성완료</button>
 					</td>
 				</tr>	
 			</table>

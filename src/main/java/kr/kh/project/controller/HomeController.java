@@ -94,7 +94,12 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/traffic/search", method = RequestMethod.GET)
 	public ModelAndView trafficMain(ModelAndView mv) {
-		mv.setViewName("/traffic/trafficMain");
+		mv.setViewName("/traffic/trafficSearch");
+		return mv;
+	}
+	@RequestMapping(value = "/traffic/scheduel", method = RequestMethod.GET)
+	public ModelAndView trafficScheduel(ModelAndView mv) {
+		mv.setViewName("/traffic/trafficScheduel");
 		return mv;
 	}
 }

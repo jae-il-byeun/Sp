@@ -178,7 +178,7 @@ swiper-slide img {
   top: 24%;
   width: 27%; height:50%;
   padding: 0px;
-  height: 100%;
+  height: 50%;
   border-radius: 15px;
   background-color: rgba(0,0,0,0.1); /* 모달 외부를 어둡게 처리합니다. */
   overflow: hidden;
@@ -340,7 +340,7 @@ swiper-slide img {
 				</li>
 				<li class="catalog">
 					<label>
-						<a href="#" class="catalog_link">
+						<a href="<c:url value="/traffic/search"></c:url>" class="catalog_link">
 							<img alt="" src="resources/img/bus.png" class="catalog_icon">
 							<span>교통</span>
 						</a>
@@ -484,14 +484,7 @@ swiper-slide img {
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
   document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
-  document.getElementById("modal").style.left = "37%";
-  document.getElementById("modal").style.height = "50%";
-  document.getElementById("modal").style.top = "24%";
-  document.getElementById("modal").style.width = "27%";
-  document.getElementById("modal").style.padding = "0px";
-  document.getElementById("modal").style.overflow = "hidden";
-  document.getElementById("modal_content").style.width = "100%";
-  document.getElementById("modal_content").style.margin = "0px";
+
   
 }
 

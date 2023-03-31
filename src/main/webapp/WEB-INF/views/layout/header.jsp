@@ -180,7 +180,7 @@ a{text-decoration: none; margin-left: 20px;}
 				</a>
 			</li>
 			<li class="h_link">
-				<a href="#">
+				<a href="<c:url value="/traffic/search"></c:url>">
 					<img alt="" src="/project/resources/img/bus.png" class="h_linkIcon">
 					<span class="h_link_text">교통</span> 
 				</a>
