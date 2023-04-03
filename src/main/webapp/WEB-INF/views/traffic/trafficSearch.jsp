@@ -29,30 +29,95 @@ body{font-family: 'GyeonggiTitleM';}
 #traffic_busSearchContainer{ 
 	width:100%; height:350px;
 	 box-sizing: border-box; padding:30px 230px 10px;
+	 
 }
 .traffic_busSearchBox{
 	width:100%; height:20%; 
 	 border: 1px solid #ddd; 
+	 box-shadow: 1px 1px 5px gray;
 }
-#taffic_searchTitle{text-align:center; font-size: 35px;  width:100%;}
-.traffic_busCorseBox{width:100%;}
+#taffic_searchTitle{text-align:center; font-size: 40px;  width:100%;}
+.traffic_busCorseBox{width:100%; box-sizing:border-box; margin-right:20px;}
 
 
 
 .traffic_busCorse label{display: flex; float:right; margin-right:5px;}
-.corse{display:block; width:30%; height:50%; margin-right:3px;}
+.corse{display:block; width:30%;  margin-right:3px;}
 .traffic_busCorse label span{width:100%;}
-.traffic_busPlace{display:flex; width:100%;}
-/* .traffic_busPlace .traffic_busDay{text-align: left;} */
+.traffic_busPlaceBox{
+	display:flex; 
+	width:100%; height:100%;
+	box-sizing:border-box; padding: 4px 20px;
+	
 
-.traffic_changeIcon{
-	width:10%; height:10%;
+}
+.traffic_busPlace{
+	width:100%; height:100%;
+	border:1px solid #ddd; border-radius:10px;
+	box-sizing:border-box; padding: 10px 5px 5px;
+	box-shadow: 1px 1px 1px gray;
+}
+.busSearch_text{
+	display:block; font-size: 20px;
+}
+.busPlace_input{
+	width:100%; height:100px; border:none;
 }
 
-.busPlace_input{ }
-.traffic_busChange{display:block;margin-left:8%; width: 20%; }
-.trffic_seatGrade img{width:1%; height:1%;}
+.traffic_busPlaceChange{
+	width:20%; height:100%;
+	box-sizing: border-box; padding: 50px 0px; margin: 0px 5px;
+	position:relative; 
+}
+#traffic_change{
+	display:block;
+	width:100%; height:40%;
+	border:1px solid #ddd; border-radius: 50%;
+	z-index: 10;
+	position:absolute;
+ }
+ #traffic_changeIcon{
+ 	width:100%; height:100%;
+ 	cursor:pointer;
+ }
+ .startBox{
+	margin-left:50px;
+}
+.arriveBox{
+	display: none;
+}
+.traffic_grade_complete{
+	width:100%; height:100%;
+	box-sizing: border-box; padding:5px 20px;
+	display:flex;
+}
+.traffic_busGradeBox{
+	width:40%; height:100%;
+	border: 1px solid #ddd;
+	margin-left: 15px;
+	display: flex;
+}
+.traffic_busGrade{
+	width:25%; height:100%;
+	box-sizing: border-box; padding:0px 20px;
+}
+.subtitle{margin-bottom: 5px;}
+.allGrade{
+	box-sizing:border-box; padding:10px 0px;
+}
+.traffic_busGradeIcon{width:20px; height:30%; box-sizing: border-box; margin-left:35%;}
+.busGrade_text{display:block; text-align:center; width:100%;}
+.traffic_searchComplete{
+	width:15%;
+	box-sizing:border-box; margin-left:300px;
+}
+.searchComplete{
+	width:100%;
+	font-size:25px;
+}
+			
 
+/* ---------------광고------------------- */
 .content_container{
 	width:100%; height:77%; 
 	box-sizing: border-box; padding: 40px 150px;
@@ -141,7 +206,7 @@ swiper-slide img {
 .tm_modal {
   display: none; /* 초기에는 모달이 보이지 않도록 설정합니다. */
   position: absolute; /* 스크롤과 상관없이 화면에 고정되도록 설정합니다. */
-  z-index: 1; /* 모달이 다른 요소 위에 표시되도록 설정합니다. */
+  z-index: 50; /* 모달이 다른 요소 위에 표시되도록 설정합니다. */
   left: 37%;
   top: 0;
   width: 27%; height:50%;
@@ -194,7 +259,7 @@ swiper-slide img {
 }
 .tm_place{width:40%; height:50%; border:1px solid #ddd; text-align: center;}
 .tm_change{width:20%; heigth:50%; }
-.tm_place span, input{display:block; width:100%; height:50%;}
+.tm_place span{display:block; width:100%; height:50%;}
 
 #tm_searchBox{
 	width: 100%; height:10%;
@@ -216,75 +281,82 @@ swiper-slide img {
 	<div class="product_innerContainer">
 	
 		<div id="traffic_busSearchContainer">
-			<div class="traffic_busSearchBox">
-					<h2 id="taffic_searchTitle">고속버스조회</h2>
-				<div class="traffic_busCorseBox">
-					<div class="traffic_busCorse">
+			<table class="traffic_busSearchBox">
+				<tr>
+					<th id="taffic_searchTitle">고속버스조회</th>
+				</tr>
+				<tr class="traffic_busCorseBox">
+					<td class="traffic_busCorse">
 						<label>
 							<input type="radio" class="corse"> <span>왕복</span>
 						</label>
 						<label>
 							<input type="radio" class="corse"> <span>편도</span>
 						</label>
-					</div>
+					</td>
 					
-			    </div>
-			    <div class="traffic_busPlace">
-					<div class="traffic_busPlaceBox">
+			    </tr>
+			    <tr class="traffic_busPlaceBox">
+					<td class="traffic_busPlace">
 						<label class="">
 							<span class="busSearch_text">출발지</span>
 							<input type="text" class="busPlace_input" id="busPlace_modal">
 						</label>
-					</div>
-					<div class="traffic_busChange">
-						<div class="traffic_change">
-							<span>전환</span>
-							<img alt="" src="/project/resources/img/왕복.png" class="traffic_changeIcon">
+					</td>
+					<td class="traffic_busPlaceChange">
+						<div id="traffic_change">
+
+							<img alt="" src="/project/resources/img/change.png" id="traffic_changeIcon">
 						</div>
-					</div>
-					<div>
-						<label id="busPlace_modal">
+					</td>
+					<td class="traffic_busPlace">
+						<label >
 							<span class= "busSearch_text">도착지</span>
 							<input type="text"  class="busPlace_input" id="busPlace_modal">
 						</label>
-					</div>
-					<div>
+					</td>
+					<td class="traffic_busPlace startBox">
 						<label class="traffic_around ts_start">
 							<span class= "busSearch_text">출발일</span>
 							<input type="text" class="busPlace_input">
 						</label>
-					</div>
-					<div>
+					</td>
+					<td class="traffic_busPlace arriveBox">
 						<label class="traffic_around ts_arrive">
 							<span class= "busSearch_text">도착일</span>
 							<input type="text" class="busPlace_input">
 						</label>
-					</div>
-				</div>
-				<div class="traffic_busPlaceBox">
-					<div class="trffic_seatGrade">
-							<span class= "busSearch_text">전체</span>
-					</div>
-					<div class="trffic_seatGrade">
-							<img alt="" src="/project/resources/img/nomal.png">
-							<span class= "busSearch_text">일반</span>
-					</div>
-					<div class="trffic_seatGrade">
-							<img alt="" src="/project/resources/img/crown.png">
-							<span class= "busSearch_text">프리미엄</span>
-					</div>
-					<div class="trffic_seatGrade">
-							<img alt="" src="/project/resources/img/woodung.png">
-							<span class= "busSearch_text">우등</span>
-					</div>
-				</div>
+					</td>
+				</tr>
+				<tr class="traffic_grade_complete">
+					<td class="traffic_busGradeBox">
+						<p class="traffic_busGrade allGrade">
+							
+							<span class= "busGrade_text ">전체</span>
+						</p>
+						<figure class="traffic_busGrade">
+							<img alt="" src="/project/resources/img/nomal.png" class="traffic_busGradeIcon">
+							<span class= "busGrade_text">일반</span>
+						</figure>
+						<figure class="traffic_busGrade">
+							<img alt="" src="/project/resources/img/crown.png" class="traffic_busGradeIcon" style="width:25px; height:45%;">
+							<span class= "busGrade_text">프리미엄</span>						
+						</figure>
+						<figure class="traffic_busGrade">
+							<img alt="" src="/project/resources/img/seatup.png" class="traffic_busGradeIcon">
+							<span class= "busGrade_text">우등</span>
+						</figure>
+					</td>
+					
+					<td class="traffic_searchComplete">
+						<div>
+							<button id="searchComplete">조회</button>
+						</div>
+					</td>
+				</tr>
 				
-				<div>
-					<div>
-						<button id="traffic_searchComplete">조회</button>
-					</div>
-				</div>
-			</div>
+				
+			</table>
 		</div>
 		
 		<div class="content_container">

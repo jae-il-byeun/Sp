@@ -14,6 +14,7 @@ a{text-decoration: none; margin-left: 20px;}
 .header_container{
 	width:100%; height:140px; 
 	position: fixed; 
+	z-index:50;
 	
 }
 #header_box{
