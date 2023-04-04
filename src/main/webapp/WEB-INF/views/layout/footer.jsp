@@ -12,7 +12,7 @@
 
 .foot_container{
 		width:100%; height:250px;
-		box-sizing: border-box; padding: 0px 130px 0px 170px;
+		box-sizing: border-box; padding: 0px 130px 0px 170px; margin-top: 50px;
 		position: sticky; 
 }
 .foot_box{

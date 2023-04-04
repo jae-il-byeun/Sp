@@ -4,10 +4,7 @@
 <!DOCTYPE html>
 
 <html>
-<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
-<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
-<script src="<c:url value='/resources/js/jquery-ui.min.js'></c:url>"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>사업자가입</title>

@@ -42,8 +42,10 @@ body{font-family: 'GyeonggiTitleM';}
 /* 좌석예약 */
   .container{ 
     width: 100%; height: 100%;
-     margin-bottom: 40px;
+    margin:0px; padding:0px;
     position: relative;
+    max-width:1440px;
+    
   }
   .contentBox{
     display: flex;
@@ -101,7 +103,7 @@ body{font-family: 'GyeonggiTitleM';}
    .seat_container{
       border: 2px solid #e6e6e6;
       width: 100%; height: 750px;  max-width: 1635px;
-      margin: 0px 150px;
+      margin-left:200px;
       border-radius: 3px;
       position: relative; box-shadow: 3px 3px 5px gray; 
     }
@@ -212,7 +214,7 @@ body{font-family: 'GyeonggiTitleM';}
     /* 선택좌석 */
     .selectSeat_detailBox{
       width: 40%; height: 100%;
-      margin-top:10px; margin-left: 70px;
+      margin-top:10px; margin-left: 100px;
       z-indox:10;
     
     }

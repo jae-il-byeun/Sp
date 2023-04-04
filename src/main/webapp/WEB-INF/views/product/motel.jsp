@@ -61,6 +61,10 @@ width:100%; height:35%;
 	box-sizing: border-box; border-top: none;
 	
 }
+.product_list{
+	height:650px;
+	overflow:overlay; overflow-x:hidden;
+}
 .product_list_content{
 	width:100%; 
 
@@ -150,7 +154,7 @@ width:100%; height:35%;
 		
 		<div class="product_contentBox">
 			<div class="product_mapBox">
-						<img alt="" src="/project/resources/img/ex_map.png" class="map_imege">
+						<img alt="" src="/project/resources/img/ex_map.png" class="map_imege" style="height: 650px;">
 			</div>
 			<div class="product_listBox">
 				<div class="product_split">
@@ -165,11 +169,9 @@ width:100%; height:35%;
 				</div>
 				
 				<div class="product_list">
-					
-					<div class="product_list_content">
-						<ul>
+					<ul class="product_list_content">
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
 									<a class="product_title">파라다이스 시티</a>
 									<button class="like_button" >
@@ -271,8 +273,7 @@ width:100%; height:35%;
 									
 							</li>
 						</ul>
-						
-					</div>
+					
 				</div>
 			</div>
 			

@@ -81,9 +81,9 @@ body{font-family: 'GyeonggiTitleM';}
     .place{display: block; margin-top:15px; color: #fff; letter-spacing: -2px;width: 80px; text-align: left;}
     
     /* 필터 시간 */
-    .delay{ padding-top: 10px;
+    .delay{ 
         width: 100%; height: 20px; display: block; text-align: right;
-        font-size: 14px; margin-bottom: 7px;
+        font-size: 14px; 
     }
     /* 필터 거리 */
     .distance{  text-align: right;
@@ -93,10 +93,13 @@ body{font-family: 'GyeonggiTitleM';}
     /* 필터 요금 */
     .payInfo{
         width: 100%; height: 100%; 
+        box-sizing:border-box; padding: 0px 5px;
     }
-    .nomalPay{text-align: right; margin-top: 30px;}
-    .payInfo-text{ text-align: left; position: relative; top: 16px; 
-        
+    .nomalPay{text-align: right;}
+    .payInfo-text{ text-align: left; position: relative; top: 55px; 
+    }
+    .nomalPay-text{
+    	position: relative; top:15px;
     }
     .pay-clear{width: 100%; height: 10px; display: block;}
     dt{text-align: left;}
@@ -226,9 +229,10 @@ body{font-family: 'GyeonggiTitleM';}
     .busClear{width: auto; display: table-cell; text-align: left; vertical-align: middle;}
     /* 버스시간 디테일 */
     .busTime-detail{
-        height: 540px;
+        height: 510px;
         margin-left: 20px;
         overflow-y: auto;
+        overflow-x: hidden;
     }
     .busTd{
         position: relative; border-bottom: 1px solid #e6e6e6;

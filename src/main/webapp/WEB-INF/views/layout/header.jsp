@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <style>
 *{margin:0; padding:0; list-style: none; }
 a{text-decoration: none; margin-left: 20px;}
@@ -98,10 +99,9 @@ a{text-decoration: none; margin-left: 20px;}
 .ml_box{
 	width:98%; height:42%; box-sizing: border-box; 
 	padding-left: 70px; position: relative;
-	margin-top: 20px;
 }
 .ml_title{
-	margin: 40px 0px 40px 65px;
+	margin: 40px 0px 20px 65px; font-weight:bold;
 }
 .ml_box input{
 	display: block; width:85%; height: 25%; 
@@ -109,10 +109,10 @@ a{text-decoration: none; margin-left: 20px;}
 	border-radius: 5px; border:1px solid gray;
 }
 .ml_box span{ 
-	 position: absolute; top: 119px;
+	 position: absolute; top: 130px; left:90px;
 }
 #ml_login_keep{
-	width:5%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
 }
 
 #ml_btn{
@@ -129,10 +129,10 @@ a{text-decoration: none; margin-left: 20px;}
 #ml_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
-#mp_login_keep{
-	width:5%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
-}
 
+#mp_login_keep{
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
+}
 #mp_btn{
 	width:60%; height:15%; text-align: center; cursor: pointer;
 	font-size: 25px; border:1px solid #ddd; border-radius: 10px;

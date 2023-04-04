@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
-
+<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -24,14 +24,15 @@ body{ font-family: 'GyeonggiTitleM';}
 
 
 .main_container{
-	width: 100%; height:1980px; box-sizing:border-box;
+	width: 100%; height:1700px; box-sizing:border-box;
 	
 }
 .title_container{
-	width: 100%; height:23%; box-sizing:border-box; box-shadow: 0 2px 4px #ddd;
-	  color:#fff;
+	width: 100%; height:23%; 
+	box-sizing:border-box; box-shadow: 0 2px 4px #ddd;
+	color:#fff;
 	background-image:url("resources/img/night_sky.jpg");
-	
+	background-size: 1980px 455px;
 	
 }
 .login_box{
@@ -42,11 +43,10 @@ body{ font-family: 'GyeonggiTitleM';}
 	width:28%; height:95%;  
 	margin-right:10px; 
 }
-.login_link *{cursor:pointer;
-}
+.login_link *{cursor:pointer;}
 
 .login_link span{
-	display:block; text-align: center; font-size:12px;
+	display:block; text-align: center; font-size:12px; color:#fff;
 }
 .login_icon{width:50%; vertical-align:middle; margin-left:13px;}
 
@@ -56,7 +56,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	 text-align: center; line-height: 250px; padding: 50px 300px 0px;
 
 }
-#title_text{font-size: 100px; font-weight: bold; }
+#title_text{font-size: 100px; font-weight: bold; color:purple; }
 
 .main_searchBox{
 	width: 100%; height:13%; 
@@ -90,12 +90,13 @@ body{ font-family: 'GyeonggiTitleM';}
 
 
 .content_container{
-	width:100%; height:77%; 
+	width:100%; height:80%; 
 	box-sizing: border-box; padding: 40px 150px;
 	position:relative;
 }
-.content_container h2 h3{
-	font-size: 40px;
+.content_container h2, h3{
+	font-size: 35px;
+	margin-bottom: 10px;
 }
 
 .content_product{
@@ -107,7 +108,7 @@ body{ font-family: 'GyeonggiTitleM';}
 
 .content_product li swiper-container {background: none;
      width: 100%; height: 100%; 
-     box-sizing: border-box;  box-shadow: 0 2px 2px #ddd;
+     box-sizing: border-box;  box-shadow: 2px 2px 2px gray;
      border-radius: 5px;
     }
 
@@ -125,14 +126,14 @@ swiper-slide {
 swiper-slide img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: 80%;
+      border-radius:5px;
       object-fit: cover;
 }
 .content_coupon{
 	
-	width:84.5%; height:5%; box-sizing:border-box;
-	
-	 position: absolute; top:1100px; 
+	width:100%; height:35%; box-sizing:border-box;
+
 }
 
 
@@ -220,10 +221,9 @@ swiper-slide img {
 .ml_box{
 	width:98%; height:42%; box-sizing: border-box; 
 	padding-left: 70px; position: relative;
-	margin-top: 20px;
 }
 .ml_title{
-	margin: 40px 0px 40px 65px;
+	margin: 40px 0px 20px 65px; font-weight:bold;
 }
 .ml_box input{
 	display: block; width:85%; height: 25%; 
@@ -231,10 +231,12 @@ swiper-slide img {
 	border-radius: 5px; border:1px solid gray;
 }
 .ml_box span{ 
-	 position: absolute; top: 119px;
+	 position: absolute; top: 130px; left:90px;
 }
 #ml_login_keep{
-	width:5%; height: 10%; margin-top: 19px; margin-right:5px; display: inline-block;
+	width:80%; height: 10%; 
+	box-sizing:border-box;margin-top: 13px; margin-left:3px; 
+	display: inline-block;
 }
 
 #ml_btn{
@@ -252,9 +254,10 @@ swiper-slide img {
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
 #mp_login_keep{
-	width:5%; height: 10%; margin-top: 19px; margin-right:5px; display: inline-block;
+	width:80%; height: 10%; 
+	box-sizing:border-box;margin-top: 13px; margin-left:3px; 
+	display: inline-block;
 }
-
 #mp_btn{
 	width:60%; height:15%; text-align: center; cursor: pointer;
 	font-size: 25px; border:1px solid #ddd; border-radius: 10px;
@@ -409,25 +412,25 @@ swiper-slide img {
 				    <swiper-slide>Slide 9</swiper-slide>
 				  </swiper-container>
 			</li>
+			<li class="content_coupon">
+	
+				<h3 >이달의 쿠폰</h3>
+				<swiper-container class="mySwiper" pagination="false" pagination-clickable="false" navigation="false" space-between="30"
+				    centered-slides="false" autoplay-delay="4000" autoplay-disable-on-interaction="false"
+				    style=" border:1px solid #ddd; border-radius: 45px;">
+				    <swiper-slide>Slide 1</swiper-slide>
+				    <swiper-slide>Slide 2</swiper-slide>
+				    <swiper-slide>Slide 3</swiper-slide>
+				    <div class="autoplay-progress" slot="container-end">
+				      <svg viewBox="0 0 48 48">
+				        <circle cx="24" cy="24" r="20"></circle>
+				      </svg>
+				      <span></span>
+				    </div>
+				  </swiper-container>
+			</li>
 			
 		</ul>
-		<figure class="content_coupon">
-
-			<h3 >이달의 쿠폰</h3>
-			<swiper-container class="mySwiper" pagination="false" pagination-clickable="false" navigation="false" space-between="30"
-			    centered-slides="false" autoplay-delay="4000" autoplay-disable-on-interaction="false"
-			    style=" border:1px solid #ddd; border-radius: 45px;">
-			    <swiper-slide>Slide 1</swiper-slide>
-			    <swiper-slide>Slide 2</swiper-slide>
-			    <swiper-slide>Slide 3</swiper-slide>
-			    <div class="autoplay-progress" slot="container-end">
-			      <svg viewBox="0 0 48 48">
-			        <circle cx="24" cy="24" r="20"></circle>
-			      </svg>
-			      <span></span>
-			    </div>
-			  </swiper-container>
-		</figure>
 
 	</div>
 	
