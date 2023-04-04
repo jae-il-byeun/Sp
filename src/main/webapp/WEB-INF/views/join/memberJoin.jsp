@@ -4,8 +4,10 @@
 <!DOCTYPE html>
 
 <html>
-
+<script src="<c:url value='/resources/js/jquery.validate.min.js'></c:url>"></script>
+<script src="<c:url value='/resources/js/additional-methods.min.js'></c:url>"></script>
 <head>
+
 <meta charset="UTF-8">
 <title>회원가입</title>
 
@@ -79,12 +81,12 @@ select{
 }
 #email_box span{margin:0px;}
 #email_box select{width:20%; margin-left:-4px; }
-#email_id{	width:50%;}
-#email_domain{width:22.2%; margin-right:3px;}
+.email_id{	width:50%;}
+.email_domain{width:22.2%; margin-right:3px;}
 [name = me_sendPhoneCheck]{
 	width:74.5%;
 }
-#me_sendPhone{
+#me_phone{
 	height: 43px;
 	border:1px solid green; border-radius: 7px;
 	background-color: green; color:#fff; 
@@ -146,9 +148,9 @@ select{
 				</tr>
 				<tr id="rrn_area">
 					<td  class="rrn_box">
-						<input type="text" class="rrn_text" name="me_rrnFront">
+						<input type="text" class="rrn_text" name="me_rrnFront"id="me_rrnFront">
 							<span>- </span>
-						<input type="password" class="rrn_text" name="me_rrnBack">
+						<input type="password" class="rrn_text" name="me_rrnBack"id="me_rrnBack">
 					</td>
 				</tr>
 					<tr>
@@ -156,8 +158,8 @@ select{
 				</tr>
 				<tr>
 					<td class="year_box">
-						<input type="text" placeholder="년(4자)" class="year" name="me_year">
-						<select >
+						<input type="text" placeholder="년(4자)" class="year" name="me_year" >
+						<select name="me_month">
 							<option>월</option>
 							<option>1</option>
 							<option>2</option>
@@ -172,7 +174,7 @@ select{
 							<option>11</option>
 							<option>12</option>
 						</select>
-						<select >
+						<select name="me_day">
 							<option>일</option>
 							<option>1</option>
 							<option>2</option>
@@ -199,12 +201,7 @@ select{
 						</select>
 						
 					</td>
-					<td>
-						
-					</td>
-					<td>
-						
-					</td>
+
 				</tr>
 				<tr>
 					<th>성별</th>
@@ -212,11 +209,11 @@ select{
 				<tr>
 					<td>
 						<label>
-							<input type="radio" name="g_check"class="gender" value="1">
+							<input type="radio" name="g_check"class="gender" value="0">
 							<span class="g_text">남자</span>
 						</label>
 						<label>
-							<input type="radio" name="g_check"  class="gender" value="2">
+							<input type="radio" name="g_check"  class="gender" value="1">
 							<span class="g_text">여자</span>
 						</label>
 					</td>
@@ -233,7 +230,7 @@ select{
 				</tr>		
 				<tr>	
 					<td>
-						<input type="text" id="phone_text">
+						<input type="text" name="me_phone">
 						<input type="text" name="me_sendPhoneCheck" placeholder="인증번호란">
 						<button type="button" id="me_sendPhone">인증번호 발송</button>
 					</td>
@@ -244,9 +241,9 @@ select{
 						
 				<tr>	
 					<td id="email_box">
-						<input type="text" id="email_id">
+						<input type="text" class="email_id" name="me_emailId">
 						<span>@</span>
-						<input type="text" id="email_domain">
+						<input type="text" class="email_domain" name="me_domain">
 						<select id="email_domainKind">
 							<option>naver.com</option>
 						</select>
@@ -270,6 +267,7 @@ select{
 </body>
 
 <script>
+	var _chk = false;
 	$('form').validate({
 		rules:{
 			me_id : {
@@ -324,11 +322,12 @@ select{
 			},
 			me_rrnFront : {
 				required : '필수 항목입니다.',				
-				regex : '잘못된 번호입니다.'
+				regex : '잘못된 앞번호입니다.'
 			},
 			me_rrnBack : {
 				required : '필수 항목입니다.',
-				regex : '잘못된 번호입니다.'
+				regex : '잘못된 뒷번호입니다.'
+				
 			}
 
 		},
@@ -338,6 +337,16 @@ select{
 				return false;
 			}
 			return true;
+		},
+		errorPlacement : function(error, element){
+			var _id = element.attr("id");
+			if((_id == "me_rrnFront" || _id == "me_rrnBack") && _chk == false){
+				_chk = true;
+				element.parent().append(error);
+			}
+			else if(!((_id == "me_rrnFront" || _id == "me_rrnBack") && _chk == true)){
+				element.parent().append(error);
+			}
 		}
 	});
 	
@@ -349,6 +358,7 @@ select{
 			},
 			"Please check your input."
 );
+	
 $('.gender').click(function(){
 		var genderCheck = $(this).find($('.gender:radio'));
 		if(genderCheck.attr("checked") == "checked"){
@@ -359,9 +369,11 @@ $('.gender').click(function(){
 			genderCheck.attr("checked","checked");
 		}
 });
-let idCheck = false;
+
+
+let idc = false;
 $('.idCheck').click(function(){
-	let me_id = $('[name=me_id]').val();
+	let me_id = $('[name = me_id]').val();
 	let obj = { me_id : me_id};
 	$.ajax({
 		async :true,
@@ -370,10 +382,10 @@ $('.idCheck').click(function(){
 		url : '<c:url value="/check/id"></c:url>',
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
-		successs : function(data){
+		success : function(data){
 			if(data.res){
 				alert('사용 가능한 아이디입니다.');
-				idCheck = true;
+				idc = true;
 			}else{
 				alert('이미 사용중인 아이디입니다.');
 			}
@@ -381,7 +393,7 @@ $('.idCheck').click(function(){
 	});
 });
 $('[name = me_id]').change(function(){
-	idCheck = false;
+	idc = false;
 });
 
 </script>

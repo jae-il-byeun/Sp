@@ -20,8 +20,11 @@ public class MemberServiceImp implements MemberService{
 	public boolean memberjoin(MemberVO member) {
 			if(member == null)
 				return false;
-			String newPw = passwordEncoder.encode(member.getMe_pw());
-			member.setMe_pw(newPw);
+
+			member.setMe_rrn( member.getMe_rrnFront()+ "-" + member.getMe_rrnBack());
+			member.setMe_email(member.getMe_emailId()+ "@" + member.getMe_domain());
+			member.setMe_birth(member.getMe_year() + member.getMe_month() + member.getMe_day());
+			member.setMe_gender(member.getG_check());
 			if(memberDao.insertMember(member) != 0) {
 				return true;
 			}
@@ -38,10 +41,5 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.selectMemberById(user.getMe_id()) == null;
 	}
 
-	@Override
-	public void emailAuthentication(String me_id, String me_email) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 }

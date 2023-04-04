@@ -8,7 +8,7 @@ public interface MemberService {
 
 	boolean checkId(MemberVO user);
 
-	void emailAuthentication(String me_id, String me_email);
+	
 
 
 

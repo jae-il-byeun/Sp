@@ -266,6 +266,7 @@ a{text-decoration: none; margin-left: 20px;}
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
   document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+  document.getElementById("p-modal").style.display = "none";
 
   
 }
@@ -286,8 +287,7 @@ window.onclick = function(event) {
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
 	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
-
-
+	document.getElementById("modal").style.display = "none";
 }
 
 //모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.

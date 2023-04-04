@@ -6,7 +6,7 @@
 <html>
     <script src="/project/resources/js/jquery.min.js"></script>
 	<script src="/project/resources/js/popper.min.js"></script>  
-<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+	<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
 	                 	
 </head>
 <body>

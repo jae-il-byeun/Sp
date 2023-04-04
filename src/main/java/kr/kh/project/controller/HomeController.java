@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.kh.project.service.MemberService;
@@ -37,7 +38,7 @@ public class HomeController {
 		boolean isSignup = memberService.memberjoin(member);
 		
 		if(isSignup) {
-			memberService.emailAuthentication(member.getMe_id(),member.getMe_email());
+		
 			mv.setViewName("redirect:/");
 		}else {
 			
@@ -46,11 +47,14 @@ public class HomeController {
 		
 		return mv;
 	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/check/id", method=RequestMethod.POST)
 	public Map<String, Object> idCheck(@RequestBody MemberVO user){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		System.out.println(user);
 		boolean res = memberService.checkId(user);
+		System.out.println(res);
 		map.put("res", res);
 		return map;
 		//다음 내용은 수정내용
