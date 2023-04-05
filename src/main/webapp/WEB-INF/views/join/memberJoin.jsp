@@ -38,7 +38,7 @@ select{
 }
 .join_box{
 	width:100%; height:100%;  
-	box-sizing: border-box; padding:10px 200px; margin-top: 130px; 
+	box-sizing: border-box; padding:10px 250px; margin-top: 130px; 
 }
 .join_form{display:flex; margin-top:15px;}
 .join_table{
@@ -48,12 +48,12 @@ select{
 	width:30%; height: 46px; font-size: 15px;
 }
 [name=me_id]{
-	width:84.6%;
+	width:81%;
 }
 [name=me_idCheck]{
-	height:43px; 
+	width:17%; height:43px; 
 	font-size:14px; 
-	border:1px solid green; border-radius: 7px;
+	border:1px solid #fff; border-radius: 5px;
 	background-color: green; color:#fff; 
 	box-sizing: border-box; padding:0px 2px;
 	cursor: pointer; box-shadow : 1px 1px 4px green;
@@ -74,7 +74,7 @@ select{
 	width:46.6%; margin-right: 0px;
 }
 
-.year{width:20%;}
+.year{width:20%; height:46px;}
 .gender{width:20%; box-shadow : none;}
 .g_text{display:inline-block; vertical-align: middle;
 	position: relative; bottom:17px;margin-left: 0px;
@@ -83,8 +83,17 @@ select{
 #email_box select{width:20%; margin-left:-4px; }
 .email_id{	width:50%;}
 .email_domain{width:22.2%; margin-right:3px;}
-[name = me_sendPhoneCheck]{
+#me_sendEmailCheck{
 	width:74.5%;
+}
+#me_sendEmail{
+	width:40%; height: 43px;
+	float:right;
+	color: #fff; background-color: green; 
+	border: 1px solid #fff; border-radius: 5px;
+	cursor: pointer; box-shadow : 1px 1px 4px green;
+	margin-bottom: 10px;
+	
 }
 #me_phone{
 	height: 43px;
@@ -94,13 +103,14 @@ select{
 	cursor: pointer; box-shadow : 1px 1px 4px green;
 }
 [name = me_complete]{
+	width: 100%;
 	height: 43px;
-	float:right;
+	
 	font-size: 17px;
-	border:1px solid green; border-radius: 7px;
-	background-color: green; color:#fff; 
-	box-sizing: border-box; padding:0px 2px;
-	cursor: pointer; box-shadow : 1px 1px 4px green;
+	border:1px solid #fff; border-radius: 7px;
+	background-color: navy; color:#fff; 
+	box-sizing: border-box; padding:0px 2px; margin-top: 15px;
+	cursor: pointer; box-shadow : 1px 1px 4px navy;
 }
 </style>
 <body>
@@ -219,23 +229,6 @@ select{
 					</td>
 				</tr>
 				<tr>
-					<th>전화번호</th>
-				</tr>
-				<tr>
-					<td>
-						<select>
-							<option>대한민국 +82</option>
-						</select>
-					</td>
-				</tr>		
-				<tr>	
-					<td>
-						<input type="text" name="me_phone">
-						<input type="text" name="me_sendPhoneCheck" placeholder="인증번호란">
-						<button type="button" id="me_sendPhone">인증번호 발송</button>
-					</td>
-				</tr>
-				<tr>
 					<th>회원이메일</th>
 				</tr>
 						
@@ -247,7 +240,17 @@ select{
 						<select id="email_domainKind">
 							<option>naver.com</option>
 						</select>
+						<button type="button" id="me_sendEmail">인증번호 발송</button>
 					</td>
+				</tr>
+				<tr>
+					<th>전화번호</th>
+				</tr>
+				<tr>	
+					<td>
+						<input type="text" name="me_phone">
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<button name="me_complete">작성완료</button>
@@ -276,7 +279,7 @@ select{
 			},
 			me_pw : {
 				required :true,
-				regex : /^[a-zA-Z0-9!-~]{8,20}$/
+				regex : /^[a-zA-Z0-9!-~]{8,16}$/
 			},
 			me_pwcheck : {
 				equalTo: me_pw
@@ -288,6 +291,10 @@ select{
 			me_gender : {
 				required : true,
 				checked : true
+			},
+			me_phone : {
+				required : true,
+				regex : /^[0-9]{10,11}$/
 			},
 			me_rrnFront : {
 					required: true,
@@ -307,7 +314,7 @@ select{
 			},
 			me_pw : {
 				required : '필수 항목입니다.',
-				regex : '비밀번호는 영문, 숫자, 특수기호를 이용하여 8~20자 까지 가능합니다.'
+				regex : '비밀번호는 영문, 숫자, 특수기호를 이용하여 8~16자 까지 가능합니다.'
 			},
 			me_pwcheck : {
 				equalTo: '비밀번호와 일치하지 않습니다.'
@@ -319,6 +326,10 @@ select{
 			me_gender : {
 				required : '필수 항목입니다.',
 				checked : '성별이 선택되지 않았습니다.'
+			},
+			me_phone : {
+				required : '필수 항목입니다.',
+				regex : '잘못된 번호입니다.'
 			},
 			me_rrnFront : {
 				required : '필수 항목입니다.',				

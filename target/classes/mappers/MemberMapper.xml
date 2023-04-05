@@ -10,4 +10,15 @@
   <select id="selectMemberById" resultType="kr.kh.project.vo.MemberVO">
   	select * from member where me_id = #{me_id}
   </select>
+  <insert id="insertAuNumVO">
+  	insert into AuNum(au_echeck, au_me_id,au_delay)
+  			values(#{che.au_echeck},#{che.au_me_id}, date_add(#{che.au_delay}, interval 1 hour))
+  </insert>
+  <select id="selectMemberCheck" resultType="kr.kh.project.vo.AuNumVO">
+  		select * from AuNum
+  			where au_me_num = #{che.au_me_num} and au_echeck = #{che.au_echeck} and au_delay >=now()
+  </select>
+  <delete id="deleteMemberCheck">
+  	delete from AuNum where au_me_num = #{che.au_me_num} and au_echeck = #{che.au_echeck}
+  </delete>
 </mapper>

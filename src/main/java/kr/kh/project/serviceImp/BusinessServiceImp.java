@@ -8,31 +8,30 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import kr.kh.project.dao.MemberDAO;
-import kr.kh.project.service.MemberService;
+import kr.kh.project.dao.BusinessDAO;
+import kr.kh.project.service.BusinessService;
 import kr.kh.project.vo.AuNumVO;
-import kr.kh.project.vo.MemberVO;
+import kr.kh.project.vo.BusinessVO;
+
 
 @Service
-public class MemberServiceImp implements MemberService{
+public class BusinessServiceImp implements BusinessService{
 
 	@Autowired
-	MemberDAO memberDao;
+	BusinessDAO businessDao;
 	@Autowired
 	private JavaMailSender mailSender;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
-	public boolean memberjoin(MemberVO member) {
-			if(member == null)
+	public boolean businessjoin(BusinessVO seller) {
+			if(seller == null)
 				return false;
 
-			member.setMe_rrn( member.getMe_rrnFront()+ "-" + member.getMe_rrnBack());
-			member.setMe_email(member.getMe_emailId()+ "@" + member.getMe_domain());
-			member.setMe_birth(member.getMe_year() + member.getMe_month() + member.getMe_day());
-			member.setMe_gender(member.getG_check());
-			if(memberDao.insertMember(member) != 0) {
+			seller.setBi_email(seller.getBi_emailId()+ "@" + seller.getBi_domain());
+			seller.setBi_address(seller.getBi_postNum()+ seller.getBi_mainAddress()+seller.getBi_detailAddress()+seller.getBi_extraAddress());
+			if(businessDao.insertBusiness(seller) != 0) {
 				return true;
 			}
 		
@@ -40,24 +39,24 @@ public class MemberServiceImp implements MemberService{
 	}
 
 	@Override
-	public boolean checkId(MemberVO user) {
-		if(user == null || user.getMe_id() == null || user.getMe_id().trim().length() == 0)
+	public boolean checkBiId(BusinessVO seller) {
+		if(seller == null || seller.getBi_id() == null || seller.getBi_id().trim().length() == 0)
 			return false;
 		
 		
-		return memberDao.selectMemberById(user.getMe_id()) == null;
+		return businessDao.selectBusinessById(seller.getBi_id()) == null;
 	}
 
 	@Override
-	public void emailAuthentication(String me_id, String me_email) {
+	public void emailAuthentication(String bi_id, String bi_email) {
 		String str = authenticationNumber();
-		AuNumVO che = new AuNumVO(me_id, str);
-		memberDao.insertAuNumVO(che);
+		AuNumVO che = new AuNumVO(bi_id, str);
+		businessDao.insertAuNumVO(che);
 		
 		String title = "Repose / email check";
 		String content = "링크를 클릭해서 인증완료하세요.<br>" +
-						 "<a href = 'http://loacalhost:8080/project/email?mo_num=" + str + "mo_me_id=" + me_id+"'>인증완료하기</a>";
-		sendEmail(title,content,me_email);
+						 "<a href = 'http://loacalhost:8080/project/email?mo_num=" + str + "mo_bi_id=" + bi_id+"'>인증완료하기</a>";
+		sendEmail(title,content,bi_email);
 	}
 	private String authenticationNumber() {
 		String str ="";
@@ -93,10 +92,10 @@ public class MemberServiceImp implements MemberService{
 	public boolean emailAuthenticationConfirm(AuNumVO che) {
 		if(che == null)
 			return false;
-		AuNumVO dbChe = memberDao.selectMemberCheck(che);
+		AuNumVO dbChe = businessDao.selectBusinessCheck(che);
 		System.out.println("DB에서 가져온 인증 정보 : " + dbChe);
 		if(dbChe != null) {
-			memberDao.deleteMemberCheck(che);
+			businessDao.deleteBusinessCheck(che);
 			return true;
 		}
 		return false;

@@ -41,15 +41,15 @@ body{ font-family: 'GyeonggiTitleM';}
 }
 .login_link{
 	width:28%; height:95%;  
-	margin-right:10px; 
 }
+.mll{margin-left:10px;}
 .login_link *{cursor:pointer;}
 
 .login_link span{
 	display:block; text-align: center; font-size:12px; color:#fff;
 }
-.login_icon{width:50%; vertical-align:middle; margin-left:13px;}
-
+.login_icon{width:50%; vertical-align:middle; margin-left:14px;}
+.mc{width:60%; margin-left:10px;}
 
 .title_box{ 
 	width:100%; height:50%; box-sizing: border-box;
@@ -84,7 +84,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	display:block; color:#fff;
 }
 .catalog_icon{
-	width:49%;
+	width:90%;
 }
 
 
@@ -289,7 +289,7 @@ swiper-slide img {
 					</a>
 				</label>
 			</li>
-			<li class="login_link">
+			<li class="login_link mll">
 				<label>
 					<a  class="m_login" id="m_modal">
 						<img alt="" src="resources/img/member.png" class="login_icon mc"> 
@@ -487,7 +487,7 @@ swiper-slide img {
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
   document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
-
+  document.getElementById("p-modal").style.display = "none";
   
 }
 
@@ -507,7 +507,7 @@ window.onclick = function(event) {
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
 	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
-
+	document.getElementById("modal").style.display = "none";
 
 }
 

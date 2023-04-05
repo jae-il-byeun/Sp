@@ -112,7 +112,7 @@ a{text-decoration: none; margin-left: 20px;}
 	 position: absolute; top: 130px; left:90px;
 }
 #ml_login_keep{
-	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block; box-shadow: none;
 }
 
 #ml_btn{
@@ -123,7 +123,7 @@ a{text-decoration: none; margin-left: 20px;}
 	
 }
 #ml_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:340px; font-size: 15px;
+	position: absolute; top: 100px; left:350px; font-size: 15px;
 	background-color: green; color: #fff;  border-radius: 15px;
 }
 #ml_loss{
@@ -131,7 +131,7 @@ a{text-decoration: none; margin-left: 20px;}
 }
 
 #mp_login_keep{
-	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block;
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block; box-shadow: none;
 }
 #mp_btn{
 	width:60%; height:15%; text-align: center; cursor: pointer;
@@ -141,7 +141,7 @@ a{text-decoration: none; margin-left: 20px;}
 	
 }
 #mp_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:340px; font-size: 15px;
+	position: absolute; top: 100px; left:350px; font-size: 15px;
 	background-color: teal; color: #fff;  border-radius: 15px;
 }
 #mp_loss{

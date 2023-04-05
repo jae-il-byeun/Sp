@@ -24,6 +24,7 @@ body{font-family: 'GyeonggiTitleM';}
 	width: 100%; height:100%;
 	 box-sizing:border-box; margin-top: 130px; 
 }
+/* 상품소개 제목 */
 .product_titleBox{
 	width:100%; height:30%;  
 	border-bottom:1px solid #ddd; border-top: none; border-radius: 5px;
@@ -31,18 +32,29 @@ body{font-family: 'GyeonggiTitleM';}
 	box-sizing:border-box; padding: 10px 10px 5px 15px; 
 }
 #pt_title{margin:5px 0px 30px 10px;}
+
 .product_placeBox{
 width:100%; height:35%;  
 	box-sizing:border-box; padding: 0px 10px 5px 15px;  display:flex; text-align: center;
 }
-
-
-.product_introImg{
-	width:40%; height:5%;
-	box-sizing: border-box; margin-left: 10px;
-	position: relative;
-
+.product_search_mainPlace{
+	width:8%; height:10%; 
+	border: 1px solid #ddd; border-radius: 7px;
+	box-sizing: border-box; margin-right:10px; 
 }
+.product_search_subPlace{
+	width:15%; height: 5%; 
+	border: 1px solid #ddd; border-radius: 7px; 
+	box-sizing: border-box; margin-right:10px; 
+}
+.product_search_calender{margin-left: 10px;}
+.dayCheck{
+	width:40%; height: 34px;
+	border: 1px solid #ddd; border-radius: 7px;
+	font-size: 15px;
+}
+
+/* 상품소개 메인속성 */
 .product_contentContainer{
 	width:100%; height: 100%;
 	box-sizing: border-box; margin-top: 10px;
@@ -53,14 +65,75 @@ width:100%; height:35%;
 .product_introMainBox{
 	width:100%; height:30%;
 	display:flex;
+	
+	
 }
 .product_introImg{
 	width:35%; height:25%;
 	z-index: -1;
+	box-sizing: border-box;
+	position: relative;
 }
 
 
-/* 슬라이드 */
+.product_introTitle{
+	width:55%; height:25%;
+	margin-left: 50px;
+	font-size: 20px;
+	border-bottom: 2px solid #ddd; border-right: 2px solid #ddd;
+}
+.product_introTitle h1{
+	width:90%;
+	font-size:50px;  
+	margin: 10px 0px 15px 10px;
+}
+.product_likeBox{
+	float:right;
+	width:30px; height:30px;
+	margin-right:15px;
+}
+.product_likeimg{
+	width:100%;
+}
+.product_starPoint{
+	width:20px; height:20px;
+}
+/* 상품 상세소개Box */
+.product_introDetail{
+	width:100%; height:30%; 
+	
+}
+
+.product_introDetail h5{
+	font-size:20px; 
+}
+.product_detailTA{
+	width: 100%; height: 100%;
+	border: 1px solid #ddd;
+}
+.product_serviceBox{
+	width:100%; height:230px;
+	display: flex; 
+
+}
+.product_service{
+	width:50%; height:100%;
+	box-sizing: border-box; padding-left: 10px;
+}
+.cp{
+	box-sizing:border-box; padding:5px 50px;
+	border-bottom: 1px solid #ddd;
+}
+.product_location{
+	width:45%; height: 200px;
+}
+.product_location img{
+	width:100%; height: 200px;
+}
+
+
+}
+/*메인소개 이미지 슬라이드 */
 .swiper {
       width: 100%;
       height: 100%;
@@ -113,59 +186,6 @@ width:100%; height:35%;
       height: 100%;
       object-fit: cover;
       border-radius: 5px;
-}
-.cp{
-	box-sizing:border-box;
-	padding:5px 50px;
-	border-bottom: 1px solid #ddd;
-}
-
-.product_introTitle{
-	width:55%; height:25%;
-
-	font-size: 20px;
-}
-.product_introTitle h1{
-	font-size:50px; width:90%;
-}
-.product_likeBox{
-	float:right;
-	width:20px; height:20px;
-	
-}
-.product_liketext{
-	font-size: 0px;
-	background-imge:url("/project/resources/img/nomal_like.png")
-}
-.product_introDetail{
-	width:100%; height:30%; 
-	
-}
-.product_introDetail h5{
-	font-size:20px; 
-}
-.product_detailTA{
-	width: 100%; height: 100%;
-	border: 1px solid #ddd;
-}
-.product_serviceBox{
-	width:100%; height:230px;
-	display: flex; 
-
-}
-.product_service{
-	width:50%; height:100%;
-	box-sizing: border-box; padding-left: 10px;
-}
-.product_location{
-	width:45%; height: 200px;
-}
-.product_location img{
-	width:100%; height: 200px;
-}
-
-
-
 }
 </style>
 <head>
@@ -277,13 +297,13 @@ width:100%; height:35%;
 					<div class="product_introTitle">
 						<h1 class="product_title">파라다이스 시티</h1>
 						<span class="product_likeBox">
-							<span class="product_liketext">좋아요</span>
+							<img src="/project/resources/img/nomal_like.png" class="product_likeimg">
 						</span>
 						<div class="product_detailInfo">
-							<span>별점</span><img alt="" src="" class="product_starPoint">
-							<span>4.5</span>
+							<span>별점</span><img alt="" src="/project/resources/img/star.png"  class="product_starPoint">
+							<span class="avScore">4.5</span>
 							<span>/평점</span>
-							<span>(<span>84</span>)></span>
+							<span>(<span class="reviewNum">84</span>)></span>
 						</div>
 						<span>10000원</span> 
 					</div>

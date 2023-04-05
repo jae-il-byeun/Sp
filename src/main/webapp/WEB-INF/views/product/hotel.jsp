@@ -43,7 +43,12 @@ width:100%; height:35%;
 	border: 1px solid #ddd; border-radius: 7px; 
 	box-sizing: border-box; margin-right:10px; 
 }
-
+.product_search_calender{margin-left: 10px;}
+.dayCheck{
+	width:40%; height: 34px;
+	border: 1px solid #ddd; border-radius: 5px;
+	font-size: 15px;
+}
 
 .product_contentBox{
 	width:100%; height:100%; 
