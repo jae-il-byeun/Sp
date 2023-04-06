@@ -47,17 +47,48 @@ public class HomeController {
 			mv.setViewName("redirect:/");
 		}else {
 			
-			mv.setViewName("redirect:/join/member");
+			mv.setViewName("redirect:/join/memberJoin");
 		}
 		
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/check/id", method=RequestMethod.POST)
+	public Map<String, Object> idCheck(@RequestBody MemberVO user){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		System.out.println(user);
+		boolean res = memberService.checkId(user);
+		System.out.println(res);
+		map.put("res", res);
+			 //	key   value			
+		return map;
+
+	}
+	@ResponseBody
+	@RequestMapping(value = "/login/member", method=RequestMethod.POST)
+	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		MemberVO user = memberService.login(member);
+		
+		mv.addObject("user",user);
+		if(user != null) {
+			map.put("result", true);
+		}
+		else {
+			map.put("result", false);
+		}
+		return map;
+
+	}
+	
 	@RequestMapping(value = "/join/business", method = RequestMethod.GET)
 	public ModelAndView businessJoin(ModelAndView mv) {
-		mv.setViewName("/join/businessjoin");
+		mv.setViewName("/join/businessJoin");
 		return mv;
 	}
+	
 	@RequestMapping(value="/join/business", method=RequestMethod.POST)
 	public ModelAndView businessJoinPost(ModelAndView mv, BusinessVO seller) {
 		boolean isSignup = businessService.businessjoin(seller);
@@ -70,28 +101,8 @@ public class HomeController {
 		}
 		return mv;
 	}
-	@RequestMapping(value="/email", method=RequestMethod.GET)
-	public ModelAndView email(ModelAndView mv, AuNumVO che) {
-		if(businessService.emailAuthenticationConfirm(che)) {
-			System.out.println("인증완료");
-		}else {
-			System.out.println("인증실패");
-		}
-		mv.setViewName("redirect:/");
-		return mv;
-	}
 	
-	@ResponseBody
-	@RequestMapping(value = "/check/id", method=RequestMethod.POST)
-	public Map<String, Object> idCheck(@RequestBody MemberVO user){
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println(user);
-		boolean res = memberService.checkId(user);
-		System.out.println(res);
-		map.put("res", res);
-		return map;
-
-	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/check/biId", method=RequestMethod.POST)
 	public Map<String, Object> BiIdCheck(@RequestBody BusinessVO seller){
@@ -103,16 +114,18 @@ public class HomeController {
 		return map;
 
 	}
-	@RequestMapping(value="/login/member", method=RequestMethod.GET)
-	public ModelAndView memberLogin(ModelAndView mv, MemberVO member) {
-		String loginId = memberService.getLoginId();
-		if(loginId != null && !loginId.contains("loginId")) {
-			
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ModelAndView email(ModelAndView mv, AuNumVO che) {
+		if(businessService.emailAuthenticationConfirm(che)) {
+			System.out.println("인증완료");
+		}else {
+			System.out.println("인증실패");
 		}
+		mv.setViewName("redirect:/");
+		return mv;
 	}
 	
-	
-	
+
 	
 	
 	

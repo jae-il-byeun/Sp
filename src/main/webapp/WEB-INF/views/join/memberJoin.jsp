@@ -386,15 +386,27 @@ let idc = false;
 $('.idCheck').click(function(){
 	let me_id = $('[name = me_id]').val();
 	let obj = { me_id : me_id};
+// 	/            key(VO에 있는 객체명)   value(여기 me_id는 바로 위 객체)
+// 포인트 VO에 있는 객체명을 적었기 때문에 컨트롤러에서는 VO 객체명 으로 받는다. ex> MemberVO user 이게 받는 것이 된다. obj = user와 같은 말
+// 만약 key의 값을 vo에 있는 객체명으로 안넘겨줄 시에는 컨트롤러에서 인자값으로 파라미터를 사용해 객체를 받아야한다. ex) @RequestParam("me_id") String me_id 
 	$.ajax({
-		async :true,
+		async :true, // 비동기화 여부 
+		//false 동기화 / true 비동기화
+		//동기화는 순차적 / 비동기화는 멀티,
+		// 하지만 ajax가 여러개 쓰일 수록 동기화가 제대로 작동할지 않할지는 모르기 때문에 너무 믿지 않는 것이 좋다.
 		type : 'POST',
 		data : JSON.stringify(obj),
+		//     JSON의 형태로 obj를 보낸다. stringify는 직렬화 데이터줄이기위한 빈칸 없애기
+		// 만약 위처럼 obj로 객체를 만들어서 넘기지 않고 { me_id : me_id} 처럼 text의 형태로 넘길 수 도 있다 ex) data : { me_id : me_id},
+		// 
 		url : '<c:url value="/check/id"></c:url>',
+		// 적은 url로 호출한다(보낸다)는 의미
 		dataType : "json",
+		// "" 안에 들어 있는 타입으로 보낸다. json란 -> key와 value를 담고 있는 객체 Map<string,object>에서 <string,object>와 같은 형태를 말한다.
 		contentType : "application/json; charset=UTF-8",
-		success : function(data){
-			if(data.res){
+		success : function(data){ //여기서 success 말고도 error,complete 가 있다.
+// 			 컨트롤러에서 return map;으로 보내고  data란 이름으로 지정해서 받는다(여기서 data는 결과적으로 map이란 이름이 변경된 것을 뜻함 map=data): 
+			if(data.res){ //여기서 res는 컨트롤러에서 보내는 키를 의미함
 				alert('사용 가능한 아이디입니다.');
 				idc = true;
 			}else{

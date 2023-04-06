@@ -17,10 +17,4 @@ public interface BusinessDAO {
 	AuNumVO selectBusinessCheck(@Param("che")AuNumVO che);
 
 	void deleteBusinessCheck(@Param("che")AuNumVO che);
-
-	
-
-
-
-
 }

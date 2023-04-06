@@ -13,6 +13,7 @@ public interface MemberService {
 
 	boolean emailAuthenticationConfirm(AuNumVO che);
 
+
 	
 
 

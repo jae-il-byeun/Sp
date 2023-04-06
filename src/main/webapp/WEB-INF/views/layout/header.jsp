@@ -283,6 +283,15 @@ window.onclick = function(event) {
   }
 }
 
+//모달 요소 가져오기
+const modal = document.querySelector('#modal');
+
+// 모달 외부 클릭 이벤트 핸들러 함수
+function closeModal(e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+}
 //dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
@@ -298,9 +307,17 @@ document.getElementsByClassName("close")[1].onclick = function() {
 
 //모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
-	if (event.target == document.getElementById("p-modal")) {
+	if (document.getElementById("p-modal").style.display != "none"
+			//&& event.target != document.getElementById("p-modal")
+			&& event.target.className != "header_loginIcon"
+			&& $("#p-modal").find(event.target).length == 0) {//대게 length는 길이보다는 갯수를 의미.배열에 길이를 찾을 때는 [0](대가로)을 사용
 	 document.getElementById("p-modal").style.display = "none";
 	}
 }
+
+let lgCheck = false;
+$('#ml_btn').click(function(){
+	let me_id = $('.ml_id').val();
+})
 </script>
 </html>
