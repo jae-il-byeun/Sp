@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.MemberDAO;
 import kr.kh.project.service.MemberService;
-import kr.kh.project.vo.AuNumVO;
 import kr.kh.project.vo.MemberVO;
 
 @Service
@@ -48,21 +47,29 @@ public class MemberServiceImp implements MemberService{
 		return memberDao.selectMemberById(user.getMe_id()) == null;
 	}
 
+
 	@Override
-	public void emailAuthentication(String me_id, String me_email) {
-		String str = authenticationNumber();
-		AuNumVO che = new AuNumVO(me_id, str);
-		memberDao.insertAuNumVO(che);
+	public String emailAuCheck(String me_email) {
+		String chekNum = authenticationNumber();
+
 		
-		String title = "Repose / email check";
-		String content = "링크를 클릭해서 인증완료하세요.<br>" +
-						 "<a href = 'http://loacalhost:8080/project/email?mo_num=" + str + "mo_me_id=" + me_id+"'>인증완료하기</a>";
-		sendEmail(title,content,me_email);
+		boolean auCheck = memberDao.insertAuNumVO(chekNum);
+		//MyBatis에서는 SQL 쿼리의 실행 결과를 자바 객체로 매핑하기 위해 void, int, long, boolean, java.util.Map, java.util.List 등의 타입을 지원
+		System.out.println(auCheck);
+		if(auCheck) {
+			String title = "Repose / email check";
+			String content = " 인증번호를 입력하세요.<br>"  + chekNum ;
+			sendEmail(title,content,me_email);
+			return chekNum;
+		}
+		return null;
 	}
+	
+	
 	private String authenticationNumber() {
 		String str ="";
 		int max = 61, min = 0;
-		while(str.length() != 6) {
+		while(str.length() != 4) {
 			int r =(int)(Math.random()*(max-min + 1)+ min);
 			if(r<=9) {
 				str  += r;
@@ -89,18 +96,19 @@ public class MemberServiceImp implements MemberService{
 		}
 	}
 
-	@Override
-	public boolean emailAuthenticationConfirm(AuNumVO che) {
-		if(che == null)
-			return false;
-		AuNumVO dbChe = memberDao.selectMemberCheck(che);
-		System.out.println("DB에서 가져온 인증 정보 : " + dbChe);
-		if(dbChe != null) {
-			memberDao.deleteMemberCheck(che);
-			return true;
-		}
-		return false;
-	}
 
+
+	@Override
+	public MemberVO login(MemberVO member) {
+		if(member == null || member.getMe_id() == null || member.getMe_pw() == null)
+			return null;
+		MemberVO dbMember = memberDao.selectMemberById(member.getMe_id());
+		if(dbMember == null)
+			return null;
+		
+		if(passwordEncoder.matches(member.getMe_pw(), dbMember.getMe_pw()))
+				return dbMember;
+		return dbMember;
+	}
 	
 }

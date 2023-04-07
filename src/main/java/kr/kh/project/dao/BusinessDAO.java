@@ -10,11 +10,12 @@ public interface BusinessDAO {
 
 	int insertBusiness(@Param("seller")BusinessVO seller);
 
-	MemberVO selectBusinessById(@Param("bi_id")String bi_id);
+	BusinessVO selectBusinessById(@Param("bi_id")String bi_id);
 	
-	void insertAuNumVO(@Param("che")AuNumVO che);
+	boolean insertBiAuNumVO(String chekNum);	
 
 	AuNumVO selectBusinessCheck(@Param("che")AuNumVO che);
 
 	void deleteBusinessCheck(@Param("che")AuNumVO che);
+
 }

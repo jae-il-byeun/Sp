@@ -3,22 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.BusinessDAO">
-  <insert id="insertBusiness">
-    insert into business(bi_id, bi_pw, bi_name, bi_email, bi_company, bi_phone, bi_address, bi_brn, bi_an_num)
-       		values(#{seller.bi_id}, #{seller.bi_pw}, #{seller.bi_name}, #{seller.bi_email}, #{seller.bi_company}, #{seller.bi_phone}, #{Business.bi_address}, #{Business.bi_brn},2)
-  </insert>
-  <select id="selectBusinessById" resultType="kr.kh.project.vo.BusinessVO">
-  	select * from business where bi_id = #{bi_id}
-  </select>
-  <insert id="insertAuNumVO">
-  	insert into AuNum(au_echeck, au_bi_id,au_delay)
-  			values(#{che.au_echeck},#{che.au_bi_id}, date_add(#{che.au_delay}, interval 1 hour))
-  </insert>
-  <select id="selectBusinessCheck" resultType="kr.kh.project.vo.AuNumVO">
-  		select * from AuNum
-  			where au_bi_num = #{che.au_bi_num} and au_echeck = #{che.au_echeck} and au_delay >=now()
-  </select>
-  <delete id="deleteBusinessCheck">
-  	delete from AuNum where au_bi_num = #{che.au_bi_bum} and au_echeck = #{che.au_echeck}
-  </delete>
+	<insert id="insertBusiness">
+		insert into business(bi_id, bi_pw, bi_name, bi_company, bi_phone,bi_email,bi_address)
+			   values(#{seller.bi_id},#{sellerbi_pw.},#{seller.bi_name},#{seller.bi_company},#{seller.bi_phone},#{seller.bi_email},#{seller.bi_address})
+	</insert>
+	
+	<select id="selectBusinessById" resultType="kr.kh.project.vo.BusinessVO">
+	 	select * from business where bi_id = #{bi_id}
+	</select>
+	<insert id="insertBiAuNumVO">
+  		insert into AuNum(au_echeck)
+  				values(#{au_echeck} )
+	</insert>
+	<select id="selectBusinessCheck" resultType="kr.kh.project.vo.AuNumVO">
+	  	select * from AuNum
+	  			where  au_echeck = #{ck.au_echeck} and au_delay >= now()
+	</select>
 </mapper>

@@ -235,9 +235,11 @@ $('form').validate({
 		bi_pwcheck : {
 			equalTo: bi_pw
 		},
-		bi_email : {
-			required :true,
-			email : true
+		bi_name : {
+			required : ture
+		},
+		bi_company : {
+			required : ture
 		},
 		bi_phone : {
 			required : true,
@@ -246,7 +248,10 @@ $('form').validate({
 		bi_brn : {
 			required: true,
 			regex : /^[0-9]{7,7}$/
-				
+		},
+		bi_email : {
+			required :true,
+			email : true
 		},
 		bi_postNum : {
 			required :true
@@ -270,17 +275,25 @@ $('form').validate({
 		bi_pwcheck : {
 			equalTo: '비밀번호와 일치하지 않습니다.'
 		},
-		bi_email : {
-			required : '필수 항목입니다.',
-			reqex : '잘못된 이메일주소입니다.'
+		bi_name : {
+			required : '필수 항목입니다.',				
+			regex : '잘못된 형식입니다.'
+		},
+		bi_company : {
+			required : '필수 항목입니다.',				
+			regex : '잘못된 형식입니다.'
+		},
+		bi_brn : {
+			required : '필수 항목입니다.',				
+			regex : '잘못된 형식입니다.'
 		},
 		bi_phone : {
 			required : '필수 항목입니다.',
 			regex : '잘못된 번호입니다.'
 		},
-		bi_brn : {
-			required : '필수 항목입니다.',				
-			regex : '잘못된 형식입니다.'
+		bi_email : {
+			required : '필수 항목입니다.',
+			reqex : '잘못된 이메일주소입니다.'
 		},
 		bi_postNum : {
 			required: '필수 항목입니다.'
@@ -341,6 +354,29 @@ $('.idCheck').click(function(){
 			}
 		}
 	});
+});
+$('#bi_sendEmail').click(function(){
+	let domain =$('[name=bi_emailId]').val() + "@" +$('[name=bi_domain]').val();
+
+	let mail = {bi_email : domain};
+	
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(mail),
+		url :'<c:url value="/join/biEmail"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(emailCheck){
+
+			if(emailCheck.result == $('#emailAuCheck').val() ){
+				alert('인증성공');
+			}else{
+				alert('인증실패');
+			}
+
+		}
+	})
 });
 $('[name = bi_id]').change(function(){
 	idc = false;

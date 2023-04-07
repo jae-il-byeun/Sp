@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.project.dao.BusinessDAO;
 import kr.kh.project.service.BusinessService;
-import kr.kh.project.vo.AuNumVO;
 import kr.kh.project.vo.BusinessVO;
 
 
@@ -48,15 +47,20 @@ public class BusinessServiceImp implements BusinessService{
 	}
 
 	@Override
-	public void emailAuthentication(String bi_id, String bi_email) {
-		String str = authenticationNumber();
-		AuNumVO che = new AuNumVO(bi_id, str);
-		businessDao.insertAuNumVO(che);
+	public String biEmailAuCheck(String bi_email) {
+		String chekNum = authenticationNumber();
+
 		
-		String title = "Repose / email check";
-		String content = "링크를 클릭해서 인증완료하세요.<br>" +
-						 "<a href = 'http://loacalhost:8080/project/email?mo_num=" + str + "mo_bi_id=" + bi_id+"'>인증완료하기</a>";
-		sendEmail(title,content,bi_email);
+		boolean auCheck = businessDao.insertBiAuNumVO(chekNum);
+		//MyBatis에서는 SQL 쿼리의 실행 결과를 자바 객체로 매핑하기 위해 void, int, long, boolean, java.util.Map, java.util.List 등의 타입을 지원
+		System.out.println(auCheck);
+		if(auCheck) {
+			String title = "Repose / email check";
+			String content = " 인증번호를 입력하세요.<br>"  + chekNum ;
+			sendEmail(title,content,bi_email);
+			return chekNum;
+		}
+		return null;
 	}
 	private String authenticationNumber() {
 		String str ="";
@@ -89,17 +93,19 @@ public class BusinessServiceImp implements BusinessService{
 	}
 
 	@Override
-	public boolean emailAuthenticationConfirm(AuNumVO che) {
-		if(che == null)
-			return false;
-		AuNumVO dbChe = businessDao.selectBusinessCheck(che);
-		System.out.println("DB에서 가져온 인증 정보 : " + dbChe);
-		if(dbChe != null) {
-			businessDao.deleteBusinessCheck(che);
-			return true;
-		}
-		return false;
+	public BusinessVO businesslogin(BusinessVO seller) {
+		if(seller == null || seller.getBi_id() == null || seller.getBi_pw() == null)
+			return null;
+		BusinessVO dbseller = businessDao.selectBusinessById(seller.getBi_id());
+		if(dbseller == null)
+			return null;
+		
+		if(passwordEncoder.matches(seller.getBi_pw(), dbseller.getBi_pw()))
+				return dbseller;
+		return dbseller;
 	}
+	
+
 
 	
 }

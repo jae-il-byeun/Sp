@@ -1,6 +1,5 @@
 package kr.kh.project.service;
 
-import kr.kh.project.vo.AuNumVO;
 import kr.kh.project.vo.MemberVO;
 
 public interface MemberService {
@@ -9,9 +8,10 @@ public interface MemberService {
 
 	boolean checkId(MemberVO user);
 
-	void emailAuthentication(String me_id, String me_email);
+	MemberVO login(MemberVO member);
 
-	boolean emailAuthenticationConfirm(AuNumVO che);
+	String emailAuCheck(String me_email);
+
 
 
 	

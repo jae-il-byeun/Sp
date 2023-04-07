@@ -1,7 +1,6 @@
 
 package kr.kh.project.service;
 
-import kr.kh.project.vo.AuNumVO;
 import kr.kh.project.vo.BusinessVO;
 
 public interface BusinessService {
@@ -10,9 +9,9 @@ public interface BusinessService {
 
 	boolean checkBiId(BusinessVO seller);
 
-	void emailAuthentication(String bi_id, String bi_email);
+	BusinessVO businesslogin(BusinessVO seller);
 
-	boolean emailAuthenticationConfirm(AuNumVO che);
+	String biEmailAuCheck(String bi_email);
 
 	
 

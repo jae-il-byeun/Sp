@@ -11,11 +11,17 @@ public interface MemberDAO {
 
 	MemberVO selectMemberById(@Param("me_id")String me_id);
 	
-	void insertAuNumVO(@Param("che")AuNumVO che);
+	
+//	AuNumVO insertAuNumVO(@Param("cn")String chekNum);
+	boolean insertAuNumVO(String chekNum);
 
-	AuNumVO selectMemberCheck(@Param("che")AuNumVO che);
+	AuNumVO selectMemberCheck(@Param("ck")AuNumVO au_echeck);
 
-	void deleteMemberCheck(@Param("che")AuNumVO che);
+
+
+	
+
+	
 
 
 

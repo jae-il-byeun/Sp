@@ -240,7 +240,9 @@ select{
 						<select id="email_domainKind">
 							<option>naver.com</option>
 						</select>
+						<input type="text" id="emailAuCheck">
 						<button type="button" id="me_sendEmail">인증번호 발송</button>
+						<button type="button" id="me_emailCheck">인증번호 확인</button>
 					</td>
 				</tr>
 				<tr>
@@ -414,7 +416,31 @@ $('.idCheck').click(function(){
 			}
 		}
 	});
+}); 
+$('#me_sendEmail').click(function(){
+	let domain =$('[name=me_emailId]').val() + "@" +$('[name=me_domain]').val();
+
+	let mail = {me_email : domain};
+	
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(mail),
+		url :'<c:url value="/join/email"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(emailCheck){
+
+			if(emailCheck.result == $('#emailAuCheck').val() ){
+				alert('인증성공');
+			}else{
+				alert('인증실패');
+			}
+
+		}
+	})
 });
+
 $('[name = me_id]').change(function(){
 	idc = false;
 });

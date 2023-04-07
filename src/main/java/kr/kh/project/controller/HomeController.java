@@ -43,7 +43,7 @@ public class HomeController {
 		boolean isSignup = memberService.memberjoin(member);
 		
 		if(isSignup) {
-			memberService.emailAuthentication(member.getMe_id(), member.getMe_email());
+//			memberService.emailAuthentication(member.getMe_email());
 			mv.setViewName("redirect:/");
 		}else {
 			
@@ -51,6 +51,14 @@ public class HomeController {
 		}
 		
 		return mv;
+	}
+	@ResponseBody
+	@RequestMapping(value="/join/email",method= RequestMethod.POST)
+	public Map<String, Object> memberEmail(@RequestBody MemberVO me_email) {
+		HashMap<String, Object> email = new HashMap<String, Object>();
+		String check = memberService.emailAuCheck(me_email.getMe_email());
+		email.put("result", check);
+		return email;
 	}
 	
 	@ResponseBody
@@ -83,6 +91,11 @@ public class HomeController {
 
 	}
 	
+	
+	
+	
+	
+	
 	@RequestMapping(value = "/join/business", method = RequestMethod.GET)
 	public ModelAndView businessJoin(ModelAndView mv) {
 		mv.setViewName("/join/businessJoin");
@@ -94,7 +107,7 @@ public class HomeController {
 		boolean isSignup = businessService.businessjoin(seller);
 		
 		if(isSignup){
-			businessService.emailAuthentication(seller.getBi_id(),seller.getBi_email());
+//			businessService.emailAuthentication(seller.getBi_id(),seller.getBi_email());
 			mv.setViewName("redirect:/");
 		}else {
 			mv.setViewName("redirect:/join/business");
@@ -104,7 +117,7 @@ public class HomeController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/check/biId", method=RequestMethod.POST)
+	@RequestMapping(value = "/check/businessId", method=RequestMethod.POST)
 	public Map<String, Object> BiIdCheck(@RequestBody BusinessVO seller){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		System.out.println(seller);
@@ -114,57 +127,31 @@ public class HomeController {
 		return map;
 
 	}
-	@RequestMapping(value="/email", method=RequestMethod.GET)
-	public ModelAndView email(ModelAndView mv, AuNumVO che) {
-		if(businessService.emailAuthenticationConfirm(che)) {
-			System.out.println("인증완료");
-		}else {
-			System.out.println("인증실패");
+	@ResponseBody
+	@RequestMapping(value="/join/biEmail",method= RequestMethod.POST)
+	public Map<String, Object>businessEmail(@RequestBody BusinessVO bi_email) {
+		HashMap<String, Object> email = new HashMap<String, Object>();
+		String check = businessService.biEmailAuCheck(bi_email.getBi_email());
+		email.put("result", check);
+		return email;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/login/business", method=RequestMethod.POST)
+	public Map<String, Object> businessLogin(ModelAndView mv, @RequestBody BusinessVO seller){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		BusinessVO bm = businessService.businesslogin(seller);
+		
+		mv.addObject("seller",bm);
+		if(bm != null) {
+			map.put("result", true);
 		}
-		mv.setViewName("redirect:/");
-		return mv;
-	}
-	
+		else {
+			map.put("result", false);
+		}
+		return map;
 
-	
-	
-	
-	
+	}
 
-	
-	@RequestMapping(value = "/product/hotel", method = RequestMethod.GET)
-	public ModelAndView hotel(ModelAndView mv) {
-		mv.setViewName("/product/hotel");
-		return mv;
-	}
-	@RequestMapping(value = "/product/hotelIntro", method = RequestMethod.GET)
-	public ModelAndView hotelIntro(ModelAndView mv) {
-		mv.setViewName("/product/hotelIntro");
-		return mv;
-	}
-	@RequestMapping(value = "/product/motel", method = RequestMethod.GET)
-	public ModelAndView motel(ModelAndView mv) {
-		mv.setViewName("/product/motel");
-		return mv;
-	}
-	@RequestMapping(value = "/product/pention", method = RequestMethod.GET)
-	public ModelAndView pention(ModelAndView mv) {
-		mv.setViewName("/product/pention");
-		return mv;
-	}
-	@RequestMapping(value = "/traffic/search", method = RequestMethod.GET)
-	public ModelAndView trafficMain(ModelAndView mv) {
-		mv.setViewName("/traffic/trafficSearch");
-		return mv;
-	}
-	@RequestMapping(value = "/traffic/scheduel", method = RequestMethod.GET)
-	public ModelAndView trafficScheduel(ModelAndView mv) {
-		mv.setViewName("/traffic/trafficScheduel");
-		return mv;
-	}
-	@RequestMapping(value = "/traffic/seat", method = RequestMethod.GET)
-	public ModelAndView trafficSeat(ModelAndView mv) {
-		mv.setViewName("/traffic/trafficSeat");
-		return mv;
-	}
 }

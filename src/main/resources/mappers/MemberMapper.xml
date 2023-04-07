@@ -7,18 +7,16 @@
     insert into member(me_id, me_pw, me_name, me_email, me_gender, me_phone, me_birth, me_rrn, me_an_num)
        		values(#{member.me_id}, #{member.me_pw}, #{member.me_name}, #{member.me_email}, #{member.me_gender}, #{member.me_phone}, #{member.me_birth}, #{member.me_rrn},1)
   </insert>
+
   <select id="selectMemberById" resultType="kr.kh.project.vo.MemberVO">
   	select * from member where me_id = #{me_id}
   </select>
-   <insert id="insertAuNumVO">
-  	insert into AuNum(au_echeck, au_me_id,au_delay)
-  			values(#{che.au_echeck},#{che.au_me_id}, date_add(#{che.au_delay}, interval 1 hour))
+  <insert id="insertAuNumVO">
+  	insert into AuNum(au_echeck)
+  			values(#{au_echeck} )
   </insert>
   <select id="selectMemberCheck" resultType="kr.kh.project.vo.AuNumVO">
-  		select * from AuNum
-  			where au_me_num = #{che.au_me_num} and au_echeck = #{che.au_echeck} and au_delay >=now()
+  	select * from AuNum
+  			where  au_echeck = #{ck.au_echeck} and au_delay >= now()
   </select>
-  <delete id="deleteMemberCheck">
-  	delete from AuNum where au_me_num = #{che.au_me_num} and au_echeck = #{che.au_echeck}
-  </delete>
 </mapper>
