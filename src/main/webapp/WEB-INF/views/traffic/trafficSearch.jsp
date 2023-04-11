@@ -577,13 +577,8 @@ swiper-slide img {
 			    	<li id="jaeju">제주</li>
 		    	</ul>
 		    	<ul class="tm_placeDetail">
-						<li>강릉</li>
-						<li>강진</li>
-						<li>경북도청</li>
-						<li>경주</li>
-						<li>고대조치원</li>
-						<li>고양백석</li>
-						<li>고양화정</li>
+
+						
 						
 		    	</ul>
 	    	</div>
@@ -598,13 +593,25 @@ swiper-slide img {
 </div>
 
 </body>
-<script>
+<script>// modal 실행
+
 // dialog 열기
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
-document.getElementById("bu_start_modal").onclick = function() {
-  document.getElementById("tpm").style.display = "block"; // 모달을 보이도록 설정합니다.
-  
-}
+
+$('#bu_start_modal').click(function(){
+	$('#tpm').css("display","block"); 
+  	var xhr = new XMLHttpRequest();
+	var url = "https://api.odsay.com/v1/api/expressBusTerminals?lang=0&CID=1000&apiKey=r7KIUfijmoLkM%2FHfY8GrAHqMy%2FYNJwN2PJeHMK8n%2B%2Fk";
+	xhr.open("GET", url, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			 let resultJSON = JSON.parse(xhr.responseText).result;
+			for(let j=0; j<resultJSON.length; j++){
+				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName+'</li>');
+			}
+		}
+	}
+})
 document.getElementById("bu_arrive_modal").onclick = function() {
 	  document.getElementById("tpm").style.display = "block"; // 모달을 보이도록 설정합니다.
 }
@@ -632,7 +639,9 @@ $('.corse').click(function(){
 	}
 });
 </script>
+
 <script >
+//버스조회
 // 인증키 :
 //  %2BoUa%2BnpovMyWRLMFUpb5u6FUhojKp3XXyaRoUbs%2B20dvzSxl8YD8CAtMfdu%2BwjfdQbuz2Brhkf%2FPA7kMvH69wA%3D%3D
 // 지역별로 분류한다. -> 서울 경기/인천 강원 충북 경남 전라도
@@ -647,7 +656,7 @@ let	jaeju = [8000,8010,8020,8030];
 let	jeounbook = [9000,9010,9020,9030,9040,9050,9060,9070,9080,9090,9100,9110,9120,9130];
 let	gangwon = [10000,10010,10020,10030,10040,10050,10060,10070,10080,10090,10100,10110,10120,10130,10140,10150,10160,10170];
 let chungbuk = [11000,11010,11020,11030,11040,11050,11060,11070,11080,11090,11100,11110];
-
+//지역을 클릭했을 시
 $('.tm_cityBox li').click( function() {
 	
 	let arry = [];
@@ -704,7 +713,7 @@ function placeSearch(i){
 	xhr.open("GET", url, true);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			let resultJSON = JSON.parse(xhr.responseText).result;
+			 resultJSON = JSON.parse(xhr.responseText).result;
 			for(let j=0; j<resultJSON.length; j++){
 				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName+'</li>');
 
@@ -713,8 +722,17 @@ function placeSearch(i){
 			}
 
 			$('.tm_placeDetail li').click(function(){
-				touch($(this));
+				resultSearchPlace($(this));
 				
+			});
+			$('.tm_placeDetail li').click(function(){
+				if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
+					
+					$('#tm_arrive').text(this.text);
+					$('#tm_arrive_id').val(this.id);
+				}
+				
+						
 			});
 			
 		}
@@ -723,12 +741,14 @@ function placeSearch(i){
 };
 //1.전체를 함수로 묶어서 전제조건을 건다. 맨 처음 출발지에 (색이 있거나, 양쪽다 데이터가 없을 )시 출발지에 데이터를 넣는다.
 //  만약 출발지에 데이터가 있는 경우 도착지에 데이터를 넣는다.
-//2.touch함수에 if문 (출발지에 데이터가 있으면) 도착지에 데이터를 넣는다. 
 
+//2.resultSearchPlace함수에 if문 (출발지에 데이터가 있으면) 도착지에 데이터를 넣는다. 
+//기본 서울 지역 터미널->지역 선택 시
 
-function touch(obj){
-	$('#tm_start').text(obj.text());
-	$('#tm_start_id').val(obj.val());
+function resultSearchPlace(obj){
+
+		$('#tm_start').text(obj.text());
+		$('#tm_start_id').val(obj.val());
 	
 	$('.ps').addClass("disabled");
 	$('#tm_place_hidden').css("box-shadow","none");
