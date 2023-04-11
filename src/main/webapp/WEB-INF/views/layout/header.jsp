@@ -48,7 +48,7 @@ a{text-decoration: none; margin-left: 20px;}
 .header_loginIcon{ margin-right:17px; width:67%; box-sizing: border-box;}
 #mli_icon{margin-left: 3%; width:65%; text-align: center;}
 .h_cataloglogin_text{ display:block; text-align: center; font-size: 13px}
-
+.h_exit{display:none;}
 
 
     
@@ -200,16 +200,22 @@ a{text-decoration: none; margin-left: 20px;}
 					<span class="h_cataloglogin_text">장바구니</span> 
 				</a>
 			</li>
-			<li class="h_login">
+			<li class="h_login h_member">
 				<a  class="hl_link" id="m_modal">
 					<img alt="" src="/project/resources/img/member.png" id="mli_icon">
 					<span class="h_cataloglogin_text">회원</span> 
 				</a>
 			</li>
-			<li class="h_login">
+			<li class="h_login h_business">
 				<a  class="hl_link" id="p_modal">
 					<img alt="" src="/project/resources/img/boss.png" class="header_loginIcon">
 					<span class="h_cataloglogin_text">사업자</span> 
+				</a>
+			</li>
+			<li class="h_login h_exit">
+				<a  class="hl_link" id="exit">
+					<img alt="" src="/project/resources/img/exit.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">로그아웃</span> 
 				</a>
 			</li>
 	
@@ -315,9 +321,69 @@ window.onclick = function(event) {
 	}
 }
 
-let lgCheck = false;
 $('#ml_btn').click(function(){
-	let me_id = $('.ml_id').val();
-})
+	let login_id = $('.ml_id').val();
+	let login_pw = $('.ml_pw').val();
+	let login = {
+			me_id : login_id,
+			me_pw : login_pw
+			
+	};
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(login),
+		url :'<c:url value="/login/member"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(emailCheck){
+			if(emailCheck.result){
+				alert('로그인성공');
+				window.location.reload();
+			}else{
+				alert('로그인 실패');
+			}
+		}
+	});	
+});
+
+//매번 최초 페이지 로드시.
+//로그인여부를 체크한다.
+$.ajax({
+	async: true,
+	type : 'POST',
+	data : null,
+	url : '<c:url value="/login/check"></c:url>',
+	dataType : "json",
+	contentType : "application/json; chearset=UTF-8",
+	success : function(ch){
+		if(ch.lgCheck){
+			
+			$('.h_business').css({display:"none"});
+			$('.h_exit').css({display:"block"});
+		}else{
+			
+		}
+	}
+		
+});
+//로그아웃
+$('#exit').click(function(){
+		$.ajax({
+			async : true,
+			type : 'POST',
+			url :'<c:url value="/logout"></c:url>',
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(emailCheck){
+				if(emailCheck.result){
+					alert('로그아웃성공');
+					window.location.reload();
+				}else{
+					alert('로그아웃 실패');
+				}
+			}
+		});	
+	});
 </script>
 </html>

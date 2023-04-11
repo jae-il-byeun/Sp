@@ -83,8 +83,8 @@ select{
 #email_box select{width:20%; margin-left:-4px; }
 .email_id{	width:50%;}
 .email_domain{width:22.2%; margin-right:3px;}
-#me_sendEmailCheck{
-	width:74.5%;
+#emailAuCheck{
+	width:55%;
 }
 #me_sendEmail{
 	width:40%; height: 43px;
@@ -93,6 +93,16 @@ select{
 	border: 1px solid #fff; border-radius: 5px;
 	cursor: pointer; box-shadow : 1px 1px 4px green;
 	margin-bottom: 10px;
+	
+}
+#me_emailCheck{
+	width:40%; height: 43px;
+	float:right;
+	color: #fff; background-color: salmon; 
+	border: 1px solid #fff; border-radius: 5px;
+	cursor: pointer; box-shadow : 1px 1px 4px salmon;
+	margin-bottom: 10px;
+	display:none;
 	
 }
 #me_phone{
@@ -309,6 +319,7 @@ select{
 				
 			}
 		},
+		//전화번호 주민등록번호 일,
 		messages:{
 			me_id : {
 				required : '필수 항목입니다.',
@@ -417,6 +428,7 @@ $('.idCheck').click(function(){
 		}
 	});
 }); 
+let checkNum = "";
 $('#me_sendEmail').click(function(){
 	let domain =$('[name=me_emailId]').val() + "@" +$('[name=me_domain]').val();
 
@@ -430,15 +442,29 @@ $('#me_sendEmail').click(function(){
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(emailCheck){
-
-			if(emailCheck.result == $('#emailAuCheck').val() ){
-				alert('인증성공');
+			if(emailCheck.result){
+				alert('메일 발송완료');
+				$('#me_sendEmail').hide();
+				$('#me_emailCheck').css({display:"block"});
+				checkNum = emailCheck.result;
 			}else{
-				alert('인증실패');
+				alert('메일 발송실패');
 			}
-
 		}
 	})
+	
+});
+$('#me_emailCheck').click(function(){
+	let mc =$('#emailAuCheck').val();
+
+	if(mc == checkNum){
+		alert('인증성공');
+
+	}else{
+		alert('인증실패');
+	}
+	$('#me_emailCheck').hide();
+	$('#me_sendEmail').css({display:"block"});
 });
 
 $('[name = me_id]').change(function(){

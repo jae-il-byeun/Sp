@@ -6,6 +6,8 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+ 
+ 
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
@@ -279,13 +281,15 @@ swiper-slide img {
 	box-sizing: border-box;	padding:5px 30px; margin-bottom: 8px;
 	display:flex;
 	position: relative;
+	
 }
 .tm_place{
 	width:100%; height:100%; 
 	border:2px solid gray; border-radius: 10px; 
 	text-align: center;
+	
 }
-.ps{margin-right:5px;}
+.ps{margin-right:5px; box-shadow: 1.5px 1.5px 7px teal;}
 .pa{margin-left:5px;}
 .tm_place span{
 	display:block; 
@@ -370,6 +374,10 @@ swiper-slide img {
 	border-bottom: 1px solid #ddd;
 	
 }
+.disabled {
+    pointer-events: none;
+    opacity: 0.5; 
+  }
 </style>
 <head>
 <meta charset="UTF-8">
@@ -527,19 +535,21 @@ swiper-slide img {
     <hr>
     <div class="tm_container">
     	<div class="tm_placeBox">
-    		<div class="tm_place ps">
+    		<div class="tm_place ps" id="tm_place_hidden">
     			<label>
 	    			<span>출발지</span>
 	    			<span class="tm_place_text" id="tm_start"></span>
+	    			<input type="hidden" id="tm_start_id"></input>
     			</label>
     		</div>
     		 <div class="tm_change">
     		 	<img alt="" src="/project/resources/img/change.png" id="tm_changeIcon">
     		 </div>
-    		<div class="tm_place pa">
+    		<div class="tm_place pa" >
     			<label>
 	    			<span>도착지</span>
 	    			<span class="tm_place_text " id="tm_arrive"></span>
+	    			<input type="hidden" id="tm_arrive_id"></input>
     			</label>
     		</div>
     	</div>
@@ -555,16 +565,16 @@ swiper-slide img {
 	    	<h4>지역별 터미널</h4>
 	    	<div class="tm_detail">
 		    	<ul class="tm_cityBox">
-			    	<li>전체</li>
-			    	<li>서울</li>
-			    	<li>인천/경기</li>
-			    	<li>강원</li>
-			    	<li>대전/충남</li>
-			    	<li>충북</li>
-			    	<li>광주/전남</li>
-			    	<li>전북</li>
-			    	<li>부산/경남</li>
-			    	<li>대구/경북</li>
+			    	<li id="seoul">서울</li>
+			    	<li id="gyongki">인천/경기</li>
+			    	<li id="gangwon">강원</li>
+			    	<li id="daejeon">대전/충남</li>
+			    	<li id="cooungbook">충북</li>
+			    	<li id="gwangwon">광주/전남</li>
+			    	<li id="jeounbook">전북</li>
+			    	<li id="busan">부산/경남</li>
+			    	<li id="daegu">대구/경북</li>
+			    	<li id="jaeju">제주</li>
 		    	</ul>
 		    	<ul class="tm_placeDetail">
 						<li>강릉</li>
@@ -574,207 +584,7 @@ swiper-slide img {
 						<li>고대조치원</li>
 						<li>고양백석</li>
 						<li>고양화정</li>
-						<li>고창</li>
-						<li>고흥</li>
-						<li>곡성</li>
-						<li>공주</li>
-						<li>광명(KTX역)</li>
-						<li>광명(철산역)</li>
-						<li>광양</li>
-						<li>광주(유·스퀘어)</li>
-						<li>광주비아</li>
-						<li>교통대</li>
-						<li>구례</li> 
-						<li>구리</li> 
-						<li>구미</li> 
-						<li>군산</li> 
-						<li>금산</li> 
-						<li>김제</li> 
-						<li>김천</li> 
-						<li>김천혁신</li> 
-						<li>김해</li> 
-						<li>김해장유</li> 
-						<li>나주</li> 
-						<li>나주혁신도시</li> 
-						<li>낙동강(휴)상행</li> 
-						<li>낙동강(휴)하행</li> 
-						<li>남악</li> 
-						<li>남원</li> 
-						<li>내포</li> 
-						<li>녹동</li> 
-						<li>논산</li> 
-						<li>능주</li> 
-						<li>담양</li> 
-						<li>당진</li> 
-						<li>당진기지시</li> 
-						<li>대구용계</li> 
-						<li>대구혁신</li> 
-						<li>대전도룡</li> 
-						<li>대전복합</li> 
-						<li>대전청사(샘머리)</li> 
-						<li>덕과</li> 
-						<li>덕산스파</li> 
-						<li>동광양</li> 
-						<li>동대구</li> 
-						<li>동서울</li> 
-						<li>동해</li> 
-						<li>마산</li>
-						<li>마산내서</li>
-						<li>목포</li>
-						<li>무안</li>
-						<li>문장</li>
-						<li>밀양</li>
-						<li>배방정류소</li>
-						<li>벌교</li>
-						<li>보성</li>
-						<li>부산</li>
-						<li>부천</li>
-						<li>북청주(청주대)</li>
-						<li>삼척</li>
-						<li>상봉</li>
-						<li>상주</li>
-						<li>서대구</li>
-						<li>서부산(사상)</li>
-						<li>서산</li>
-						<li>서수원</li>
-						<li>서울경부</li>
-						<li>서충주</li>
-						<li>선문대</li>
-						<li>선산(휴)상행</li>
-						<li>선산(휴)하행</li>
-						<li>섬진강(휴)상행</li>
-						<li>섬진강(휴)하행</li>
-						<li>성남(분당)</li>
-						<li>세종국무조정실</li>
-						<li>세종시청</li>
-						<li>세종연구단지</li>
-						<li>세종청사</li>
-						<li>세종터미널</li>
-						<li>센트럴시티(서울)</li>
-						<li>속초</li>
-						<li>수원</li>
-						<li>순창</li>
-						<li>순천</li>
-						<li>순천신대지구</li>
-						<li>순천신대지구CGV</li>
-						<li>시흥(시화)</li>
-						<li>신갈시외</li>
-						<li>신갈영덕</li>
-						<li>아산둔포</li>
-						<li>아산서부(호서대)</li>
-						<li>아산온양</li>
-						<li>아산탕정사무소</li>
-						<li>아산테크노밸리</li>
-						<li>안동</li>
-						<li>안면도</li>
-						<li>안산</li>
-						<li>안성</li>
-						<li>안성공도</li>
-						<li>안성대림</li>
-						<li>안성중대</li>
-						<li>안성풍림</li>
-						<li>안성한경</li>
-						<li>안성회관</li>
-						<li>안중</li>
-						<li>안중오거리</li>
-						<li>애통리</li>
-						<li>양양</li>
-						<li>여수</li>
-						<li>여주</li>
-						<li>여주대</li>
-						<li>여천</li>
-						<li>연무대</li>
-						<li>영광</li>
-						<li>영덕</li>
-						<li>영산포</li>
-						<li>영암</li>
-						<li>영주</li>
-						<li>영천</li>
-						<li>영천망정동</li>
-						<li>예산</li>
-						<li>예천</li>
-						<li>오산</li>
-						<li>옥과</li>
-						<li>완도</li>
-						<li>용인</li>
-						<li>용인기흥역</li>
-						<li>용인신갈</li>
-						<li>용인유림</li>
-						<li>울산</li>
-						<li>울산신복</li>
-						<li>원동</li>
-						<li>원주</li>
-						<li>원주기업도시</li>
-						<li>원주문막</li>
-						<li>원주혁신</li>
-						<li>유성</li>
-						<li>의정부</li>
-						<li>이천</li>
-						<li>이천(마장택지지구)</li>
-						<li>이천부발(신하리)</li>
-						<li>익산</li>
-						<li>익산팔봉</li>
-						<li>인삼랜드(휴)상행</li>
-						<li>인삼랜드(휴)하행</li>
-						<li>인천</li>
-						<li>인천공항T1</li>
-						<li>인천공항T2</li>
-						<li>임자(대광)</li>
-						<li>임자(진리)</li>
-						<li>자치인재원</li>
-						<li>장성</li>
-						<li>장흥</li>
-						<li>전북혁신</li>
-						<li>전주</li>
-						<li>전주호남제일문</li>
-						<li>점촌</li>
-						<li>정산</li>
-						<li>정안(휴)상행</li>
-						<li>정안(휴)하행</li>
-						<li>정읍</li>
-						<li>제천</li>
-						<li>제천하소</li>
-						<li>조치원</li>
-						<li>죽전</li>
-						<li>지도</li>
-						<li>진도</li>
-						<li>진주</li>
-						<li>진주개양</li>
-						<li>진주혁신</li>
-						<li>진해</li>
-						<li>창기리</li>
-						<li>창원</li>
-						<li>창원역</li>
-						<li>천안</li>
-						<li>천안3공단</li>
-						<li>천안아산역</li>
-						<li>청양</li>
-						<li>청주(센트럴)</li>
-						<li>청주고속터미널</li>
-						<li>청주공항</li>
-						<li>청주북부</li>
-						<li>춘천</li>
-						<li>충주</li>
-						<li>탕정삼성LCD</li>
-						<li>태안</li>
-						<li>태인</li>
-						<li>통영</li>
-						<li>평택</li>
-						<li>평택대</li>
-						<li>평택용이동</li>
-						<li>포항</li>
-						<li>포항시청</li>
-						<li>풍기</li>
-						<li>함평</li>
-						<li>해남</li>
-						<li>해제</li>
-						<li>홍대조치원</li>
-						<li>홍성</li>
-						<li>화순</li>
-						<li>황간</li>
-						<li>횡성(휴)상행</li>
-						<li>횡성(휴)하행</li>
-						<li>흥덕 	</li>
+						
 		    	</ul>
 	    	</div>
 	    </div>
@@ -793,6 +603,7 @@ swiper-slide img {
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("bu_start_modal").onclick = function() {
   document.getElementById("tpm").style.display = "block"; // 모달을 보이도록 설정합니다.
+  
 }
 document.getElementById("bu_arrive_modal").onclick = function() {
 	  document.getElementById("tpm").style.display = "block"; // 모달을 보이도록 설정합니다.
@@ -820,6 +631,126 @@ $('.corse').click(function(){
 		genderCheck.attr("checked","checked");
 	}
 });
+</script>
+<script >
+// 인증키 :
+//  %2BoUa%2BnpovMyWRLMFUpb5u6FUhojKp3XXyaRoUbs%2B20dvzSxl8YD8CAtMfdu%2BwjfdQbuz2Brhkf%2FPA7kMvH69wA%3D%3D
+// 지역별로 분류한다. -> 서울 경기/인천 강원 충북 경남 전라도
+// 지역을 누른다. 누르면 지역에 앞 코드를
+let seoul = [1000];
+let gyongki = [1010,1020,1030,1040,1050,1060,1070,1080,1090,1100,1110,1120,1130,1140,1150,1160,1170,1180,1190,1200,1210,1220,1230,1240,1250,1260,1270,1280,1290,1300,1310,2000];
+let daejeon = [3000,3010,3020,3030,3040,3050,3060,3070,3080,3090,3100,3110,3120,3130,3140,3150,3160,3300];
+let daegu	= [4000,4010,4020,4030,4040,4050,4060,4070,4080,4090,4100,4110,4120,4130,4140,4150,4160,4170,4180,4190,4200,4210,4220,4230];
+let	jeounnam = [5000,5010,5020,5030,5040,5050,5060,5070,5080,5090,5100,5110,5120,5130,5140,5150,5160,5170,5180,5190,5200,5210,5220];
+let	busan = [6000,7000,7010,7020,7030,7040,7050,7060,7070,7080,7090,7100,7110,7120,7130,7140,7150,7160,7170,7180,7190,7200];
+let	jaeju = [8000,8010,8020,8030];
+let	jeounbook = [9000,9010,9020,9030,9040,9050,9060,9070,9080,9090,9100,9110,9120,9130];
+let	gangwon = [10000,10010,10020,10030,10040,10050,10060,10070,10080,10090,10100,10110,10120,10130,10140,10150,10160,10170];
+let chungbuk = [11000,11010,11020,11030,11040,11050,11060,11070,11080,11090,11100,11110];
+
+$('.tm_cityBox li').click( function() {
+	
+	let arry = [];
+	switch(this.id){
+		case 'seoul':
+			arry = seoul;
+				break;
+		case 'gyongki' :
+			arry = gyongki;
+				break;
+		case 'daejeon' :
+			arry = daejeon;
+				break;
+		case 'daegu' :
+			arry = daegu;
+				break;
+		case 'jeounnam' :
+			arry = jeounnam;
+				break;
+		case 'busan' :
+			arry = busan;
+				break;
+		case 'jaeju' :
+			arry = jaeju;
+				break;
+		case 'jeounbook' :
+			arry = jeounbook;
+				break;
+		case 'gangwon' :
+			arry = gangwon;
+				break;
+		case 'chungbuk' :
+			arry = chungbuk;
+				break;
+	};
+	$('.tm_placeDetail').children().remove();
+	//순차처리를 위한 함수
+	for(let i = 0; i<arry.length; i++){
+		placeSearch(arry[i]);
+		//위 구문을 밖으로 빼면
+		// function ex(i);로 하고, function ex(){...};를 따로 작성하여 이 함수를 끌어와서 쓰는 방법으로 쓸 수 있다.
+		// 이때 인자값은 i가 아니라 arry[i]가 된다. 구문 안에 있을 때는 arry 값을 바로 가져올 수 있었지만 구문이 밖으로 나간 순간 
+		// arry 값을 찾아서 넣어줘야 한다.
+	};
+
+	//a ==> 클릭한 지역에 해당하는 터미널정보가 들어감.
+});
+
+
+let re_JSON = [];
+function placeSearch(i){
+	var xhr = new XMLHttpRequest();
+	var url = "https://api.odsay.com/v1/api/expressBusTerminals?lang=0&CID="+i+"&apiKey=r7KIUfijmoLkM%2FHfY8GrAHqMy%2FYNJwN2PJeHMK8n%2B%2Fk";
+	xhr.open("GET", url, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			let resultJSON = JSON.parse(xhr.responseText).result;
+			for(let j=0; j<resultJSON.length; j++){
+				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName+'</li>');
+
+				if(resultJSON[j].haveDestinationTerminals)
+					re_JSON.push(resultJSON[j]);
+			}
+
+			$('.tm_placeDetail li').click(function(){
+				touch($(this));
+				
+			});
+			
+		}
+	}
+	xhr.send();
+};
+//1.전체를 함수로 묶어서 전제조건을 건다. 맨 처음 출발지에 (색이 있거나, 양쪽다 데이터가 없을 )시 출발지에 데이터를 넣는다.
+//  만약 출발지에 데이터가 있는 경우 도착지에 데이터를 넣는다.
+//2.touch함수에 if문 (출발지에 데이터가 있으면) 도착지에 데이터를 넣는다. 
+
+
+function touch(obj){
+	$('#tm_start').text(obj.text());
+	$('#tm_start_id').val(obj.val());
+	
+	$('.ps').addClass("disabled");
+	$('#tm_place_hidden').css("box-shadow","none");
+	$('.pa').css("box-shadow","1px 1px 7px teal");
+	
+	$('.tm_placeDetail').children().remove();
+	//this의 val값으로 re_JSON에서 동일한 stationID를 찾는다.
+	for(let y = 0; y<re_JSON.length; y++){
+		if(obj.val() == re_JSON[y].stationID){
+			for(let s = 0; s<re_JSON[y].destinationTerminals.length; s++){
+				$('.tm_placeDetail').append('<li value='+re_JSON[y].destinationTerminals[s].stationID+'>'+re_JSON[y].destinationTerminals[s].stationName+'</li>');
+			}
+			break;
+		}
+	}
+	//그리고 찾은 index의 destinationTerminals 하위에 있는 stationID, stationName으로 li를 만들어준다. 
+
+	re_JSON=[];
+}
+// 				for( let n = 0; n<a.length(); n++){
+// 					$('.tm_placeDetail li').append("")
+// 				}
 </script>
 </html>
 

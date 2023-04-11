@@ -1,7 +1,12 @@
 package kr.kh.project.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,12 +60,11 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value="/join/email",method= RequestMethod.POST)
 	public Map<String, Object> memberEmail(@RequestBody MemberVO me_email) {
-		HashMap<String, Object> email = new HashMap<String, Object>();
+		HashMap<String, Object> aunum = new HashMap<String, Object>();
 		String check = memberService.emailAuCheck(me_email.getMe_email());
-		email.put("result", check);
-		return email;
+		aunum.put("result", check);
+		return aunum;
 	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/check/id", method=RequestMethod.POST)
 	public Map<String, Object> idCheck(@RequestBody MemberVO user){
@@ -75,22 +79,62 @@ public class HomeController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/login/member", method=RequestMethod.POST)
-	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member){
+	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member,HttpSession session){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		MemberVO user = memberService.login(member);
-		
+		//로그인을 세션을 저장 -> 객체에 담고 ->
 		mv.addObject("user",user);
+		
 		if(user != null) {
+			session.setAttribute("user", user);
+			
 			map.put("result", true);
+			return map;
+			
 		}
 		else {
 			map.put("result", false);
+			return map;
 		}
-		return map;
 
 	}
-	
+	@ResponseBody//리퀘스트가 서버,리스폰스= 현재페이지
+	@RequestMapping(value="/login/check", method=RequestMethod.POST)
+	public Map<String,Object> loginCheck(HttpSession lgCheck){
+		HashMap<String, Object> keepUser = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)lgCheck.getAttribute("user");
+		
+		if(user != null)
+			keepUser.put("lgCheck", true);
+		else 
+			keepUser.put("lgCheck", false);
+
+		return keepUser;
+		//사업자는 사업자VO에 객체를 만들어서 
+		// 사업자가 모두 다 널이면 펄스 하나라도 았으면 트루 
+		// 그안에 이프절로 멤버가 널이 아니면 멤버로 데이터를 보내고 사업자가 널이 아니면 사업자를 보내서 처리한다.
+		
+	}
+	@ResponseBody
+	@RequestMapping(value = "/logout", method=RequestMethod.POST)
+	public Map<String, Object> logout(ModelAndView mv, HttpSession session, HttpServletResponse response) throws IOException {
+		HashMap<String,Object> dd = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		// 객체로 받기 때문에 자동 형변환이 안되어서 MemberVO로 지정해줘야함
+		
+		if(user != null) {
+
+			dd.put("result", true);
+			
+		}else
+			dd.put("result", false);
+		//세션에 있는 회원정보를 삭제
+		session.removeAttribute("user");
+		mv.setViewName("/main/home");
+		return dd;
+	}
 	
 	
 	
