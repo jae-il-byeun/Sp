@@ -307,13 +307,13 @@ body{font-family: 'GyeonggiTitleM';}
                         <div class="promotion-place">
                             <p class="roote">
                                 <span class="point">출발지</span>
-                                <span class="place" id="sPlace">서울</span>
+                                <span class="place" id="sPlace">지역</span>
                                 <input type="hidden" id="sPlace_id">
                             </p>
                             <p class="roote-clear">  ←--→ </p>
                             <p class="roote">
                                 <span class="point">도착지</span>
-                                <span class="place" id="ePlace">부산</span>
+                                <span class="place" id="ePlace">지역</span>
                                 <input type="hidden" id="ePlace_id">
                             </p>
                         </div>
@@ -424,7 +424,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">25석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -439,7 +440,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">12석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -453,7 +455,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">고속</span>
                                     <span class="temp"></span>
-                                    <span class="remain">29석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -469,7 +472,8 @@ body{font-family: 'GyeonggiTitleM';}
  
                                     </span>
                                     <span class="temp"></span>
-                                    <span class="remain">25석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -483,7 +487,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">고속</span>
                                     <span class="temp"></span>
-                                    <span class="remain">2석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -497,7 +502,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">6석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -511,7 +517,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">12석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -525,7 +532,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">고속</span>
                                     <span class="temp"></span>
-                                    <span class="remain">10석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -540,7 +548,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     <span class="grade woodung">우등
                                     </span>
                                     <span class="temp"></span>
-                                    <span class="remain">21석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -556,7 +565,8 @@ body{font-family: 'GyeonggiTitleM';}
 
                                     </span>
                                     <span class="temp"></span>
-                                    <span class="remain">30석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -570,7 +580,8 @@ body{font-family: 'GyeonggiTitleM';}
                                     </span>
                                     <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">31석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -586,7 +597,8 @@ body{font-family: 'GyeonggiTitleM';}
 
                                     </span>
                                     <span class="temp"></span>
-                                    <span class="remain">25석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -598,11 +610,10 @@ body{font-family: 'GyeonggiTitleM';}
                                     <span class="bus_com">
                                         <span class="dongbu">동부고속</span>
                                     </span>
-                                    <span class="grade woodung">우등
-                                        <!-- <span class="moonMak">(경유)</span> -->
-                                    </span>
+                                    <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">15석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -614,11 +625,10 @@ body{font-family: 'GyeonggiTitleM';}
                                     <span class="bus_com">
                                         <span class="dongbu">동부고속</span>
                                     </span>
-                                    <span class="grade woodung">우등
-
-                                    </span>
+                                    <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">17석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -630,11 +640,10 @@ body{font-family: 'GyeonggiTitleM';}
                                     <span class="bus_com">
                                         <span class="hanil">한일고속</span>
                                     </span>
-                                    <span class="grade woodung">우등
-
-                                    </span>
+                                    <span class="grade woodung">우등</span>
                                     <span class="temp"></span>
-                                    <span class="remain">23석</span>
+                                    <span class="remain" >25석</span>
+                                    <input type="hidden" id="re_seat" value="25">
                                     <span class="status">
                                         <span class="status-icon">선택</span>
                                     </span>
@@ -661,60 +670,67 @@ window.onload= function(){
 	$("#ePlace_id").val('${bs_av}');
 	$("#recive_day").text('${bs_sdv}');
 	$("#researchDay").text('${bs_sdv}');
+	let s_id = $('#sPlace_id').val();
+	let a_id = $('#ePlace_id').val();
+	let seat = $('.remain').val();
+	timeGrade(s_id,a_id);
+// 	remain(seat);
+};
+
+
+function timeGrade(s_id,a_id){
+	var xhr = new XMLHttpRequest();
+	var url = "https://api.odsay.com/v1/api/expressServiceTime?lang=0&startStationID="+s_id+"&endStationID="+a_id+"&apiKey=r7KIUfijmoLkM%2FHfY8GrAHqMy%2FYNJwN2PJeHMK8n%2B%2Fk";
+	xhr.open("GET", url, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			 let resultJSON = JSON.parse(xhr.responseText).result.station.schedule;
+			// 출발시간은 전체시간을 가져와서 \n split으로 나누고, / split으로 나누고,
+			//  소요시간 요금은 따로  출력하는 방법,
+ 			 let timeGrade = JSON.stringify(resultJSON).schedule;
+ 			 let time = timeGrade.split('\n');
+			for(let j=0; j<time.length; j++){
+				//글자수가 5자가 넘어가면 우등으로 등급표시 안넘어가면 일반으로 등급표시
+				//시간을 가져온 station에 첫번째에서 가져왔으면 1번 고속사 두번째에서 가져오면 2번 고속사
+				if(time.length>5 || timeGrade.length[0]){
+	 				$('[name=spendData]').append('<span class="start-time">'+시간+'</span> <span class="bus_com"> <span class="dongbu">동부</span> </span> <span class="grade woodung">우등</span> <span class="temp"><span class="remain" >'+잔역석+'</span><input type="hidden" id="re_seat" value="25"></span> <span class="status"><span class="status-icon">선택</span></span>');					
+				}else{
+	 				$('[name=spendData]').append('<span class="start-time">'+시간+'</span> <span class="bus_com"> <span class="hanil">한일</span> </span> <span class="grade woodung">일반</span> <span class="temp"></span> <span class="remain" value="25">'+잔역석+'/span> <span class="status"><span class="status-icon">선택</span></span>');
+				}
+
+
+					
+			}
+
+		}
+	}
+	xhr.send();
+};
 	
-}
 
-var pash = new URL(window.location.href).searchParams;
-                        //내위치를 현재보고있는 사이트로 옮기고.파라미터를가져오는 명령어
-//pash.get("Sd");
-$('#sPlace').text(pash.get("Sd"));
-$('#ePlace').text(pash.get("Ed"));
-var dt = new Date(pash.get("Dp"));
 
-var days = ["일","월","화","수","목","금","토"];
+  
 
-$('#recive_day').text(
-         dt.getFullYear()    //년도
-         +"."+
-         (dt.getMonth()+1)   //월(0월부터 시작하니까 +1해줌)
-         +"."+
-         dt.getDate()        //일
-         +" "+
-         days[dt.getDay()]   //요일(0:일요일 부터 시작함. 6:토요일)(배열에서 한글로가져오자)
-);
- 
-$('.date-text').text(
-      dt.getFullYear()    //년도
-      +"."+
-      (dt.getMonth()+1)   //월(0월부터 시작하니까 +1해줌)
-      +"."+
-      dt.getDate()        //일
-      +" "+
-      days[dt.getDay()]   //요일(0:일요일 부터 시작함. 6:토요일)(배열에서 한글로가져오자)
-);
+//좌석은 25석을 기준으로 하고, 결제를 하면 db에서 없어지게 만든다. db생성 잔여석 고속사
+function remain(seat){
+	
+	$.ajax({
+		async:true,
+		type:'POST',
+		data : seat,
+		url : '<c:url value="/traffic/re_seat"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(u_seat){
+					
+		}
+	})
+	
+};
 
-$('.refresh-icon').click(function(){
-    location.reload();
-});
-        
-
-        $(".dropmenu ul li").hover(function() {
-  $(this)
-    .find("ul")
-    .stop()
-    .fadeToggle(300);
-});
-
-$('.nav-login').click(function(){
-  $('.modal-login').show();
-});
-
-$('.exit-btn').click(function(){
-  $('.modal-login').hide();
+//배차를 선택하면 자리선택페이지로 데이터를 넘겨줌
+$('[name=spendData]').click(function(){
+	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$(#re_seat).val()+"&delay="+$('#delay').val();
 })
-
-$('[name="spendData"]').click(function(){
-    window.location.href="busSeat.html?Sd="+$('#sPlace').text()+"&Ed="+$('#ePlace').text()+"&Dp="+$('#recive_day').text();
-});
 </script>
 </html>

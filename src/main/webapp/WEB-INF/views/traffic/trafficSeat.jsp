@@ -302,16 +302,18 @@ body{font-family: 'GyeonggiTitleM';}
 				                <p class="roote">
 				                    <span class="point" >출발지</span>
 				                    <span class="place" id="sPlace">서울</span>
+				                    <input type="hidden" id="sPlace_id">
 				                </p>
 				                <p class="roote-clear">  ←--→ </p>
 				                <p class="roote">
 				                    <span class="point">도착지</span>
 				                    <span class="place" id="ePlace">부산</span>
+				                    <input type="hidden" id="ePlace_id">
 				                </p>
 				            </div>
 				            <hr>
 				
-				            <span class="delay">1시간 40분 소요</span>
+				            <span class="delay" id="delay">1시간 40분 소요</span>
 				            <span class="distance">1.34km</span>
 				        </div>
 				        
@@ -607,7 +609,7 @@ body{font-family: 'GyeonggiTitleM';}
 					            </a>
 					          </div>
 					          <div class="remaining">
-					            <span class="remaining_text">잔여 10석/전체 40석</span>
+					            <span class="remaining_text">잔여 <span id="re_seat">10</span>석/전체 25석</span>
 					          </div>
 					        </div>
 				            <!-- 선택좌석 -->
@@ -666,14 +668,20 @@ body{font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-
 //데이터 받기
-var pash = new URL(window.location.href).searchParams;
-                        //내위치를 현재보고있는 사이트로 옮기고.파라미터를가져오는 명령어
-//pash.get("Sd");
-$('#sPlace').text(pash.get("Sd"));
-$('#ePlace').text(pash.get("Ed"));
-$('#recive_day').text(pash.get("Dp"));
+window.onload= function(){
+	$("#sPlace").text('${bs_st}');
+	$("#sPlace_id").val('${bs_sv}');
+	$("#ePlace").text('${bs_at}');
+	$("#ePlace_id").val('${bs_av}');
+	$("#recive_day").text('${bs_rd}');
+	$("#re_seat").text('${bs_seat}');
+	$("#delay").text('${bs_delay}');
+	
+	
+	//예약된 좌석 비활성화시키기
+};
+
         
 $('.seatBox').click(function(){
   var SetInCheck = $(this).find($('[name="seatIn"]:checkbox'));

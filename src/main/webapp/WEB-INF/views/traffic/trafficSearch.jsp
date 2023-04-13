@@ -60,12 +60,16 @@ body{font-family: 'GyeonggiTitleM';}
 	box-sizing:border-box; padding: 10px 5px 5px;
 	box-shadow: 1px 1px 1px gray;
 }
+.traffic_busPlace label{
+	width: 100%;
+}
 .busSearch_smalltitle{
 	display:block; font-size: 25px; margin-left: 10px;
 }
 .busPlace_text{
-	width:100%; height:60px; border:none;
+	width:100%; height:60px; border:none; font-size: 25px;
 	display:block;
+	box-sizing: border-box; padding-left: 20px; padding-top:10px;
 	cursor:pointer;
 }
 
@@ -90,11 +94,15 @@ body{font-family: 'GyeonggiTitleM';}
  .startBox{
 	margin-left:50px;
 }
+.bs_day{
+	display: flex;
+}
 .busPlace_dayText{
-	width:100%; height:60px; border:none;
+	width:75%; height:60px; border:none;
 	display:block;
 	cursor:pointer;
-	margin-left :20px; padding-left: 5px;
+	font-size: 25px;
+	box-sizing: border-box;margin-left :20px; padding-left: 5px; margin-right: 5px;
 }
 .arriveBox{
 	margin-left: 10px; display:none; 
@@ -385,8 +393,9 @@ swiper-slide img {
 
 /* datepicker   */
 .ui-datepicker-trigger{
-	width:20px; height:20px;
+	width:40px; height:40px;
 	display:inline-block;
+	
 }
 </style>
 <head>
@@ -437,7 +446,10 @@ swiper-slide img {
 					<td class="traffic_busPlace startBox">
 						<label class="traffic_around ts_start">
 							<span class= "busSearch_smalltitle">출발일</span>
-							<input type="text" class="busPlace_dayText" id="startDay">
+							<div class="bs_day">
+								
+								<input type="text" class="busPlace_dayText" id="startDay">
+							</div>
 						</label>
 					</td>
 					<td class="traffic_busPlace arriveBox">
@@ -630,7 +642,7 @@ window.onclick = function(event) {
   if (event.target == document.getElementById("tpm")) {
     document.getElementById("tpm").style.display = "none";
   }
-}
+};
 
 $('.corse').click(function(){
 	var genderCheck = $(this).find($('.corse:radio'));
@@ -735,16 +747,12 @@ function placeSearch(i){
 	}
 	xhr.send();
 };
-// 좌석은 25석을 기준으로 하고, 결제를 하면 db에서 없어지게 만든다. db생성 잔여석 고속사
-// 출발시간은 전체시간을 가져와서 \n split으로 나누고, / split으로 나누고,  
-//글자수가 5자가 넘어가면 우등으로 등급표시 안넘어가면 일반으로 등급표시  
-//시간을 가져온 station에 첫번째에서 가져왔으면 1번 고속사 두번째에서 가져오면 2번 고속사  
 
 
 function resultSearchPlace(obj){
 
-		$('#tm_start').text(obj.text());
-		$('#tm_start_id').val(obj.val());
+	$('#tm_start').text(obj.text());
+	$('#tm_start_id').val(obj.val());
 	
 	$('.ps').addClass("disabled");
 	$('#tm_place_hidden').css("box-shadow","none");
@@ -762,10 +770,10 @@ function resultSearchPlace(obj){
 	}
 	$('.tm_placeDetail li').click(function(){
 		if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
-			
 			$('#tm_arrive').text($(this).text());
 			$('#tm_arrive_id').val($(this).val());
 		}
+		
 		$('#tpm').css("display","none");
 		$('#bu_start_modal').text($('#tm_start').text());
 		$('#bu_start_value').val($('#tm_start_id').val());
@@ -777,6 +785,7 @@ function resultSearchPlace(obj){
 
 	//re_JSON=[];
 }
+//조회하면 배차시간표로 데이터를 넘겨줌
 $('#searchComplete').click(function(){
 	window.location.href="/project/traffic/scheduel?st="+$('#bu_start_modal').text()+"&sv="+$('#bu_start_value').val()+"&at="+$('#bu_arrive_modal').text()+"&av="+$('#bu_arrive_value').val()+"&sdv="+$('#startDay').val();
 })
@@ -787,7 +796,8 @@ $('#searchComplete').click(function(){
       showOn: "button",
       buttonImage: "/project/resources/img/calender.png",
       buttonImageOnly: true,
-      buttonText: "Select date"
+      buttonText: "Select date",
+      dateformat: "yy-mm-dd"
     });
 </script>
 </html>
