@@ -308,11 +308,13 @@ body{font-family: 'GyeonggiTitleM';}
                             <p class="roote">
                                 <span class="point">출발지</span>
                                 <span class="place" id="sPlace">서울</span>
+                                <input type="hidden" id="sPlace_id">
                             </p>
                             <p class="roote-clear">  ←--→ </p>
                             <p class="roote">
                                 <span class="point">도착지</span>
                                 <span class="place" id="ePlace">부산</span>
+                                <input type="hidden" id="ePlace_id">
                             </p>
                         </div>
                         <hr>
@@ -354,7 +356,7 @@ body{font-family: 'GyeonggiTitleM';}
                             </a>
                         </div>
                         <div class="date">
-                            <span class="date-text">2023.2.15.수</span>
+                            <span class="date-text" id="researchDay">2023.2.15.수</span>
                         
                             <img class="date-calender" src="/project/resources/img/calender.png" alt="">
                             <span class="calender"></span>
@@ -652,7 +654,15 @@ body{font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-
+window.onload= function(){
+	$("#sPlace").text('${bs_st}');
+	$("#sPlace_id").val('${bs_sv}');
+	$("#ePlace").text('${bs_at}');
+	$("#ePlace_id").val('${bs_av}');
+	$("#recive_day").text('${bs_sdv}');
+	$("#researchDay").text('${bs_sdv}');
+	
+}
 
 var pash = new URL(window.location.href).searchParams;
                         //내위치를 현재보고있는 사이트로 옮기고.파라미터를가져오는 명령어

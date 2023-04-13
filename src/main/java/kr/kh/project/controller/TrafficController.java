@@ -15,7 +15,19 @@ public class TrafficController {
 		return mv;
 	}
 	@RequestMapping(value = "/traffic/scheduel", method = RequestMethod.GET)
-	public ModelAndView trafficScheduel(ModelAndView mv) {
+	public ModelAndView trafficScheduel(ModelAndView mv,String st,String sv,String at,String av,String sdv,String adv) {
+		String bs_st= st;
+		String bs_sv = sv;
+		String bs_at = at;
+		String bs_av = av;
+		String bs_sdv = sdv;
+		String bs_adv = adv;
+		mv.addObject("bs_st", bs_st);
+		mv.addObject("bs_sv", bs_sv);
+		mv.addObject("bs_at", bs_at);
+		mv.addObject("bs_av", bs_av);
+		mv.addObject("bs_sdv", bs_sdv);
+		mv.addObject("bs_adv", bs_adv);
 		mv.setViewName("/traffic/trafficScheduel");
 		return mv;
 	}

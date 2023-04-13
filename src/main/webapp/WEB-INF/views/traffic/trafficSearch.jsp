@@ -7,6 +7,9 @@
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
  
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+ <script src="/project/resources/js/jquery-ui.min.js"></script>
+
  
 <style>
 *{margin:0px; padding:0px;}
@@ -91,6 +94,7 @@ body{font-family: 'GyeonggiTitleM';}
 	width:100%; height:60px; border:none;
 	display:block;
 	cursor:pointer;
+	margin-left :20px; padding-left: 5px;
 }
 .arriveBox{
 	margin-left: 10px; display:none; 
@@ -378,6 +382,12 @@ swiper-slide img {
     pointer-events: none;
     opacity: 0.5; 
   }
+
+/* datepicker   */
+.ui-datepicker-trigger{
+	width:20px; height:20px;
+	display:inline-block;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -408,6 +418,7 @@ swiper-slide img {
 						<label class="">
 							<span class="busSearch_smalltitle">출발지</span>
 							<span class="busPlace_text" id="bu_start_modal"></span>
+							<input type="hidden" id="bu_start_value">
 						</label>
 					</td>
 					<td class="traffic_busPlaceChange">
@@ -420,18 +431,19 @@ swiper-slide img {
 						<label >
 							<span class= "busSearch_smalltitle">도착지</span>
 							<span  class="busPlace_text" id="bu_arrive_modal"></span>
+							<input type="hidden" id="bu_arrive_value">
 						</label>
 					</td>
 					<td class="traffic_busPlace startBox">
 						<label class="traffic_around ts_start">
 							<span class= "busSearch_smalltitle">출발일</span>
-							<input type="text" class="busPlace_dayText">
+							<input type="text" class="busPlace_dayText" id="startDay">
 						</label>
 					</td>
 					<td class="traffic_busPlace arriveBox">
 						<label class="traffic_around ts_arrive">
 							<span class= "busSearch_smalltitle">도착일</span>
-							<input type="text" class="busPlace_dayText">
+							<input type="text" class="busPlace_dayText" id="">
 						</label>
 					</td>
 				</tr>
@@ -600,17 +612,9 @@ swiper-slide img {
 
 $('#bu_start_modal').click(function(){
 	$('#tpm').css("display","block"); 
-  	var xhr = new XMLHttpRequest();
-	var url = "https://api.odsay.com/v1/api/expressBusTerminals?lang=0&CID=1000&apiKey=r7KIUfijmoLkM%2FHfY8GrAHqMy%2FYNJwN2PJeHMK8n%2B%2Fk";
-	xhr.open("GET", url, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			 let resultJSON = JSON.parse(xhr.responseText).result;
-			for(let j=0; j<resultJSON.length; j++){
-				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName+'</li>');
-			}
-		}
-	}
+	
+	$('#seoul').click();
+	
 })
 document.getElementById("bu_arrive_modal").onclick = function() {
 	  document.getElementById("tpm").style.display = "block"; // 모달을 보이도록 설정합니다.
@@ -725,25 +729,17 @@ function placeSearch(i){
 				resultSearchPlace($(this));
 				
 			});
-			$('.tm_placeDetail li').click(function(){
-				if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
-					
-					$('#tm_arrive').text(this.text);
-					$('#tm_arrive_id').val(this.id);
-				}
-				
-						
-			});
+		
 			
 		}
 	}
 	xhr.send();
 };
-//1.전체를 함수로 묶어서 전제조건을 건다. 맨 처음 출발지에 (색이 있거나, 양쪽다 데이터가 없을 )시 출발지에 데이터를 넣는다.
-//  만약 출발지에 데이터가 있는 경우 도착지에 데이터를 넣는다.
+// 좌석은 25석을 기준으로 하고, 결제를 하면 db에서 없어지게 만든다. db생성 잔여석 고속사
+// 출발시간은 전체시간을 가져와서 \n split으로 나누고, / split으로 나누고,  
+//글자수가 5자가 넘어가면 우등으로 등급표시 안넘어가면 일반으로 등급표시  
+//시간을 가져온 station에 첫번째에서 가져왔으면 1번 고속사 두번째에서 가져오면 2번 고속사  
 
-//2.resultSearchPlace함수에 if문 (출발지에 데이터가 있으면) 도착지에 데이터를 넣는다. 
-//기본 서울 지역 터미널->지역 선택 시
 
 function resultSearchPlace(obj){
 
@@ -764,13 +760,35 @@ function resultSearchPlace(obj){
 			break;
 		}
 	}
+	$('.tm_placeDetail li').click(function(){
+		if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
+			
+			$('#tm_arrive').text($(this).text());
+			$('#tm_arrive_id').val($(this).val());
+		}
+		$('#tpm').css("display","none");
+		$('#bu_start_modal').text($('#tm_start').text());
+		$('#bu_start_value').val($('#tm_start_id').val());
+		$('#bu_arrive_modal').text($('#tm_arrive').text());
+		$('#bu_arrive_value').val($('#tm_arrive_id').val());
+				
+	});
 	//그리고 찾은 index의 destinationTerminals 하위에 있는 stationID, stationName으로 li를 만들어준다. 
 
-	re_JSON=[];
+	//re_JSON=[];
 }
-// 				for( let n = 0; n<a.length(); n++){
-// 					$('.tm_placeDetail li').append("")
-// 				}
+$('#searchComplete').click(function(){
+	window.location.href="/project/traffic/scheduel?st="+$('#bu_start_modal').text()+"&sv="+$('#bu_start_value').val()+"&at="+$('#bu_arrive_modal').text()+"&av="+$('#bu_arrive_value').val()+"&sdv="+$('#startDay').val();
+})
+</script>
+<!-- datepicker -->
+<script>
+    $( "#startDay" ).datepicker({
+      showOn: "button",
+      buttonImage: "/project/resources/img/calender.png",
+      buttonImageOnly: true,
+      buttonText: "Select date"
+    });
 </script>
 </html>
 
