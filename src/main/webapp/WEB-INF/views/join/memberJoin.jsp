@@ -382,17 +382,7 @@ select{
 			},
 			"Please check your input."
 );
-	
-$('.gender').click(function(){
-		var genderCheck = $(this).find($('.gender:radio'));
-		if(genderCheck.attr("checked") == "checked"){
-			
-			genderCheck.removeAttr("checked");
-			
-		}else{
-			genderCheck.attr("checked","checked");
-		}
-});
+
 
 
 let idc = false;

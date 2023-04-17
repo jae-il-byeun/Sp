@@ -414,10 +414,10 @@ swiper-slide img {
 				<tr class="traffic_busCorseBox">
 					<td class="traffic_busCorse">
 						<label>
-							<input type="radio" class="corse"> <span>왕복</span>
+							<input type="radio" class="corse" name="if_corse"> <span>왕복</span>
 						</label>
 						<label>
-							<input type="radio" class="corse"> <span>편도</span>
+							<input type="radio" class="corse" name="if_corse"> <span>편도</span>
 						</label>
 					</td>
 					
@@ -644,16 +644,7 @@ window.onclick = function(event) {
   }
 };
 
-$('.corse').click(function(){
-	var genderCheck = $(this).find($('.corse:radio'));
-	if(genderCheck.attr("checked") == "checked"){
-		
-		genderCheck.removeAttr("checked");
-		
-	}else{
-		genderCheck.attr("checked","checked");
-	}
-});
+
 </script>
 
 <script >

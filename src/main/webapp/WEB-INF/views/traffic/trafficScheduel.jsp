@@ -81,8 +81,11 @@ body{font-family: 'GyeonggiTitleM';}
     .place{display: block; margin-top:15px; color: #fff; letter-spacing: -2px;width: 80px; text-align: left;}
     
     /* 필터 시간 */
+    .wasteTime{
+		margin: 0px 100px 0px 5px;    
+    }
     .delay{ 
-        width: 100%; height: 20px; display: block; text-align: right;
+        width: 100%; height: 20px;  text-align: right;
         font-size: 14px; 
     }
     /* 필터 거리 */
@@ -242,7 +245,7 @@ body{font-family: 'GyeonggiTitleM';}
     }
     /* 디테일 출발 */
     .start-time{
-        width: 213px; font-size: 18px;  display: table-cell; text-align: left; 
+        width: 213px; font-size: 18px;  display: table-cell; text-align: left;  vertical-align: middle;
     }
     /* 고속사 */
     .bus_com{width: 215px; display: table-cell; padding-top: 15px; vertical-align: top; line-height: 1;
@@ -274,17 +277,17 @@ body{font-family: 'GyeonggiTitleM';}
     }
     /* 등급 */
     .woodung{
-        width: 145px; font-size: 14px; line-height: 50px;
+        width: 50px; font-size: 14px;  display: inline-block;
     }
 
     .moonMak{display: inline-block; font-size: 8px;  }
     /* 할인 */
-    .temp{display: table-cell; width: 165px;}
+    .temp{display: table-cell; width: 165px; vertical-align: middle;}
     /* 잔여석 */
-    .remain{padding-right: 30px; text-align: left; box-sizing: border-box; width: 150px;}
+    .remain{padding-right: 30px; text-align: left; box-sizing: border-box; width: 150px; vertical-align: middle;}
     /* 선택 */
     .status{width: auto; font-size: 13px;}
-    .status-icon{padding-right: 11px; background: url("/project/resources/img/timetable_arrow.png") right center no-repeat; color: #68b3ce;}
+    .status-icon{padding-right: 11px; background: url("/project/resources/img/timetable_arrow.png") right center no-repeat; color: #68b3ce; vertical-align: middle;}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -318,9 +321,8 @@ body{font-family: 'GyeonggiTitleM';}
                             </p>
                         </div>
                         <hr>
-
+						<span class="wasteTime">소요시간</span>
                         <span class="delay">1시간 40분 소요</span>
-                        <span class="distance">1.34km</span>
                     </div>
                     
                     <div class="payInfo">
@@ -416,239 +418,7 @@ body{font-family: 'GyeonggiTitleM';}
                             등
                          -->
                         <div class="busTime-detail">
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">06:00</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                                
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">06:40</span>
-                                    <span class="bus_com">
-                                        <span class="dongyang">동양고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">07:20</span>
-                                    <span class="bus_com">
-                                        <span class="gumho">금호고속</span>
-                                    </span>
-                                    <span class="grade woodung">고속</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">08:00</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등
- 
-                                    </span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">08:40</span>
-                                    <span class="bus_com">
-                                        <span class="dongyang">동양고속</span>
-                                    </span>
-                                    <span class="grade woodung">고속</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">09:20</span>
-                                    <span class="bus_com">
-                                        <span class="dongyang">동양고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">10:00</span>
-                                    <span class="bus_com">
-                                        <span class="gumho">금호고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">10:40</span>
-                                    <span class="bus_com">
-                                        <span class="jungang">중앙고속</span>
-                                    </span>
-                                    <span class="grade woodung">고속</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">11:20</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등
-                                    </span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">12:00</span>
-                                    <span class="bus_com">
-                                        <span class="jungang">중앙고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등
-
-                                    </span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">12:40</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">13:20</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등
-
-                                    </span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">13:50</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">14:20</span>
-                                    <span class="bus_com">
-                                        <span class="dongbu">동부고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
-                            <p class="busTd">
-                                <a href="#" name="spendData">
-                                    <span class="start-time">14:50</span>
-                                    <span class="bus_com">
-                                        <span class="hanil">한일고속</span>
-                                    </span>
-                                    <span class="grade woodung">우등</span>
-                                    <span class="temp"></span>
-                                    <span class="remain" >25석</span>
-                                    <input type="hidden" id="re_seat" value="25">
-                                    <span class="status">
-                                        <span class="status-icon">선택</span>
-                                    </span>
-                                </a>
-                            </p>
+                            
                         </div>
                         
                     </div>
@@ -664,73 +434,155 @@ body{font-family: 'GyeonggiTitleM';}
 </body>
 <script>
 window.onload= function(){
+	//출발지(id) 도착지(id) 출발날자 
 	$("#sPlace").text('${bs_st}');
 	$("#sPlace_id").val('${bs_sv}');
 	$("#ePlace").text('${bs_at}');
 	$("#ePlace_id").val('${bs_av}');
 	$("#recive_day").text('${bs_sdv}');
 	$("#researchDay").text('${bs_sdv}');
+	//배차조회
 	let s_id = $('#sPlace_id').val();
 	let a_id = $('#ePlace_id').val();
 	let seat = $('.remain').val();
 	timeGrade(s_id,a_id);
+
 // 	remain(seat);
 };
 
-
+//등급 시간 출력
 function timeGrade(s_id,a_id){
 	var xhr = new XMLHttpRequest();
 	var url = "https://api.odsay.com/v1/api/expressServiceTime?lang=0&startStationID="+s_id+"&endStationID="+a_id+"&apiKey=r7KIUfijmoLkM%2FHfY8GrAHqMy%2FYNJwN2PJeHMK8n%2B%2Fk";
 	xhr.open("GET", url, true);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
-			 let resultJSON = JSON.parse(xhr.responseText).result.station.schedule;
-			// 출발시간은 전체시간을 가져와서 \n split으로 나누고, / split으로 나누고,
-			//  소요시간 요금은 따로  출력하는 방법,
- 			 let timeGrade = JSON.stringify(resultJSON).schedule;
- 			 let time = timeGrade.split('\n');
-			for(let j=0; j<time.length; j++){
-				//글자수가 5자가 넘어가면 우등으로 등급표시 안넘어가면 일반으로 등급표시
-				//시간을 가져온 station에 첫번째에서 가져왔으면 1번 고속사 두번째에서 가져오면 2번 고속사
-				if(time.length>5 || timeGrade.length[0]){
-	 				$('[name=spendData]').append('<span class="start-time">'+시간+'</span> <span class="bus_com"> <span class="dongbu">동부</span> </span> <span class="grade woodung">우등</span> <span class="temp"><span class="remain" >'+잔역석+'</span><input type="hidden" id="re_seat" value="25"></span> <span class="status"><span class="status-icon">선택</span></span>');					
-				}else{
-	 				$('[name=spendData]').append('<span class="start-time">'+시간+'</span> <span class="bus_com"> <span class="hanil">한일</span> </span> <span class="grade woodung">일반</span> <span class="temp"></span> <span class="remain" value="25">'+잔역석+'/span> <span class="status"><span class="status-icon">선택</span></span>');
-				}
-
-
+			//처음에 시간을 넣을 객체를 만든다.(for문을 돌릴때 몇번 돌릴 횟수를 알기 위해서)
+			//String으로 되어 있는 객체를 split( ()속에 문자열을 기준으로 나누는 기능 )으로 인해서 배열을 만들고
+			//배열에 필요없는 구문들을 replace, replaceAll로 정리한다.
+			//그다음 for문으로 빈 배열에 JSON의 형태로 넣어준다,
+			 let resultJSON = JSON.parse(xhr.responseText).result.station;
+			 let resultCount = JSON.parse(xhr.responseText).result.count;
+			 let timeGrade;
+			 let min ="분";
+			 let wt_JSON= resultJSON[0].wasteTime.replace(":","시간").concat(min);
+			 $('.delay').text(wt_JSON);
+			 let arry = [];
+			 let sortArry;
+			 // arry가 배열이기 때믄에 
+			 for(let u = 0; u<resultJSON.length; u++){
+				 timeGrade = resultJSON[u].schedule.replaceAll("\"","").replaceAll("\n","/").trim().split('/');
+				 //timeGrade 반복돌면서 arr에 객체넣기(JSON 형태).
+				  for(let z = 0; z<timeGrade.length; z++){
+					  //객체.substring(0,5);-> 문자열자르기(포함하는 index부터, 불포함하는 index까지) 
+						let time = timeGrade[z].substring(0,5);
+						 //등급 예외나누기
+						let t_grade = "고속";
+						let fare = resultJSON[u].normalFare;
 					
-			}
-
+						
+					 	if(timeGrade[z].length > 5){
+						
+							if(resultCount >= 2 && u == 0){
+								t_grade="프리미엄";
+							}
+							else {
+								t_grade = "우등";	
+							}
+							
+							fare = resultJSON[u].specialFare;
+						 };
+					  
+					  
+					  arry.push({
+					 	 // JSON의 형태로 (key : value) 로 넣는 작업
+					 	 //schedule은 배열의 형태로 만들었고 이배열로 횟수를 돌기 때문에 변수z로 들어간다.
+						 time : time,
+						 grade : t_grade,
+						 //z가 u속에 있기 때문에 u는 고정인 상태에서 z가 계속 된다.
+					 	 fare : fare
+					 });
+					
+				 };
+				 
+				timeGrade = resultJSON[u].nightSchedule.replaceAll("\"","").replaceAll("\n","/").trim().split('/');
+				//timeGrade 반복돌면서 arr에 넣자.
+				for(let z=0; z<timeGrade.length; z++){
+					 if(timeGrade == ""){
+						 break;
+					 }
+					let time = timeGrade[z].substring(0,5);
+					let t_grade = "고속";
+					let fare = resultJSON[u].nightFare;
+				  	if(timeGrade[z].length > 5){
+				  		
+				  		if(resultCount >= 2 && u == 0){
+						    t_grade = "심야<br>프리미엄<br>우등";
+							fare = resultJSON[u].nightSpecialFare;
+				  		}
+				  		else{
+				  			t_grade = "심야우등";
+				  			fare = resultJSON[u].nightSpecialFare;
+				  		}
+					 };
+					 arry.push({
+								time: time,
+								grade : t_grade,
+								fare : fare
+					 });
+						
+				};
+				sortArry = arry.sort(function(a,b){
+					let x = a.time.toLowerCase();
+					let y = b.time.toLowerCase();
+					if(x< y){
+						return -1;
+					}
+					if(x>y){
+						return 1;
+					}
+					return 0;
+				});	
+			
 		}
-	}
+		for(let i=0; i<sortArry.length; i++){
+			$('.busTime-detail').append('<p class="busTd"><a href="#" name="spendData"><span class="start-time">'
+								+sortArry[i].time
+								+'</span><span class="bus_com "><span class="dongbu"></span></span><span class="grade woodung">'
+								+sortArry[i].grade
+								+'</span><span class="temp">'
+								+sortArry[i].fare
+								+'</span><span class="remain" >41석</span>'
+								+""
+								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></a></p>');
+		}
+		
+	}	 
+   }	 
+	//이문장이 실행되어야 진행이된다. 진행되는 방향 확인
 	xhr.send();
 };
+
+//좌석은 41석을 기준으로 하고, 결제를 하면 db에서 없어지게 만든다. db생성 잔여석 고속사
+// function remain(seat){
 	
-
-
-  
-
-//좌석은 25석을 기준으로 하고, 결제를 하면 db에서 없어지게 만든다. db생성 잔여석 고속사
-function remain(seat){
-	
-	$.ajax({
-		async:true,
-		type:'POST',
-		data : seat,
-		url : '<c:url value="/traffic/re_seat"></c:url>',
-		dataType : "json",
-		contentType : "application/json; charset=UTF-8",
-		success : function(u_seat){
+// 	$.ajax({
+// 		async:true,
+// 		type:'POST',
+// 		data : seat,
+// 		url : '<c:url value="/traffic/re_seat"></c:url>',
+// 		dataType : "json",
+// 		contentType : "application/json; charset=UTF-8",
+// 		success : function(u_seat){
 					
-		}
-	})
+// 		}
+// 	})
 	
-};
+// };
 
 //배차를 선택하면 자리선택페이지로 데이터를 넘겨줌
 $('[name=spendData]').click(function(){
-	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$(#re_seat).val()+"&delay="+$('#delay').val();
+	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
 })
 </script>
 </html>
