@@ -133,11 +133,11 @@ body{font-family: 'GyeonggiTitleM';}
 }
 .busGrade_text{display:inline-block; text-align:center; width:100%;}
 .traffic_searchComplete{
-	width:50%; height:100%;
-	box-sizing:border-box; padding-left:150px;
+	width:100%; height:100%;
+	box-sizing:border-box; padding:0px 250px;
 }
 #searchComplete{
-	width:35%; height:100%;
+	width:100%; height:100%;
 	font-size:30px;
 	border:1px solid #ddd;
 	box-sizing: border-box; margin:5px 0px 0px 0px;
@@ -414,10 +414,10 @@ swiper-slide img {
 				<tr class="traffic_busCorseBox">
 					<td class="traffic_busCorse">
 						<label>
-							<input type="radio" class="corse" name="if_corse"> <span>왕복</span>
+							<input type="radio" class="corse" name="if_corse" id="double"> <span>왕복</span>
 						</label>
 						<label>
-							<input type="radio" class="corse" name="if_corse"> <span>편도</span>
+							<input type="radio" class="corse" name="if_corse" checked> <span>편도</span>
 						</label>
 					</td>
 					
@@ -460,24 +460,7 @@ swiper-slide img {
 					</td>
 				</tr>
 				<tr class="traffic_grade_complete">
-					<td class="traffic_busGradeBox">
-						<p class="traffic_busGrade allGrade">
-							
-							<span class= "busGrade_text ">전체</span>
-						</p>
-						<figure class="traffic_busGrade">
-							<img alt="" src="/project/resources/img/nomal.png" class="traffic_busGradeIcon">
-							<span class= "busGrade_text">일반</span>
-						</figure>
-						<figure class="traffic_busGrade">
-							<img alt="" src="/project/resources/img/crown.png" class="traffic_busGradeIcon" style="width:25px; height:45%;">
-							<span class= "busGrade_text">프리미엄</span>						
-						</figure>
-						<figure class="traffic_busGrade">
-							<img alt="" src="/project/resources/img/seatup.png" class="traffic_busGradeIcon">
-							<span class= "busGrade_text">우등</span>
-						</figure>
-					</td>
+
 					
 					<td class="traffic_searchComplete">
 						<div>
@@ -776,6 +759,15 @@ function resultSearchPlace(obj){
 
 	//re_JSON=[];
 }
+$('.corse').click(function(){
+	var corseCheck = $(this).find($('.couse:radio'));
+	
+	if(corseCheck.attr("checked") == "checked"){
+		$('.arriveBox').css("display","block");
+	}else{
+		$('.arriveBox').css("display","none");
+	}
+})
 //조회하면 배차시간표로 데이터를 넘겨줌
 $('#searchComplete').click(function(){
 	window.location.href="/project/traffic/scheduel?st="+$('#bu_start_modal').text()+"&sv="+$('#bu_start_value').val()+"&at="+$('#bu_arrive_modal').text()+"&av="+$('#bu_arrive_value').val()+"&sdv="+$('#startDay').val();

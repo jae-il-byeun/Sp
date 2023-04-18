@@ -217,6 +217,7 @@ body{font-family: 'GyeonggiTitleM';}
         width: 1px;
         height: 100%;
     }
+    [name=spendData]{cursor:pointer;}
     /* 버스타임 헤더 */
     .busTime-head{
         display: table; width: 100%; min-height: 33px; padding: 0 15px 0 20px;
@@ -240,7 +241,7 @@ body{font-family: 'GyeonggiTitleM';}
     .busTd{
         position: relative; border-bottom: 1px solid #e6e6e6;
     }
-    .busTd a{ height: 54px; display: table; width: 100%; position: relative; text-decoration: none;
+    .busTd p{ height: 54px; display: table; width: 100%; position: relative; text-decoration: none;
         margin-left: 92px;
     }
     /* 디테일 출발 */
@@ -279,7 +280,7 @@ body{font-family: 'GyeonggiTitleM';}
     .woodung{
         width: 50px; font-size: 14px;  display: inline-block;
     }
-
+	
     .moonMak{display: inline-block; font-size: 8px;  }
     /* 할인 */
     .temp{display: table-cell; width: 165px; vertical-align: middle;}
@@ -302,7 +303,7 @@ body{font-family: 'GyeonggiTitleM';}
 	
 		<div class="product_contentContainer">
 			<div class="product_content">
-				 <div class="contentBox">
+			  <div class="contentBox">
                 <div class="filterBox">
                     <p class="today" id="recive_day">2023.02.16.목</p>
                     <hr>
@@ -325,27 +326,7 @@ body{font-family: 'GyeonggiTitleM';}
                         <span class="delay">1시간 40분 소요</span>
                     </div>
                     
-                    <div class="payInfo">
-                        <div class="nomalPay">
-                            <p class="payInfo-text">요금정보</p>
-                            <span class="nomalPay-text">(일반요금)</span>
-                        </div>
-                        <hr>
-                        <div class="pay"></div>
-                        <span class="pay-clear"></span>
-                        <dt>우등</dt>
-                        <dd>10,000원</dd>
-                        <dt>고속</dt>
-                        <dd>10,000원</dd>
-                        <dt>심야우등</dt>
-                        <dd>10,000원</dd>
-                        <dt>심야우등할증</dt>
-                        <dd>10,000원</dd>
-                        <dt>심야고속</dt>
-                        <dd>10,000원</dd>
-                        <dt>심야고속할증</dt>
-                        <dd>10,000원</dd> 
-                    </div>
+     
 
                 </div>
                 <div class="schedulBox">
@@ -425,7 +406,7 @@ body{font-family: 'GyeonggiTitleM';}
                     
                     </div>
                     
-                </div>
+              </div>
 			
 			</div>
 		</div>
@@ -546,7 +527,7 @@ function timeGrade(s_id,a_id){
 			
 		}
 		for(let i=0; i<sortArry.length; i++){
-			$('.busTime-detail').append('<p class="busTd"><a href="#" name="spendData"><span class="start-time">'
+			$('.busTime-detail').append('<div class="busTd"><p  name="spendData"><span class="start-time">'
 								+sortArry[i].time
 								+'</span><span class="bus_com "><span class="dongbu"></span></span><span class="grade woodung">'
 								+sortArry[i].grade
@@ -554,7 +535,7 @@ function timeGrade(s_id,a_id){
 								+sortArry[i].fare
 								+'</span><span class="remain" >41석</span>'
 								+""
-								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></a></p>');
+								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></p></div>');
 		}
 		
 	}	 
@@ -583,6 +564,7 @@ function timeGrade(s_id,a_id){
 //배차를 선택하면 자리선택페이지로 데이터를 넘겨줌
 $('[name=spendData]').click(function(){
 	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
+
 })
 </script>
 </html>
