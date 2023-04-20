@@ -240,8 +240,9 @@ body{font-family: 'GyeonggiTitleM';}
     }
     .busTd{
         position: relative; border-bottom: 1px solid #e6e6e6;
+        cursor: pointer;
     }
-    .busTd p{ height: 54px; display: table; width: 100%; position: relative; text-decoration: none;
+    .busTd a{ height: 54px; display: table; width: 100%; position: relative; text-decoration: none;
         margin-left: 92px;
     }
     /* 디테일 출발 */
@@ -269,7 +270,7 @@ body{font-family: 'GyeonggiTitleM';}
     .jungang{
         display: inline-block; text-align: left; vertical-align: middle;
         width: 80px; height: 40px; font-size: 0px; 
-        background: url("/project/resources/img/gumhobus.png") 0 0 no-repeat; 
+        background: url("/project/resources/img/jungang.png") 0 0 no-repeat; 
     }
     .hanil{
         display: inline-block; text-align: left; vertical-align: middle;
@@ -526,16 +527,20 @@ function timeGrade(s_id,a_id){
 				});	
 			
 		}
+		let express= ["dongbu","hanil","jungang","gumho","dongyang"];
 		for(let i=0; i<sortArry.length; i++){
-			$('.busTime-detail').append('<div class="busTd"><p  name="spendData"><span class="start-time">'
+			let max = 4;
+			let min = 1;
+			let r = Math.floor(Math.random()*(max-min + 1)+ min);
+			$('.busTime-detail').append('<div class="busTd"><a  name="spendData"><span class="start-time">'
 								+sortArry[i].time
-								+'</span><span class="bus_com "><span class="dongbu"></span></span><span class="grade woodung">'
+								+'</span><span class="bus_com "><span class="'+ express[r]+'"></span></span><span class="grade woodung">'
 								+sortArry[i].grade
 								+'</span><span class="temp">'
 								+sortArry[i].fare
 								+'</span><span class="remain" >41석</span>'
 								+""
-								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></p></div>');
+								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></a></div>');
 		}
 		
 	}	 
@@ -562,7 +567,7 @@ function timeGrade(s_id,a_id){
 // };
 
 //배차를 선택하면 자리선택페이지로 데이터를 넘겨줌
-$('[name=spendData]').click(function(){
+$('.busTd').click(function(){
 	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
 
 })

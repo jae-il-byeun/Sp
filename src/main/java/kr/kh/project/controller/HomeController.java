@@ -81,7 +81,7 @@ public class HomeController {
 	@RequestMapping(value = "/login/member", method=RequestMethod.POST)
 	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member,HttpSession session){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
+
 		MemberVO user = memberService.login(member);
 		//로그인을 세션을 저장 -> 객체에 담고 ->
 		mv.addObject("user",user);
@@ -105,36 +105,46 @@ public class HomeController {
 		HashMap<String, Object> keepUser = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)lgCheck.getAttribute("user");
-		
-		if(user != null)
-			keepUser.put("lgCheck", true);
-		else 
+		BusinessVO biLogin = (BusinessVO)lgCheck.getAttribute("seller");
+		if(user == null && biLogin == null) {
 			keepUser.put("lgCheck", false);
-
+		}
+		else if(user != null && biLogin == null){
+			keepUser.put("lgCheck", user);
+			
+		}else if(user == null && biLogin != null){
+			keepUser.put("lgCheck", biLogin);
+		}
 		return keepUser;
 		//사업자는 사업자VO에 객체를 만들어서 
 		// 사업자가 모두 다 널이면 펄스 하나라도 았으면 트루 
 		// 그안에 이프절로 멤버가 널이 아니면 멤버로 데이터를 보내고 사업자가 널이 아니면 사업자를 보내서 처리한다.
 		
 	}
+
 	@ResponseBody
 	@RequestMapping(value = "/logout", method=RequestMethod.POST)
 	public Map<String, Object> logout(ModelAndView mv, HttpSession session, HttpServletResponse response) throws IOException {
-		HashMap<String,Object> dd = new HashMap<String,Object>();
+		HashMap<String,Object> logout = new HashMap<String,Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller = (BusinessVO)session.getAttribute("seller");
 		// 객체로 받기 때문에 자동 형변환이 안되어서 MemberVO로 지정해줘야함
-		
-		if(user != null) {
-
-			dd.put("result", true);
-			
-		}else
-			dd.put("result", false);
+		if(user == null && seller == null){
+			logout.put("result", false);
+				
+		}else if (user!= null){
+			logout.put("result", true);
+			session.removeAttribute("user");
+		}else if(seller !=null) {
+			logout.put("result", true);
+			session.removeAttribute("seller");
+		}
 		//세션에 있는 회원정보를 삭제
-		session.removeAttribute("user");
+		
 		mv.setViewName("/main/home");
-		return dd;
+		return logout;
 	}
+	
 	
 	
 	
@@ -151,25 +161,11 @@ public class HomeController {
 		boolean isSignup = businessService.businessjoin(seller);
 		
 		if(isSignup){
-//			businessService.emailAuthentication(seller.getBi_id(),seller.getBi_email());
 			mv.setViewName("redirect:/");
 		}else {
-			mv.setViewName("redirect:/join/business");
+			mv.setViewName("redirect:/join/businessJoin");
 		}
 		return mv;
-	}
-	
-	
-	@ResponseBody
-	@RequestMapping(value = "/check/businessId", method=RequestMethod.POST)
-	public Map<String, Object> BiIdCheck(@RequestBody BusinessVO seller){
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println(seller);
-		boolean res = businessService.checkBiId(seller);
-		System.out.println(res);
-		map.put("res", res);
-		return map;
-
 	}
 	@ResponseBody
 	@RequestMapping(value="/join/biEmail",method= RequestMethod.POST)
@@ -179,23 +175,36 @@ public class HomeController {
 		email.put("result", check);
 		return email;
 	}
-	
+		
 	@ResponseBody
-	@RequestMapping(value = "/login/business", method=RequestMethod.POST)
-	public Map<String, Object> businessLogin(ModelAndView mv, @RequestBody BusinessVO seller){
+	@RequestMapping(value = "/check/businessId", method=RequestMethod.POST)
+	public Map<String, Object> BiIdCheck(@RequestBody BusinessVO seller){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		BusinessVO bm = businessService.businesslogin(seller);
-		
-		mv.addObject("seller",bm);
-		if(bm != null) {
-			map.put("result", true);
-		}
-		else {
-			map.put("result", false);
-		}
+		System.out.println(seller);
+		boolean result = businessService.checkBiId(seller);
+		System.out.println(result);
+		map.put("res", result);
 		return map;
 
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/login/business", method=RequestMethod.POST)
+	public Map<String, Object> businessLogin(ModelAndView mv, @RequestBody BusinessVO seller,HttpSession session){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		System.out.println(seller);
+		BusinessVO business = businessService.businesslogin(seller);
+		
+		mv.addObject("seller",business);
+		if(business != null) {
+			session.setAttribute("seller", business);
+			map.put("result", true);
+			return map;
+		}else {
+			map.put("result", false);
+			return map;
+		}
+	}
+
 
 }

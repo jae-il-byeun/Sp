@@ -55,19 +55,31 @@ input{
 	box-sizing: border-box; padding:0px 2px;
 	cursor: pointer; box-shadow : 1px 1px 4px teal;
 }
-
+.brn{width: 30%;}
 #email_box span{margin:0px;}
 #email_box select{width:20%; margin-left:-4px; }
 #email_id{width:50%;}
 #email_domain{margin-right:3px; width:22.3%;}
+#emailAuCheck{
+	width:55%;
+}
 #ba_title{margin-top: 10px;line-height: 35px;}
-#bu_sendEmail{
+#bi_sendEmail{
 	width:40%;  height: 43px;
 	float:right;
 	border:1px solid #fff; border-radius: 7px;
 	background-color: teal; color:#fff; 
 	box-sizing: border-box; padding:0px 2px;
 	cursor: pointer; box-shadow : 1px 1px 4px teal;
+}
+#bi_emailCheck{
+	width:40%; height: 43px;
+	float:right;
+	color: #fff; background-color: salmon; 
+	border: 1px solid #fff; border-radius: 5px;
+	cursor: pointer; box-shadow : 1px 1px 4px salmon;
+	margin-bottom: 10px;
+	display:none;
 }
 #sample6_postcode{
 	width:45%;
@@ -124,7 +136,7 @@ input{
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="bi_pwCheck">
+						<input type="password" name="bi_pwCheck">
 					</td>
 				</tr>
 				
@@ -153,8 +165,11 @@ input{
 						
 				<tr>	
 					<td>
-
-						<input type="text" name="bi_brn">
+						<input type="text" class="brn" name="bi_brn_front">
+						<span>-</span>
+						<input type="text" class="brn" name="bi_brn_middle">
+						<span>-</span>
+						<input type="text" class="brn" name="bi_brn_back">
 					</td>
 				</tr>
 				<tr>
@@ -171,13 +186,16 @@ input{
 						
 				<tr>	
 					<td id="email_box">
-						<input type="text" id="email_id" name="bi_email">
+						<input type="text" id="email_id" name="bi_emailId">
 						<span>@</span>
-						<input type="text" id="email_domain">
+						<input type="text" id="email_domain" name="bi_domain">
 						<select>
 							<option>naver.com</option>
+							<option>google.com</option>
 						</select>
-						<button type="button" id="bu_sendEmail">인증번호 발송</button>
+						<input type="text" id="emailAuCheck">
+						<button type="button" id="bi_sendEmail">인증번호 발송</button>
+						<button type="button" id="bi_emailCheck">인증번호 확인</button>
 					</td>
 				</tr>
 				<tr style="margin-bottom:10px;">
@@ -236,18 +254,26 @@ $('form').validate({
 			equalTo: bi_pw
 		},
 		bi_name : {
-			required : ture
+			required : true
 		},
 		bi_company : {
-			required : ture
+			required : true
+		},
+		bi_brn_front : {
+			required: true,
+			regex : /^[0-9]{3,3}$/
+		},
+		bi_brn_middle : {
+			required: true,
+			regex : /^[0-9]{2,2}$/
+		},
+		bi_brn_back : {
+			required: true,
+			regex : /^[0-9]{5,5}$/
 		},
 		bi_phone : {
 			required : true,
 			regex : /^[0-9]{10,11}$/
-		},
-		bi_brn : {
-			required: true,
-			regex : /^[0-9]{7,7}$/
 		},
 		bi_email : {
 			required :true,
@@ -276,20 +302,26 @@ $('form').validate({
 			equalTo: '비밀번호와 일치하지 않습니다.'
 		},
 		bi_name : {
-			required : '필수 항목입니다.',				
-			regex : '잘못된 형식입니다.'
+			required : '필수 항목입니다.'
 		},
 		bi_company : {
+			required : '필수 항목입니다.'
+		},
+		bi_brn_front : {
 			required : '필수 항목입니다.',				
 			regex : '잘못된 형식입니다.'
 		},
-		bi_brn : {
+		bi_brn_middle : {
+			required : '필수 항목입니다.',				
+			regex : '잘못된 형식입니다.'
+		},
+		bi_brn_back : {
 			required : '필수 항목입니다.',				
 			regex : '잘못된 형식입니다.'
 		},
 		bi_phone : {
 			required : '필수 항목입니다.',
-			regex : '잘못된 번호입니다.'
+			regex : ' 잘못된 번호이거나 - 를 생략하고 입력하세요.'
 		},
 		bi_email : {
 			required : '필수 항목입니다.',
@@ -312,7 +344,7 @@ $('form').validate({
 				return false;
 			}
 			return true;
-	},
+	},	
 	errorPlacement : function(error, element){
 		var _ad = element.attr("id");
 		if((_ad == "bi_postNum" || _ad == "bi_mainAddress" || _ad == "bi_detailAddress") && _chk == false){
@@ -322,7 +354,7 @@ $('form').validate({
 		else if(!((_ad == "bi_postNum" || _ad == "bi_mainAddress" || _ad == "bi_detailAddress") && _chk == true)){
 			element.parent().append(error);
 		}
-	};
+	}
 });
 	
 $.validator.addMethod(
@@ -342,7 +374,7 @@ $('.idCheck').click(function(){
 		async :true,
 		type : 'POST',
 		data : JSON.stringify(obj),
-		url : '<c:url value="/check/BiId"></c:url>',
+		url : '<c:url value="/check/businessId"></c:url>',
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(data){
@@ -355,6 +387,7 @@ $('.idCheck').click(function(){
 		}
 	});
 });
+let checkNum ="";
 $('#bi_sendEmail').click(function(){
 	let domain =$('[name=bi_emailId]').val() + "@" +$('[name=bi_domain]').val();
 
@@ -368,66 +401,82 @@ $('#bi_sendEmail').click(function(){
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(emailCheck){
-
-			if(emailCheck.result == $('#emailAuCheck').val() ){
-				alert('인증성공');
+			if(emailCheck.result){
+				alert('메일 발송완료');
+				$('#bi_sendEmail').hide();
+				$('#bi_emailCheck').css({display:"block"});
+				checkNum = emailCheck.result;
 			}else{
-				alert('인증실패');
+				alert('메일 발송실패');
 			}
 
 		}
 	})
 });
+$('#bi_emailCheck').click(function(){
+	let mc =$('#emailAuCheck').val();
+
+	if(mc == checkNum){
+		alert('인증성공');
+
+	}else{
+		alert('인증실패');
+	}
+	$('#bi_emailCheck').hide();
+	$('#bi_sendEmail').css({display:"block"});
+});
+
 $('[name = bi_id]').change(function(){
 	idc = false;
 });
 
 </script>
 <script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    };
+//주소 API
+function sample6_execDaumPostcode() {
+   new daum.Postcode({
+	   oncomplete: function(data) {
+	            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	            var addr = ''; // 주소 변수
+	            var extraAddr = ''; // 참고항목 변수
+	
+	            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                addr = data.roadAddress;
+	            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                addr = data.jibunAddress;
+	            }
+	
+	            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	            if(data.userSelectedType === 'R'){
+	                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                    extraAddr += data.bname;
+	                }
+	                // 건물명이 있고, 공동주택일 경우 추가한다.
+	                if(data.buildingName !== '' && data.apartment === 'Y'){
+	                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                }
+	                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                if(extraAddr !== ''){
+	                    extraAddr = ' (' + extraAddr + ')';
+	                }
+	                // 조합된 참고항목을 해당 필드에 넣는다.
+	                document.getElementById("sample6_extraAddress").value = extraAddr;
+	            
+	            } else {
+	                document.getElementById("sample6_extraAddress").value = '';
+	            }
+	
+	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	            document.getElementById('sample6_postcode').value = data.zonecode;
+	            document.getElementById("sample6_address").value = addr;
+	            // 커서를 상세주소 필드로 이동한다.
+	            document.getElementById("sample6_detailAddress").focus();
+	        }
+	    }).open();
+};
 </script>
 </html>

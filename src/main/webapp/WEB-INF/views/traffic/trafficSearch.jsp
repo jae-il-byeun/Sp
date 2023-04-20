@@ -759,10 +759,12 @@ function resultSearchPlace(obj){
 
 	//re_JSON=[];
 }
+// 물어보기
 $('.corse').click(function(){
-	var corseCheck = $(this).find($('.couse:radio'));
+	var corseCheck = $(this).find($('.corse:radio'));
 	
 	if(corseCheck.attr("checked") == "checked"){
+
 		$('.arriveBox').css("display","block");
 	}else{
 		$('.arriveBox').css("display","none");

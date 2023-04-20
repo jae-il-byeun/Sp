@@ -8,7 +8,7 @@ import kr.kh.project.vo.MemberVO;
 
 public interface BusinessDAO {
 
-	int insertBusiness(@Param("seller")BusinessVO seller);
+	int insertBusiness(@Param("sell")BusinessVO seller);
 
 	BusinessVO selectBusinessById(@Param("bi_id")String bi_id);
 	

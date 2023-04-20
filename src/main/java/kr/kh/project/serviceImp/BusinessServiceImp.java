@@ -27,7 +27,7 @@ public class BusinessServiceImp implements BusinessService{
 	public boolean businessjoin(BusinessVO seller) {
 			if(seller == null)
 				return false;
-
+			seller.setBi_brn(seller.getBi_brn_front()+seller.getBi_brn_middle()+seller.getBi_brn_back());
 			seller.setBi_email(seller.getBi_emailId()+ "@" + seller.getBi_domain());
 			seller.setBi_address(seller.getBi_postNum()+ seller.getBi_mainAddress()+seller.getBi_detailAddress()+seller.getBi_extraAddress());
 			if(businessDao.insertBusiness(seller) != 0) {
@@ -49,18 +49,13 @@ public class BusinessServiceImp implements BusinessService{
 	@Override
 	public String biEmailAuCheck(String bi_email) {
 		String chekNum = authenticationNumber();
-
-		
-		boolean auCheck = businessDao.insertBiAuNumVO(chekNum);
 		//MyBatis에서는 SQL 쿼리의 실행 결과를 자바 객체로 매핑하기 위해 void, int, long, boolean, java.util.Map, java.util.List 등의 타입을 지원
-		System.out.println(auCheck);
-		if(auCheck) {
+
 			String title = "Repose / email check";
 			String content = " 인증번호를 입력하세요.<br>"  + chekNum ;
 			sendEmail(title,content,bi_email);
 			return chekNum;
-		}
-		return null;
+
 	}
 	private String authenticationNumber() {
 		String str ="";
@@ -97,6 +92,7 @@ public class BusinessServiceImp implements BusinessService{
 		if(seller == null || seller.getBi_id() == null || seller.getBi_pw() == null)
 			return null;
 		BusinessVO dbseller = businessDao.selectBusinessById(seller.getBi_id());
+		System.out.println(dbseller);
 		if(dbseller == null)
 			return null;
 		

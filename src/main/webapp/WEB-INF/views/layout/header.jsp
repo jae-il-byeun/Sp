@@ -49,8 +49,9 @@ a{text-decoration: none; margin-left: 20px;}
 #mli_icon{margin-left: 3%; width:65%; text-align: center;}
 .h_cataloglogin_text{ display:block; text-align: center; font-size: 13px}
 .h_exit{display:none;}
-
-
+.h_biExit{display:none;}
+.h_myPage{display:none;}
+.h_productUpload{display:none;}
     
     /* 모달 스타일 */
 .modal {
@@ -133,7 +134,7 @@ a{text-decoration: none; margin-left: 20px;}
 #mp_login_keep{
 	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block; box-shadow: none;
 }
-#mp_btn{
+#bl_btn{
 	width:60%; height:15%; text-align: center; cursor: pointer;
 	font-size: 25px; border:1px solid #ddd; border-radius: 10px;
 	background-color: teal; color: #fff; 
@@ -144,7 +145,7 @@ a{text-decoration: none; margin-left: 20px;}
 	position: absolute; top: 100px; left:350px; font-size: 15px;
 	background-color: teal; color: #fff;  border-radius: 15px;
 }
-#mp_loss{
+#bp_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
 </style>
@@ -212,12 +213,25 @@ a{text-decoration: none; margin-left: 20px;}
 					<span class="h_cataloglogin_text">사업자</span> 
 				</a>
 			</li>
+			<li class="h_login h_myPage">
+				<a  class="hl_link" id="myPage">
+					<img alt="" src="/project/resources/img/myPage.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">마이페이지</span> 
+				</a>
+			</li>
+			<li class="h_login h_productUpload">
+				<a  class="hl_link" id="myPage">
+					<img alt="" src="/project/resources/img/productUpload.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">상품등록</span> 
+				</a>
+			</li>
 			<li class="h_login h_exit">
 				<a  class="hl_link" id="exit">
 					<img alt="" src="/project/resources/img/exit.png" class="header_loginIcon">
 					<span class="h_cataloglogin_text">로그아웃</span> 
 				</a>
 			</li>
+
 	
 		</ul>
 	</div>
@@ -230,7 +244,7 @@ a{text-decoration: none; margin-left: 20px;}
 	    <a type="button" href="<c:url value="/join/member"></c:url>" id="ml_join">회원가입</a>
 	    <div class="ml_box">
 	    	<input type="text" class="ml_id" placeholder="아이디">
-	    	<input type="text" class="ml_pw" placeholder="비밀번호">
+	    	<input type="password" class="ml_pw" placeholder="비밀번호">
 	    	<label>
 	    		<input type="checkbox" id="ml_login_keep">
 	    		<span>아이디 유지</span>
@@ -250,17 +264,17 @@ a{text-decoration: none; margin-left: 20px;}
 	    <h2 class="ml_title">사업자 로그인</h2>
 	    <a type="button" href="<c:url value="/join/business"></c:url>" id="mp_join">회원가입</a>
 	    <div class="ml_box">
-	    	<input type="text" class="ml_id" placeholder="아이디">
-	    	<input type="text" class="ml_pw" placeholder="비밀번호">
+	    	<input type="text" class="bl_id" placeholder="아이디">
+	    	<input type="password" class="bl_pw" placeholder="비밀번호">
 	    	<label>
 	    		<input type="checkbox" id="mp_login_keep">
 	    		<span>아이디 유지</span>
 	    	</label>
 	    	
-	    	<a href="#" id="mp_loss" >아이디·비번찾기</a>
+	    	<a href="#" id="bp_loss" >아이디·비번찾기</a>
 	    	
 	    </div>
-	    <button id="mp_btn">로그인</button>
+	    <button id="bl_btn">로그인</button>
 	  </div>
 	</div>
 </nav>	
@@ -268,7 +282,7 @@ a{text-decoration: none; margin-left: 20px;}
 
 </body>
 <script>
-// dialog 열기
+//멤버 dialog 열기
 // 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
   document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
@@ -298,7 +312,7 @@ function closeModal(e) {
     modal.style.display = 'none';
   }
 }
-//dialog 열기
+//사업자 dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
 	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
@@ -321,6 +335,7 @@ window.onclick = function(event) {
 	}
 }
 
+let session ="";
 $('#ml_btn').click(function(){
 	let login_id = $('.ml_id').val();
 	let login_pw = $('.ml_pw').val();
@@ -336,9 +351,10 @@ $('#ml_btn').click(function(){
 		url :'<c:url value="/login/member"></c:url>',
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
-		success : function(emailCheck){
-			if(emailCheck.result){
+		success : function(memberCheck){
+			if(memberCheck.result){
 				alert('로그인성공');
+				session="member";
 				window.location.reload();
 			}else{
 				alert('로그인 실패');
@@ -346,7 +362,33 @@ $('#ml_btn').click(function(){
 		}
 	});	
 });
-
+$('#bl_btn').click(function(){
+	let login_id = $('.bl_id').val();
+	let login_pw = $('.bl_pw').val();
+	let loginC = {
+			bi_id : login_id,
+			bi_pw : login_pw
+			
+	};
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(loginC),
+		url :'<c:url value="/login/business"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(sellerCheck){
+			if(sellerCheck.result){
+				alert('로그인 성공');
+				session="business";
+				window.location.reload();
+			}else{
+				alert('로그인 실패');
+			}
+		}
+	});	
+});
+session;
 //매번 최초 페이지 로드시.
 //로그인여부를 체크한다.
 $.ajax({
@@ -358,15 +400,28 @@ $.ajax({
 	contentType : "application/json; chearset=UTF-8",
 	success : function(ch){
 		if(ch.lgCheck){
-			
-			$('.h_business').css({display:"none"});
-			$('.h_exit').css({display:"block"});
-		}else{
-			
+				if(ch.lgCheck.me_id != null){
+					$('.h_member').css({display:"none"});
+					$('.h_business').css({display:"none"});
+					$('.h_myPage').css({display:"block"});
+					$('.h_exit').css({display:"block"});
+
+					
+				}else if(ch.lgCheck.bi_id != null){
+					$('.h_business').css({display:"none"});
+					$('.h_member').css({display:"none"});
+					$('.h_productUpload').css({display:"block"});
+					$('.h_exit').css({display:"block"});
+	
+					
+				}		
 		}
-	}
 		
+		
+	}
 });
+
+
 //로그아웃
 $('#exit').click(function(){
 		$.ajax({
@@ -379,6 +434,7 @@ $('#exit').click(function(){
 				if(emailCheck.result){
 					alert('로그아웃성공');
 					window.location.reload();
+					session="";
 				}else{
 					alert('로그아웃 실패');
 				}

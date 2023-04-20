@@ -249,6 +249,7 @@ select{
 						<input type="text" class="email_domain" name="me_domain">
 						<select id="email_domainKind">
 							<option>naver.com</option>
+							<option>google.com</option>
 						</select>
 						<input type="text" id="emailAuCheck">
 						<button type="button" id="me_sendEmail">인증번호 발송</button>

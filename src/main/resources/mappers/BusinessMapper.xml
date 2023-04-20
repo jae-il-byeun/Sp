@@ -4,17 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.BusinessDAO">
 	<insert id="insertBusiness">
-		insert into business(bi_id, bi_pw, bi_name, bi_company, bi_phone,bi_email,bi_address)
-			   values(#{seller.bi_id},#{sellerbi_pw.},#{seller.bi_name},#{seller.bi_company},#{seller.bi_phone},#{seller.bi_email},#{seller.bi_address})
+		insert into business(bi_id, bi_pw, bi_name, bi_company, bi_brn, bi_phone, bi_email, bi_address)
+			   values(#{sell.bi_id},#{sell.bi_pw},#{sell.bi_name},#{sell.bi_company},#{sell.bi_brn},#{sell.bi_phone},#{sell.bi_email},#{sell.bi_address})
 	</insert>
 	
 	<select id="selectBusinessById" resultType="kr.kh.project.vo.BusinessVO">
 	 	select * from business where bi_id = #{bi_id}
 	</select>
-	<insert id="insertBiAuNumVO">
-  		insert into AuNum(au_echeck)
-  				values(#{au_echeck} )
-	</insert>
 	<select id="selectBusinessCheck" resultType="kr.kh.project.vo.AuNumVO">
 	  	select * from AuNum
 	  			where  au_echeck = #{ck.au_echeck} and au_delay >= now()
