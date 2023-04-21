@@ -41,8 +41,8 @@ public class TrafficController {
 		mv.setViewName("/traffic/trafficScheduel");
 		return mv;
 	}
-	@RequestMapping(value = "/traffic/seat", method = RequestMethod.GET)
-	public ModelAndView trafficSeat(ModelAndView mv,String st,String sv,String at,String av,Date rd,String seat,Date delay) {
+	@RequestMapping(value = "/traffic/seatExpress", method = RequestMethod.GET)
+	public ModelAndView trafficSeatExpress(ModelAndView mv,String st,String sv,String at,String av,Date rd,String seat,Date delay) {
 		String bs_st= st;
 		String bs_sv = sv;
 		String bs_at = at;
@@ -57,7 +57,45 @@ public class TrafficController {
 		mv.addObject("bs_rd", bs_rd);
 		mv.addObject("bs_seat", bs_seat);
 		mv.addObject("bs_delay", bs_delay);
-		mv.setViewName("/traffic/trafficSeat");
+		mv.setViewName("/traffic/trafficSeatExpress");
+		return mv;
+	}
+	@RequestMapping(value = "/traffic/seatWoodung", method = RequestMethod.GET)
+	public ModelAndView trafficSeatWoodung(ModelAndView mv,String st,String sv,String at,String av,Date rd,String seat,Date delay) {
+		String bs_st= st;
+		String bs_sv = sv;
+		String bs_at = at;
+		String bs_av = av;
+		Date bs_rd= rd;
+		String bs_seat = seat;
+		Date bs_delay = delay;
+		mv.addObject("bs_st", bs_st);
+		mv.addObject("bs_sv", bs_sv);
+		mv.addObject("bs_at", bs_at);
+		mv.addObject("bs_av", bs_av);
+		mv.addObject("bs_rd", bs_rd);
+		mv.addObject("bs_seat", bs_seat);
+		mv.addObject("bs_delay", bs_delay);
+		mv.setViewName("/traffic/trafficSeatWoodung");
+		return mv;
+	}
+	@RequestMapping(value = "/traffic/seatPremium", method = RequestMethod.GET)
+	public ModelAndView trafficSeatPreminum(ModelAndView mv,String st,String sv,String at,String av,Date rd,String seat,Date delay) {
+		String bs_st= st;
+		String bs_sv = sv;
+		String bs_at = at;
+		String bs_av = av;
+		Date bs_rd= rd;
+		String bs_seat = seat;
+		Date bs_delay = delay;
+		mv.addObject("bs_st", bs_st);
+		mv.addObject("bs_sv", bs_sv);
+		mv.addObject("bs_at", bs_at);
+		mv.addObject("bs_av", bs_av);
+		mv.addObject("bs_rd", bs_rd);
+		mv.addObject("bs_seat", bs_seat);
+		mv.addObject("bs_delay", bs_delay);
+		mv.setViewName("/traffic/trafficSeatPremium");
 		return mv;
 	}
 	@RequestMapping(value = "/traffic/re_seat", method = RequestMethod.POST)

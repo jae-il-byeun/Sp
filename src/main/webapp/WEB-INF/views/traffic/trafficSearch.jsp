@@ -237,9 +237,9 @@ swiper-slide img {
   display: none; /* 초기에는 모달이 보이지 않도록 설정합니다. */
   position: absolute; /* 스크롤과 상관없이 화면에 고정되도록 설정합니다. */
   z-index: 50; /* 모달이 다른 요소 위에 표시되도록 설정합니다. */
-  left: 35%;
+  left: 30%;
   top: 130px;
-  width: 30%; height:750px;
+  width: 40%; height:750px;
   padding: 0px;
   border-radius: 15px;
   background-color: rgba(0,0,0,0.1); /* 모달 외부를 어둡게 처리합니다. */
@@ -257,7 +257,7 @@ swiper-slide img {
   border: 1px solid #888;
   width: 100%;
   height: 750px;
-  max-width: 600px;
+  max-width: 800px;
   box-sizing: border-box;
   border-radius: 15px;
   
@@ -355,7 +355,7 @@ swiper-slide img {
 }
 .tm_detailBox h4{font-size:20px; margin-bottom:5px;}
 .tm_detail{
-	width:100%; height:480px;
+	width:100%; height:407px;
 	box-sizing: border-box; padding: 8px 0px 5px 13px;
 	border:1px solid gray;
 	display:flex;
@@ -695,7 +695,7 @@ $('.tm_cityBox li').click( function() {
 	//a ==> 클릭한 지역에 해당하는 터미널정보가 들어감.
 });
 
-
+//출발지
 let re_JSON = [];
 function placeSearch(i){
 	var xhr = new XMLHttpRequest();
@@ -705,7 +705,7 @@ function placeSearch(i){
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			 resultJSON = JSON.parse(xhr.responseText).result;
 			for(let j=0; j<resultJSON.length; j++){
-				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName+'</li>');
+				$('.tm_placeDetail').append('<li value='+resultJSON[j].stationID+'>'+resultJSON[j].stationName.replaceAll("터미널","").replaceAll("정류장","").replaceAll("정류소","").replaceAll("환승","")+'</li>');
 
 				if(resultJSON[j].haveDestinationTerminals)
 					re_JSON.push(resultJSON[j]);
@@ -722,7 +722,7 @@ function placeSearch(i){
 	xhr.send();
 };
 
-
+//도착지
 function resultSearchPlace(obj){
 
 	$('#tm_start').text(obj.text());
@@ -737,7 +737,7 @@ function resultSearchPlace(obj){
 	for(let y = 0; y<re_JSON.length; y++){
 		if(obj.val() == re_JSON[y].stationID){
 			for(let s = 0; s<re_JSON[y].destinationTerminals.length; s++){
-				$('.tm_placeDetail').append('<li value='+re_JSON[y].destinationTerminals[s].stationID+'>'+re_JSON[y].destinationTerminals[s].stationName+'</li>');
+				$('.tm_placeDetail').append('<li value='+re_JSON[y].destinationTerminals[s].stationID+'>'+re_JSON[y].destinationTerminals[s].stationName.replaceAll("터미널","").replaceAll("고속버스","").replaceAll("정류장","").replaceAll("정류소","").replaceAll("환승","")+'</li>');
 			}
 			break;
 		}
@@ -782,7 +782,7 @@ $('#searchComplete').click(function(){
       buttonImage: "/project/resources/img/calender.png",
       buttonImageOnly: true,
       buttonText: "Select date",
-      dateformat: "yy-mm-dd"
+      dateFormat: "yy-mm-dd"
     });
 </script>
 </html>

@@ -353,11 +353,11 @@ $('#ml_btn').click(function(){
 		contentType : "application/json; charset=UTF-8",
 		success : function(memberCheck){
 			if(memberCheck.result){
-				alert('로그인성공');
+				alert('로그인 되셨습니다.');
 				session="member";
 				window.location.reload();
 			}else{
-				alert('로그인 실패');
+				alert('아이디 또는 비밀번호가 맞지않습니다.');
 			}
 		}
 	});	
@@ -379,11 +379,11 @@ $('#bl_btn').click(function(){
 		contentType : "application/json; charset=UTF-8",
 		success : function(sellerCheck){
 			if(sellerCheck.result){
-				alert('로그인 성공');
+				alert('로그인 되셨습니다.');
 				session="business";
 				window.location.reload();
 			}else{
-				alert('로그인 실패');
+				alert('아이디 또는 비밀번호가 맞지않습니다.');
 			}
 		}
 	});	
@@ -432,7 +432,7 @@ $('#exit').click(function(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(emailCheck){
 				if(emailCheck.result){
-					alert('로그아웃성공');
+					alert('로그아웃 되었습니다.');
 					window.location.reload();
 					session="";
 				}else{

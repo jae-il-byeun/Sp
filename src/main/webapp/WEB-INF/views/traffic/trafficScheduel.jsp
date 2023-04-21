@@ -53,7 +53,7 @@ body{font-family: 'GyeonggiTitleM';}
 
     /* 필터상자 */
     .filterBox{ box-shadow:3px 3px 5px gray; 
-        width: 230px; height: 656px;
+        width: 230px; height: 400px;
         background-color: teal;
         border-radius: 3px;
         color: #fff;
@@ -324,7 +324,7 @@ body{font-family: 'GyeonggiTitleM';}
                         </div>
                         <hr>
 						<span class="wasteTime">소요시간</span>
-                        <span class="delay">1시간 40분 소요</span>
+                        <span class="delay"></span>
                     </div>
                     
      
@@ -392,7 +392,7 @@ body{font-family: 'GyeonggiTitleM';}
                             <span class="busStart">출발</span>
                             <span class="busFind">고속사</span>
                             <span class="busGrade">등급</span>
-                            <span class="busTemp">할인</span>
+                            <span class="busTemp">요금</span>
                             <span class="busRemain">잔여석</span>
                             <span class="busClear"></span>
                         </p>
@@ -451,6 +451,7 @@ function timeGrade(s_id,a_id){
 			 $('.delay').text(wt_JSON);
 			 let arry = [];
 			 let sortArry;
+			 let remain; 
 			 // arry가 배열이기 때믄에 
 			 for(let u = 0; u<resultJSON.length; u++){
 				 timeGrade = resultJSON[u].schedule.replaceAll("\"","").replaceAll("\n","/").trim().split('/');
@@ -475,18 +476,29 @@ function timeGrade(s_id,a_id){
 							fare = resultJSON[u].specialFare;
 						 };
 					  
-					  
+						 switch(t_grade){
+						 case "고속":
+							 remain = 41;
+							 break;
+						 case "우등":
+							 remain = 28;
+							 break;
+						 case "프리미엄":
+							 remain = 21;
+							 break;
+						 }
 					  arry.push({
 					 	 // JSON의 형태로 (key : value) 로 넣는 작업
 					 	 //schedule은 배열의 형태로 만들었고 이배열로 횟수를 돌기 때문에 변수z로 들어간다.
 						 time : time,
 						 grade : t_grade,
 						 //z가 u속에 있기 때문에 u는 고정인 상태에서 z가 계속 된다.
-					 	 fare : fare
+					 	 fare : fare,
+					 	 seat : remain
 					 });
 					
 				 };
-				 
+				
 				timeGrade = resultJSON[u].nightSchedule.replaceAll("\"","").replaceAll("\n","/").trim().split('/');
 				//timeGrade 반복돌면서 arr에 넣자.
 				for(let z=0; z<timeGrade.length; z++){
@@ -507,10 +519,22 @@ function timeGrade(s_id,a_id){
 				  			fare = resultJSON[u].nightSpecialFare;
 				  		}
 					 };
+					 switch(t_grade){
+					 case "고속":
+						 remain = 41;
+						 break;
+					 case "심야우등":
+						 remain = 28;
+						 break;
+					 case "심야<br>프리미엄<br>우등":
+						 remain = 21;
+						 break;
+					 }
 					 arry.push({
 								time: time,
 								grade : t_grade,
-								fare : fare
+								fare : fare,
+							 	seat : remain
 					 });
 						
 				};
@@ -527,19 +551,22 @@ function timeGrade(s_id,a_id){
 				});	
 			
 		}
+		//우등이면 28석 프리미엄이면 21석 고속 41석
 		let express= ["dongbu","hanil","jungang","gumho","dongyang"];
 		for(let i=0; i<sortArry.length; i++){
 			let max = 4;
 			let min = 1;
 			let r = Math.floor(Math.random()*(max-min + 1)+ min);
+			
 			$('.busTime-detail').append('<div class="busTd"><a  name="spendData"><span class="start-time">'
 								+sortArry[i].time
 								+'</span><span class="bus_com "><span class="'+ express[r]+'"></span></span><span class="grade woodung">'
 								+sortArry[i].grade
 								+'</span><span class="temp">'
 								+sortArry[i].fare
-								+'</span><span class="remain" >41석</span>'
-								+""
+								+'</span><span class="remain" >'
+								+sortArry[i].seat+"석"+'</span>'
+								
 								+'<input type="hidden" id="re_seat" value="41"><span class="status"><span class="status-icon">선택</span></span></a></div>');
 		}
 		
@@ -567,8 +594,30 @@ function timeGrade(s_id,a_id){
 // };
 
 //배차를 선택하면 자리선택페이지로 데이터를 넘겨줌
-$('.busTd').click(function(){
-	window.location.href="/project/traffic/seat?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
+//ajax 비동기화로 인한 순서 엇깔림 그렇기 떄문에 document로 작업을 하던가 ajax안에 넣어야한다.
+//ajax->click->ajax이기 때문에 click이벤트가 생략된것
+// $('.busTd').click(funtion(){ });
+$(document).on('click','.busTd',function(){
+	let shock = $(this).getElementsByClassName(grade).text();
+	switch($(this).grade){
+		case "고속":
+			window.location.href="/project/traffic/seatExpress?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
+			break;
+		case "우등":
+			window.location.href="/project/traffic/seatWoodung";
+			break;
+		case "프리미엄우등":
+			window.location.href="/project/traffic/seatPremium";
+			break;
+		case "심야우등":
+			window.location.href="/project/traffic/seatWoodung";
+			break;
+		case "심야<br>프리미엄<br>우등":
+			window.location.href="/project/traffic/seatPremium";
+			break;
+	// 	
+	
+	}
 
 })
 </script>

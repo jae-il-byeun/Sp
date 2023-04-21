@@ -52,7 +52,7 @@ body{font-family: 'GyeonggiTitleM';}
   }
   /* 필터상자 */
   .filterBox{ box-shadow:3px 3px 5px gray; 
-        width: 14.7%; height: 750px; min-width: 230px;
+        width: 14.7%; height: 400px; min-width: 230px;
         background-color: teal;
         border-radius: 3px;
         color: #fff;
@@ -260,7 +260,7 @@ body{font-family: 'GyeonggiTitleM';}
     #dicount_example{font-size: 12px; text-align: left;margin-top: 2px; margin-left: 60px;}
     /* 총 결제 */
     .total_payBox{ position: relative;
-      width: 100%; height: 221px;
+      width: 100%; height: 230px;
       box-sizing: border-box; padding: 20px 30px 5px 25px; margin-bottom: 2px;
       border-left: 1.5px solid #e6e6e6;
       border-right: 1.5px solid #e6e6e6;
@@ -325,18 +325,9 @@ body{font-family: 'GyeonggiTitleM';}
 				            <hr>
 				            <div class="pay"></div>
 				            <span class="pay-clear"></span>
-				            <dt>우등</dt>
-				            <dd>10,000원</dd>
-				            <dt>고속</dt>
-				            <dd>10,000원</dd>
-				            <dt>심야우등</dt>
-				            <dd>10,000원</dd>
-				            <dt>심야우등할증</dt>
-				            <dd>10,000원</dd>
-				            <dt>심야고속</dt>
-				            <dd>10,000원</dd>
-				            <dt>심야고속할증</dt>
-				            <dd>10,000원</dd> 
+				            <span>우등</span>
+				            <span>10,000원</span>
+
 				        </div>
 				
 				      </div>
