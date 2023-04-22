@@ -60,7 +60,7 @@ body{font-family: 'GyeonggiTitleM';}
     /* 필터날짜 */
     .today{ font-size: 20px; text-align: left;
         width: 100%; height: 50px; line-height: 50px;
-        padding-top: 15px; margin-top: 15px; margin-left: 8px;
+        padding-top: 15px; margin-top: 15px; margin-left: 15px;
     }
     /* 필터 출발지 도착지 */
     .promotion{ 
@@ -76,10 +76,13 @@ body{font-family: 'GyeonggiTitleM';}
         width: 28%; height: 50px; margin-top: 21px; text-align: center;
     }
     .place{display: block; margin-top:15px; color: #fff; letter-spacing: -2px;width: 80px; text-align: left;}
-    
+    /* 필터 시간 */
+    .wasteTime{
+		margin: 0px 65px 0px 20px;    
+    }
     /* 필터 시간 */
     .delay{ padding-top: 10px;
-        width: 100%; height: 20px; display: block; text-align: right;
+        width: 100%; height: 20px;  text-align: right;
         font-size: 14px; margin-bottom: 7px;
     }
     /* 필터 거리 */
@@ -312,26 +315,19 @@ body{font-family: 'GyeonggiTitleM';}
 				                </p>
 				            </div>
 				            <hr>
-				
+							<span class="wasteTime">소요시간</span>
 				            <span class="delay" id="delay">1시간 40분 소요</span>
-				            <span class="distance">1.34km</span>
+				            <input type="hidden" value="" id="express">
 				        </div>
 				        
 				        <div class="payInfo">
 				            <div class="nomalPay">
-				                <p class="payInfo-text">요금정보</p>
-				                <span class="nomalPay-text">(일반요금)</span>
 				            </div>
 				            <hr>
-				            <div class="pay"></div>
-				            <span class="pay-clear"></span>
-				            <span>우등</span>
-				            <span>10,000원</span>
-
 				        </div>
-				
 				      </div>
 				      <!-- 필터박스 끝-->
+				      
 				      <!-- 좌석예약 -->
 				      <div class="seat_container">
 				        <!-- 좌석예약박스 헤더-->
@@ -482,7 +478,7 @@ body{font-family: 'GyeonggiTitleM';}
 					            </a>
 					          </div>
 					          <div class="remaining">
-					            <span class="remaining_text">잔여 <span id="re_seat">10</span>석/전체 25석</span>
+					            <span class="remaining_text">잔여 <span id="re_seat">10</span>석/전체 21석</span>
 					          </div>
 					        </div>
 				            <!-- 선택좌석 -->
@@ -493,24 +489,20 @@ body{font-family: 'GyeonggiTitleM';}
 				            <!-- 탑승인원 및 요금 -->
 				            <div class="board_payBox">
 				              <ul>탑승인원 및 요금
-				                <li>일반 0명
-				                  <button class="plus">+</button>
-				                  <button class="minus">-</button>
+				                <li>
+				                  일반 <label name="useCount">0</label>명
+				                  <button name="nomalFare" class="plus" value="10000">+</button>
+				                  <button name="nomalFare" class="minus" value="10000">-</button>
 				                  <span>0원</span>
 				                </li>
-				                <li>초등생 0명
-				                  <button class="plus">+</button>
-				                  <button class="minus">-</button>
+				                <li>초등생 <label name="useCount">0</label>명
+				                  <button name="elementFare" class="plus" value="3000">+</button>
+				                  <button name="elementFare" class="minus" value="3000">-</button>
 				                  <span>0원</span>
 				                </li>
-				                <li>중고생 0명
-				                  <button class="plus">+</button>
-				                  <button class="minus">-</button>
-				                  <span>0원</span>
-				                </li>
-				                <li>보훈 0명
-				                  <button class="plus">+</button>
-				                  <button class="minus">-</button>
+				                <li>중고생 <label name="useCount">0</label>명
+				                  <button name="mhFare" class="plus" value="4000">+</button>
+				                  <button name="mhFare" class="minus" value="4000">-</button>
 				                  <span>0원</span>
 				                </li>
 				              </ul>
@@ -526,7 +518,8 @@ body{font-family: 'GyeonggiTitleM';}
 				            <!-- 총 결제 -->
 				            <div class="total_payBox">
 				              <strong>총 결제금액</strong>
-				              <span>0원</span>
+				              <input type="hidden" id="total_pay_hid" value="0">
+				              <span id="total_pay">0원</span>
 				              <a href="#" id="complete">선택완료</a>
 				            </div>
 				          </div>
@@ -550,6 +543,13 @@ window.onload= function(){
 	$("#recive_day").text('${bs_rd}');
 	$("#re_seat").text('${bs_seat}');
 	$("#delay").text('${bs_delay}');
+	$('#express').val('${bs_ex}');
+	$(".plus").val('${bs_fare}');
+	$(".minus").val('${bs_fare}');
+	var elefre = Number('${bs_fare}')*0.3;
+	var mhfre = Number('${bs_fare}')*0.7;
+	$("[name=elementFare]").val(elefre);
+	$("[name=mhFare]").val(mhfre);	
 	
 	
 	//예약된 좌석 비활성화시키기
@@ -557,26 +557,106 @@ window.onload= function(){
 
         
 $('.seatBox').click(function(){
-  var SetInCheck = $(this).find($('[name="seatIn"]:checkbox'));
-  if(SetInCheck.attr("checked") == "checked"){
-    SetInCheck.removeAttr("checked");
-    
-  }
-  else {
-    SetInCheck.attr("checked","checked");
-  };
-  var seatCount =[];
-//   for(var i=0;i<$(('[name="seatIn"]:checked')).length;i++)
-// {
-//   $($(('[name="seatIn"]:checked'))[i]).val() + "번"
-// }  
+	  var SetInCheck = $(this).find($('[name="seatIn"]:checkbox'));
+	  if(SetInCheck.attr("checked") == "checked"){
+	    SetInCheck.removeAttr("checked");
+	    
+	  }
+	  else {
+	    SetInCheck.attr("checked","checked");
+	  };
+	  
+	  var seatCount =[];
+	//   for(var i=0;i<$(('[name="seatIn"]:checked')).length;i++)
+	// {
+	//   $($(('[name="seatIn"]:checked'))[i]).val() + "번"
+	// }  
 
-  $('#seat_num').text(
-    //$(('[name="seatIn"]:checked')).val()+"번"
-    //$(('[name="seatIn"]:checked')).serialize().replaceAll("seatIn=","").split('&').join('번 ') + '번'
-    $(('[name="seatIn"]:checked')).serialize().replaceAll("seatIn=","").replaceAll('&','번 ') + '번'
-    );
-});
+	// 선택좌석
+	  if($(('[name="seatIn"]:checked')).length == 0)
+	  {
+	    $('#seat_num').text("");  
+	  }
+	  else {
+	    $('#seat_num').text(
+	      //$(('[name="seatIn"]:checked')).val()+"번"
+	      //$(('[name="seatIn"]:checked')).serialize().replaceAll("seatIn=","").split('&').join('번 ') + '번'
+	      
+	      $(('[name="seatIn"]:checked')).serialize().replaceAll("seatIn=","").replaceAll('&','번 ') + '번'
+	      //(input 태그로 여러데이터가 들어가기 때문에 배열로되어있고 대신 세로배열).
+	      //(직렬화(세로배열을 가로로 한줄로 만든다는 말)).
+	      //(원하는 글자,바꾸는 글자)
+	      //
+	    );
+	  }
+	});
+
+	$('.refresh-icon').click(function(){
+	  location.reload();
+	});
+
+	$('.plus').click(function(){
+	  var __num = $($(this).parent().children()[0]).text();
+	  __num++;
+	  $($(this).parent().children()[0]).text(__num);
+	  var __amt = $(this).val() * __num;
+	  $($(this).parent().children()[3]).text(__amt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원");
+
+	  if(__num != 0)
+	  {
+	    var __total_pay = Number($("#total_pay_hid").val());
+	    __total_pay = __total_pay + Number($(this).val());
+	    $("#total_pay_hid").val(__total_pay);
+	    $("#total_pay").text(__total_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
+	  }
+	});
+	$('.minus').click(function(){
+	  var __num = $($(this).parent().children()[0]).text();
+	  __num--;
+	  
+	  if(__num >= 0)
+	  {
+	    var __total_pay = Number($("#total_pay_hid").val());
+	    __total_pay = __total_pay - Number($(this).val());
+	    $("#total_pay_hid").val(__total_pay);
+	    $("#total_pay").text(__total_pay.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
+	  }
+
+	  if(__num < 0)
+	    __num = 0;
+	  $($(this).parent().children()[0]).text(__num);
+	  var __amt = $(this).val() * __num;
+	  $($(this).parent().children()[3]).text(__amt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원");//3자릿수 콤마
+	  
+	});
+	  //버튼을 누르면 일반 0명이 1명으로 카운트가 되고 클릭숫자가 더해지면 일반 n명도 숫자가 더해진다.
+
+	$('#complete').click(function(){
+	  var sum = 0;
+	  $('[name="useCount"]').each(function(_index,_ele){//(_index,_ele)임의변수 _index 반복횟수자리 _ele 값자리
+	    //주의$('[name="useCount"]').val()은 제일 마지막에 있는 value를 갖고온다.
+	    sum += Number($(_ele).text());
+	  })
+	  if(sum == 0 || $(('[name="seatIn"]:checked')).length == 0){
+		  alert("좌석과 인원을 선택하세요")
+	  }else if(sum == 0){
+		  alert("선택한 좌석수와 인원수가 맞지 않습니다.")
+	  }else if($(('[name="seatIn"]:checked')).length == 0){
+		  alert("선택한 좌석수와 인원수가 맞지 않습니다.")
+	  }else if(sum != $(('[name="seatIn"]:checked')).length ){
+	    alert("선택한 좌석수와 인원수가 맞지 않습니다.")
+	  }else{
+		  if(confirm("결제 페이지로 이동하시겠습니까?")){
+			  //이동
+		  }
+		  else {
+			  return;
+		  }
+		  
+		  
+	  }
+	  
+	})
 
 
 </script>

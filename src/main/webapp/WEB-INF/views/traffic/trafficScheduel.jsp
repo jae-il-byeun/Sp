@@ -228,7 +228,7 @@ body{font-family: 'GyeonggiTitleM';}
     .busStart{width: 200px; text-align: left; vertical-align: middle; display: table-cell;}
     .busFind{width: 220px; display: table-cell; text-align: left; vertical-align: middle;}
     .busGrade{width: 200px; display: table-cell; text-align: left; vertical-align: middle;}
-    .busTemp{width: 220px; display: table-cell; text-align: left; vertical-align: middle;}
+    .busFare{width: 220px; display: table-cell; text-align: left; vertical-align: middle;}
     .busRemain{width: 150px; display: table-cell; text-align: left; vertical-align: middle;}
     .busClear{width: auto; display: table-cell; text-align: left; vertical-align: middle;}
     /* 버스시간 디테일 */
@@ -284,7 +284,7 @@ body{font-family: 'GyeonggiTitleM';}
 	
     .moonMak{display: inline-block; font-size: 8px;  }
     /* 할인 */
-    .temp{display: table-cell; width: 165px; vertical-align: middle;}
+    .fare{display: table-cell; width: 165px; vertical-align: middle;}
     /* 잔여석 */
     .remain{padding-right: 30px; text-align: left; box-sizing: border-box; width: 150px; vertical-align: middle;}
     /* 선택 */
@@ -392,7 +392,7 @@ body{font-family: 'GyeonggiTitleM';}
                             <span class="busStart">출발</span>
                             <span class="busFind">고속사</span>
                             <span class="busGrade">등급</span>
-                            <span class="busTemp">요금</span>
+                            <span class="busFare">요금</span>
                             <span class="busRemain">잔여석</span>
                             <span class="busClear"></span>
                         </p>
@@ -487,6 +487,8 @@ function timeGrade(s_id,a_id){
 							 remain = 21;
 							 break;
 						 }
+						 //날짜 도착지 출발지 시간 -> 예약목록 =>잔여석-예약목록 db를 왔다갔다 하는 개념
+						 //날짜 도착지 출발지를 갖고 시간별로 예약목록을 다 갖고옴->여기서 시간대별로 분류 
 					  arry.push({
 					 	 // JSON의 형태로 (key : value) 로 넣는 작업
 					 	 //schedule은 배열의 형태로 만들었고 이배열로 횟수를 돌기 때문에 변수z로 들어간다.
@@ -562,7 +564,7 @@ function timeGrade(s_id,a_id){
 								+sortArry[i].time
 								+'</span><span class="bus_com "><span class="'+ express[r]+'"></span></span><span class="grade woodung">'
 								+sortArry[i].grade
-								+'</span><span class="temp">'
+								+'</span><span class="fare" value="'+sortArry[i].fare+'">'
 								+sortArry[i].fare
 								+'</span><span class="remain" >'
 								+sortArry[i].seat+"석"+'</span>'
@@ -597,28 +599,33 @@ function timeGrade(s_id,a_id){
 //ajax 비동기화로 인한 순서 엇깔림 그렇기 떄문에 document로 작업을 하던가 ajax안에 넣어야한다.
 //ajax->click->ajax이기 때문에 click이벤트가 생략된것
 // $('.busTd').click(funtion(){ });
+//find -- getElementByClassName,id,name
+//$(this).find("class")[2].css()
+//$(this).find는 j쿼리 하지만 [2]를 만나면서 자바스크립트로 바뀌기 때문에 j쿼리 문법인 attr prop문 작동하지 않고 getAttribute를 써야한다.
+//만약 j쿼리르 다시 쓰고 싶을 때는 $()로 다시 묶고 attr이나 prop를 쓰면 가능하다.
+//$($(this).find("span")[2]).prop("class") 는 
+//$(this).find("span"[2].getAttribute("class"))같다
 $(document).on('click','.busTd',function(){
-	let shock = $(this).getElementsByClassName(grade).text();
-	switch($(this).grade){
+	let shock = $(this).find(".grade").text();
+	let test= $($(this).find("class")[2]).attr("class");
+	switch(shock){
 		case "고속":
-			window.location.href="/project/traffic/seatExpress?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').val()+"&seat="+$('#re_seat').val()+"&delay="+$('#delay').val();
+			window.location.href="/project/traffic/seatExpress?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').text()+"&fare="+$(this).find(".fare").text()+"&ex="+$($(this).find("span")[2]).prop("class")+"&delay="+$('.delay').text();
 			break;
 		case "우등":
-			window.location.href="/project/traffic/seatWoodung";
+			window.location.href="/project/traffic/seatWoodung?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').text()+"&fare="+$(this).find(".fare").text()+"&ex="+$($(this).find("span")[2]).prop("class")+"&delay="+$('.delay').text();
 			break;
-		case "프리미엄우등":
-			window.location.href="/project/traffic/seatPremium";
+		case "프리미엄":
+			window.location.href="/project/traffic/seatPremium?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').text()+"&fare="+$(this).find(".fare").text()+"&ex="+$($(this).find("span")[2]).attr("class")+"&delay="+$('.delay').text();
 			break;
 		case "심야우등":
-			window.location.href="/project/traffic/seatWoodung";
+			window.location.href="/project/traffic/seatWoodung?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').text()+"&fare="+$(this).find(".fare").text()+"&ex="+$($(this).find("span")[2]).attr("class")+"&delay="+$('.delay').text();
 			break;
-		case "심야<br>프리미엄<br>우등":
-			window.location.href="/project/traffic/seatPremium";
+		case "심야프리미엄우등":
+			window.location.href="/project/traffic/seatPremium?st="+$('#sPlace').text()+"&sv="+$('#sPlace_id').val()+"&at="+$('#ePlace').text()+"&av="+$('#ePlace_id').val()+"&rd="+$('#recive_day').text()+"&fare="+$(this).find(".fare").text()+"&ex="+$($(this).find("span")[2]).attr("class")+"&delay="+$('.delay').text();
 			break;
-	// 	
-	
 	}
-
-})
+	let text;
+});
 </script>
 </html>

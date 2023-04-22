@@ -323,7 +323,7 @@ swiper-slide img {
 	width:35px; height:35px;
 	z-index: 10;
 	position:absolute;
-	top:30px; left:245px;
+	top:30px; left:47.5%;
 	background-color:#fff;
  }
  #tm_changeIcon{
@@ -355,7 +355,7 @@ swiper-slide img {
 }
 .tm_detailBox h4{font-size:20px; margin-bottom:5px;}
 .tm_detail{
-	width:100%; height:407px;
+	width:100%; height:385px;
 	box-sizing: border-box; padding: 8px 0px 5px 13px;
 	border:1px solid gray;
 	display:flex;
@@ -365,7 +365,7 @@ swiper-slide img {
 	font-size: 20px;
 }
 .tm_cityBox li{
-	
+	height:27px; font-size:17px;
 	box-sizing:border-box; padding-bottom:5px;margin-bottom: 10px; 
 	background-color: #ddd; border-radius: 2px;
 	cursor: pointer;
@@ -542,7 +542,7 @@ swiper-slide img {
     <hr>
     <div class="tm_container">
     	<div class="tm_placeBox">
-    		<div class="tm_place ps" id="tm_place_hidden">
+    		<div class="tm_place ps" id="tm_place_start">
     			<label>
 	    			<span>출발지</span>
 	    			<span class="tm_place_text" id="tm_start"></span>
@@ -552,7 +552,7 @@ swiper-slide img {
     		 <div class="tm_change">
     		 	<img alt="" src="/project/resources/img/change.png" id="tm_changeIcon">
     		 </div>
-    		<div class="tm_place pa" >
+    		<div class="tm_place pa" id="tm_place_arrive">
     			<label>
 	    			<span>도착지</span>
 	    			<span class="tm_place_text " id="tm_arrive"></span>
@@ -607,7 +607,14 @@ swiper-slide img {
 
 $('#bu_start_modal').click(function(){
 	$('#tpm').css("display","block"); 
-	
+	$('.ps').removeClass("disabled");
+	$('.pa').addClass("disabled");
+	$('#tm_arrive').text("");
+	$('#tm_start').text("");
+	$('.tm_cityBox').css("display","block");
+	$('.tm_placeDetail').css("width","79%");
+	$('#tm_place_arrive').css("box-shadow","none");
+	$('.ps').css("box-shadow","1px 1px 7px teal");
 	$('#seoul').click();
 	
 })
@@ -712,7 +719,9 @@ function placeSearch(i){
 			}
 
 			$('.tm_placeDetail li').click(function(){
-				resultSearchPlace($(this));
+				$('.pa').removeClass("disabled");
+				$('.ps').addClass("disabled");
+					resultSearchPlace($(this));
 				
 			});
 		
@@ -729,8 +738,12 @@ function resultSearchPlace(obj){
 	$('#tm_start_id').val(obj.val());
 	
 	$('.ps').addClass("disabled");
-	$('#tm_place_hidden').css("box-shadow","none");
+	$('#tm_place_start').css("box-shadow","none");
 	$('.pa').css("box-shadow","1px 1px 7px teal");
+	//1. 지역선택을 감춘다	
+	$('.tm_cityBox').css("display","none");
+	$('.tm_placeDetail').css("width","100%");
+	
 	
 	$('.tm_placeDetail').children().remove();
 	//this의 val값으로 re_JSON에서 동일한 stationID를 찾는다.
@@ -742,6 +755,8 @@ function resultSearchPlace(obj){
 			break;
 		}
 	}
+	if('.tm_placeDetail li').text() == "")
+		alert("도착정보가 없습니다.");
 	$('.tm_placeDetail li').click(function(){
 		if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
 			$('#tm_arrive').text($(this).text());
@@ -759,11 +774,14 @@ function resultSearchPlace(obj){
 
 	//re_JSON=[];
 }
+
 // 물어보기
 $('.corse').click(function(){
-	var corseCheck = $(this).find($('.corse:radio'));
 	
-	if(corseCheck.attr("checked") == "checked"){
+// 	var corseCheck = $(this).find($('radio'));
+	//find(".corse:radio") 하위에 있는 .couse의 radio를 찾는 뜻
+	//find 자체가 하위에 것을 찾는 함수 -> 그렇기에 find가 아닌 attr을 써줘야한다.
+	if($(this).attr("id") == "double"){
 
 		$('.arriveBox').css("display","block");
 	}else{
@@ -782,7 +800,8 @@ $('#searchComplete').click(function(){
       buttonImage: "/project/resources/img/calender.png",
       buttonImageOnly: true,
       buttonText: "Select date",
-      dateFormat: "yy-mm-dd"
+      dateFormat: "yy-mm-dd",
+      minDate: new Date()
     });
 </script>
 </html>
