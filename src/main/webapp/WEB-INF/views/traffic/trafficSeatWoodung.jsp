@@ -599,7 +599,7 @@ window.onload= function(){
 	//예약된 좌석 비활성화시키기
 };
 
-        
+//좌석 선택
 $('.seatBox').click(function(){
   var SetInCheck = $(this).find($('[name="seatIn"]:checkbox'));
   if(SetInCheck.attr("checked") == "checked"){
@@ -635,6 +635,7 @@ $('.seatBox').click(function(){
   }
 });
 
+//해당 분류에 따른 금액표현
 $('.refresh-icon').click(function(){
   location.reload();
 });
@@ -673,8 +674,9 @@ $('.minus').click(function(){
   $($(this).parent().children()[3]).text(__amt.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + "원");//3자릿수 콤마
   
 });
-  //버튼을 누르면 일반 0명이 1명으로 카운트가 되고 클릭숫자가 더해지면 일반 n명도 숫자가 더해진다.
 
+  //버튼을 누르면 일반 0명이 1명으로 카운트가 되고 클릭숫자가 더해지면 일반 n명도 숫자가 더해진다.
+//완료버튼
 $('#complete').click(function(){
   var sum = 0;
   $('[name="useCount"]').each(function(_index,_ele){//(_index,_ele)임의변수 _index 반복횟수자리 _ele 값자리
