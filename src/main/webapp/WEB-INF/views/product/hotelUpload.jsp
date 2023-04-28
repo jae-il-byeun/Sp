@@ -486,18 +486,34 @@ width:100%; height:35%;
 			
 				<div class="product_reviewBox cp">
 					<h2>리뷰</h2>
-					<p>
-						<span>별점</span><img alt="" src="/project/resources/img/star.png" class="product_starPoint">
-						<span>4.5</span>
-						<span>/평점</span>
-					</p>
-					<textarea rows="" cols="" class="product_reviewText">
+					<table>
+					<tr>
+						<td>
+							<span>별점</span><img alt="" src="/project/resources/img/star.png" class="product_starPoint">
+							<span>4.5</span>
+							<span>/평점</span>
+						</td>
+						<td>
 						
-					</textarea>
-					<button class="product_reviewComplete">상품등록</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="" cols="" class="product_reviewText">
+								
+							</textarea>						
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button type="button" class="product_reviewComplete">댓글등록</button>
+						</td>
+					</tr>
+					</table>
 				</div>
 			</div>
 		</div>
+		<button class="product_complete">상품등록</button> 
 	  </form>
 	</div>
 </div>
