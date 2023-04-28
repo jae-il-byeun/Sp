@@ -28,8 +28,9 @@ body{font-family: 'GyeonggiTitleM';}
 .product_titleBox{
 	width:100%; height:30%;  
 	border-bottom:1px solid #ddd; border-top: none; border-radius: 5px;
-	box-shadow: 1px 1px 5px gray; font-size: 20px;
+	box-shadow: 1px 1px 5px gray; font-size: 20px; 
 	box-sizing:border-box; padding: 10px 10px 5px 15px; 
+
 }
 #pt_title{margin:5px 0px 30px 10px;}
 
@@ -41,6 +42,12 @@ width:100%; height:35%;
 	width:8%; height:10%; 
 	border: 1px solid #ddd; border-radius: 7px;
 	box-sizing: border-box; margin-right:10px; 
+}
+.search_place{
+	cursor:pointer;
+}
+.place_hidden{
+	display:none;
 }
 .product_search_subPlace{
 	width:15%; height: 5%; 
@@ -58,6 +65,8 @@ width:100%; height:35%;
 .product_contentContainer{
 	width:100%; height: 100%;
 	box-sizing: border-box; margin-top: 10px;
+	background-color: rgba(226, 225, 225, 0.452);
+	box-sizing:border-box; padding: 0px 100px;
 }
 .product_content{
 	width:100%; height:100%;
@@ -70,17 +79,21 @@ width:100%; height:35%;
 }
 .product_introImg{
 	width:35%; height:25%;
-	z-index: -1;
+	z-index: 1;
 	box-sizing: border-box;
 	position: relative;
 }
-
+#product_img{
+	display: none;
+}
 
 .product_introTitle{
 	width:55%; height:25%;
-	margin-left: 50px;
+	box-sizing: border-box; margin-top:10px; margin-left: 50px;
 	font-size: 20px;
 	border-bottom: 2px solid #ddd; border-right: 2px solid #ddd;
+	background-color: #fff;
+	
 }
 .product_introTitle h1{
 	width:90%;
@@ -199,12 +212,16 @@ width:100%; height:35%;
 			<h1 id="pt_title">호텔</h1>
 			<div class="product_placeBox">
 				<ul class="product_search_mainPlace">
-					<li>
-						<span>서울</span>
-					</li>
-					<li>
+					<li class="search_place search_main"> <span>서울</span> </li>
+					<li class="search_place place_hidden"> <span>부산</span> </li>
+					<li class="search_place place_hidden"> <span>제주</span> </li>
+					<li class="search_place place_hidden"> <span>강원</span> </li>
+					<li class="search_place place_hidden"> <span>경기</span> </li>
+					<li class="search_place place_hidden"> <span>인천</span> </li>
+					<li class="search_place place_hidden"> <span>경상</span> </li>
+					<li class="search_place place_hidden"> <span>전라</span> </li>
+					<li class="search_place place_hidden"> <span>충성</span> </li>
 					
-				</li>
 				</ul>
 				<ul class="product_search_subPlace">
 					<li>
@@ -218,140 +235,144 @@ width:100%; height:35%;
 				</div>
 			</div>
 		</div>
-		
-		<div class="product_contentContainer">
-			<div class="product_content">
-				<div class="product_introMainBox">
-					<div class="product_introImg">
-							 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-							    <div class="swiper-wrapper">
-							      <div class="swiper-slide">
-							        <img src="/project/resources/img/ship.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-							      </div>
-							    </div>
-							    <div class="swiper-button-next"></div>
-							    <div class="swiper-button-prev"></div>
-							  </div>
-							  <div thumbsSlider="" class="swiper mySwiper">
-							    <div class="swiper-wrapper">
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-							      </div>
-							    </div>
-							  </div>
-					</div>
-					<div class="product_introTitle">
-						<h1 class="product_title">파라다이스 시티</h1>
-						<span class="product_likeBox">
-							<img src="/project/resources/img/nomal_like.png" class="product_likeimg">
-						</span>
-						<div class="product_detailInfo">
-							<span>별점</span><img alt="" src="/project/resources/img/star.png"  class="product_starPoint">
-							<span class="avScore">4.5</span>
-							<span>/평점</span>
-							<span>(<span class="reviewNum">84</span>)></span>
+		<form action="">
+			<div class="product_contentContainer">
+				<div class="product_content">
+					<div class="product_introMainBox">
+						<div class="product_introImg">
+								 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+								    <div class="swiper-wrapper">
+								      <div class="swiper-slide ss_first">
+									      	<label for="product_img">파일선택</label>
+									      	<input type="file" id="product_img" multiple>
+								      </div>
+								      <div class="swiper-slide">
+											<span>+</span>
+											<input type="file" id="product_img">
+								      </div>
+								      <div class="swiper-slide">
+								       		<input type="file" id="product_img">
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+								      </div>
+								    </div>
+								    <div class="swiper-button-next"></div>
+								    <div class="swiper-button-prev"></div>
+								  </div>
+								  <div thumbsSlider="" class="swiper mySwiper">
+								    <div class="swiper-wrapper">
+								      <div class="swiper-slide">
+								      	 <input type="file" id="product_img">
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+								      </div>
+								      <div class="swiper-slide">
+								        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+								      </div>
+								    </div>
+								  </div>
 						</div>
-						<span>10000원</span> 
+						<div class="product_introTitle">
+							<h1 class="product_title">파라다이스 시티</h1>
+							<span class="product_likeBox">
+								<img src="/project/resources/img/nomal_like.png" class="product_likeimg">
+							</span>
+							<div class="product_detailInfo">
+								<span>별점</span><img alt="" src="/project/resources/img/star.png"  class="product_starPoint">
+								<span class="avScore">4.5</span>
+								<span>/평점</span>
+								<span>(<span class="reviewNum">84</span>)></span>
+							</div>
+							<span>10000원</span> 
+						</div>
 					</div>
-				</div>
-
-				<div class="product_introDetail cp">
-					<h5 >상세셜명</h5>
-					<textarea rows="" cols="" class="product_detailTA">
-						
-					</textarea>
-				</div>
-
-				<div class="product_serviceBox cp">
-					<figure class="product_service">
-						<h5>편의시설</h5>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					</figure>
-					<div class="product_location cp">
-						<h5>숙소 위치</h5>
-						<img alt="" src="/project/resources/img/ex_map.png">
+	
+					<div class="product_introDetail cp">
+						<h5 >상세셜명</h5>
+						<textarea rows="" cols="" class="product_detailTA">
+							
+						</textarea>
 					</div>
-				</div>
-			
-				<div class="product_reviewBox cp">
-					<h2>리뷰</h2>
-					<p>
-						<span>별점</span><img alt="" src="" class="product_starPoint">
-						<span>4.5</span>
-						<span>/평점</span>
-					</p>
-					<textarea rows="" cols="" class="product_reviewText">
-						
-					</textarea>
-					<button class="product_reviewComplete">작성완료</button>
+	
+					<div class="product_serviceBox cp">
+						<figure class="product_service">
+							<h5>편의시설</h5>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</figure>
+						<div class="product_location cp">
+							<h5>숙소 위치</h5>
+							<img alt="" src="/project/resources/img/ex_map.png">
+						</div>
+					</div>
+				
+					<div class="product_reviewBox cp">
+						<h2>리뷰</h2>
+						<p>
+							<span>별점</span><img alt="" src="" class="product_starPoint">
+							<span>4.5</span>
+							<span>/평점</span>
+						</p>
+						<textarea rows="" cols="" class="product_reviewText">
+							
+						</textarea>
+						<button class="product_reviewComplete">작성완료</button>
+					</div>
+					
 				</div>
 				
+				
 			</div>
-			
-			
-		</div>
+		</form>
 	</div>
 	
 </div>
+
 </body>
   <script>
     var swiper = new Swiper(".mySwiper", {
@@ -370,5 +391,15 @@ width:100%; height:35%;
         swiper: swiper,
       },
     });
+  </script>
+  <script >
+	$(".search_place").click(function(){
+		if($(".place_hidden").css("display","block")){
+			
+			$(".place_hidden").css("display","none");
+		}else{
+			$(".place_hidden").css("display","block");
+		}
+	}) 
   </script>
 </html>
