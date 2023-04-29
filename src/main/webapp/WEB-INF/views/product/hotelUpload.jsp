@@ -143,7 +143,7 @@ width:100%; height:35%;
 	box-sizing:border-box; padding-left:5px;
 }
 .product_serviceBox{
-	width:100%; height:230px;
+	width:100%; height:260px;
 	display: flex; 
 
 }
@@ -153,10 +153,10 @@ width:100%; height:35%;
 }
 .cp{
 	box-sizing:border-box; padding:5px 10px;
-	border-bottom: 1px solid #ddd;
+
 }
 .product_location{
-	width:45%; height: 230px;
+	width:45%; height: 260px;
 	position:relative;
 }
 .product_location img{
@@ -190,6 +190,30 @@ width:100%; height:35%;
 }
 .product_room_text{
 	width:600px; height:150px;
+}
+.product_reviewPoint{
+	display: flex;
+}
+.product_reviewAv{
+	text-align: right;
+	display:block;
+}
+.product_reviewcontent{
+	display:flex;
+}
+.product_reviewText{
+	width:100%;
+}
+.product_reviewComplete{
+	width:70px;
+}
+
+.product_Complete{
+ 	width:100%; height:70px;
+ 	font-size:40px;
+ 	background-color: teal; box-shadow: 2px 2px 5px teal;
+ 	border: 1px solid teal; border-radius: 5px;
+ 	color: #fff;
 }
 
 
@@ -406,10 +430,11 @@ width:100%; height:35%;
 								<span>객실가격 : </span> <input type="text">	
 							</td>
 							<td class="product_room_intro">
-							
 								<span>객실이용안내 : </span> <input type="text" class="product_room_text">
 							</td>
+
 						</tr>
+
 						<tr class="product_room_tr">
 							<td>
 								<input type="file" class="product_room_img pf">		
@@ -482,20 +507,41 @@ width:100%; height:35%;
 						<h2>숙소 위치</h2>
 						<img alt="" src="/project/resources/img/ex_map.png">
 					</div>
+				
 				</div>
-			
+				<hr>
 				<div class="product_reviewBox cp">
 					<h2>리뷰</h2>
+					<div class="product_reviewPoint">
 					<p>
 						<span>별점</span><img alt="" src="/project/resources/img/star.png" class="product_starPoint">
 						<span>4.5</span>
 						<span>/평점</span>
 					</p>
-					<textarea rows="" cols="" class="product_reviewText">
-						
-					</textarea>
-					<button class="product_reviewComplete">상품등록</button>
+					<div>
+						<p  class="product_reviewAv">
+							<span>4.5</span>
+							<span>/평점</span>
+						</p>
+						<p class="product_reviewAv">
+							<span>4.5</span>
+							<span>/평점</span>
+						</p>
+						<p class="product_reviewAv">
+							<span>4.5</span>
+							<span>/평점</span>
+						</p>
+					</div>
+					
+					</div>
+					<div class="product_reviewcontent">
+						<textarea rows="" cols="" class="product_reviewText">
+							
+						</textarea>
+						<button type="button" class="product_reviewComplete">댓글등록</button>
+					</div>
 				</div>
+				<button class="product_Complete">상품등록</button>
 			</div>
 		</div>
 	  </form>
