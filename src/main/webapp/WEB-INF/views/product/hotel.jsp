@@ -119,7 +119,6 @@ width:100%; height:35%;
 	margin: 30px 0px 0px 100px; 
 	float: right; text-align:right; color: #000;
 	font-size: 30px; font-decoration: none; 
-	
 }
 
 

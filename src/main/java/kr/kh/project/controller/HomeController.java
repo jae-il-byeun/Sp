@@ -99,51 +99,7 @@ public class HomeController {
 		}
 
 	}
-	@ResponseBody//리퀘스트가 서버,리스폰스= 현재페이지
-	@RequestMapping(value="/login/check", method=RequestMethod.POST)
-	public Map<String,Object> loginCheck(HttpSession lgCheck){
-		HashMap<String, Object> keepUser = new HashMap<String,Object>();
-		
-		MemberVO user = (MemberVO)lgCheck.getAttribute("user");
-		BusinessVO biLogin = (BusinessVO)lgCheck.getAttribute("seller");
-		if(user == null && biLogin == null) {
-			keepUser.put("lgCheck", false);
-		}
-		else if(user != null && biLogin == null){
-			keepUser.put("lgCheck", user);
-			
-		}else if(user == null && biLogin != null){
-			keepUser.put("lgCheck", biLogin);
-		}
-		return keepUser;
-		//사업자는 사업자VO에 객체를 만들어서 
-		// 사업자가 모두 다 널이면 펄스 하나라도 았으면 트루 
-		// 그안에 이프절로 멤버가 널이 아니면 멤버로 데이터를 보내고 사업자가 널이 아니면 사업자를 보내서 처리한다.
-		
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/logout", method=RequestMethod.POST)
-	public Map<String, Object> logout(ModelAndView mv, HttpSession session, HttpServletResponse response) throws IOException {
-		HashMap<String,Object> logout = new HashMap<String,Object>();
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		BusinessVO seller = (BusinessVO)session.getAttribute("seller");
-		// 객체로 받기 때문에 자동 형변환이 안되어서 MemberVO로 지정해줘야함
-		if(user == null && seller == null){
-			logout.put("result", false);
-				
-		}else if (user!= null){
-			logout.put("result", true);
-			session.removeAttribute("user");
-		}else if(seller !=null) {
-			logout.put("result", true);
-			session.removeAttribute("seller");
-		}
-		//세션에 있는 회원정보를 삭제
-		
-		mv.setViewName("/main/home");
-		return logout;
-	}
+	
 	
 	
 	
@@ -206,5 +162,61 @@ public class HomeController {
 		}
 	}
 
-
+	@ResponseBody//리퀘스트가 서버,리스폰스= 현재페이지
+	@RequestMapping(value="/login/check", method=RequestMethod.POST)
+	public Map<String,Object> loginCheck(HttpSession lgCheck){
+		HashMap<String, Object> keepUser = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)lgCheck.getAttribute("user");
+		BusinessVO biLogin = (BusinessVO)lgCheck.getAttribute("seller");
+		if(user == null && biLogin == null) {
+			keepUser.put("lgCheck", false);
+		}
+		else if(user != null && biLogin == null){
+			keepUser.put("lgCheck", user);
+			
+		}else if(user == null && biLogin != null){
+			keepUser.put("lgCheck", biLogin);
+		}
+		return keepUser;
+		//사업자는 사업자VO에 객체를 만들어서 
+		// 사업자가 모두 다 널이면 펄스 하나라도 았으면 트루 
+		// 그안에 이프절로 멤버가 널이 아니면 멤버로 데이터를 보내고 사업자가 널이 아니면 사업자를 보내서 처리한다.
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/logout", method=RequestMethod.POST)
+	public Map<String, Object> logout(ModelAndView mv, HttpSession session, HttpServletResponse response) throws IOException {
+		HashMap<String,Object> logout = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller = (BusinessVO)session.getAttribute("seller");
+		// 객체로 받기 때문에 자동 형변환이 안되어서 MemberVO로 지정해줘야함
+		if(user == null && seller == null){
+			logout.put("result", false);
+			
+		}else if (user!= null){
+			logout.put("result", true);
+			session.removeAttribute("user");
+		}else if(seller !=null) {
+			logout.put("result", true);
+			session.removeAttribute("seller");
+		}
+		//세션에 있는 회원정보를 삭제
+		
+		mv.setViewName("/main/home");
+		return logout;
+	}
+	
+	@RequestMapping(value = "/mypage/mypageMain", method = RequestMethod.GET)
+	public ModelAndView myPageMain(ModelAndView mv) {
+		mv.setViewName("/mypage/myPage");
+		return mv;
+	}	
+	@RequestMapping(value = "/mypage/basket", method = RequestMethod.GET)
+	public ModelAndView myPageBasket(ModelAndView mv) {
+		mv.setViewName("/mypage/basket");
+		return mv;
+	}
+	
 }
