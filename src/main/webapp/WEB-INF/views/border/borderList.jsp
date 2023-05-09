@@ -4,10 +4,6 @@
 <%@ page session="false" %>
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-  <!-- Link Swiper's CSS -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-<!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
 
     
 <style>
@@ -80,6 +76,7 @@ body{ font-family: 'GyeonggiTitleM';}
 <body>
 <div class="main_container">
 	<div class= "main_innerContainer">
+	
 		<div class="border_titleBox">
 			<h2>게시판</h2>
 		</div>
@@ -105,7 +102,7 @@ body{ font-family: 'GyeonggiTitleM';}
 						</tr>
 						<tr>
 							<th>번호</th>
-							<th>게시판</th>
+							<th>분류</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>추천/비추천</th>
@@ -114,23 +111,55 @@ body{ font-family: 'GyeonggiTitleM';}
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="border_List">
-							<td id="border_number"></td>
-							<td id="border_type"></td>
-							<td id="border_name"></td>
-							<td id="border_writer"></td>
-							<td id="border_good_bed"></td>
-							<td id="border_writeDay"></td>
-							<td id="border_click"></td>
-						</tr>
+						<c:forEach items="${board_list}" var="board" varStatus="bo">
+							<tr class="border_List">
+								<td id="border_number">${board.bo_num}</td>
+								<td id="border_type">${board.bo_type}</td>
+								<td id="border_title">${board.bo_title}</td>
+								<td id="border_writer">${board.bo_writer}</td>
+								<td id="border_up_down">${board.bo_up}/${board.bo_down}</td>
+								<td id="border_writeDay">${board.bo_record_date}</td>
+								<td id="border_click">${board.bo_views}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
-
+				<ul class="pagination">
+					<c:if test="${page.prev}">
+						<li class="page-item"><a class="page-link" href="<c:url value='Board/list?page=${page.startPage -1 }@search=${page.cri.search}&type=${page.cri.type}'></c:url>">이전</a></li>
+					</c:if>
+					<c:forEach begin="${page.startPage}" end="${page.endPage}" var="i">
+						<li class="page-item<c:if test="${page.cri.page == i }">active</c:if>">
+							<a class="page-link" href="<c:url value='/Board/list?page=${i}&search=${page.cri.search}&type= ${page.cri.type}'></c:url>">다음</a>
+						</li>
+					</c:forEach>
+					<c:if test="${page.next}">
+						<li class="page-item">
+							<a class="page-link" href="<c:url value='/Board/list?page=${page.endPage+1}&search=${page.cri.search}&type=${page.cri.type}'></c:url>">다음</a>
+						</li>
+					</c:if>
+				</ul>
+				<form class="list_search" action="<c:url value='/Board/list'></c:url>">
+					<select class="list_type_name" name="type">
+						<option value="0"></option>
+						<c:forEach items="${typeList}" var="type">
+							<option value="${type.bt_num}" <c:if test="${page.cri.type == type.bt_num}">selected</c:if>>${type.bt_name}</option>
+						</c:forEach>
+					</select>
+					<input type="text" class="list_search_text" placeholder="Search" name="search" value="${page.cri.search}">
+					<div class="search_button_box">
+						<button class="btn_search" type="submit">검색</button>
+					</div>
+				</form>
+				<c:if test="${user != null }">
+					<a href="<c:url value="/Board/insert"></c:url>">
+						<button class="btn_write">글쓰기</button>
+					</a>
+				</c:if>
 			</div>
-			
 		</div>
+		
 	</div>
-	
 </div>
 </body>
 <script>

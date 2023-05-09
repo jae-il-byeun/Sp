@@ -189,7 +189,7 @@ a{text-decoration: none; margin-left: 20px;}
 			</li>
 			
 			<li  class="h_link" id="h_link_board">
-				<a href="#" >
+				<a href="<c:url value="/board/list"></c:url>" >
 					<img alt="" src="/project/resources/img/board.png" class="h_linkIcon">
 					<span class="h_link_textboard">게시판</span> 
 				</a>

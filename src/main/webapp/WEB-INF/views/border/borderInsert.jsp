@@ -95,38 +95,46 @@ body{ font-family: 'GyeonggiTitleM';}
 					<a>개인정보수정</a>
 				</li>
 			</ul>
-			<div id="mypage_contentBox">
-				<table id="coupon_Listbox">
-					<tr id="coupon_HeadText">
-						<th>
-							<h2>쿠폰보유현황</h2>
-						</th>
-					</tr>
-					<tr id="coupon_ListHead">
-						<td class="coupon_ListName">
-							<span>쿠폰명</span>
-						</td>
-						<td class="coupon_ListW">
-							<span>쿠폰기간</span>
-						</td>
-						<td class="coupon_ListPersent">
-							<span>할인율</span>
-						</td>
-					</tr>
-					<tr class="coupon_List">
-						
-						<td id="coupon_name">
-							<span>생일축하할인쿠폰</span>
-						</td>
-						<td id="coupon_w">
-							<span>12.03.12 ~ 12.12.12</span>
-						</td>
-						<td id="coupon_persent">
-							<span>10%</span>
-						</td>
-					</tr>
-				</table>
-
+			<div id="board_insertBox">
+				<form action="">
+					<table id="board_insert">
+						<tr>
+							<th>
+								<h2>글쓰기</h2>
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<span>제목 :</span>
+							</td>
+							<td>
+								<input type="text" class="board_title_text">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>내용 :</span>
+							</td>
+							<td>
+								<div id="editor" class="bo_content"></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>첨부파일 : </span>
+							</td>
+							<td >
+								<label> + </label>
+								<input type ="file" class="board_file" name="files">
+								<input type ="file" class="board_file" name="files">
+								<input type ="file" class="board_file" name="files">
+								<input type ="file" class="board_file" name="files">	
+								<input type ="file" class="board_file" name="files">		
+							</td>
+							
+						</tr>
+					</table>
+				</form>
 			</div>
 			
 		</div>
@@ -135,6 +143,18 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-
+// 	내용 에디터
+var editor;
+	
+ClassicEditor
+	.create( document.querySelector( '#editor' ), {
+    	language: 'ko'
+    })
+    .then( newEditor => {
+        editor = newEditor;
+      })
+    .catch( error => {
+        console.error( error );
+    });
 </script>
 </html>

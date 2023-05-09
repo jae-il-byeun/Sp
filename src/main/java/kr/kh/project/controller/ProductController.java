@@ -1,6 +1,6 @@
 package kr.kh.project.controller;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.kh.project.vo.BusinessVO;
+import kr.kh.project.vo.HotelRoomsVO;
 
 @Controller
 public class ProductController {
@@ -43,15 +43,15 @@ public class ProductController {
 		return mv;
 	}
 
-	@RequestMapping(value="/product/hotelUpload2",method=RequestMethod.GET)
+	@RequestMapping(value="/product/hotelUpload",method=RequestMethod.GET)
     public ModelAndView hotelUpload2(ModelAndView mv) {
-		mv.setViewName("/product/hotelUpload2");
+		mv.setViewName("/product/hotelUpload");
 		return mv;
     }
 	
 	@ResponseBody
 	@RequestMapping(value="/product/hotelUploadData",method= RequestMethod.POST)
-	public boolean businessEmail(@RequestBody Map<String, Object> params) {		
+	public boolean HotelUploadData(@RequestBody Map<String, Object> params) {		
 		String product_title = (String)params.get("product_title");
 		String product_service_type = (String)params.get("product_service_type");
 		String product_detail = (String)params.get("product_detail");

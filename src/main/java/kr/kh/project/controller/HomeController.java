@@ -168,15 +168,15 @@ public class HomeController {
 		HashMap<String, Object> keepUser = new HashMap<String,Object>();
 		
 		MemberVO user = (MemberVO)lgCheck.getAttribute("user");
-		BusinessVO biLogin = (BusinessVO)lgCheck.getAttribute("seller");
-		if(user == null && biLogin == null) {
+		BusinessVO seller = (BusinessVO)lgCheck.getAttribute("seller");
+		if(user == null && seller == null) {
 			keepUser.put("lgCheck", false);
 		}
-		else if(user != null && biLogin == null){
+		else if(user != null && seller == null){
 			keepUser.put("lgCheck", user);
 			
-		}else if(user == null && biLogin != null){
-			keepUser.put("lgCheck", biLogin);
+		}else if(user == null && seller != null){
+			keepUser.put("lgCheck", seller);
 		}
 		return keepUser;
 		//사업자는 사업자VO에 객체를 만들어서 
