@@ -208,9 +208,9 @@ public class HomeController {
 		return logout;
 	}
 	
-	@RequestMapping(value = "/mypage/mypageMain", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
 	public ModelAndView myPageMain(ModelAndView mv) {
-		mv.setViewName("/mypage/myPage");
+		mv.setViewName("/mypage/mypage");
 		return mv;
 	}	
 	@RequestMapping(value = "/mypage/basket", method = RequestMethod.GET)

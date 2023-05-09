@@ -46,6 +46,7 @@ body {
 	box-sizing: border-box;
 	margin-top: 130px;
 }
+
 /* 상품소개 제목 */
 .product_titleBox {
 	width: 100%;
@@ -59,60 +60,6 @@ body {
 	padding: 10px 10px 5px 15px;
 }
 
-#pt_title {
-	margin: 5px 0px 30px 10px;
-	font-size: 50px;
-	border-radius: 10px;
-	border-color: #ddd;
-}
-
-.product_placeBox {
-	width: 100%;
-	height: 35%;
-	box-sizing: border-box;
-	padding: 0px 10px 5px 15px;
-	display: flex;
-	text-align: center;
-}
-
-.product_search_mainPlace {
-	width: 8%;
-	height: 10%;
-	border: 1px solid #ddd;
-	border-radius: 7px;
-	box-sizing: border-box;
-	margin-right: 10px;
-}
-
-.search_place {
-	cursor: pointer;
-}
-
-.place_hidden {
-	display: none;
-}
-
-.product_search_subPlace {
-	width: 15%;
-	height: 5%;
-	border: 1px solid #ddd;
-	border-radius: 7px;
-	box-sizing: border-box;
-	margin-right: 10px;
-}
-
-.product_search_calender {
-	margin-left: 10px;
-}
-
-.dayCheck {
-	width: 40%;
-	height: 34px;
-	border: 1px solid #ddd;
-	border-radius: 7px;
-	font-size: 15px;
-}
-
 /* 상품소개 메인속성 */
 .product_contentContainer {
 	width: 100%;
@@ -120,199 +67,59 @@ body {
 	box-sizing: border-box;
 	padding: 0px 100px;
 	background-color: rgba(226, 225, 225, 0.452);
+	margin-top: 10px;
 }
 
 .product_content {
 	width: 100%;
 	height: 100%;
 }
-
-.product_introMainBox {
-	width: 100%;
-	height: 30%;
-	display: flex;
+/* 상품명 */
+.product_ex_title{
+	vertical-align: middle;
 }
-
-.product_introImg {
-	width: 45%;
-	height: 25%;
-	z-index: 1;
-	box-sizing: border-box;
-	margin-top: 10px;
-	position: relative;
-}
-
-.product_room_img {
-	width: 200px;
-	height: 150px;
-}
-
-.pf {
-	border-radius: 7px;
-	border: 1px solid #ddd;
-}
-
-#product_img {
-	display: none;
-}
-
-#product_img_text {
-	font-size: 40px;
-}
-
-#product_subimg {
-	font-size: 30px;
-}
-
-#subAddress {
-	box-sizing: border-box;
-	padding: 10px 0px 0px 10px;
-}
-
-.product_introTitle {
-	width: 55%;
-	height: 25%;
-	box-sizing: border-box;
-	margin-top: 10px;
-	margin-left: 50px;
-	font-size: 20px;
-	border-bottom: 2px solid #ddd;
-	border-right: 2px solid #ddd;
-	background-color: #fff;
-}
-
-.product_introTitle h1 {
-	width: 90%;
-	font-size: 50px;
-	margin: 10px 0px 15px 20px;
-}
-
-.product_likeBox {
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin-right: 15px;
-}
-
-.product_likeimg {
-	width: 100%;
-}
-
-.product_starPoint {
-	width: 20px;
-	height: 20px;
-}
-/* 상품 상세소개Box */
-.product_introDetail {
-	width: 100%;
-	height: 50%;
-	box-sizing: border-box;
-	margin-top: 10px;
-}
-
-.product_introDetail h2 {
-	font-size: 30px;
-}
-
-.product_detailTA {
-	width: 100%;
-	height: 200px;
-	border: 1px solid #ddd;
-	box-sizing: border-box;
+#txt_product_service_title{
+	height:50px;
+	font-size:25px;
 	padding-left: 5px;
+	border: 1px solid gray;
+	border-radius: 8px;
 }
+#image_upload{
 
-.product_serviceBox {
-	width: 100%;
-	height: 260px;
-	display: flex;
 }
-
-.product_service {
-	width: 50%;
-	height: 100%;
-	box-sizing: border-box;
-	padding-left: 10px;
+.product_room_img{
+	width: 200px;
+	box-shadow: 1px 1px 1px #ddd;
 }
-
-.cp {
-	box-sizing: border-box;
-	padding: 5px 10px;
-}
-
-.product_location {
-	width: 45%;
-	height: 260px;
-	position: relative;
-}
-
-.product_location img {
-	width: 100%;
-	height: 200px;
-}
-
-.product_detailInfo {
-	box-sizing: border-box;
-	padding-left: 20px;
-}
-
-.survice_type {
-	margin: 0px 5px 0px 5px;
-	font-size: 18px;
-}
-
-#product_service_title {
+.btn-upload{
 	font-size: 30px;
-	font-weight: normal;
-	position: relative;
-	top: 0px;
+	border: none;
 }
-
-.product_room_table {
-	border-collapse: separate;
-	border-spacing: 0 15px;
+.upload-box{
+	width:30%; height: 70px; 
+	border: 1px solid gray; border-radius: 5px;
+	box-shadow: 2px 3px 9px hsl(0, 0%, 47%); padding: 10px;
+	text-align:center;
 }
-
-.product_room {
-	width: 300px;
-	height: 150px;
-	border-radius: 6px;
-	text-align: center;
-	vertical-align: middle;
+.product_upload_group{
+	width:200px;
 }
-
-.product_room_intro {
-	display: block;
-	margin-left: 20px;
-	vertical-align: middle;
+#btn_product_room_add{
+	width:80%;	height:50px; 
+	margin-left: 110px; margin-top: 10px;
+	border:1px solid #fff;  border-radius: 7px;
+	font-size: 35px; text-align: center;
+	background-color: tan; color: #fff;
 }
-
-.product_room_text {
-	width: 600px;
-	height: 150px;
+.product_room_cancel{
+	width:100px; height: 50px;
+	float: right;
+	margin-left: 50px;
+	font-size: 30px;
+	background-color: darkred; color:#fff;
+	border: 1px solid #fff; border-radius: 7px;
 }
-
-.product_reviewPoint {
-	display: flex;
-}
-
-.product_reviewAv {
-	text-align: right;
-	display: block;
-}
-
-.product_reviewcontent {
-	display: flex;
-}
-
-.product_reviewText {
-	width: 100%;
-}
-
-.product_reviewComplete {
-	width: 70px;
-}
-
 .product_Complete {
 	width: 100%;
 	height: 70px;
@@ -324,67 +131,6 @@ body {
 	color: #fff;
 }
 
-}
-/*메인소개 이미지 슬라이드 */
-.swiper {
-	width: 100%;
-	height: 100%;
-}
-
-.swiper-slide {
-	text-align: center;
-	font-size: 18px;
-	background: #fff;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.swiper-slide img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 5px;
-}
-
-.swiper {
-	width: 100%;
-	height: 350px;
-}
-
-.swiper-slide {
-	background-size: cover;
-	background-position: center;
-}
-
-.mySwiper2 {
-	width: 100%;
-}
-
-.mySwiper {
-	height: 20%;
-	box-sizing: border-box;
-	padding: 10px 0;
-}
-
-.mySwiper .swiper-slide {
-	width: 25%;
-	height: 90px;
-	opacity: 0.4;
-}
-
-.mySwiper .swiper-slide-thumb-active {
-	opacity: 1;
-}
-
-.swiper-slide img {
-	display: block;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 5px;
-}
 
 /*추가*/
 .product_table {
@@ -409,7 +155,7 @@ body {
 </style>
 <head>
 <meta charset="UTF-8">
-<title>상품관리 - 호텔</title>
+<title>상품등록 - 호텔</title>
 </head>
 <body>
 	<input type="text" style="display: none;">
@@ -425,16 +171,16 @@ body {
 						<br>
 						<table class="product_table">
 							<colgroup>
-								<col width="30%">
+								<col width="15%">
 								<col width="*">
 							</colgroup>
 							<tr>
-								<td><h2>상품명</h2></td>
+								<td class="product_upload_group"><h2 class="product_ex_title">상품명</h2></td>
 								<td><input type="text" id="txt_product_service_title"
 									style="width: 90%;"></td>
 							</tr>
 							<tr>
-								<td><h2>편의시설</h2></td>
+								<td class="product_upload_group"><h2>편의시설</h2></td>
 								<td><input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service01"
 									value="01"><label for="chk_product_service01">24시간데스크</label>
@@ -570,14 +316,13 @@ body {
 								</td>
 							</tr>
 							<tr>
-								<td><h2>이미지</h2></td>
+								<td class="product_upload_group"><h2>이미지</h2></td>
 								<td>
-									<section id="ex9">
-										<div class="upload-box"
-											style="width: 300px; height: 80px; border: 1px solid gray; box-shadow: 2px 3px 9px hsl(0, 0%, 47%); padding: 10px;">
+									<section id="image_upload">
+										<div class="upload-box">
 											<input type="text" style="display: none;">
 											<button style="display: none;" onclick="return false;"></button>
-											<button class="btn-upload">파일선택</button>
+											<button class="btn-upload">파일선택 : +</button>
 											<input class="btn-file d-none" type="file" multiple>
 											<!-- <span id="testFileNm" style="font-size:20px; display:table-cell; vertical-align:middle;">
 				                    여기로 파일을 끌어 놓
@@ -587,14 +332,14 @@ body {
 								</td>
 							</tr>
 							<tr>
-								<td><h2>상세설명</h2></td>
+								<td class="product_upload_group"><h2>상세설명</h2></td>
 								<td><div id="editor"></div></td>
 							</tr>
 							<tr>
-								<td><h2>객실</h2></td>
+								<td class="product_upload_group"><h2>객실</h2></td>
 								<td>
-									<button id="btn_product_room_add" type="button">객실 추가</button>
 									<div id="div_product_room_list"></div>
+									<button id="btn_product_room_add" type="button">객실 추가</button>
 								</td>
 							</tr>
 						</table>
@@ -636,8 +381,13 @@ body {
 				<td class="product_room_intro">\
 					<span>객실가격 : </span> <input type="text" name="product_room_price">\
 				</td>\
+			</tr>\
+			<tr class="product_room_tr">\
 				<td class="product_room_intro">\
-					<span>객실이용안내 : </span> <textarea rows="5" cols="33" name="product_room_detail" style="padding: 5px 5px 5px 10px"></textarea>\
+					<span style="display: block;">객실이용안내 : </span> <textarea rows="5" cols="33" name="product_room_detail" style="padding: 5px 5px 5px 10px; width: 500px;"></textarea>\
+				</td>\
+				<td class="product_room_intro">\
+					<button type="button" class="product_room_cancel">취소</button>\
 				</td>\
 			</tr>\
 		</table>\
@@ -689,7 +439,7 @@ body {
 <script>
 	var fileList = []; //파일 정보를 담아 둘 배열
   
-	var sec9 = document.querySelector('#ex9');
+	var sec9 = document.querySelector('#image_upload');
 	var btnUpload = sec9.querySelector('.btn-upload');
 	var inputFile = sec9.querySelector('.btn-file');
 	var uploadBox = sec9.querySelector('.upload-box');

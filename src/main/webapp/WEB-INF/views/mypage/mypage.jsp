@@ -24,7 +24,7 @@ body{ font-family: 'GyeonggiTitleM';}
 /* ================================================================================================================ */
 
 .main_container{
-	width: 100%; height:1700px; box-sizing:border-box;	padding:2px 130px 2px 170px;
+	width: 100%; height:900px; box-sizing:border-box;	padding:2px 130px 2px 170px;
 }
 .main_innerContainer{
 	width: 100%; 
@@ -39,27 +39,50 @@ body{ font-family: 'GyeonggiTitleM';}
 .main_contentContainer{
 	width:100%; height:70%;
 	display:flex;
+	box-sizing: border-box; margin-top: 10px;
 }
 .mypage_listBox{
-	width:30%; height:200px;
+	width:15%; height:700px;
 	border: 1px solid #ddd; border-radius: 7px; box-shadow: 1px 1px 1px #ddd;
+}
+.mypage_list{
+	font-size: 25px; text-align: center;
+	cursor:pointer;
+}
+.mypage_list span{
+	vertical-align: middle;
 }
 /* ================================================================================================================ */
 #mypage_contentBox{
-	width:70%; height: 200px;
+	width:80%; height:700px;
+	margin-left:60px;
 	border: 1px solid #ddd; border-radius: 7px; box-shadow: 1px 1px 1px #ddd;
 }
 #mypage_content{
-	min-height:200px;
+	width:100%; height:500px;
+	min-height:200px; margin-top: 50px;
 }
 #mypage_content li{
-	
+	box-sizing: border-box; padding: 5px 400px; 
+}
+#mypage_content li span{
+	font-size: 20px;
 }
 #user_id{
+	
+}
+#user_password_text{
+
 }
 #user_password{
+	width: 50%;
 }
 #user_search{
+	width: 80%; height:50px; 
+	box-sizing: border-box; margin-top:20px;
+	border: 1px solid #fff; border-radius: 5px;
+	background-color: navy; color: #fff;
+	font-size: 25px;
 }
 </style>
 <head>
@@ -73,23 +96,36 @@ body{ font-family: 'GyeonggiTitleM';}
 		<div class="main_contentContainer">	
 			<ul class="mypage_listBox">
 				<li class="mypage_list">
-					<a>장바구니</a>
+					
+					<hr>
 				</li>
 				<li class="mypage_list">
-					<a>쿠폰보유</a>
+					<span>장바구니</span>
+					<hr>
 				</li>
 				<li class="mypage_list">
-					<a>개인정보수정</a>
+					<span>쿠폰보유</span>
+					<hr>
+				</li>
+				<li class="mypage_list">
+					<span>개인정보수정</span>
+					<hr>
 				</li>
 			</ul>
 			<div id="mypage_contentBox">
 				<ul id="mypage_content">
 					<li>
-						<span id="user_id">유저아이디</span>
-						<input type="password" id="user_password">
+						<span id="user_id">아이디 : </span> <span>아이디</span>
+						
+					</li>
+					<li>
+						<span id="user_password_text">현재 비밀번호 : </span><input type="password" id="user_password">
+					</li>
+					<li>
+						<button type="button" id="user_search">조회하기</button>
 					</li>
 				</ul>
-				<button type="button" id="user_search">조회하기</button>
+				
 			</div>
 			
 		</div>
