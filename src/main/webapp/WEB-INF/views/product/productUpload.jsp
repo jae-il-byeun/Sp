@@ -79,6 +79,7 @@ body {
 	vertical-align: middle;
 }
 #txt_product_service_title{
+	width:90%;
 	height:50px;
 	font-size:25px;
 	padding-left: 5px;
@@ -120,6 +121,11 @@ body {
 	background-color: darkred; color:#fff;
 	border: 1px solid #fff; border-radius: 7px;
 }
+.product_type{
+	width:100px;
+	font-size:40px;
+	border: 1px solid gray; border-radius: 7px;
+}
 .product_Complete {
 	width: 100%;
 	height: 70px;
@@ -155,7 +161,7 @@ body {
 </style>
 <head>
 <meta charset="UTF-8">
-<title>상품등록 - 호텔</title>
+<title>상품등록</title>
 </head>
 <body>
 	<input type="text" style="display: none;">
@@ -164,7 +170,7 @@ body {
 		<div class="product_innerContainer">
 			<form action="">
 				<div class="product_titleBox">
-					<h1>상품관리 - 호텔</h1>
+					<h1>상품등록</h1>
 				</div>
 				<div class="product_contentContainer">
 					<div class="product_content">
@@ -175,9 +181,18 @@ body {
 								<col width="*">
 							</colgroup>
 							<tr>
+								<td class="product_upload_group"><h2 class="product_ex_title">분류</h2></td>
+								<td>
+									<select  class="product_type">
+										<option value="0">호텔</option>
+										<option value="1">모텔</option>
+										<option value="2">펜션</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
 								<td class="product_upload_group"><h2 class="product_ex_title">상품명</h2></td>
-								<td><input type="text" id="txt_product_service_title"
-									style="width: 90%;"></td>
+								<td><input type="text" id="txt_product_service_title"></td>
 							</tr>
 							<tr>
 								<td class="product_upload_group"><h2>편의시설</h2></td>
@@ -201,7 +216,7 @@ body {
 									value="06"><label for="chk_product_service06">주차가능</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service07"
-									value="07"><label for="chk_product_service07">매점/편의점</label><br>
+									value="07"><label for="chk_product_service07">매점/편의점</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service08"
 									value="08"><label for="chk_product_service08">어메니티</label>
@@ -213,7 +228,7 @@ body {
 									value="10"><label for="chk_product_service10">수화물보관</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service11"
-									value="11"><label for="chk_product_service11">바다전망</label>
+									value="11"><label for="chk_product_service11">바다전망</label><br>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service12"
 									value="12"><label for="chk_product_service12">조식운영</label>
@@ -225,7 +240,7 @@ body {
 									value="14"><label for="chk_product_service14">뷔페</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service15"
-									value="15"><label for="chk_product_service15">공항셔틀</label><br>
+									value="15"><label for="chk_product_service15">공항셔틀</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service16"
 									value="16"><label for="chk_product_service16">노트북대여</label>
@@ -249,13 +264,13 @@ body {
 									value="22"><label for="chk_product_service22">바</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service23"
-									value="23"><label for="chk_product_service23">야외수영장</label><br>
+									value="23"><label for="chk_product_service23">야외수영장</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service24"
-									value="24"><label for="chk_product_service24">레스토랑</label>
+									value="24"><label for="chk_product_service24">레스토랑</label><br>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service25"
-									value="25"><label for="chk_product_service25">야외테라스</label>
+									value="25"><label for="chk_product_service25">워터슬라이드</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service26"
 									value="26"><label for="chk_product_service26">스파/월풀/욕조</label>
@@ -270,7 +285,7 @@ body {
 									value="29"><label for="chk_product_service29">풀빌라</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service30"
-									value="30"><label for="chk_product_service30">키즈</label><br>
+									value="30"><label for="chk_product_service30">키즈</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service31"
 									value="31"><label for="chk_product_service31">바베큐</label>
@@ -285,7 +300,7 @@ body {
 									value="34"><label for="chk_product_service34">주방</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service35"
-									value="35"><label for="chk_product_service35">공기청정기</label>
+									value="35"><label for="chk_product_service35">공기청정기</label><br>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service36"
 									value="36"><label for="chk_product_service36">복층구조</label>
@@ -294,7 +309,7 @@ body {
 									value="37"><label for="chk_product_service37">루프탑</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service38"
-									value="38"><label for="chk_product_service38">독채객실</label><br>
+									value="38"><label for="chk_product_service38">독채객실</label>
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service39"
 									value="39"><label for="chk_product_service39">커플룸</label>
@@ -313,6 +328,148 @@ body {
 									<input type="checkbox" class="survice_type"
 									name="chk_product_service" id="chk_product_service44"
 									value="44"><label for="chk_product_service44">다이닝룸</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service45"
+									value="45"><label for="chk_product_service45">거울룸</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service46"
+									value="46"><label for="chk_product_service46">부티크브랜드</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service47"
+									value="47"><label for="chk_product_service47">VOD</label><br>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service48"
+									value="48"><label for="chk_product_service48">피트니스</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service49"
+									value="49"><label for="chk_product_service49">수영장</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service50"
+									value="50"><label for="chk_product_service50">노래방</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service51"
+									value="51"><label for="chk_product_service51">스낵바</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service52"
+									value="52"><label for="chk_product_service52">대여</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service53"
+									value="53"><label for="chk_product_service53">객실내PC</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service54"
+									value="54"><label for="chk_product_service54">해수욕장인근</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service55"
+									value="55"><label for="chk_product_service55">미니바</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service56"
+									value="56"><label for="chk_product_service56">커플PC</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service57"
+									value="57"><label for="chk_product_service57">무인텔</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service58"
+									value="58"><label for="chk_product_service58">당구대</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service59"
+									value="59"><label for="chk_product_service59">파티가능</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service60"
+									value="60"><label for="chk_product_service60">파티룸</label><br>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service61"
+									value="61"><label for="chk_product_service61">스타일러</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service62"
+									value="62"><label for="chk_product_service62">PC라운지</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service63"
+									value="63"><label for="chk_product_service63">3DTV</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service64"
+									value="64"><label for="chk_product_service64">세미나실</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service65"
+									value="65"><label for="chk_product_service65">클럽라운지</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service66"
+									value="66"><label for="chk_product_service66">마사지베드</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service67"
+									value="67"><label for="chk_product_service67">고사양PC</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service68"
+									value="68"><label for="chk_product_service68">글램핑</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service69"
+									value="69"><label for="chk_product_service69">무료세탁</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service70"
+									value="70"><label for="chk_product_service70">노천탕</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service71"
+									value="71"><label for="chk_product_service71">욕실TV</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service72"
+									value="72"><label for="chk_product_service72">공주룸</label><br>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service73"
+									value="73"><label for="chk_product_service73">안마의자</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service74"
+									value="74"><label for="chk_product_service74">한옥</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service75"
+									value="75"><label for="chk_product_service75">독체객실</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service76"
+									value="76"><label for="chk_product_service76">이벤트가능</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service77"
+									value="77"><label for="chk_product_service77">족구장</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service78"
+									value="78"><label for="chk_product_service78">픽업가능</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service79"
+									value="79"><label for="chk_product_service79">기본양념</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service80"
+									value="80"><label for="chk_product_service80">계곡인접</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service81"
+									value="81"><label for="chk_product_service81">체험</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service82"
+									value="82"><label for="chk_product_service82">벽난로</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service83"
+									value="83"><label for="chk_product_service83">애견동반</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service84"
+									value="84"><label for="chk_product_service84">도미토리</label><br>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service85"
+									value="85"><label for="chk_product_service85">프리미엄펜션</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service86"
+									value="86"><label for="chk_product_service86">독채펜션</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service87"
+									value="87"><label for="chk_product_service87">투어</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service88"
+									value="88"><label for="chk_product_service88">게임</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service89"
+									value="89"><label for="chk_product_service89">히노끼탕</label>
+									<input type="checkbox" class="survice_type"
+									name="chk_product_service" id="chk_product_service90"
+									value="90"><label for="chk_product_service90">카페형룸</label>
+									
+
+									
+									
 								</td>
 							</tr>
 							<tr>
@@ -420,7 +577,7 @@ body {
 			async : true,
 			type : 'POST',
 			data : JSON.stringify(params),
-			url :'<c:url value="/product/hotelUploadData"></c:url>',
+			url :'<c:url value="/product/productUploadData"></c:url>',
 			dataType : "json",
 			contentType : "application/json; charset=UTF-8",
 			success : function(emailCheck){
