@@ -97,7 +97,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	font-size: 40px;
 	border: 1px solid #fff; border-radius: 7px; 
 	background-color: tan; color: #fff;
-	margin-left: 10%;
+	box-sizing: border-box; margin-left: 10%;
 }
 </style>
 <head>

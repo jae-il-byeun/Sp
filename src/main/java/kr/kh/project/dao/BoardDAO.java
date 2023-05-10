@@ -14,6 +14,14 @@ public interface BoardDAO {
 
 	int selectBoardTotalCount(@Param("cri") Criteria cri);
 
-	ArrayList<BoardTypeVO> selectAllBoardType(@Param("authority") int authority);
+	ArrayList<BoardTypeVO> selectAllBoardType(@Param("au") int now_au);
+
+	BoardVO selectBoardList(@Param("bo")int bo_num);
+
+	BoardTypeVO selectBoardType(@Param("bo_bt_num")int bo_bt_num);
+
+	void insertBoard(@Param("bo")BoardVO board);
+
+
 
 }

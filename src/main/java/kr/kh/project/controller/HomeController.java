@@ -81,14 +81,16 @@ public class HomeController {
 	@RequestMapping(value = "/login/member", method=RequestMethod.POST)
 	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member,HttpSession session){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-
+		
 		MemberVO user = memberService.login(member);
 		//로그인을 세션을 저장 -> 객체에 담고 ->
+		int me_au = member.getMe_authority();
+
 		mv.addObject("user",user);
-		
 		if(user != null) {
 			session.setAttribute("user", user);
-			
+			session.setAttribute("au", me_au);
+
 			map.put("result", true);
 			return map;
 			
@@ -148,12 +150,12 @@ public class HomeController {
 	@RequestMapping(value = "/login/business", method=RequestMethod.POST)
 	public Map<String, Object> businessLogin(ModelAndView mv, @RequestBody BusinessVO seller,HttpSession session){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println(seller);
 		BusinessVO business = businessService.businesslogin(seller);
-		
+		int bi_au= seller.getBi_authority();
 		mv.addObject("seller",business);
 		if(business != null) {
 			session.setAttribute("seller", business);
+			session.setAttribute("au", bi_au);
 			map.put("result", true);
 			return map;
 		}else {

@@ -2,9 +2,12 @@ package kr.kh.project.service;
 
 import java.util.ArrayList;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
+import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.MemberVO;
 
 public interface BoardService {
@@ -13,8 +16,17 @@ public interface BoardService {
 
 	int getBoardTotalCount(Criteria cri);
 
-	ArrayList<BoardTypeVO> getBoardType(int authority);
+	ArrayList<BoardTypeVO> getBoardType(int now_au);
 
-	BoardVO getBoard(int bo_ori_num, MemberVO user);
+	boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files);
+
+	boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files);
+
+
+//	BoardVO getBoard(int bo_num, int now_au);
+
+	
+
+	
 
 }
