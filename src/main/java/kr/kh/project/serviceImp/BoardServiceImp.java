@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import kr.kh.project.dao.BoardDAO;
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.BoardService;
+import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
+import kr.kh.project.vo.MemberVO;
 
 @Service
 public class BoardServiceImp implements BoardService {
@@ -26,6 +28,18 @@ public class BoardServiceImp implements BoardService {
 	@Override
 	public int getBoardTotalCount(Criteria cri) {
 		return boardDao.selectBoardTotalCount(cri);
+	}
+
+	@Override
+	public ArrayList<BoardTypeVO> getBoardType(int authority) {
+
+		return boardDao.selectAllBoardType(authority);
+	}
+
+	@Override
+	public BoardVO getBoard(int bo_ori_num, MemberVO user) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

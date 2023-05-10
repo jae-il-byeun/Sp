@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.project.dao.BusinessDAO">
 	<insert id="insertBusiness">
-		insert into business(bi_id, bi_pw, bi_name, bi_company, bi_brn, bi_phone, bi_email, bi_address)
-			   values(#{sell.bi_id},#{sell.bi_pw},#{sell.bi_name},#{sell.bi_company},#{sell.bi_brn},#{sell.bi_phone},#{sell.bi_email},#{sell.bi_address})
+		insert into business(bi_id, bi_pw, bi_name, bi_company, bi_brn, bi_phone, bi_email, bi_address,bi_authority)
+			   values(#{sell.bi_id},#{sell.bi_pw},#{sell.bi_name},#{sell.bi_company},#{sell.bi_brn},#{sell.bi_phone},#{sell.bi_email},#{sell.bi_address},2)
 	</insert>
 	
 	<select id="selectBusinessById" resultType="kr.kh.project.vo.BusinessVO">

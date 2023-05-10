@@ -12,7 +12,7 @@ public class BusinessVO {
 	String bi_company;
 	String bi_brn;
 	String bi_address;
-	
+	int bi_authority;
 	String bi_emailId;
 	String bi_domain;
 	String bi_brn_front;

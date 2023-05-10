@@ -9,7 +9,9 @@
 a{text-decoration: none; margin-left: 20px;}
 
 
-.h_linkIcon{width:45%;}
+.h_linkIcon{
+	width:45%;
+}
 
 
 .header_container{

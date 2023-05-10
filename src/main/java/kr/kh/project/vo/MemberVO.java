@@ -21,7 +21,7 @@ public class MemberVO {
 	String me_rrnFront;
 	String me_rrnBack;
 	int me_au_num;
-	
+	int me_authority;
 	
 	
 }

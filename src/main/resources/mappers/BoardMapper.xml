@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="kr.kh.project.dao.BoardDAO">
+ 	<resultMap type="kr.kh.project.dao.BoardVO" id="Board">
+ 		<id property="bo_num" column="bo_num" />
+		<result  property="bo_title" column="bo_title" />
+		<result  property="bo_content" column="bo_content" />
+		<result  property="bo_record_date" column="bo_record_date" />
+		<result  property="bo_update_date" column="bo_update_date" />
+		<result  property="bo_views" column="bo_views" />
+		<result  property="bo_up" column="bo_up" />
+		<result  property="bo_down" column="bo_down" />
+		<result  property="bo_ori_num" column="bo_ori_num" />
+		<result  property="bo_me_num" column="bo_me_num" />
+		<result  property="bo_bi_num" column="bo_bi_num" />
+		<result  property="bo_bt_num" column="bo_bt_num" />
+<!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
+<!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
+	</resultMap>
+	<select id="selectAllBoardType" resultType="kr.kh.spring.vo.BoardTypeVO">
+		<![CDATA[
+			select * from board_type where bt_w_authority <= #{authority}
+		]]>
+	</select>
+ </mapper>
