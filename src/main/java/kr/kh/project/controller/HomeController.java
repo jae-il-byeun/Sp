@@ -84,8 +84,8 @@ public class HomeController {
 		
 		MemberVO user = memberService.login(member);
 		//로그인을 세션을 저장 -> 객체에 담고 ->
-		int me_au = member.getMe_authority();
 
+		int me_au = user.getMe_authority();
 		mv.addObject("user",user);
 		if(user != null) {
 			session.setAttribute("user", user);

@@ -37,22 +37,25 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<BoardTypeVO> getBoardType(int now_au) {
-		
-		return boardDao.selectAllBoardType(now_au);
+	public ArrayList<BoardTypeVO> getBoardType(int me_authority) {
+		System.out.println("au :" +me_authority);
+		ArrayList<BoardTypeVO> bt =boardDao.selectAllBoardType(me_authority);
+		System.out.println("bt는 :"+bt);
+		return bt;
 	}
 
 	@Override
 	public boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files) {
+		
 		if(user == null)
 			return false;
 		if(!checkBoard(board))
 			return false;
-		String me_num= user.getMe
-		board.setBo_me_num(me_id);
-		boardDao.insertBoard(board);
-		uploadFiles(files,board.getBo_num());
-		return false;
+////		String me_num= user.getMe
+////		board.setBo_me_num(me_id);
+//		boardDao.insertBoard(board);
+////		uploadFiles(files,board.getBo_num());
+		return true;
 	}
 
 	@Override
@@ -61,18 +64,20 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		if(!checkBoard(board))
 			return false;
-		String bi_id= seller.getBi_id();
-		board.setBo_bi_num(bi_id);
-		return false;
+////		String bi_id= seller.getBi_id();
+////		board.setBo_bi_num(bi_id);
+		return true;
 	}
+	
 	private boolean checkBoard(BoardVO board) {
 		if(board == null || board.getBo_title() == null || board.getBo_title().trim().length()== 0 || board.getBo_content() == null) {
 			return false;
 		}
 		BoardTypeVO bt = boardDao.selectBoardType(board.getBo_bt_num());
+		System.out.println(bt);
 		if(bt == null)
 			return false;
-		if(bt.getBt_type().equals("이미지"))
+		if(bt.getBt_name().equals("자유게시판"))
 			return true;
 		if(board.getBo_content() == null || board.getBo_content().trim().length() == 0)
 			return false;

@@ -43,11 +43,11 @@ public class BoardController {
 	public ModelAndView boardInsert(ModelAndView mv,HttpSession session,Integer bo_ori_num,HttpServletResponse response) {
 		//권한번호 가져오기
 		
-		int now_au= (Integer)session.getAttribute("au");
-		
+		int me_authority= (Integer)session.getAttribute("au");
+
 		// 비회원추가 해야함
 		
-//		ArrayList<BoardTypeVO> btList= boardService.getBoardType(now_au);
+		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
 		
 //		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
 //		BoardVO board = boardService.getBoard(bo_ori_num, now_au);

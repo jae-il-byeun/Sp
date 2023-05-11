@@ -22,7 +22,7 @@ public class BoardTypeVO {
 		case 0: return "관리자";
 		case 1: return "회원";
 		case 2: return "사업자";
-		case 3: return "비회원";
+		case 9: return "비회원";
 		
 		}
 		return"";

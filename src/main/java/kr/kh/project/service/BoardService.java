@@ -16,7 +16,7 @@ public interface BoardService {
 
 	int getBoardTotalCount(Criteria cri);
 
-	ArrayList<BoardTypeVO> getBoardType(int now_au);
+	ArrayList<BoardTypeVO> getBoardType(int me_authority);
 
 	boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files);
 

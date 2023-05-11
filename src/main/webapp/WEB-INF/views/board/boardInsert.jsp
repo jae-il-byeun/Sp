@@ -133,9 +133,9 @@ body{ font-family: 'GyeonggiTitleM';}
 						<label for="type">분류 :</label>
 						<select class="" name="bo_bt_num" id="type">
 							<option value="0">게시판을 선택하세요</option>
-<%-- 							<c:forEach items="${btList}" var="bt"> --%>
-<%-- 								<option value="${bt.bt_num}">${bt.bt_name}</option> --%>
-<%-- 							</c:forEach> --%>
+							<c:forEach items="${btList}" var="bt">
+								<option value="${bt.bt_num}">${bt.bt_name}</option>
+							</c:forEach>
 						</select>
 					</div>
 					<div class="board_insert_semi">
