@@ -183,7 +183,7 @@ body {
 							<tr>
 								<td class="product_upload_group"><h2 class="product_ex_title">분류</h2></td>
 								<td>
-									<select  class="product_type">
+									<select id="sel_product_type" class="product_type">
 										<option value="0">호텔</option>
 										<option value="1">모텔</option>
 										<option value="2">펜션</option>
@@ -553,10 +553,10 @@ body {
 	});
 	
 	$("#btn_product_complete").click(function(e) {
-		var rooms = [];		
+		let rooms = [];		
 		
 		$(".product_room_table").each(function(i, ele){
-			var rooms_items = {
+			let rooms_items = {
 				files: $(ele).find("input")[0].files
 				, title: $(ele).find("input:eq('1')").val()
 				, price: $(ele).find("input:eq('2')").val()
@@ -565,8 +565,9 @@ body {
 			rooms.push(rooms_items);
 		});
 		
-		var params = {
-			product_title: $("#txt_product_service_title").val()
+		let params = {
+			product_type: $("#sel_product_type").val()
+			, product_title: $("#txt_product_service_title").val()
 			, product_service_type: $("input[name='chk_product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
 			, product_images: fileList
 			, product_detail: editor.getData()
@@ -580,14 +581,11 @@ body {
 			url :'<c:url value="/product/productUploadData"></c:url>',
 			dataType : "json",
 			contentType : "application/json; charset=UTF-8",
-			success : function(emailCheck){
-				if(emailCheck){
-					alert('메일 발송완료');
-					$('#me_sendEmail').hide();
-					$('#me_emailCheck').css({display:"block"});
-					checkNum = emailCheck.result;
+			success : function(result){
+				if(result.result){
+					alert('완료');
 				}else{
-					alert('메일 발송실패');
+					alert('실패');
 				}
 			}
 		});		
@@ -657,14 +655,14 @@ body {
 	
 	/* 박스 밖으로 Drag가 나갈 때 */
 	uploadBox.addEventListener('dragleave', function(e) {	
-		this.style.backgroundColor = '#FFFFFF';
+		this.style.backgroundColor = '';
 	});
 	
 	/* 박스 안에서 Drag를 Drop했을 때 */
 	uploadBox.addEventListener('drop', function(e) {
 		e.preventDefault();
 		
-		this.style.backgroundColor = '#FFFFFF';
+		this.style.backgroundColor = '';
 		
 		fnFileUpload(e.dataTransfer.files);
 		

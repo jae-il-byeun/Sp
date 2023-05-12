@@ -1,7 +1,10 @@
 package kr.kh.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.kh.project.vo.ProductVO;
 import kr.kh.project.vo.ProductRoomsVO;
 
 @Controller
@@ -47,13 +51,18 @@ public class ProductController {
 	
 	@ResponseBody
 	@RequestMapping(value="/product/productUploadData",method= RequestMethod.POST)
-	public boolean ProductUploadData(@RequestBody Map<String, Object> params) {		
-		String product_title = (String)params.get("product_title");
-		String product_service_type = (String)params.get("product_service_type");
-		String product_detail = (String)params.get("product_detail");
-		MultipartFile[] product_images = (MultipartFile[])params.get("product_images");
-		List<ProductRoomsVO> product_rooms = (List<ProductRoomsVO>)params.get("product_rooms");
+	public Map<String, Object> ProductUploadData(@RequestBody ProductVO params) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		return true;
+		
+		String product_title = params.getProduct_title();
+		String product_service_type = params.getProduct_service_type();
+		String product_detail = params.getProduct_detail();
+		MultipartFile[] product_images = params.getProduct_images();
+		ProductRoomsVO[] product_rooms = params.getProduct_rooms();
+		
+		
+		map.put("result", true);
+		return map;
 	}
 }
