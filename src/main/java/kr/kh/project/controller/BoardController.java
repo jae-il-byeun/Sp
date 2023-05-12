@@ -42,7 +42,9 @@ public class BoardController {
 	@RequestMapping(value = "/board/insert", method = RequestMethod.GET)
 	public ModelAndView boardInsert(ModelAndView mv,HttpSession session,Integer bo_ori_num,HttpServletResponse response) {
 		//권한번호 가져오기
-		
+//		if(session == null) {
+//			alert();
+//		}
 		int me_authority= (Integer)session.getAttribute("au");
 
 		// 비회원추가 해야함

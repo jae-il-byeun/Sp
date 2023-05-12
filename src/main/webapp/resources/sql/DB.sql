@@ -301,7 +301,7 @@ REFERENCES `Business` (
 	`bi_id`
 );
 ALTER TABLE `Product` ADD CONSTRAINT `FK_location_TO_Product_1` FOREIGN KEY (
-	`lo_num`
+	`product_lo_num`
 )
 REFERENCES `location` (
 	`lo_num`
