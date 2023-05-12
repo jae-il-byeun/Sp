@@ -514,12 +514,12 @@ body {
 							<tr>
 								<td class="product_upload_group"><h2>지역태그</h2></td>
 								<td>
-									<select class="" name="bo_bt_num" id="type">
-										<option value="0">지역을 선택하세요</option>
-										<c:forEach items="${location_list}" var="lo">
-											<option value="${lo.lo_num}">${lo.lo_name}</option>
-										</c:forEach>
-									</select>
+<!-- 									<select class="" name="lo_num" id="type"> -->
+<!-- 										<option value="0">지역을 선택하세요</option> -->
+<%-- 										<c:forEach items="${location_list}" var="lo"> --%>
+<%-- 											<option value="${lo.lo_num}">${lo.lo_name}</option> --%>
+<%-- 										</c:forEach> --%>
+<!-- 									</select> -->
 								</td>
 							</tr>
 							<tr style="margin-bottom:10px;">

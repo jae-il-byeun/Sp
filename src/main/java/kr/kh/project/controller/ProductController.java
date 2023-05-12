@@ -1,11 +1,13 @@
 package kr.kh.project.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +17,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.kh.project.vo.ProductVO;
+import kr.kh.project.service.ProductService;
+import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 
 @Controller
 public class ProductController {
+	
+	@Autowired
+	ProductService productService;
 	
 	@RequestMapping(value="/product/hotel",method=RequestMethod.GET)
     public ModelAndView hotel(ModelAndView mv) {
@@ -42,7 +49,12 @@ public class ProductController {
 		return mv;
 	}
 	@RequestMapping(value="/product/productUpload",method=RequestMethod.GET)
-    public ModelAndView productUpload(ModelAndView mv) {
+    public ModelAndView productUpload(ModelAndView mv,HttpSession session) {
+//		int seller_authority = (Integer)session.getAttribute("au");
+//		ArrayList<LocationVO> location_list = productService.getLocation(seller_authority);
+//	
+//		mv.addObject("location_list",location_list);
+//		
 		mv.setViewName("/product/productUpload");
 		return mv;
     }
@@ -54,12 +66,13 @@ public class ProductController {
 	public Map<String, Object> ProductUploadData(@RequestBody ProductVO params) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		
 		String product_title = params.getProduct_title();
 		String product_service_type = params.getProduct_service_type();
 		String product_detail = params.getProduct_detail();
 		MultipartFile[] product_images = params.getProduct_images();
 		ProductRoomsVO[] product_rooms = params.getProduct_rooms();
+		
+		
 		
 		
 		map.put("result", true);
