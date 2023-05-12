@@ -102,6 +102,7 @@ CREATE TABLE `Reservation` (
 	`re_num`	int auto_increment	NOT NULL primary key,
 	`re_rename`	varchar(20)	NULL,
 	`re_rephone`	varchar(15)	NULL,
+    `re_date`	date	NULL,
 	`re_usename`	varchar(20)	NULL,
 	`re_usephone`	varchar(15)	NULL,
 	`re_totalprice`	int	NULL,
@@ -136,8 +137,9 @@ CREATE TABLE `Product` (
 	`product_name`	varchar(50)	NULL,
 	`product_type`	varchar(10)	NULL,
 	`product_content`	longtext	NULL,
-	`product_calender`	date	NULL,
 	`product_location`	varchar(200)	NULL,
+    `product_service`	varchar(500)	NULL,
+	`product_address`	varchar(50)	NULL,
 	`product_bi_id`	varchar(20)	NOT NULL
 );
 
@@ -179,6 +181,12 @@ DROP TABLE IF EXISTS `BoardFile`;
 CREATE TABLE `BoardFile` (
 	`bf_bo_num`	int	NOT NULL,
 	`bf_file_num`	int	NOT NULL
+);
+DROP TABLE IF EXISTS `location`;
+
+CREATE TABLE `location` (
+	`lo_num`	int	NOT NULL primary key,
+	`lo_name`	varchar(10)	NULL
 );
 
 ALTER TABLE `Review` ADD CONSTRAINT `FK_Member_TO_Review_1` FOREIGN KEY (
@@ -291,6 +299,12 @@ ALTER TABLE `Product` ADD CONSTRAINT `FK_Business_TO_Product_1` FOREIGN KEY (
 )
 REFERENCES `Business` (
 	`bi_id`
+);
+ALTER TABLE `Product` ADD CONSTRAINT `FK_location_TO_Product_1` FOREIGN KEY (
+	`lo_num`
+)
+REFERENCES `location` (
+	`lo_num`
 );
 
 ALTER TABLE `ProductFile` ADD CONSTRAINT `FK_Product_TO_ProductFile_1` FOREIGN KEY (
