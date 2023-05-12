@@ -70,7 +70,7 @@ public class BoardServiceImp implements BoardService {
 	}
 	
 	private boolean checkBoard(BoardVO board) {
-		if(board == null || board.getBo_title() == null || board.getBo_title().trim().length()== 0 || board.getBo_content() == null) {
+		if(board == null || board.getBo_name() == null || board.getBo_name().trim().length()== 0 || board.getBo_content() == null) {
 			return false;
 		}
 		BoardTypeVO bt = boardDao.selectBoardType(board.getBo_bt_num());
@@ -108,19 +108,30 @@ public class BoardServiceImp implements BoardService {
 //					boardDao.insertFile(fileVo);
 				}
 	}
+
 //	@Override
-//	public BoardVO getBoard(int bo_num, int now_au) {
-//		// 조회수 증가
-////		boardDao.updateBoardViews(bo_num);
-//		//게시글 가져오기
-//		BoardVO board= boardDao.selectBoardList(bo_num);
-//		//권한
-//		
-//		
-//		
-//			
-//		return board;
+//	public BoardVO getBoard(Integer bo_ori_num, int me_authority) {
+//		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
+//				boardDao.updateBoardViews(bo_num);
+//				//게시글 가져오기
+//				BoardVO board = boardDao.selectBoard(bo_num);
+//				//권한확인
+//				if(board == null)
+//					return null;
+//				BoardTypeVO boardType = boardDao.selectBoardType(board.getBo_bt_num());
+//				//비회원 이상 읽기 가능
+//				if(boardType.getBt_r_authority() == 0)
+//						return board;
+//				//회원 이상인 경우 비회원은 못봄
+//				if(user == null)
+//					return null;
+//				//게시글 읽기 권한이 사용자 권한 이하인 경우만 조회가능
+//				if(boardType.getBt_r_authority() <= user.getMe_authority())
+//					return board;
+//				return null;
+//		return null;
 //	}
+
 
 
 

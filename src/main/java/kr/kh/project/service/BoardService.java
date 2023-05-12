@@ -22,8 +22,9 @@ public interface BoardService {
 
 	boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files);
 
+//	BoardVO getBoard(int bo_num, int me_authority);
 
-//	BoardVO getBoard(int bo_num, int now_au);
+
 
 	
 

@@ -17,12 +17,11 @@
 		<result  property="bo_bi_num" column="bo_bi_num" />
 		<result  property="bo_bt_num" column="bo_bt_num" />
 <!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
-<!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
+		<collection property="type" ofType="kr.kh.project.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/>
 	</resultMap>
 	<select id="selectAllBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
 		<![CDATA[
-			select * from boardType where bt_w_authority > #{au.bt_w_authority}
-
+			select * from boardType where bt_writer_authority > #{au}
 		]]>
 	</select>
 	<select id="selectBoardList" resultMap="Board">

@@ -67,11 +67,14 @@ DROP TABLE IF EXISTS `Board`;
 CREATE TABLE `Board` (
 	`bo_num`	int auto_increment	NOT NULL primary key,
 	`bo_name`	varchar(100)	NULL,
-	`no_content`	longtext	NULL,
+	`bo_content`	longtext	NULL,
 	`bo_record_date`	datetime	NULL,
+	`bo_update_date`	datetime	NULL,
 	`bo_views`	int	NULL,
 	`bo_ori_num`	int	NOT NULL,
-	`bo_bt_num`	int	NOT NULL
+	`bo_bt_num`	int	NOT NULL,
+	`bo_me_id`	varchar(20)	NOT NULL,
+	`bo_bi_id`	varchar(20)	NOT NULL
 );
 
 DROP TABLE IF EXISTS `Coopon`;
@@ -211,6 +214,20 @@ ALTER TABLE `Board` ADD CONSTRAINT `FK_BoardType_TO_Board_1` FOREIGN KEY (
 )
 REFERENCES `BoardType` (
 	`bt_num`
+);
+
+ALTER TABLE `Board` ADD CONSTRAINT `FK_Member_TO_Board_1` FOREIGN KEY (
+	`bo_me_id`
+)
+REFERENCES `Member` (
+	`me_id`
+);
+
+ALTER TABLE `Board` ADD CONSTRAINT `FK_Business_TO_Board_1` FOREIGN KEY (
+	`bo_bi_id`
+)
+REFERENCES `Business` (
+	`bi_id`
 );
 
 ALTER TABLE `Basket` ADD CONSTRAINT `FK_Member_TO_Basket_1` FOREIGN KEY (

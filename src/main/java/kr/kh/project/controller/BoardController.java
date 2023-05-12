@@ -49,29 +49,30 @@ public class BoardController {
 		
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
 		
-//		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
-//		BoardVO board = boardService.getBoard(bo_ori_num, now_au);
+		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
+//		BoardVO board = boardService.getBoard(bo_ori_num, me_authority);
 //		if(board == null) {
 //			MessageUtils.alertAndMovePage(response, "게시글이 없습니다.", "/project", "/board/list");		
 //		}
 //		mv.addObject("board", board);
-//		mv.addObject("btList", btList);
-//		mv.addObject("bo_ori_num", bo_ori_num);
-//		if(btList.size() == 0) {
-//			mv.setViewName("redirect:/board/boardList");
-//		}else
+		mv.addObject("btList", btList);
+		mv.addObject("bo_ori_num", bo_ori_num);
+		if(btList.size() == 0) {
+			mv.setViewName("redirect:/board/boardList");
+		}else
 			mv.setViewName("/board/boardInsert");
 		return mv;
 	}
 	@RequestMapping(value="/board/insert", method=RequestMethod.POST)
 	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		System.out.println(user);
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		if(user == null & seller == null) {
+		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
-		}else if(user != null & seller == null) {
+		}else if(user != null && seller == null) {
 			boardService.insertBoard_User(board, user, files);
-		}else if(user == null & seller != null) {
+		}else if(user == null && seller != null) {
 			boardService.insertBoard_Seller(board, seller, files);
 		}
 		mv.setViewName("redirect:/board/list");

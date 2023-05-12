@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	int bo_num;
-	String bo_title;
+	String bo_name;
 	String bo_content;
 	Date bo_record_date;
 	Date bo_update_date;

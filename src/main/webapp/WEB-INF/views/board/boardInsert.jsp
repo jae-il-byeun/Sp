@@ -93,11 +93,11 @@ body{ font-family: 'GyeonggiTitleM';}
 	width:70%; height:100px;
 }
 #btn_complete{
-	width:100%; height: 60px;
+	width:70%; height: 60px;
 	font-size: 40px;
 	border: 1px solid #fff; border-radius: 7px; 
 	background-color: tan; color: #fff;
-	box-sizing: border-box; margin-left: 10%;
+	box-sizing: border-box; margin-left: 15%;
 }
 </style>
 <head>
@@ -140,8 +140,7 @@ body{ font-family: 'GyeonggiTitleM';}
 					</div>
 					<div class="board_insert_semi">
 						<label for="title">제목:</label>
-						<input type="text" class="board_title_text" id="title" name="bo_title">
-					
+						<input type="text" class="board_title_text" id="title" name="bo_name">
 					</div>
 					<div id="common">
 						<div>
@@ -154,7 +153,7 @@ body{ font-family: 'GyeonggiTitleM';}
 							<input type="file" class="form-control"  name="files">
 							<input type="file" class="form-control"  name="files">
 						</div>
-					</div>	
+					</div>
 					<div id="image" style="display: none;">
 						<label>이미지:</label>
 						<div>

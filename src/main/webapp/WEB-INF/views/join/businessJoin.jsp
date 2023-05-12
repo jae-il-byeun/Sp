@@ -81,6 +81,7 @@ input{
 	margin-bottom: 10px;
 	display:none;
 }
+/* 주소 */
 #sample6_postcode{
 	width:45%;
 	display:block;
