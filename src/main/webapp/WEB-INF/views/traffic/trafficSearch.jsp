@@ -755,8 +755,9 @@ function resultSearchPlace(obj){
 			break;
 		}
 	}
-	if('.tm_placeDetail li').text() == "")
+	if($('.tm_placeDetail li').text() == "") {
 		alert("도착정보가 없습니다.");
+	}
 	$('.tm_placeDetail li').click(function(){
 		if($('#tm_start').text() != null && $('#tm_start_id').val() != null){
 			$('#tm_arrive').text($(this).text());
