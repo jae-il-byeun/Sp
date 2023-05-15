@@ -50,11 +50,9 @@ public class ProductController {
 	}
 	@RequestMapping(value="/product/productUpload",method=RequestMethod.GET)
     public ModelAndView productUpload(ModelAndView mv,HttpSession session) {
-//		int seller_authority = (Integer)session.getAttribute("au");
-//		ArrayList<LocationVO> location_list = productService.getLocation(seller_authority);
-//	
-//		mv.addObject("location_list",location_list);
-//		
+		ArrayList<LocationVO> location_list = productService.getLocationNum(); 
+		System.out.println(location_list);
+		mv.addObject("location_list",location_list);
 		mv.setViewName("/product/productUpload");
 		return mv;
     }

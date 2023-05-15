@@ -20,7 +20,9 @@
 <!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
 	</resultMap>
 
-<!-- 	 <select id="selectLocationNum" resultType="kr.kh.project.vo.LocationVO"> -->
-<!-- 	 	select * from location where lo_num = #{sa} -->
-<!-- 	 </select> -->
+	 <select id="selectLocation" resultType="kr.kh.project.vo.LocationVO">
+	 	<![CDATA[
+	 		select * from location where lo_num > 0;
+	 	]]>
+	 </select>
  </mapper>

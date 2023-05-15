@@ -52,8 +52,8 @@ width:100%; height:35%;
 
 .product_contentBox{
 	width:100%; height:100%; 
-	display:flex;
-	box-sizing: border-box; padding: 2px 1px; margin-top: 10px; margin-bottom:30px; 
+
+	box-sizing: border-box; padding: 0px 150px; margin-top: 10px; margin-bottom:30px; 
 }
 .product_mapBox{
 	width:50%; height:80%;
@@ -62,7 +62,7 @@ width:100%; height:35%;
 }
 
 .product_listBox{
-	width:50%; height:100%;
+	width:100%; height:100%;
 	box-sizing: border-box; border-top: none;
 	
 }
@@ -88,7 +88,7 @@ width:100%; height:35%;
 	box-sizing: border-box; padding: 4px; 
 }
 .like_button{
-	width:11%;  
+	width:8%;  
 	border: none; background: none;
 	vertical-align: middle; cursor: pointer;
 	margin-bottom: 7px;
@@ -96,7 +96,7 @@ width:100%; height:35%;
 .like_icon{
 	width:70%; 
 	vertical-align: middle;
-	margin-left: 260px;
+	margin-left: 690%;
 	cursor: pointer;
 }
 
@@ -105,11 +105,12 @@ width:100%; height:35%;
 	box-sizing: border-box; padding: 10px 0px;
 }
 .product_title{
-	font-size: 25px;
+	font-size: 45px;
 }
 .product_detailInfo{
 	display:block;
-	margin-left: 20px;
+	margin-left: 30px;
+	font-size: 25px;
 }
 .product_starPoint{
 	margin-right: 0px;
@@ -118,7 +119,7 @@ width:100%; height:35%;
 	width:40%; 
 	margin: 30px 0px 0px 100px; 
 	float: right; text-align:right; color: #000;
-	font-size: 30px; font-decoration: none; 
+	font-size: 30px; text-decoration: none; 
 }
 
 
@@ -157,9 +158,7 @@ width:100%; height:35%;
 		</div>
 		
 		<div class="product_contentBox">
-			<div class="product_mapBox">
-						<img alt="" src="/project/resources/img/ex_map.png" class="map_imege" style="height: 650px;">
-			</div>
+
 			<div class="product_listBox">
 				<div class="product_split">
 					<span>정렬기준</span>

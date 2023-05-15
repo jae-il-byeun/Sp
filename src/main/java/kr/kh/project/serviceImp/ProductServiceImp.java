@@ -41,6 +41,7 @@ public class ProductServiceImp implements ProductService {
 		return true;
 	}
 
+
 /*	
 	private boolean checkBoard(BoardVO board) {
 //		if(board == null || board.getBo_title() == null || board.getBo_title().trim().length()== 0 || board.getBo_content() == null) {
@@ -95,14 +96,15 @@ public class ProductServiceImp implements ProductService {
 //		return board;
 //	}
 
-
-//	@Override
-//	public ArrayList<LocationVO> getLocation(int seller_authority) {
-//		
-//		return productDao.selectLocationNum(seller_authority);
-//	}
-
 */
+
+
+	@Override
+	public ArrayList<LocationVO> getLocationNum() {
+		ArrayList<LocationVO> tt =productDao.selectLocation(); 
+		return  tt;
+	}
+
 
 
 }
