@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="kr.kh.project.dao.BoardDAO">
- 	<resultMap type="kr.kh.project.vo.BoardVO" id="Board">
+ <mapper namespace="kr.kh.project.dao.ProductDAO">
+ 	<resultMap type="kr.kh.project.vo.ProductVO" id="Product">
  		<id property="bo_num" column="bo_num" />
 		<result  property="bo_title" column="bo_title" />
 		<result  property="bo_content" column="bo_content" />
@@ -19,33 +19,7 @@
 <!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
 <!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
 	</resultMap>
-	<select id="selectAllBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
-		<![CDATA[
-			select * from boardType where bt_w_authority > #{au.bt_w_authority}
 
-		]]>
-	</select>
-	<select id="selectBoardList" resultMap="Board">
-		select * from board where (bo_title like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%'))
-		<if test="cri.type ! = 0">
-			and bo_bt_num = #{cri.type}
-		</if>
-		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
-		select * from board_type where bt_num = 2
-	</select>
-	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
-		insert into board(bo_num, bo_title,bo_content, bo_me_id, bo_bt_num, bo_ori_num)
-		select ifnull(max(bo_num),0)+1, #{bo.bo_title},#{bo.bo_content},#{bo.bo_me_id}, #{bo.bo_bt_num},
-			<if test="bo.bo_ori_num == 0">
-				ifnull(max(bo_num),0)+1
-			</if>
-			<if test="bo.bo_ori_num != 0">
-				#{bo.bo_ori_num}
-			</if>
-			from board
-	 </insert>
 <!-- 	 <select id="selectLocationNum" resultType="kr.kh.project.vo.LocationVO"> -->
 <!-- 	 	select * from location where lo_num = #{sa} -->
 <!-- 	 </select> -->

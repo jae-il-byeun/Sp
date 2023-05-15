@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
-import kr.kh.project.pagination.Criteria;
-import kr.kh.project.vo.BoardTypeVO;
-import kr.kh.project.vo.BoardVO;
-import kr.kh.project.vo.LocationVO;
+import kr.kh.project.vo.ProductRoomsVO;
+import kr.kh.project.vo.ProductVO;
 
 public interface ProductDAO {
-
+/*
 	ArrayList<BoardVO> selectBoardList(@Param("cri") Criteria cri);
 
 	int selectBoardTotalCount(@Param("cri") Criteria cri);
@@ -22,7 +20,7 @@ public interface ProductDAO {
 	BoardTypeVO selectBoardType(@Param("bo_bt_num")int bo_bt_num);
 
 	void insertBoard(@Param("bo")BoardVO board);
-
+*/
 //	ArrayList<LocationVO> selectLocationNum(@Param("sa")int seller_authority);
 
 	

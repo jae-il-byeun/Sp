@@ -24,13 +24,10 @@ import kr.kh.project.vo.LocationVO;
 public class ProductServiceImp implements ProductService {
 	
 	@Autowired
-	BoardDAO boardDao;
-	
-	@Autowired
 	ProductDAO productDao;
 	
 	String uploadPath = "D:\\uploadfiles";
-	
+
 	@Override
 	public boolean productInsert(ProductVO params) {
 		
@@ -44,7 +41,7 @@ public class ProductServiceImp implements ProductService {
 		return true;
 	}
 
-	
+/*	
 	private boolean checkBoard(BoardVO board) {
 //		if(board == null || board.getBo_title() == null || board.getBo_title().trim().length()== 0 || board.getBo_content() == null) {
 //			return false;
@@ -105,7 +102,7 @@ public class ProductServiceImp implements ProductService {
 //		return productDao.selectLocationNum(seller_authority);
 //	}
 
-
+*/
 
 
 }
