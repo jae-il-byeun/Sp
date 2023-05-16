@@ -32,10 +32,10 @@
 		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
-		select * from board_type where bt_num = 2
+		select * from board_type where bt_num = #{btn}
 	</select>
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
-		insert into board(bo_num, bo_title,bo_content, bo_me_id, bo_bt_num, bo_ori_num)
+		insert into board (bo_num, bo_title ,bo_content, bo_me_id, bo_bt_num, bo_ori_num)
 		select ifnull(max(bo_num),0)+1, #{bo.bo_title},#{bo.bo_content},#{bo.bo_me_id}, #{bo.bo_bt_num},
 			<if test="bo.bo_ori_num == 0">
 				ifnull(max(bo_num),0)+1
@@ -45,4 +45,17 @@
 			</if>
 			from board
 	 </insert>
+	 <insert id="insertFile">
+	 	insert into file(fi_ori_name, fi_name, fi_bo_num) values(#{file.fi_ori_name},#{file.fi_name},#{file.fi_bo_num})
+	 </insert>
+	 
+	 <select id="selectBoardWriter" resultType="kr.kh.project.vo.BoardTypeVO">
+	 	select * from board_type where bt_num = #{bo_bt_num}
+	 </select>
+<!-- 	 <update id="updateBoardViews"> -->
+<!-- 	 	update board set bo_views = bo_views+1 where bo_num = #{bo_num} -->
+<!-- 	 </update> -->
+<!-- 	 <select id="selectBoard" resultMap="Board"> -->
+<!-- 	 	select * from board join board_type on bo_bt_num = bt_num where bo_num =#{bo_num} -->
+<!-- 	 </select> -->
  </mapper>

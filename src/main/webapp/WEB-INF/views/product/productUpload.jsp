@@ -539,6 +539,14 @@ body {
 										</c:forEach>
 									</select>
 								</td>
+								<td>
+									<select class="product_upload_location" name="dl_num" id="type">
+										<option value="0">세부 지역</option>
+<%-- 										<c:forEach items="${detailLocation_list}" var="dl"> --%>
+<%-- 											<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
+<%-- 										</c:forEach> --%>
+									</select>
+								</td>
 							</tr>
 							<tr style="margin-bottom:10px;">
 								<td class="product_upload_group"><h2>상품주소</h2></td>
@@ -572,6 +580,24 @@ body {
 	</div>
 
 </body>
+<script>
+$('#type').change(function(){
+	let lo_num = $('[name=lo_num]').val();
+	let send = { lo_num : lo_num };
+	
+	$.ajax({
+		async : true,
+		type : 'GET',
+		data: JSON.stringify(send),
+		url : "<c:url value='/product/detailLocation'></c:url>",
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(detailLocation_list){
+			
+		} 
+	});
+});
+</script>
 <script>
 	var editor;
 	
@@ -727,7 +753,6 @@ body {
 		this.style.backgroundColor = '';
 		
 		fnFileUpload(e.dataTransfer.files);
-		
  	});
 </script>
 <script>

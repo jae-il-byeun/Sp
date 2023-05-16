@@ -22,7 +22,15 @@ public interface BoardService {
 
 	boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files);
 
-//	BoardVO getBoard(int bo_num, int me_authority);
+	String selectBoardWrite(BoardTypeVO bo_bt_num);
+
+
+
+
+
+//	BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller);
+
+
 
 
 

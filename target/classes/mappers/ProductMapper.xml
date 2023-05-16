@@ -25,4 +25,9 @@
 	 		select * from location where lo_num > 0;
 	 	]]>
 	 </select>
+	 <select id="selectDetailLocation" resultType="kr.kh.project.vo.detailLocationVO">
+	 	<![CDATA[
+	 		select * from detailLocation where de_lo_num = #{lo_num}
+	 	]]>
+	 </select>
  </mapper>

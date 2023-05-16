@@ -16,6 +16,7 @@ import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.ProductVO;
+import kr.kh.project.vo.detailLocationVO;
 import kr.kh.project.utils.UploadFileUtils;
 import kr.kh.project.vo.FileVO;
 import kr.kh.project.vo.LocationVO;
@@ -103,6 +104,13 @@ public class ProductServiceImp implements ProductService {
 	public ArrayList<LocationVO> getLocationNum() {
 		ArrayList<LocationVO> tt =productDao.selectLocation(); 
 		return  tt;
+	}
+
+
+	@Override
+	public ArrayList<detailLocationVO> getDetailLocation(String lo_num) {
+		
+		return productDao.selectDetailLocation(lo_num);
 	}
 
 

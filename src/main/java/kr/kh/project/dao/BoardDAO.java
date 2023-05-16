@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
+import kr.kh.project.vo.FileVO;
 
 public interface BoardDAO {
 
@@ -18,9 +19,20 @@ public interface BoardDAO {
 
 	BoardVO selectBoardList(@Param("bo")int bo_num);
 
-	BoardTypeVO selectBoardType(@Param("bo_bt_num")int bo_bt_num);
+	BoardTypeVO selectBoardType(@Param("btn")int bo_bt_num);
 
 	void insertBoard(@Param("bo")BoardVO board);
+
+	void insertFile(@Param("file")FileVO fileVo);
+
+	String selectBoardWriter(@Param("bo_bt_num")String bo_bt_num);
+
+
+
+
+//	void updateBoardViews(@Param("bo_num")int bo_num);
+
+//	BoardVO selectBoard(@Param("bo_num")int bo_num);
 
 
 

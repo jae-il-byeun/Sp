@@ -8,14 +8,14 @@ public class BoardTypeVO {
 	int bt_num;
 	String bt_type;
 	String bt_name;
-	int bt_r_authority;
-	int bt_w_authority;
+	int bt_read_authority;
+	int bt_writer_authority;
 	
 	public String getBt_r_authority_str() {
-		return getAuthority(bt_r_authority);
+		return getAuthority(bt_read_authority);
 	}
 	public String getBt_w_authority_str() {
-			return getAuthority(bt_w_authority);
+			return getAuthority(bt_writer_authority);
 	}
 	private String getAuthority(int authority) {
 		switch(authority) {

@@ -38,23 +38,22 @@ public class BoardServiceImp implements BoardService {
 	
 	@Override
 	public ArrayList<BoardTypeVO> getBoardType(int me_authority) {
-		System.out.println("au :" +me_authority);
 		ArrayList<BoardTypeVO> bt =boardDao.selectAllBoardType(me_authority);
-		System.out.println("bt는 :"+bt);
 		return bt;
 	}
 
 	@Override
 	public boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files) {
-		
+//		System.out.println("impl : "+board);
 		if(user == null)
 			return false;
 		if(!checkBoard(board))
 			return false;
-////		String me_num= user.getMe
-////		board.setBo_me_num(me_id);
-//		boardDao.insertBoard(board);
-////		uploadFiles(files,board.getBo_num());
+		String me_id= user.getMe_id();
+		board.setBo_me_id(me_id);
+//		System.out.println("게시판 정보"+board);
+		boardDao.insertBoard(board);
+		uploadFiles(files,board.getBo_num());
 		return true;
 	}
 
@@ -64,8 +63,8 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		if(!checkBoard(board))
 			return false;
-////		String bi_id= seller.getBi_id();
-////		board.setBo_bi_num(bi_id);
+		String bi_id= seller.getBi_id();
+		board.setBo_bi_id(bi_id);
 		return true;
 	}
 	
@@ -74,7 +73,6 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		}
 		BoardTypeVO bt = boardDao.selectBoardType(board.getBo_bt_num());
-		System.out.println(bt);
 		if(bt == null)
 			return false;
 		if(bt.getBt_name().equals("자유게시판"))
@@ -105,32 +103,45 @@ public class BoardServiceImp implements BoardService {
 					//첨부파일 객체를 생성
 					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
 					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
-//					boardDao.insertFile(fileVo);
+					boardDao.insertFile(fileVo);
 				}
 	}
-
 //	@Override
-//	public BoardVO getBoard(Integer bo_ori_num, int me_authority) {
+//	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
 //		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
-//				boardDao.updateBoardViews(bo_num);
-//				//게시글 가져오기
-//				BoardVO board = boardDao.selectBoard(bo_num);
-//				//권한확인
-//				if(board == null)
-//					return null;
-//				BoardTypeVO boardType = boardDao.selectBoardType(board.getBo_bt_num());
-//				//비회원 이상 읽기 가능
-//				if(boardType.getBt_r_authority() == 0)
-//						return board;
-//				//회원 이상인 경우 비회원은 못봄
-//				if(user == null)
-//					return null;
-//				//게시글 읽기 권한이 사용자 권한 이하인 경우만 조회가능
-//				if(boardType.getBt_r_authority() <= user.getMe_authority())
-//					return board;
-//				return null;
+//		boardDao.updateBoardViews(bo_num);
+//		//게시글 가져오기
+//		BoardVO board = boardDao.selectBoard(bo_num);
+//		//권한확인
+//		if(board == null)
+//			return null;
+//		BoardTypeVO boardType = boardDao.selectBoardType(board.getBo_bt_num());
+//		System.out.println(boardType);
+//		//비회원 이상 읽기 가능
+//		if(boardType.getBt_num() != 2 || boardType.getBt_read_authority() != 1)
+//				return board;
+//		//회원 이상인 경우 비회원은 못봄
+//		if(boardType.getBt_read_authority()== 0 && user == null || seller == null)
+//			return null;
+//		//게시글 읽기 권한이 사용자 권한 이하인 경우만 조회가능
+//		if(boardType.getBt_read_authority() <= user.getMe_authority() || boardType.getBt_read_authority() <=seller.getBi_authority())
+//			return board;
+//
 //		return null;
 //	}
+
+	@Override
+	public String selectBoardWrite(BoardTypeVO bo_bt_num) {
+		System.out.println(bo_bt_num);
+		return "";
+	}
+
+
+
+
+
+
+
 
 
 

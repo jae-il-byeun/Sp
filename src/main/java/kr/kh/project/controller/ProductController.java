@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.kh.project.vo.ProductVO;
+import kr.kh.project.vo.detailLocationVO;
 import kr.kh.project.service.ProductService;
 import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
@@ -50,13 +51,23 @@ public class ProductController {
 	}
 	@RequestMapping(value="/product/productUpload",method=RequestMethod.GET)
     public ModelAndView productUpload(ModelAndView mv,HttpSession session) {
+	
 		ArrayList<LocationVO> location_list = productService.getLocationNum(); 
+//		ArrayList<detailLocationVO> detailLocation_list = productService.getDetailLocationNum();
+		
 		System.out.println(location_list);
 		mv.addObject("location_list",location_list);
 		mv.setViewName("/product/productUpload");
 		return mv;
     }
-
+	@RequestMapping(value = "/product/detailLoction", method = RequestMethod.GET)
+	public Map<String, Object> detailLocation(@RequestBody String lo_num ) {
+		System.out.println(lo_num);
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		ArrayList<detailLocationVO> detailLocationList = productService.getDetailLocation(lo_num);
+		System.out.println(detailLocationList);
+		return result;
+	}
 
 	
 	@ResponseBody

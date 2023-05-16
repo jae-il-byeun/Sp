@@ -1,6 +1,8 @@
 package kr.kh.project.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,9 +45,11 @@ public class BoardController {
 	@RequestMapping(value = "/board/insert", method = RequestMethod.GET)
 	public ModelAndView boardInsert(ModelAndView mv,HttpSession session,Integer bo_ori_num,HttpServletResponse response) {
 		//권한번호 가져오기
-//		if(session == null) {
-//			alert();
-//		}
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		if(user == null && seller == null) {
+			MessageUtils.alertAndMovePage(response, "작성 불가능합니다.", "/project", "/board/list");
+		}
 		int me_authority= (Integer)session.getAttribute("au");
 
 		// 비회원추가 해야함
@@ -52,7 +57,7 @@ public class BoardController {
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
 		
 		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
-//		BoardVO board = boardService.getBoard(bo_ori_num, me_authority);
+//		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
 //			MessageUtils.alertAndMovePage(response, "게시글이 없습니다.", "/project", "/board/list");		
 //		}
@@ -68,18 +73,39 @@ public class BoardController {
 	@RequestMapping(value="/board/insert", method=RequestMethod.POST)
 	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		System.out.println(user);
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+//		System.out.println("controller :"+board);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
+			mv.addObject("nu",user);
 			boardService.insertBoard_User(board, user, files);
 		}else if(user == null && seller != null) {
+			mv.addObject("nu",seller);
 			boardService.insertBoard_Seller(board, seller, files);
 		}
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
-	
+	@RequestMapping(value="/board/auCheck", method=RequestMethod.POST)
+	public Map<String, Object> boardAuCheck(@RequestBody BoardTypeVO bo_bt_num, HttpSession session){
+		System.out.println("first : " +bo_bt_num);
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		String aun = boardService.selectBoardWrite(bo_bt_num);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		if(user == null && seller == null) {
+			return null;
+		}else if(user != null && seller == null) {
+			int user_au = user.getMe_authority();
+			result.put("au", user_au);
+		}else if(user == null && seller != null) {
+			int seller_au = seller.getBi_authority();
+			result.put("au", seller_au);
+		}
+		System.out.println("result : "+result);
+		return result;
+		
+	}
  
 }

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
-<link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+
 
     
 <style>
@@ -46,7 +46,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	font-size: 25px; text-align: center;
 	cursor:pointer;
 }
-.board_type a{
+.board_link{
 	vertical-align: middle;
 	margin-left:0px;
 }

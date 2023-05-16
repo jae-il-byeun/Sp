@@ -53,7 +53,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	font-size: 25px; text-align: center;
 	cursor:pointer;
 }
-.board_type a{
+.board_link{
 	vertical-align: middle;
 	margin-left:0px;
 }
@@ -68,6 +68,13 @@ body{ font-family: 'GyeonggiTitleM';}
 	width:100%; height: 680px;
 	box-sizing: border-box; padding: 5px;
 	
+}
+.board_title_text{
+	width:70%; height:30px;
+	margin-left: 5px; 
+}
+.board_content{
+	height:500px;
 }
 #board_HeadText{
 	height: 20px;
@@ -86,6 +93,9 @@ body{ font-family: 'GyeonggiTitleM';}
 	width:15%; height:70px;
 	font-size: 30px;
 }
+.board_insert_label{
+	font-size: 20px;
+}
 .board_insert_content{
 	width:80%;
 }
@@ -98,6 +108,9 @@ body{ font-family: 'GyeonggiTitleM';}
 	border: 1px solid #fff; border-radius: 7px; 
 	background-color: tan; color: #fff;
 	box-sizing: border-box; margin-left: 15%;
+}
+.ck-content{
+	height:500px;
 }
 </style>
 <head>
@@ -115,23 +128,24 @@ body{ font-family: 'GyeonggiTitleM';}
 					<hr>
 				</li>
 				<li class="board_type">
-					<a>공지사항</a>
+					<a class="board_link">공지사항</a>
 					<hr>
 				</li>
 				<li class="board_type">
-					<a>자유게시판</a>
+					<a class="board_link">자유게시판</a>
 					<hr>
 				</li>
 				<li class="board_type">
-					<a>QnA</a>
+					<a class="board_link">QnA</a>
 					<hr>
 				</li>
 			</ul>
 			<div id="board_insertBox">
-				<form action="">
+				<form action="<c:url value='/board/insert'></c:url>"method="POST" enctype="multipart/form-data">
+					<input type="hidden" name="bo_ori_num" value="${bo_ori_num }">
 					<div class="board_insert_semi">
-						<label for="type">분류 :</label>
-						<select class="" name="bo_bt_num" id="type">
+						<label for="type" class="board_insert_label">분류 :</label>
+						<select class="" name="bo_bt_num" id="type"  <c:if test="${board != null }">readonly</c:if>>
 							<option value="0">게시판을 선택하세요</option>
 							<c:forEach items="${btList}" var="bt">
 								<option value="${bt.bt_num}">${bt.bt_name}</option>
@@ -139,16 +153,16 @@ body{ font-family: 'GyeonggiTitleM';}
 						</select>
 					</div>
 					<div class="board_insert_semi">
-						<label for="title">제목:</label>
+						<label for="title" class="board_insert_label">제목:</label>
 						<input type="text" class="board_title_text" id="title" name="bo_name">
 					</div>
 					<div id="common">
 						<div>
-							<label for="content">내용:</label>
+							<label for="content" class="board_insert_label">내용:</label>
 						</div>
 						<div id="editor" class="board_content" name="bo_content"></div>
 						<div>
-							<label>첨부파일:</label>
+							<label class="board_insert_label">첨부파일:</label>
 							<input type="file" class="form-control"  name="files">
 							<input type="file" class="form-control"  name="files">
 							<input type="file" class="form-control"  name="files">
@@ -183,7 +197,92 @@ body{ font-family: 'GyeonggiTitleM';}
 	
 </div>
 </body>
+<script>
+$('#type').change(function(){
+	let val = $(this).val();
+	$('#common').hide();
+	$('#image').hide();
+	if(val == 0)
+		return ;
+	
+let bo_bt_num = $('[name=bo_bt_num]').val();
+let btjson ={bo_bt_num : bo_bt_num};
 
+$.ajax({
+	async : true,
+	type : 'POST',
+	data : JSON.stringify(btjson),
+	url : '<c:url value="/board/auCheck"></c:url>',
+	dataType : "json",
+	contentType :"application/json; charset=UTF-8",
+	success : function(result){
+		if(result.au == 1){
+			console.log('jsp :' + p);
+			alert(p);	
+		}else if(result.au == 2){
+			console.log('jsp :' + p);
+			alert(p);	
+		}
+		
+		
+	}
+});
+	if(val > 0){
+		$('#common').show();
+		
+	}
+});
+$('form').submit(function(){
+	let bo_bt_num = $('[name=bo_bt_num]').val();
+	if(bo_bt_num == 0){
+		alert('게시판을 선택하세요.');
+		$('[name=bo_bt_num]').focus();
+		return false;
+	}
+	let bo_title =$('[name=bo_title]').val();
+	if(bo_title.trim().length == 0){
+		alert('제목을 입력하세요');
+		$('[name=bo_title]').focus();
+		return false;
+	}
+	let bo_content = $('[name=bo_content]').val();
+	if(bo_content.trim().length == 0 && common.indexOf($('#type').val())>=0){
+		alert('내용을 입력하세요');
+		return false;
+	}
+	if(common.indexOf($('#type').val()) < 0){
+		let images = image.querySelectorAll('[type=file]');
+		for(i= 0; i<images.length; i++){
+			if(images[i].files && images[i].files[0])
+				return true;
+		}
+		alert('이미지를 1개이상 선택하세요');
+		return false;
+	}
+});
+let common = [];
+<c:forEach items="${btList}" var="bt">
+	<c:if test="${bt.bt_type == '자유게시판'}">common.push('${bt.bt_num}')</c:if>
+</c:forEach>
+$('.file-box, .preview').click(function(){
+	$(this).siblings('input').click();
+});
+function readURL(input){
+	
+	if(!input.files || !input.files[0]){
+		input.nextElementSibling.src ='';
+		input.previousElementSibling.style.display = 'block';
+		return;
+	}
+	let reader = new FileReader();
+	reader.onload = function(e){
+		input.previousElementSibling.style.display = 'none';
+		input.nextElementSibling.src = e.target.result;
+	}
+	reader.readAsDataURL(input.files[0]);
+}
+$('select').val('${board.bo_bt_num}').trigger('change');
+</script>
 
 <script>
 //	내용 에디터

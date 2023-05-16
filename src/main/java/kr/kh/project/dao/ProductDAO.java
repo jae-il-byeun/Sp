@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.ProductVO;
+import kr.kh.project.vo.detailLocationVO;
 
 public interface ProductDAO {
 
@@ -25,6 +26,8 @@ public interface ProductDAO {
 	void insertBoard(@Param("bo")BoardVO board);
 */
 //	ArrayList<LocationVO> selectLocationNum(@Param("sa")int seller_authority);
+
+	ArrayList<detailLocationVO> selectDetailLocation(@Param("lo_num")String lo_num);
 
 	
 
