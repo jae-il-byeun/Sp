@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.ProductVO;
 
 public interface ProductDAO {
+
+	ArrayList<LocationVO> selectLocation();
 /*
 	ArrayList<BoardVO> selectBoardList(@Param("cri") Criteria cri);
 

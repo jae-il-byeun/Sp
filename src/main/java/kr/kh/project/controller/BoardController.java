@@ -60,7 +60,7 @@ public class BoardController {
 		mv.addObject("btList", btList);
 		mv.addObject("bo_ori_num", bo_ori_num);
 		if(btList.size() == 0) {
-			mv.setViewName("redirect:/board/boardList");
+			mv.setViewName("redirect:/board/list");
 		}else
 			mv.setViewName("/board/boardInsert");
 		return mv;
