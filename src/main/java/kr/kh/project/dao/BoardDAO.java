@@ -27,6 +27,8 @@ public interface BoardDAO {
 
 	String selectBoardWriter(@Param("bo_bt_num")String bo_bt_num);
 
+	ArrayList<BoardTypeVO> selectChooseBoardType(@Param("bs_au")int me_authority);
+
 
 
 

@@ -55,7 +55,8 @@ public class BoardController {
 		// 비회원추가 해야함
 		
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
-		
+//		ArrayList<BoardTypeVO> user_btList = boardService.getUserBoardType(me_authority);
+//		System.out.println("user_btList" + user_btList);
 		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
 //		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
@@ -63,6 +64,7 @@ public class BoardController {
 //		}
 //		mv.addObject("board", board);
 		mv.addObject("btList", btList);
+//		mv.addObject("user_btList", user_btList);
 		mv.addObject("bo_ori_num", bo_ori_num);
 		if(btList.size() == 0) {
 			mv.setViewName("redirect:/board/list");
@@ -74,13 +76,18 @@ public class BoardController {
 	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		
 //		System.out.println("controller :"+board);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
+			int session_au = user.getMe_authority();
+			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
 			boardService.insertBoard_User(board, user, files);
 		}else if(user == null && seller != null) {
+			int session_au = seller.getBi_authority();
+			mv.addObject("session_au",session_au);
 			mv.addObject("nu",seller);
 			boardService.insertBoard_Seller(board, seller, files);
 		}

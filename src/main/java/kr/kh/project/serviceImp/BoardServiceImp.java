@@ -38,9 +38,16 @@ public class BoardServiceImp implements BoardService {
 	
 	@Override
 	public ArrayList<BoardTypeVO> getBoardType(int me_authority) {
-		ArrayList<BoardTypeVO> bt =boardDao.selectAllBoardType(me_authority);
+		ArrayList<BoardTypeVO> bt = new ArrayList<BoardTypeVO>();
+		if(me_authority == 9) {
+			 bt =boardDao.selectAllBoardType(me_authority);			
+		}else if(me_authority >=1) {
+			 bt = boardDao.selectChooseBoardType(me_authority);
+			
+		}
 		return bt;
 	}
+	
 
 	@Override
 	public boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files) {
@@ -135,6 +142,8 @@ public class BoardServiceImp implements BoardService {
 		System.out.println(bo_bt_num);
 		return "";
 	}
+
+
 
 
 

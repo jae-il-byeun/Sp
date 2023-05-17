@@ -17,12 +17,16 @@ public interface BoardService {
 	int getBoardTotalCount(Criteria cri);
 
 	ArrayList<BoardTypeVO> getBoardType(int me_authority);
+	
+//	ArrayList<BoardTypeVO> getUserBoardType(int me_authority);
 
 	boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files);
 
 	boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files);
 
 	String selectBoardWrite(BoardTypeVO bo_bt_num);
+
+	
 
 
 
