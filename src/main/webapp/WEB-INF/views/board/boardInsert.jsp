@@ -8,8 +8,9 @@
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<!-- ckeditor -->
+<script	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     
@@ -158,16 +159,15 @@ body{ font-family: 'GyeonggiTitleM';}
 				</li>
 			</ul>
 			<div id="board_insertBox">
-				<form action="<c:url value='/board/insert'></c:url>"method="POST" enctype="multipart/form-data">
-					<input type="hidden" name="bo_ori_num" value="${bo_ori_num }">
+				<form action="<c:url value='/board/insert'></c:url>"method="POST" >
+					<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
 						<select class="" name="bo_bt_num" id="type"  >
-							<option value="0" selected>게시판 선택</option>
+							<option value="0" >게시판 선택</option>
 							<c:forEach items="${btList}" var="bt">
 								<option value="${bt.bt_num}">${bt.bt_name}</option>
 							</c:forEach>
-
 						</select>
 					</div>
 					<div class="board_insert_semi">
@@ -176,9 +176,9 @@ body{ font-family: 'GyeonggiTitleM';}
 					</div>
 					<div id="common">
 						<div>
-							<label for="content" class="board_insert_label">내용:</label>
+							<label for="editor" class="board_insert_label">내용:</label>
 						</div>
-						<div id="editor" class="board_content" name="bo_content"></div>
+						<textarea id="editor" class="board_content" name="bo_content"></textarea>
 						<div id="extraFile">
 							<label class="board_insert_label">첨부파일:</label>
 							<input type="file" class="form-control"  name="files">
@@ -216,6 +216,22 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
+//	내용 에디터
+	var editor;
+	
+	ClassicEditor
+    .create( document.querySelector( '#editor' ), {
+    	language: 'ko'
+    } )
+    .then( newEditor => {
+        editor = newEditor;
+      } )
+    .catch( error => {
+        console.error( error );
+    } );
+</script>
+
+<script>
 $('#type').change(function(){
 	let val = $(this).val();
 	$('#common').hide();
@@ -231,7 +247,7 @@ $('#type').change(function(){
 		$('#image').show();
 	}
 		
-
+// 서버 중지 후 디버그 on server 누른 다음 switch 확인 할지 안할지 하고 그다음 파란 점 찍은다음 url로 지정해서 실행시키면 된다.
 });
 $('form').submit(function(){
 	let bo_bt_num = $('[name=bo_bt_num]').val();
@@ -246,28 +262,19 @@ $('form').submit(function(){
 		$('[name=bo_name]').focus();
 		return false;
 	}
-	let bo_content = $('[name=bo_content]').val();
-	if(bo_content.trim().length == 0 && common.indexOf($('#type').val())>=0){
+	const bo_content = editor.getData().replaceAll("<p>","").replaceAll("</p>","");
+	$()
+	if(bo_content.trim().length == 0){
 		alert('내용을 입력하세요');
 		return false;
 	}
-	if(common.indexOf($('#type').val()) < 0){
-		let images = image.querySelectorAll('[type=file]');
-		for(i= 0; i<images.length; i++){
-			if(images[i].files && images[i].files[0])
-				return true;
-		}
-		alert('이미지를 1개이상 선택하세요');
-		return false;
-	}
+	return true;
 });
-let common = [];
-<c:forEach items="${btList}" var="bt">
-	<c:if test="${bt.bt_type == '자유게시판'}">common.push('${bt.bt_num}')</c:if>
-</c:forEach>
+
 $('.file-box, .preview').click(function(){
 	$(this).siblings('input').click();
 });
+
 function readURL(input){
 	
 	if(!input.files || !input.files[0]){
@@ -281,24 +288,10 @@ function readURL(input){
 		input.nextElementSibling.src = e.target.result;
 	}
 	reader.readAsDataURL(input.files[0]);
-}
-$('select').val('${board.bo_bt_num}').trigger('change');
+};
+
 </script>
 
-<script>
-//	내용 에디터
-	var editor;
-	
-	ClassicEditor
-    .create( document.querySelector( '#editor' ), {
-    	language: 'ko'
-    } )
-    .then( newEditor => {
-        editor = newEditor;
-      } )
-    .catch( error => {
-        console.error( error );
-    } );
-</script>
+
 
 </html>

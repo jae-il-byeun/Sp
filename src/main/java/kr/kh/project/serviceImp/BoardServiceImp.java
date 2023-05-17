@@ -57,6 +57,7 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		String me_id= user.getMe_id();
 		board.setBo_me_id(me_id);
+		System.out.println(board);
 		boardDao.insertBoard(board);
 		uploadFiles(files,board.getBo_num());
 		return true;

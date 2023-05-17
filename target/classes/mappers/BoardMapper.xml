@@ -36,7 +36,7 @@
 		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
-		select * from board_type where bt_num = #{btn}
+		select * from boardType where bt_num = #{btn}
 	</select>
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
 		insert into board (bo_num, bo_name ,bo_content,bo_record_date, bo_me_id, bo_bt_num, bo_ori_num)
@@ -53,9 +53,6 @@
 	 	insert into file(fi_ori_name, fi_name, fi_bo_num) values(#{file.fi_ori_name},#{file.fi_name},#{file.fi_bo_num})
 	 </insert>
 	 
-	 <select id="selectBoardWriter" resultType="kr.kh.project.vo.BoardTypeVO">
-	 	select * from board_type where bt_num = #{bo_bt_num}
-	 </select>
 <!-- 	 <update id="updateBoardViews"> -->
 <!-- 	 	update board set bo_views = bo_views+1 where bo_num = #{bo_num} -->
 <!-- 	 </update> -->

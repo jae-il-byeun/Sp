@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
+<script src="/project/resources/js/jquery.min.js"></script>
+<script src="/project/resources/js/popper.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
@@ -50,6 +53,17 @@ body{ font-family: 'GyeonggiTitleM';}
 }
 .login_icon{width:50%; vertical-align:middle; margin-left:14px;}
 .mc{width:60%; margin-left:10px;}
+
+.h_login{}
+.h_login span{color:#fff}
+.hl_link{margin-left:8px; }
+.header_loginIcon{ margin-right:17px; width:67%; box-sizing: border-box;}
+#mli_icon{margin-left: 3%; width:65%; text-align: center;}
+.h_cataloglogin_text{ display:block; text-align: center; font-size: 13px}
+.h_exit{display:none;}
+.h_biExit{display:none;}
+.h_myPage{display:none;}
+.h_productUpload{display:none;}
 
 .title_box{ 
 	width:100%; height:50%; box-sizing: border-box;
@@ -234,9 +248,7 @@ swiper-slide img {
 	 position: absolute; top: 130px; left:90px;
 }
 #ml_login_keep{
-	width:80%; height: 10%; 
-	box-sizing:border-box;margin-top: 13px; margin-left:3px; 
-	display: inline-block;
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block; box-shadow: none;
 }
 
 #ml_btn{
@@ -247,18 +259,17 @@ swiper-slide img {
 	
 }
 #ml_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:360px; font-size: 15px;
+	position: absolute; top: 100px; left:350px; font-size: 15px;
 	background-color: green; color: #fff;  border-radius: 15px;
 }
 #ml_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
+
 #mp_login_keep{
-	width:80%; height: 10%; 
-	box-sizing:border-box;margin-top: 13px; margin-left:3px; 
-	display: inline-block;
+	width:100%; height: 10%; margin-top: 15px; margin-right:5px; display: inline-block; box-shadow: none;
 }
-#mp_btn{
+#bl_btn{
 	width:60%; height:15%; text-align: center; cursor: pointer;
 	font-size: 25px; border:1px solid #ddd; border-radius: 10px;
 	background-color: teal; color: #fff; 
@@ -266,12 +277,13 @@ swiper-slide img {
 	
 }
 #mp_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:360px; font-size: 15px;
+	position: absolute; top: 100px; left:350px; font-size: 15px;
 	background-color: teal; color: #fff;  border-radius: 15px;
 }
-#mp_loss{
+#bp_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
 }
+
 </style>
 <head>
 
@@ -289,20 +301,38 @@ swiper-slide img {
 					</a>
 				</label>
 			</li>
-			<li class="login_link mll">
+			<li class="login_link mll h_member">
 				<label>
 					<a  class="m_login" id="m_modal">
-						<img alt="" src="resources/img/member.png" class="login_icon mc"> 
+						<img alt="" src="resources/img/member.png" class="login_icon"> 
 						<span>회원</span>
 					</a>
 				</label>		
 			</li>
-			<li class="login_link">
+			<li class="login_link h_business">
 				<a class="p_login" id="p_modal">
 					<label>
 						<img alt="" src="resources/img/boss.png" class="login_icon">
 						<span>사업자</span>
 					</label>
+				</a>
+			</li>
+			<li class="login_link h_myPage">
+				<a  class="hl_link" id="myPage">
+					<img alt="" src="/project/resources/img/myPage.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">마이페이지</span> 
+				</a>
+			</li>
+			<li class="login_link h_productUpload">
+				<a  class="hl_link" id="myPage">
+					<img alt="" src="/project/resources/img/productUpload.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">상품등록</span> 
+				</a>
+			</li>
+			<li class="login_link h_exit">
+				<a  class="hl_link" id="exit">
+					<img alt="" src="/project/resources/img/exit.png" class="header_loginIcon">
+					<span class="h_cataloglogin_text">로그아웃</span> 
 				</a>
 			</li>
 		</ul>
@@ -351,7 +381,7 @@ swiper-slide img {
 				</li>
 				<li class="catalog">
 					<label>
-						<a href="#" class="catalog_link">
+						<a href="<c:url value="/board/list"></c:url>" class="catalog_link">
 							<img alt="" src="resources/img/board.png" class="catalog_icon">
 							<span>게시판</span>
 						</a>
@@ -369,6 +399,8 @@ swiper-slide img {
 				    slides-per-view="4">
 				    <swiper-slide>
 				    	<img src="/project/resources/img/night_sky.jpg">
+				    	<span class="" style="position: absolute;">평점</span>
+				    	<span style="position: absolute; float: right;">10,000</span>
 					</swiper-slide>
 				    <swiper-slide>
 						<img src="/project/resources/img/night_sky.jpg">
@@ -443,7 +475,7 @@ swiper-slide img {
 	    <a type="button" href="<c:url value="/join/member"></c:url>" id="ml_join">회원가입</a>
 	    <div class="ml_box">
 	    	<input type="text" class="ml_id" placeholder="아이디">
-	    	<input type="text" class="ml_pw" placeholder="비밀번호">
+	    	<input type="password" class="ml_pw" placeholder="비밀번호">
 	    	<label>
 	    		<input type="checkbox" id="ml_login_keep">
 	    		<span>아이디 유지</span>
@@ -463,17 +495,17 @@ swiper-slide img {
 	    <h2 class="ml_title">사업자 로그인</h2>
 	    <a type="button" href="<c:url value="/join/business"></c:url>" id="mp_join">회원가입</a>
 	    <div class="ml_box">
-	    	<input type="text" class="ml_id" placeholder="아이디">
-	    	<input type="text" class="ml_pw" placeholder="비밀번호">
+	    	<input type="text" class="bl_id" placeholder="아이디">
+	    	<input type="password" class="bl_pw" placeholder="비밀번호">
 	    	<label>
 	    		<input type="checkbox" id="mp_login_keep">
 	    		<span>아이디 유지</span>
 	    	</label>
 	    	
-	    	<a href="#" id="mp_loss" >아이디·비번찾기</a>
+	    	<a href="#" id="bp_loss" >아이디·비번찾기</a>
 	    	
 	    </div>
-	    <button id="mp_btn">로그인</button>
+	    <button id="bl_btn">로그인</button>
 	  </div>
 	</div>
 	
@@ -483,32 +515,41 @@ swiper-slide img {
 <%@ include file = "/WEB-INF/views/layout/footer.jsp" %>
 </body>
 <script>
-// dialog 열기
-// 모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
+//멤버 dialog 열기
+//모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
-  document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
-  document.getElementById("p-modal").style.display = "none";
-  
+document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+document.getElementById("p-modal").style.display = "none";
+
+
 }
 
-// 모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
+//모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementsByClassName("close")[0].onclick = function() {
-  document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
 }
 
-// 모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
+//모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
-  if (event.target == document.getElementById("modal")) {
-    document.getElementById("modal").style.display = "none";
-  }
+if (event.target == document.getElementById("modal")) {
+ document.getElementById("modal").style.display = "none";
+}
 }
 
-//dialog 열기
+//모달 요소 가져오기
+const modal = document.querySelector('#modal');
+
+//모달 외부 클릭 이벤트 핸들러 함수
+function closeModal(e) {
+if (e.target == modal) {
+ modal.style.display = 'none';
+}
+}
+//사업자 dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
 	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
 	document.getElementById("modal").style.display = "none";
-
 }
 
 //모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
@@ -519,10 +560,120 @@ document.getElementsByClassName("close")[1].onclick = function() {
 
 //모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
-	if (event.target == document.getElementById("p-modal")) {
+	if (document.getElementById("p-modal").style.display != "none"
+			//&& event.target != document.getElementById("p-modal")
+			&& event.target.className != "header_loginIcon"
+			&& $("#p-modal").find(event.target).length == 0) {//대게 length는 길이보다는 갯수를 의미.배열에 길이를 찾을 때는 [0](대가로)을 사용
 	 document.getElementById("p-modal").style.display = "none";
 	}
 }
+
+let session ="";
+$('#ml_btn').click(function(){
+	let login_id = $('.ml_id').val();
+	let login_pw = $('.ml_pw').val();
+	let login = {
+			me_id : login_id,
+			me_pw : login_pw
+			
+	};
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(login),
+		url :'<c:url value="/login/member"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(memberCheck){
+			if(memberCheck.result){
+				alert('로그인 되셨습니다.');
+				session="member";
+				window.location.reload();
+			}else{
+				alert('아이디 또는 비밀번호가 맞지않습니다.');
+			}
+		}
+	});	
+});
+$('#bl_btn').click(function(){
+	let login_id = $('.bl_id').val();
+	let login_pw = $('.bl_pw').val();
+	let loginC = {
+			bi_id : login_id,
+			bi_pw : login_pw
+			
+	};
+	$.ajax({
+		async : true,
+		type : 'POST',
+		data : JSON.stringify(loginC),
+		url :'<c:url value="/login/business"></c:url>',
+		dataType : "json",
+		contentType : "application/json; charset=UTF-8",
+		success : function(sellerCheck){
+			if(sellerCheck.result){
+				alert('로그인 되셨습니다.');
+				session="business";
+				window.location.reload();
+			}else{
+				alert('아이디 또는 비밀번호가 맞지않습니다.');
+			}
+		}
+	});	
+});
+session;
+//매번 최초 페이지 로드시.
+//로그인여부를 체크한다.
+$.ajax({
+	async: true,
+	type : 'POST',
+	data : null,
+	url : '<c:url value="/login/check"></c:url>',
+	dataType : "json",
+	contentType : "application/json; chearset=UTF-8",
+	success : function(ch){
+		if(ch.lgCheck){
+				if(ch.lgCheck.me_id != null){
+					$('.h_member').css({display:"none"});
+					$('.h_business').css({display:"none"});
+					$('.h_myPage').css({display:"block"});
+					$('.h_exit').css({display:"block"});
+
+					
+				}else if(ch.lgCheck.bi_id != null){
+					$('.h_member').css({display:"none"});
+					$('.h_business').css({display:"none"});
+					$('.h_productUpload').css({display:"block"});
+					$('.h_exit').css({display:"block"});
+	
+					
+				}		
+		}
+		
+		
+	}
+});
+
+
+//로그아웃
+$('#exit').click(function(){
+		$.ajax({
+			async : true,
+			type : 'POST',
+			url :'<c:url value="/logout"></c:url>',
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(emailCheck){
+				if(emailCheck.result){
+					alert('로그아웃 되었습니다.');
+					window.location.reload();
+					session="";
+				}else{
+					alert('로그아웃 실패');
+				}
+			}
+		});	
+	});
 </script>
 </html>
 

@@ -48,7 +48,7 @@ public class BoardController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
 		if(user == null && seller == null) {
-			MessageUtils.alertAndMovePage(response, "작성 불가능합니다.", "/project", "/board/list");
+			MessageUtils.alertAndMovePage(response, "작성 권한 없음.", "/project", "/board/list");
 		}
 		int me_authority= (Integer)session.getAttribute("au");
 
@@ -72,10 +72,10 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping(value="/board/insert", method=RequestMethod.POST)
-	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
+	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board,String bo_content, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		
+		System.out.println("content :"+bo_content);
 		System.out.println("controller :"+board);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
@@ -83,7 +83,7 @@ public class BoardController {
 			int session_au = user.getMe_authority();
 			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
-			boardService.insertBoard_User(board, user, files);
+			boardService.insertBoard_User(board, user, 	files);
 		}else if(user == null && seller != null) {
 			int session_au = seller.getBi_authority();
 			mv.addObject("session_au",session_au);

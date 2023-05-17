@@ -25,7 +25,7 @@ public interface BoardDAO {
 
 	void insertFile(@Param("file")FileVO fileVo);
 
-	String selectBoardWriter(@Param("bo_bt_num")String bo_bt_num);
+	
 
 	ArrayList<BoardTypeVO> selectChooseBoardType(@Param("bs_au")int me_authority);
 
