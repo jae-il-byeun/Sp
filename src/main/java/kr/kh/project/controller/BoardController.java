@@ -55,8 +55,7 @@ public class BoardController {
 		// 비회원추가 해야함
 		
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
-//		ArrayList<BoardTypeVO> user_btList = boardService.getUserBoardType(me_authority);
-//		System.out.println("user_btList" + user_btList);
+		System.out.println(btList);
 		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
 //		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
@@ -77,7 +76,7 @@ public class BoardController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
 		
-//		System.out.println("controller :"+board);
+		System.out.println("controller :"+board);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
@@ -94,25 +93,6 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
-	@RequestMapping(value="/board/auCheck", method=RequestMethod.POST)
-	public Map<String, Object> boardAuCheck(@RequestBody BoardTypeVO bo_bt_num, HttpSession session){
-		System.out.println("first : " +bo_bt_num);
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		String aun = boardService.selectBoardWrite(bo_bt_num);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		if(user == null && seller == null) {
-			return null;
-		}else if(user != null && seller == null) {
-			int user_au = user.getMe_authority();
-			result.put("au", user_au);
-		}else if(user == null && seller != null) {
-			int seller_au = seller.getBi_authority();
-			result.put("au", seller_au);
-		}
-		System.out.println("result : "+result);
-		return result;
-		
-	}
+
  
 }
