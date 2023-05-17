@@ -27,7 +27,7 @@ public interface ProductDAO {
 */
 //	ArrayList<LocationVO> selectLocationNum(@Param("sa")int seller_authority);
 
-	ArrayList<detailLocationVO> selectDetailLocation(@Param("lo_num")String lo_num);
+	ArrayList<detailLocationVO> selectDetailLocation(@Param("lo_num")int lo_num);
 
 	
 

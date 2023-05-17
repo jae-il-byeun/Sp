@@ -107,9 +107,11 @@ public class ProductServiceImp implements ProductService {
 	}
 
 
+
+
 	@Override
-	public ArrayList<detailLocationVO> getDetailLocation(String lo_num) {
-		
+	public ArrayList<detailLocationVO> getDetailLocation(int lo_num) {
+		// TODO Auto-generated method stub
 		return productDao.selectDetailLocation(lo_num);
 	}
 

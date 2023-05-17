@@ -19,7 +19,19 @@
 <!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
 <!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
 	</resultMap>
-
+	<insert id="insertProduct" useGeneratedKeys="true" keyProperty = "pd.product_num">
+		insert into product(product_num,product_name,product_type,product_content,product_location,product_bi_id,product_service,product_address,product_lo_num)
+		select ifnull(max(product_num),0)+1, #{bo.product_title},#{bo.bo_content},#{bo.bo_me_id}, #{bo.bo_bt_num},
+			<if test="bo.bo_ori_num == 0">
+				ifnull(max(bo_num),0)+1
+			</if>
+			<if test="bo.bo_ori_num != 0">
+				#{bo.bo_ori_num}
+			</if>
+			from board
+	 </insert>
+	 
+	 
 	 <select id="selectLocation" resultType="kr.kh.project.vo.LocationVO">
 	 	<![CDATA[
 	 		select * from location where lo_num > 0;
@@ -27,7 +39,37 @@
 	 </select>
 	 <select id="selectDetailLocation" resultType="kr.kh.project.vo.detailLocationVO">
 	 	<![CDATA[
-	 		select * from detailLocation where de_lo_num = #{lo_num}
+	 		select * from detailLocation where dl_lo_num = #{lo_num}
 	 	]]>
 	 </select>
  </mapper>
+<!-- 	 <select id="selectLocationNum" resultType="kr.kh.project.vo.LocationVO"> -->
+<!-- 	 	select * from location where lo_num = #{sa} -->
+<!-- 	 </select> -->
+
+ <!--
+INSERT INTO `project`.`product`
+(product_num,product_name,product_type,product_content,product_location,product_bi_id,product_service,product_address,product_lo_num`)
+VALUES
+(<{product_num: }>,
+<{product_name: }>,
+<{product_type: }>,
+<{product_content: }>,
+<{product_location: }>,
+<{product_bi_id: }>,
+<{product_service: }>,
+<{product_address: }>,
+<{product_lo_num: }>);
+
+  
+  
+	String product_type;
+	String product_title;
+	String product_service_type;
+	MultipartFile[] product_images;
+	String product_detail;
+	ProductRoomsVO[] product_rooms;
+  
+  -->
+
+ 

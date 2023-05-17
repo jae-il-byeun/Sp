@@ -20,6 +20,7 @@ import kr.kh.project.vo.ProductVO;
 import kr.kh.project.vo.detailLocationVO;
 import kr.kh.project.service.ProductService;
 import kr.kh.project.vo.LocationVO;
+import kr.kh.project.vo.MemberVO;
 import kr.kh.project.vo.ProductRoomsVO;
 
 @Controller
@@ -60,19 +61,21 @@ public class ProductController {
 		mv.setViewName("/product/productUpload");
 		return mv;
     }
-	@RequestMapping(value = "/product/detailLoction", method = RequestMethod.GET)
-	public Map<String, Object> detailLocation(@RequestBody String lo_num ) {
-		System.out.println(lo_num);
+	@RequestMapping(value = "/product/detailLocation", method = RequestMethod.POST)
+	public Map<String, Object> detailLocation(@RequestBody int lo_num ) {
+		System.out.println("현재 필요 " + lo_num);
+		// string lo_num을 int형태로 바꾸는 구문
+//		int dl_lo_num = Integer.parseInt(lo_num);
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		ArrayList<detailLocationVO> detailLocationList = productService.getDetailLocation(lo_num);
-		System.out.println(detailLocationList);
+		System.out.println("detail : " + detailLocationList);
 		return result;
 	}
 
 	
 	@ResponseBody
 	@RequestMapping(value="/product/productUploadData",method= RequestMethod.POST)
-	public Map<String, Object> ProductUploadData(@RequestBody ProductVO params) {
+	public Map<String, Object> ProductUploadData(@RequestBody ProductVO params,HttpSession session) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		String product_title = params.getProduct_title();
@@ -80,6 +83,12 @@ public class ProductController {
 		String product_detail = params.getProduct_detail();
 		MultipartFile[] product_images = params.getProduct_images();
 		ProductRoomsVO[] product_rooms = params.getProduct_rooms();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+//		productService.productInsert(params, user);
+		
+		
 		
 		
 		

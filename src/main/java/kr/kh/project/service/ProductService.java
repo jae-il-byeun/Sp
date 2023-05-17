@@ -13,7 +13,9 @@ public interface ProductService {
 
 	ArrayList<LocationVO> getLocationNum();
 
-	ArrayList<detailLocationVO> getDetailLocation(String lo_num);
+	
+
+	ArrayList<detailLocationVO> getDetailLocation(int lo_num);
 
 	
 	

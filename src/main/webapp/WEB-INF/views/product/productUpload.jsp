@@ -540,12 +540,12 @@ body {
 									</select>
 								</td>
 								<td>
-									<select class="product_upload_location" name="dl_num" id="type">
-										<option value="0">세부 지역</option>
+<!-- 									<select class="product_upload_location" name="dl_num" id="type"> -->
+<!-- 										<option value="0">세부 지역</option> -->
 <%-- 										<c:forEach items="${detailLocation_list}" var="dl"> --%>
 <%-- 											<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
 <%-- 										</c:forEach> --%>
-									</select>
+<!-- 									</select> -->
 								</td>
 							</tr>
 							<tr style="margin-bottom:10px;">
@@ -581,14 +581,15 @@ body {
 
 </body>
 <script>
+// 교육원
 $('#type').change(function(){
 	let lo_num = $('[name=lo_num]').val();
 	let send = { lo_num : lo_num };
 	
 	$.ajax({
 		async : true,
-		type : 'GET',
-		data: JSON.stringify(send),
+		type : 'POST',
+		data: lo_num,
 		url : "<c:url value='/product/detailLocation'></c:url>",
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
@@ -654,9 +655,9 @@ $('#type').change(function(){
 		});
 		
 		let params = {
-			product_type: $("#product_type").val()
-			, product_title: $("#product_name").val()
-			, product_service_type: $("input[name='product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
+			product_type: $("#sel_product_type").val()
+			, product_title: $("#txt_product_service_title").val()
+			, product_service_type: $("input[name='chk_product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
 			, product_images: fileList
 			, product_detail: editor.getData()
 			, product_rooms: rooms
@@ -753,6 +754,7 @@ $('#type').change(function(){
 		this.style.backgroundColor = '';
 		
 		fnFileUpload(e.dataTransfer.files);
+		
  	});
 </script>
 <script>
