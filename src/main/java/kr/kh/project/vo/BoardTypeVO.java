@@ -27,4 +27,12 @@ public class BoardTypeVO {
 		}
 		return"";
 	}
+//	private String getProduct_type(int product_type) {
+//		switch(product_type) {
+//		case 0: return "호텔";
+//		case 1: return "모텔";
+//		case 2: return "펜션";
+//		}
+//		return "";
+//	}
 }

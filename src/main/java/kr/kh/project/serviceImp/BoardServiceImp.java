@@ -51,14 +51,13 @@ public class BoardServiceImp implements BoardService {
 
 	@Override
 	public boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files) {
-//		System.out.println("impl : "+board);
 		if(user == null)
 			return false;
 		if(!checkBoard(board))
 			return false;
 		String me_id= user.getMe_id();
 		board.setBo_me_id(me_id);
-//		System.out.println("게시판 정보"+board);
+		System.out.println(board);
 		boardDao.insertBoard(board);
 		uploadFiles(files,board.getBo_num());
 		return true;

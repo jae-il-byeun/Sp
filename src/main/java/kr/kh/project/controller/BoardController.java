@@ -33,11 +33,11 @@ public class BoardController {
        
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public ModelAndView boardList(ModelAndView mv,Criteria cri) {
-//		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
-//		int totalCount = boardService.getBoardTotalCount(cri);
-//		PageMaker page = new PageMaker(totalCount,10, cri);
-//		mv.addObject("board_list",board_list);
-//		mv.addObject("page",page);
+		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
+		int totalCount = boardService.getBoardTotalCount(cri);
+		PageMaker page = new PageMaker(totalCount,10, cri);
+		mv.addObject("board_list",board_list);
+		mv.addObject("page",page);
 		mv.setViewName("/board/boardList");
 		return mv;
 	}
@@ -48,15 +48,14 @@ public class BoardController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
 		if(user == null && seller == null) {
-			MessageUtils.alertAndMovePage(response, "작성 불가능합니다.", "/project", "/board/list");
+			MessageUtils.alertAndMovePage(response, "작성 권한 없음.", "/project", "/board/list");
 		}
 		int me_authority= (Integer)session.getAttribute("au");
 
 		// 비회원추가 해야함
 		
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
-//		ArrayList<BoardTypeVO> user_btList = boardService.getUserBoardType(me_authority);
-//		System.out.println("user_btList" + user_btList);
+		System.out.println(btList);
 		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
 //		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
@@ -73,18 +72,18 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping(value="/board/insert", method=RequestMethod.POST)
-	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
+	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board,String bo_content, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		
-//		System.out.println("controller :"+board);
+		System.out.println("content :"+bo_content);
+		System.out.println("controller :"+board);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
 			int session_au = user.getMe_authority();
 			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
-			boardService.insertBoard_User(board, user, files);
+			boardService.insertBoard_User(board, user, 	files);
 		}else if(user == null && seller != null) {
 			int session_au = seller.getBi_authority();
 			mv.addObject("session_au",session_au);
@@ -94,25 +93,6 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
-	@RequestMapping(value="/board/auCheck", method=RequestMethod.POST)
-	public Map<String, Object> boardAuCheck(@RequestBody BoardTypeVO bo_bt_num, HttpSession session){
-		System.out.println("first : " +bo_bt_num);
-		HashMap<String, Object> result = new HashMap<String, Object>();
-		String aun = boardService.selectBoardWrite(bo_bt_num);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		if(user == null && seller == null) {
-			return null;
-		}else if(user != null && seller == null) {
-			int user_au = user.getMe_authority();
-			result.put("au", user_au);
-		}else if(user == null && seller != null) {
-			int seller_au = seller.getBi_authority();
-			result.put("au", seller_au);
-		}
-		System.out.println("result : "+result);
-		return result;
-		
-	}
+
  
 }

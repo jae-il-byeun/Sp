@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
 
@@ -27,7 +28,7 @@ body{font-family: 'GyeonggiTitleM';}
 	box-shadow: 1px 1px 5px gray; font-size: 20px;
 	box-sizing:border-box; padding: 10px 10px 5px 15px; 
 }
-#pt_title{margin:5px 0px 30px 10px;}
+#product_type{margin:5px 0px 30px 10px;}
 .product_placeBox{
 width:100%; height:35%;  
 	box-sizing:border-box; padding: 0px 10px 5px 15px;  display:flex; text-align: center;
@@ -134,26 +135,20 @@ width:100%; height:35%;
 <div class="product_outterContainer">
 	<div class="product_innerContainer">
 		<div class="product_titleBox">
-			<h1 id="pt_title">호텔</h1>
+			<h1 id="product_type">호텔</h1>
 			<div class="product_placeBox">
-				<ul class="product_search_mainPlace">
-				<li>
-					<span>서울</span>
-				</li>
-				<li>
-					
-				</li>
-			</ul>
-			<ul class="product_search_subPlace">
-				<li>
-					<span>종로/명동/을지로</span>
-				</li>
-			</ul>
-			<div class="product_search_calender">
-				<input type="text" class="dayCheck">
-				<span>~</span>
-				<input type="text" class="dayCheck">
-			</div>
+				<select class="product_upload_location" name="lo_num" id="type">
+					<option value="0">지역 선택</option>
+<%-- 					<c:forEach items="${location_list}" var="lo"> --%>
+<%-- 						<option value="${lo.lo_num}">${lo.lo_name}</option> --%>
+<%-- 					</c:forEach> --%>
+				</select>
+				<select class="product_upload_location" name="dl_num" id="type">
+					<option value="0">세부 지역</option>
+	<%-- 				<c:forEach items="${detailLocation_list}" var="dl"> --%>
+	<%-- 					<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
+	<%-- 				</c:forEach> --%>
+				</select>
 			</div>
 		</div>
 		
@@ -176,102 +171,102 @@ width:100%; height:35%;
 							<li class="product">
 								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num" >
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon"  id="pf_file_num">
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>
 							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
+								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
 								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
+									<a class="product_title" id="product_name">파라다이스 시티</a>
 									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
+										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
 									</button>
 									
 									<div class="product_detailInfo">
 										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
+										<span id="rv_star">4.5/평점</span>
 										
 									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
+									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
 									
 							</li>

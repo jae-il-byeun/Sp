@@ -8,8 +8,9 @@
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<!-- ckeditor -->
+<script	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     
@@ -99,6 +100,23 @@ body{ font-family: 'GyeonggiTitleM';}
 .board_insert_content{
 	width:80%;
 }
+/* 이미지 */
+ .file-box{
+ 	width:100px; height: 200px; border : 1px solid black; font-size: 50px;
+ 	text-align :center; line-height:200px; font-weight: bold;
+ 	border-radius: 5px;
+ 	float:left; cursor: pointer;
+ }
+ 
+ #image>div::after{
+ 	display:block; content: ''; clear:both;
+ }
+ #image [type=file]{
+ 	display: none;	
+ }
+ #image>div>div{
+ 	float: left; margin-right:20px;
+ }
 .board_insert_complete{
 	width:70%; height:100px;
 }
@@ -107,7 +125,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	font-size: 40px;
 	border: 1px solid #fff; border-radius: 7px; 
 	background-color: tan; color: #fff;
-	box-sizing: border-box; margin-left: 15%;
+	box-sizing: border-box; margin-left: 15%; margin-top:2%;
 }
 .ck-content{
 	height:500px;
@@ -141,17 +159,15 @@ body{ font-family: 'GyeonggiTitleM';}
 				</li>
 			</ul>
 			<div id="board_insertBox">
-				<form action="<c:url value='/board/insert'></c:url>"method="POST" enctype="multipart/form-data">
-					<input type="hidden" name="bo_ori_num" value="${bo_ori_num }">
+				<form action="<c:url value='/board/insert'></c:url>"method="POST" >
+					<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
-						<select class="" name="bo_bt_num" id="type"  <c:if test="${board != null }">readonly</c:if>>
-							<option value="0">게시판을 선택하세요</option>
-					
+						<select class="" name="bo_bt_num" id="type"  >
+							<option value="0" >게시판 선택</option>
 							<c:forEach items="${btList}" var="bt">
 								<option value="${bt.bt_num}">${bt.bt_name}</option>
 							</c:forEach>
-
 						</select>
 					</div>
 					<div class="board_insert_semi">
@@ -160,17 +176,17 @@ body{ font-family: 'GyeonggiTitleM';}
 					</div>
 					<div id="common">
 						<div>
-							<label for="content" class="board_insert_label">내용:</label>
+							<label for="editor" class="board_insert_label">내용:</label>
 						</div>
-						<div id="editor" class="board_content" name="bo_content"></div>
-						<div>
+						<textarea id="editor" class="board_content" name="bo_content"></textarea>
+						<div id="extraFile">
 							<label class="board_insert_label">첨부파일:</label>
 							<input type="file" class="form-control"  name="files">
 							<input type="file" class="form-control"  name="files">
 							<input type="file" class="form-control"  name="files">
 						</div>
 					</div>
-					<div id="image" style="display: none;">
+					<div id="image" >
 						<label>이미지:</label>
 						<div>
 							<div>
@@ -200,93 +216,6 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-$('#type').change(function(){
-	let val = $(this).val();
-	$('#common').hide();
-	$('#image').hide();
-	if(val == 0)
-		return ;
-	
-let bo_bt_num = $('[name=bo_bt_num]').val();
-let btjson ={bo_bt_num : bo_bt_num};
-
-$.ajax({
-	async : true,
-	type : 'POST',
-	data : JSON.stringify(btjson),
-	url : '<c:url value="/board/auCheck"></c:url>',
-	dataType : "json",
-	contentType :"application/json; charset=UTF-8",
-	success : function(result){
-		if(result.au == 1){
-			console.log('jsp :' + p);
-			alert(p);	
-		}else if(result.au == 2){
-			console.log('jsp :' + p);
-			alert(p);	
-		}
-		
-		
-	}
-});
-	if(val > 0){
-		$('#common').show();
-		
-	}
-});
-$('form').submit(function(){
-	let bo_bt_num = $('[name=bo_bt_num]').val();
-	if(bo_bt_num == 0){
-		alert('게시판을 선택하세요.');
-		$('[name=bo_bt_num]').focus();
-		return false;
-	}
-	let bo_title =$('[name=bo_title]').val();
-	if(bo_title.trim().length == 0){
-		alert('제목을 입력하세요');
-		$('[name=bo_title]').focus();
-		return false;
-	}
-	let bo_content = $('[name=bo_content]').val();
-	if(bo_content.trim().length == 0 && common.indexOf($('#type').val())>=0){
-		alert('내용을 입력하세요');
-		return false;
-	}
-	if(common.indexOf($('#type').val()) < 0){
-		let images = image.querySelectorAll('[type=file]');
-		for(i= 0; i<images.length; i++){
-			if(images[i].files && images[i].files[0])
-				return true;
-		}
-		alert('이미지를 1개이상 선택하세요');
-		return false;
-	}
-});
-let common = [];
-<c:forEach items="${btList}" var="bt">
-	<c:if test="${bt.bt_type == '자유게시판'}">common.push('${bt.bt_num}')</c:if>
-</c:forEach>
-$('.file-box, .preview').click(function(){
-	$(this).siblings('input').click();
-});
-function readURL(input){
-	
-	if(!input.files || !input.files[0]){
-		input.nextElementSibling.src ='';
-		input.previousElementSibling.style.display = 'block';
-		return;
-	}
-	let reader = new FileReader();
-	reader.onload = function(e){
-		input.previousElementSibling.style.display = 'none';
-		input.nextElementSibling.src = e.target.result;
-	}
-	reader.readAsDataURL(input.files[0]);
-}
-$('select').val('${board.bo_bt_num}').trigger('change');
-</script>
-
-<script>
 //	내용 에디터
 	var editor;
 	
@@ -301,5 +230,67 @@ $('select').val('${board.bo_bt_num}').trigger('change');
         console.error( error );
     } );
 </script>
+
+<script>
+$('#type').change(function(){
+	let val = $(this).val();
+	$('#common').hide();
+	$('#image').hide();
+	if(val == 2){
+		$('#common').show();
+		$('#image').show();
+		$('#extraFile').hide();
+		$('#board_insertBox').css({"height":"900px"});
+	}else if(val == 1){
+		$('#common').show();
+		$('#board_insertBox').css({"height":"1050px"});
+		$('#image').show();
+	}
+		
+// 서버 중지 후 디버그 on server 누른 다음 switch 확인 할지 안할지 하고 그다음 파란 점 찍은다음 url로 지정해서 실행시키면 된다.
+});
+$('form').submit(function(){
+	let bo_bt_num = $('[name=bo_bt_num]').val();
+	if(bo_bt_num == 0){
+		alert('게시판을 선택하세요.');
+		$('[name=bo_bt_num]').focus();
+		return false;
+	}
+	let bo_name =$('[name=bo_name]').val();
+	if(bo_name.trim().length == 0){
+		alert('제목을 입력하세요');
+		$('[name=bo_name]').focus();
+		return false;
+	}
+	const bo_content = editor.getData();
+	if(bo_content.trim().length == 0){
+		alert('내용을 입력하세요');
+		return false;
+	}
+	return true;
+});
+
+$('.file-box, .preview').click(function(){
+	$(this).siblings('input').click();
+});
+
+function readURL(input){
+	
+	if(!input.files || !input.files[0]){
+		input.nextElementSibling.src ='';
+		input.previousElementSibling.style.display = 'block';
+		return;
+	}
+	let reader = new FileReader();
+	reader.onload = function(e){
+		input.previousElementSibling.style.display = 'none';
+		input.nextElementSibling.src = e.target.result;
+	}
+	reader.readAsDataURL(input.files[0]);
+};
+
+</script>
+
+
 
 </html>
