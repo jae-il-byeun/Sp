@@ -61,9 +61,10 @@ body{ font-family: 'GyeonggiTitleM';}
 /* ================================================================================================================ */
 /* 게시판 Box */
 #board_insertBox{
-	width:80%; height:700px;
+	width:95%; height:700px;
 	margin-left:60px;
-	border: 1px solid #ddd; border-radius: 7px; box-shadow: 1px 1px 1px #ddd;
+	border: 1px solid #ddd; border-radius: 7px; 
+	box-shadow: 1px 1px 1px #ddd;
 }
 #board_insert{
 	width:100%; height: 680px;
@@ -141,30 +142,30 @@ body{ font-family: 'GyeonggiTitleM';}
 			<h2>게시글 작성</h2>
 		</div>
 		<div class="main_contentContainer">	
-			<ul class="board_typeBox">
-				<li class="board_type">
-					<hr>
-				</li>
-				<li class="board_type">
-					<a class="board_link">공지사항</a>
-					<hr>
-				</li>
-				<li class="board_type">
-					<a class="board_link">자유게시판</a>
-					<hr>
-				</li>
-				<li class="board_type">
-					<a class="board_link">QnA</a>
-					<hr>
-				</li>
-			</ul>
+<!-- 			<ul class="board_typeBox"> -->
+<!-- 				<li class="board_type"> -->
+<!-- 					<hr> -->
+<!-- 				</li> -->
+<!-- 				<li class="board_type"> -->
+<!-- 					<a class="board_link">공지사항</a> -->
+<!-- 					<hr> -->
+<!-- 				</li> -->
+<!-- 				<li class="board_type"> -->
+<!-- 					<a class="board_link">자유게시판</a> -->
+<!-- 					<hr> -->
+<!-- 				</li> -->
+<!-- 				<li class="board_type"> -->
+<!-- 					<a class="board_link">QnA</a> -->
+<!-- 					<hr> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
 			<div id="board_insertBox">
 				<form action="<c:url value='/board/insert'></c:url>"method="POST" >
 					<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
 						<select class="" name="bo_bt_num" id="type"  >
-							<option value="0" >게시판 선택</option>
+							<option>게시판 선택</option>
 							<c:forEach items="${btList}" var="bt">
 								<option value="${bt.bt_num}">${bt.bt_name}</option>
 							</c:forEach>
@@ -236,12 +237,12 @@ $('#type').change(function(){
 	let val = $(this).val();
 	$('#common').hide();
 	$('#image').hide();
-	if(val == 2){
+	if(val == 1){
 		$('#common').show();
 		$('#image').show();
 		$('#extraFile').hide();
 		$('#board_insertBox').css({"height":"900px"});
-	}else if(val == 1){
+	}else if(val == 0){
 		$('#common').show();
 		$('#board_insertBox').css({"height":"1050px"});
 		$('#image').show();
@@ -272,6 +273,7 @@ $('form').submit(function(){
 
 $('.file-box, .preview').click(function(){
 	$(this).siblings('input').click();
+
 });
 
 function readURL(input){
@@ -287,10 +289,38 @@ function readURL(input){
 		input.nextElementSibling.src = e.target.result;
 	}
 	reader.readAsDataURL(input.files[0]);
+	alert(reader);
 };
 
 </script>
-
+<script>
+// 	var fileList = [];
+	
+// 	var va = document.querySelector('[name=files]');
+// 	var inputFile = va.querySelector('.btn-upload');
+	
+// 	allfileUpload = function(files){
+// 		if(files != null && files != undefined && files.length > 0){
+// 			fileList = [];
+// 			var tag = "";
+// 			for(i=0; i<files.length; i++){
+// 				var fi = files[i];
+// 				fileList.push(f);
+// 				var fileName = fi.name;
+// 				var fileSize = fi.size / 1024 / 1024;
+// 				fileSize = fileSize < 1 ? fileSize.toFixed(3) : fileSize.toFixed(1);
+				
+// 				if(fi.size > 1024*1024){
+// 					fileSize = (fi.size / 1024 / 1024).toFixed(1) + " MB";
+// 				}
+// 				else{
+// 					fileSize = (fi.size / 1024).toFixed(fi.size > 1024 ? 1: 3) + " KB";
+// 				}
+// 			}
+			
+// 		}
+// 	}
+</script>
 
 
 </html>

@@ -29,30 +29,36 @@
 	</select>
 	
 <!-- 	list -->
-	<select id="selectBoardList" resultMap="Board">
-		select * from board where (bo_name like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%'))
-		<if test="cri.type != 0">
-			AND bo_bt_num = #{cri.type}
-		</if>
-		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	<select id="selectBoardTotalCount" resultType="int">
-  		select count(*) from board
-  			where
-  				(bo_name like concat('%',#{cri.search} ,'%')
-  				or bo_content like concat('%',#{cri.search} ,'%'))
-  				<if test="cri.type != 0">
-  					and bo_bt_num = #{cri.type}  				
-  				</if>
-  	</select>
+<!-- 	<select id="selectBoardList" resultMap="Board"> -->
+<!-- 		select * from board where (bo_name like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%')) -->
+<!-- 		<if test="cri.type != 0"> -->
+<!-- 			AND bo_bt_num = #{cri.type} -->
+<!-- 		</if> -->
+<!-- 		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum} -->
+<!-- 	</select> -->
+		<select id="selectBoardList" resultType="kr.kh.project.vo.BoardVO">
+			select * from board 
+		</select>
+<!-- 	<select id="selectBoardTotalCount" resultType="int"> -->
+<!--   		select count(*) from board -->
+<!--   			where -->
+<!--   				(bo_name like concat('%',#{cri.search} ,'%') -->
+<!--   				or bo_content like concat('%',#{cri.search} ,'%')) -->
+<!--   				<if test="cri.type != 0"> -->
+<!--   					and bo_bt_num = #{cri.type}  				 -->
+<!--   				</if> -->
+<!--   	</select> -->
   	
 	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
 		select * from boardType where bt_num = #{btn}
 	</select>
+	<select id="selectBoardListType" resultType="kr.kh.project.vo.BoardTypeVO">
+		select * from boardType 
+	</select>
 	
-	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
+	<insert id="userInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
 		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_me_id, bo_bt_num, bo_ori_num)
-		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content}, now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num},
+		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num},
 			<if test="bo.bo_ori_num == 0">
 				ifnull(max(bo_num),0)+1
 			</if>
@@ -61,6 +67,20 @@
 			</if>
 			from board
 	 </insert>
+	 <insert id="sellerInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
+		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_bi_id, bo_bt_num, bo_ori_num)
+		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_bi_id}, #{bo.bo_bt_num},
+			<if test="bo.bo_ori_num == 0">
+				ifnull(max(bo_num),0)+1
+			</if>
+			<if test="bo.bo_ori_num != 0">
+				#{bo.bo_ori_num}
+			</if>
+			from board
+	 </insert>
+	 
+	 
+	 
 	 <insert id="insertFile">
 	 	insert into file(fi_ori_name, fi_name, fi_bo_num) values(#{file.fi_ori_name},#{file.fi_name},#{file.fi_bo_num})
 	 </insert>

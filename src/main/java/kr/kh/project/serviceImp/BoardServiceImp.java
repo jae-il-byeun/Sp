@@ -1,6 +1,7 @@
 package kr.kh.project.serviceImp;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +25,20 @@ public class BoardServiceImp implements BoardService {
 	
 	String uploadPath = "D:\\uploadfiles";
 	
+//	@Override
+//	public ArrayList<BoardVO> getBoardList(Criteria cri) {
+//		if(cri == null)
+//			cri = new Criteria();
+//		System.out.println(cri);
+//		
+//		return boardDao.selectBoardList(cri);
+//	}
 	@Override
-	public ArrayList<BoardVO> getBoardList(Criteria cri) {
-		if(cri == null)
-			cri = new Criteria();
-		return boardDao.selectBoardList(cri);
-	}
+	public ArrayList<BoardVO> getBoardList() {
+		ArrayList<BoardVO> testArrayList = boardDao.selectBoardList();
 
+		return testArrayList;
+	}
 	@Override
 	public int getBoardTotalCount(Criteria cri) {
 		return boardDao.selectBoardTotalCount(cri);
@@ -47,7 +55,11 @@ public class BoardServiceImp implements BoardService {
 		}
 		return bt;
 	}
-	
+	@Override
+	public ArrayList<BoardTypeVO> getBoardListType() {
+		ArrayList<BoardTypeVO> bt = boardDao.selectBoardListType();
+		return bt;
+	}
 
 	@Override
 	public boolean insertBoard_User(BoardVO board, MemberVO user, MultipartFile[] files) {
@@ -57,9 +69,9 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		String me_id= user.getMe_id();
 		board.setBo_me_id(me_id);
-		System.out.println(board);
-		boardDao.insertBoard(board);
-		uploadFiles(files,board.getBo_num());
+
+		boardDao.userInsertBoard(board);
+//		uploadFiles(files,board.getBo_num());
 		return true;
 	}
 
@@ -71,6 +83,7 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		String bi_id= seller.getBi_id();
 		board.setBo_bi_id(bi_id);
+		boardDao.sellerInsertBoard(board);
 		return true;
 	}
 	
@@ -88,30 +101,30 @@ public class BoardServiceImp implements BoardService {
 		
 		return true;
 	}
-	private void uploadFiles(MultipartFile [] files,int bo_num) {
-		//첨부파일 없을 시
-				if(files ==null || files.length == 0 )
-					return ;
-				//반복문
-				for(MultipartFile file : files) {
-					if(file == null || file.getOriginalFilename().length()==0)
-						continue;
-					String fileName = "";
-					//첨부파일 서버에 업로드
-					try {
-						fileName = UploadFileUtils.uploadFile(uploadPath,
-								 file.getOriginalFilename(), //파일명
-								 file.getBytes()); //실제 파일 데이터
-					} catch(Exception e){
-						e.printStackTrace();
-					}
-					
-					//첨부파일 객체를 생성
-					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
-					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
-					boardDao.insertFile(fileVo);
-				}
-	}
+//	private void uploadFiles(MultipartFile [] files,int bo_num) {
+//		//첨부파일 없을 시
+//				if(files ==null || files.length == 0 )
+//					return ;
+//				//반복문
+//				for(MultipartFile file : files) {
+//					if(file == null || file.getOriginalFilename().length()==0)
+//						continue;
+//					String fileName = "";
+//					//첨부파일 서버에 업로드
+//					try {
+//						fileName = UploadFileUtils.uploadFile(uploadPath,
+//								 file.getOriginalFilename(), //파일명
+//								 file.getBytes()); //실제 파일 데이터
+//					} catch(Exception e){
+//						e.printStackTrace();
+//					}
+//					
+//					//첨부파일 객체를 생성
+//					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
+//					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
+//					boardDao.insertFile(fileVo);
+//				}
+//	}
 //	@Override
 //	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
 //		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
@@ -141,6 +154,11 @@ public class BoardServiceImp implements BoardService {
 		System.out.println(bo_bt_num);
 		return "";
 	}
+
+
+
+
+
 
 
 

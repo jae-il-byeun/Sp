@@ -32,12 +32,25 @@ public class BoardController {
 	BoardService boardService;
        
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
-	public ModelAndView boardList(ModelAndView mv,Criteria cri) {
-		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
-		int totalCount = boardService.getBoardTotalCount(cri);
-		PageMaker page = new PageMaker(totalCount,10, cri);
+	public ModelAndView boardList(ModelAndView mv,Criteria cri,HttpSession session) {
+		ArrayList<BoardVO> board_list = boardService.getBoardList();
+		ArrayList<BoardTypeVO> btList= boardService.getBoardListType();
+////		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		if(user != null && seller != null) {
+			int aunch = (Integer)session.getAttribute("au");
+			mv.addObject("aunch", aunch);
+		}
+		
+//		int aunch =(Integer)session.getAttribute("au");
+//		System.out.println(aunch);
+////		int totalCount = boardService.getBoardTotalCount(cri);
+////		PageMaker page = new PageMaker(totalCount,10, cri);
+//		mv.addObject("aunch",aunch);
+		mv.addObject("btList",btList);
 		mv.addObject("board_list",board_list);
-		mv.addObject("page",page);
+//		mv.addObject("page",page);
 		mv.setViewName("/board/boardList");
 		return mv;
 	}
@@ -51,11 +64,8 @@ public class BoardController {
 			MessageUtils.alertAndMovePage(response, "작성 권한 없음.", "/project", "/board/list");
 		}
 		int me_authority= (Integer)session.getAttribute("au");
-
 		// 비회원추가 해야함
-		
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
-		System.out.println(btList);
 		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
 //		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
@@ -63,7 +73,6 @@ public class BoardController {
 //		}
 //		mv.addObject("board", board);
 		mv.addObject("btList", btList);
-//		mv.addObject("user_btList", user_btList);
 		mv.addObject("bo_ori_num", bo_ori_num);
 		if(btList.size() == 0) {
 			mv.setViewName("redirect:/board/list");
@@ -72,11 +81,10 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping(value="/board/insert", method=RequestMethod.POST)
-	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board,String bo_content, HttpSession session, MultipartFile []files) {
+	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		System.out.println("content :"+bo_content);
-		System.out.println("controller :"+board);
+//		System.out.println("file :"+files);
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {

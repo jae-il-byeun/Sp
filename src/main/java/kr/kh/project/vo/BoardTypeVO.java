@@ -6,7 +6,6 @@ import lombok.Data;
 public class BoardTypeVO {
 	//sql의 속성을 보고 타입에 맞게 변수설정
 	int bt_num;
-	String bt_type;
 	String bt_name;
 	int bt_read_authority;
 	int bt_writer_authority;

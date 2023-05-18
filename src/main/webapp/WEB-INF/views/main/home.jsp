@@ -324,7 +324,7 @@ swiper-slide img {
 				</a>
 			</li>
 			<li class="login_link h_productUpload">
-				<a  class="hl_link" id="myPage">
+				<a href="<c:url value="/product/productUpload"></c:url>"  class="hl_link" id="myPage">
 					<img alt="" src="/project/resources/img/productUpload.png" class="header_loginIcon">
 					<span class="h_cataloglogin_text">상품등록</span> 
 				</a>

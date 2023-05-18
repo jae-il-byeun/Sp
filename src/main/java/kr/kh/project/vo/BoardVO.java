@@ -10,8 +10,8 @@ public class BoardVO {
 	int bo_num;
 	String bo_name;
 	String bo_content;
-	Date bo_record_date;
-	Date bo_update_date;
+	String bo_record_date;
+	String bo_update_date;
 	int bo_views;
 	int bo_up;
 	int bo_down;
@@ -21,7 +21,7 @@ public class BoardVO {
 	int bo_bt_num;
 	String bt_name;
 	
-	public String getBo_register_date_str() { // 그리고 겟터를 만들어줌
+	public String getBo_record_date_str() { // 그리고 겟터를 만들어줌
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return format.format(bo_record_date);
 	}

@@ -4,8 +4,8 @@
 <%@ page session="false" %>
 <html>
 
-
-    
+<script src="/project/resources/js/pagination.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
@@ -56,6 +56,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	margin-left:50px;
 	border: 1px solid #ddd; border-radius: 7px; 
 	box-shadow: 1px 1px 1px #ddd;
+	position:relative;
 }
 #board_Listbox{
 	min-height:200px;
@@ -97,8 +98,30 @@ body{ font-family: 'GyeonggiTitleM';}
 .border_ListPersent{
 }
 /* 게시판 리스트 */
-.border_List{
+.board_List{
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
+.list_search{
+ 	display: flex;
+ 	
+ }
+ .search_button_box{
+ 	width:5%; height:5%;
+ }
+ .btn_search{
+ 	width:100%; height:100%;
+ 	border:1px solid #ddd; border-radius: 7px;
+ 	background-color: green; color: #fff;
+ }
+ .btn_write{
+ 	width:5%; height:4.5%;
+ 	border:1px solid #ddd; border-radius: 7px;
+ 	background-color: skyblue; color: #fff;
+ 	position: absolute; right: 0px;
+ 	margin-right:10px;
+ }
+ 
 #border_name{
 }
 #border_w{
@@ -155,45 +178,42 @@ body{ font-family: 'GyeonggiTitleM';}
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${board_list}" var="board" varStatus="bo">
+						<c:forEach items="${board_list}" var="board" >
 							<tr class="board_List">
-								<td id="board_number">${board.bo_num}</td>
-								<td id="board_type">${board.bo_type}</td>
-								<td id="board_title">${board.bo_name}</td>
-								<td id="board_writer">
+								<td id="bo_num">${board.bo_num}</td>
+								<td id="bo_bt_num">
+									<c:if test="${board.bo_bt_num == 0}">공지사항</c:if>
+									<c:if test="${board.bo_bt_num == 1}">자유게시판</c:if>
+								
+								</td>
+								<td id="bo_name">${board.bo_name}</td>
+								<td>
 									<c:if test="${board.bo_me_id != null}">${board.bo_me_id}</c:if>
 									<c:if test="${board.bo_bi_id != null}">${board.bo_bi_id}</c:if>
 								</td>
-								<td id="board_up_down">
-									<c:if test="${board.bo_type == 1}">-</c:if>
-									<c:if test="${board.bo_type == 2}">${board.bo_up}/${board.bo_down}</c:if>
+								<td>
+									<c:if test="${board.bo_bt_num == 0}">-</c:if>
+									<c:if test="${board.bo_bt_num == 1}">${board.bo_up}/${board.bo_down}</c:if>
 								</td>
-								<td id="board_writeDay">${board.bo_record_date}</td>
-								<td id="board_click">${board.bo_views}</td>
+								<td>${board.bo_record_date}</td>
+								<td>${board.bo_views}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<ul class="pagination">
-					<c:if test="${page.prev}">
-						<li class="page-item"><a class="page-link" href="<c:url value='Board/list?page=${page.startPage -1 }@search=${page.cri.search}&type=${page.cri.type}'></c:url>">이전</a></li>
-					</c:if>
-					<c:forEach begin="${page.startPage}" end="${page.endPage}" var="i">
-						<li class="page-item<c:if test="${page.cri.page == i }">active</c:if>">
-							<a class="page-link" href="<c:url value='/Board/list?page=${i}&search=${page.cri.search}&type= ${page.cri.type}'></c:url>">다음</a>
-						</li>
-					</c:forEach>
-					<c:if test="${page.next}">
-						<li class="page-item">
-							<a class="page-link" href="<c:url value='/Board/list?page=${page.endPage+1}&search=${page.cri.search}&type=${page.cri.type}'></c:url>">다음</a>
-						</li>
-					</c:if>
-				</ul>
-				<form class="list_search" action="<c:url value='/Board/list'></c:url>">
+				<div class="pagination" id="pagination">
+					
+				</div>
+				<form class="list_search" action="<c:url value='/board/list'></c:url>">
 					<select class="list_type_name" name="type">
-						<option value="0"></option>
-						<c:forEach items="${typeList}" var="type">
-							<option value="${type.bt_num}" <c:if test="${page.cri.type == type.bt_num}">selected</c:if>>${type.bt_name}</option>
+						<c:forEach items="${btList}" var="board" >
+							<c:if test="${board.bt_num == 0 }">
+								<option value="${board.bt_num}">공지사항</option>
+							</c:if>
+							<c:if test="${board.bt_num == 1 }">
+								<option value="${board.bt_num}">자유게시판</option>
+							</c:if>
+							
 						</c:forEach>
 					</select>
 					<input type="text" class="list_search_text" placeholder="Search" name="search" value="${page.cri.search}">
@@ -201,8 +221,8 @@ body{ font-family: 'GyeonggiTitleM';}
 						<button class="btn_search" type="submit">검색</button>
 					</div>
 				</form>
-				<c:if test="${user != null }">
-					<a href="<c:url value="/Board/insert"></c:url>">
+				<c:if test="${aunch != 0}">
+					<a href="<c:url value="/board/insert"></c:url>">
 						<button class="btn_write">글쓰기</button>
 					</a>
 				</c:if>
@@ -213,6 +233,16 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-
+let sour = ${board_list}.querySelector();
+alert(sour);
+$('#pagination').pagination({
+    dataSource: 
+		for(var i=1; i <= sour;),
+    callback: function(data, pagination) {
+        // template method of yourself
+        var html = template(data);
+        dataContainer.html(html);
+    }
+})
 </script>
 </html>

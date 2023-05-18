@@ -10,24 +10,40 @@ import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.FileVO;
 
 public interface BoardDAO {
+	
+	ArrayList<BoardVO> selectBoardList();
 
-	ArrayList<BoardVO> selectBoardList(@Param("cri") Criteria cri);
 
 	int selectBoardTotalCount(@Param("cri") Criteria cri);
 
 	ArrayList<BoardTypeVO> selectAllBoardType(@Param("au") int me_authority);
 
-	BoardVO selectBoardList(@Param("bo")int bo_num);
+//	BoardVO selectBoardList(@Param("bo")int bo_num);
 
 	BoardTypeVO selectBoardType(@Param("btn")int bo_bt_num);
 
-	void insertBoard(@Param("bo")BoardVO board);
+	ArrayList<BoardTypeVO> selectBoardListType();
+	
+	
+	void userInsertBoard(@Param("bo")BoardVO board);
+	
+	void sellerInsertBoard(@Param("bo")BoardVO board);
 
-	void insertFile(@Param("file")FileVO fileVo);
+//	void insertFile(@Param("file")FileVO fileVo);
 
 	
 
 	ArrayList<BoardTypeVO> selectChooseBoardType(@Param("bs_au")int me_authority);
+
+
+
+
+
+
+
+	
+
+	
 
 
 

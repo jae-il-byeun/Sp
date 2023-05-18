@@ -12,11 +12,13 @@ import kr.kh.project.vo.MemberVO;
 
 public interface BoardService {
 
-	ArrayList<BoardVO> getBoardList(Criteria cri);
 
+	ArrayList<BoardVO> getBoardList();
+	
 	int getBoardTotalCount(Criteria cri);
 
 	ArrayList<BoardTypeVO> getBoardType(int me_authority);
+	ArrayList<BoardTypeVO> getBoardListType();
 	
 //	ArrayList<BoardTypeVO> getUserBoardType(int me_authority);
 
@@ -25,6 +27,10 @@ public interface BoardService {
 	boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files);
 
 	String selectBoardWrite(BoardTypeVO bo_bt_num);
+
+	
+
+	
 
 	
 
