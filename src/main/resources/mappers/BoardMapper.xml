@@ -5,7 +5,7 @@
  <mapper namespace="kr.kh.project.dao.BoardDAO">
  	<resultMap type="kr.kh.project.vo.BoardVO" id="Board">
  		<id property="bo_num" column="bo_num" />
-		<result  property="bo_title" column="bo_title" />
+		<result  property="bo_name" column="bo_name" />
 		<result  property="bo_content" column="bo_content" />
 		<result  property="bo_record_date" column="bo_record_date" />
 		<result  property="bo_update_date" column="bo_update_date" />
@@ -16,7 +16,7 @@
 		<result  property="bo_me_num" column="bo_me_num" />
 		<result  property="bo_bi_num" column="bo_bi_num" />
 		<result  property="bo_bt_num" column="bo_bt_num" />
-<!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
+		<collection property="fileList" ofType="kr.kh.project.vo.FileVO" column="bo_num" select="selectFileList"/>
 		<collection property="type" ofType="kr.kh.project.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/>
 	</resultMap>
 	<select id="selectAllBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
@@ -28,19 +28,31 @@
 		select * from boardType where bt_writer_authority BETWEEN #{bs_au}+2 AND #{bs_au}+4
 	</select>
 	
+<!-- 	list -->
 	<select id="selectBoardList" resultMap="Board">
-		select * from board where (bo_title like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%'))
-		<if test="cri.type ! = 0">
-			and bo_bt_num = #{cri.type}
+		select * from board where (bo_name like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%'))
+		<if test="cri.type != 0">
+			AND bo_bt_num = #{cri.type}
 		</if>
 		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
+	<select id="selectBoardTotalCount" resultType="int">
+  		select count(*) from board
+  			where
+  				(bo_name like concat('%',#{cri.search} ,'%')
+  				or bo_content like concat('%',#{cri.search} ,'%'))
+  				<if test="cri.type != 0">
+  					and bo_bt_num = #{cri.type}  				
+  				</if>
+  	</select>
+  	
 	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
 		select * from boardType where bt_num = #{btn}
 	</select>
+	
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
-		insert into board (bo_num, bo_name ,bo_content,bo_record_date, bo_me_id, bo_bt_num, bo_ori_num)
-		select ifnull(max(bo_num),0)+1, #{bo.bo_name},#{bo.bo_content},now(),#{bo.bo_me_id}, #{bo.bo_bt_num},
+		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_me_id, bo_bt_num, bo_ori_num)
+		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content}, now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num},
 			<if test="bo.bo_ori_num == 0">
 				ifnull(max(bo_num),0)+1
 			</if>
@@ -57,6 +69,6 @@
 <!-- 	 	update board set bo_views = bo_views+1 where bo_num = #{bo_num} -->
 <!-- 	 </update> -->
 <!-- 	 <select id="selectBoard" resultMap="Board"> -->
-<!-- 	 	select * from board join board_type on bo_bt_num = bt_num where bo_num =#{bo_num} -->
+<!-- 	 	select * from board join board_ty	pe on bo_bt_num = bt_num where bo_num =#{bo_num} -->
 <!-- 	 </select> -->
  </mapper>

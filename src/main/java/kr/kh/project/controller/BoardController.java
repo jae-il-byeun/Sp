@@ -33,11 +33,11 @@ public class BoardController {
        
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public ModelAndView boardList(ModelAndView mv,Criteria cri) {
-//		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
-//		int totalCount = boardService.getBoardTotalCount(cri);
-//		PageMaker page = new PageMaker(totalCount,10, cri);
-//		mv.addObject("board_list",board_list);
-//		mv.addObject("page",page);
+		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
+		int totalCount = boardService.getBoardTotalCount(cri);
+		PageMaker page = new PageMaker(totalCount,10, cri);
+		mv.addObject("board_list",board_list);
+		mv.addObject("page",page);
 		mv.setViewName("/board/boardList");
 		return mv;
 	}

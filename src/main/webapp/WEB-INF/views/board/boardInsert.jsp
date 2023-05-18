@@ -262,8 +262,7 @@ $('form').submit(function(){
 		$('[name=bo_name]').focus();
 		return false;
 	}
-	const bo_content = editor.getData().replaceAll("<p>","").replaceAll("</p>","");
-	$()
+	const bo_content = editor.getData();
 	if(bo_content.trim().length == 0){
 		alert('내용을 입력하세요');
 		return false;
