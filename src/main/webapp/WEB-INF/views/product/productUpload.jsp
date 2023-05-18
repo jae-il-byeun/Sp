@@ -532,20 +532,19 @@ body {
 							<tr>
 								<td class="product_upload_group"><h2>지역태그</h2></td>
 								<td>
-									<select class="product_upload_location" name="lo_num" id="type">
-										<option value="0">지역 선택</option>
+									<select class="product_upload_location" name="lo_num" id="type_lo">
+										<!-- <option value="0">지역 선택</option> -->
 										<c:forEach items="${location_list}" var="lo">
 											<option value="${lo.lo_num}">${lo.lo_name}</option>
 										</c:forEach>
 									</select>
-								</td>
-								<td>
-<!-- 									<select class="product_upload_location" name="dl_num" id="type"> -->
-<!-- 										<option value="0">세부 지역</option> -->
-<%-- 										<c:forEach items="${detailLocation_list}" var="dl"> --%>
-<%-- 											<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
-<%-- 										</c:forEach> --%>
-<!-- 									</select> -->
+									
+ 									<select class="product_upload_location" name="dl_num" id="type_dl">
+ 										<!-- <option value="0">세부 지역</option> -->
+										<%-- <c:forEach items="${detailLocationList}" var="dl">
+											<option value="${dl.dl_num}">${dl.dl_name}</option>
+										</c:forEach> --%>
+ 									</select>
 								</td>
 							</tr>
 							<tr style="margin-bottom:10px;">
@@ -582,7 +581,9 @@ body {
 </body>
 <script>
 // 교육원
-$('#type').change(function(){
+$('#type_lo').change(function(){
+	$("#type_dl").empty();
+	
 	let lo_num = $('[name=lo_num]').val();
 	let send = { lo_num : lo_num };
 	
@@ -594,10 +595,17 @@ $('#type').change(function(){
 		dataType : "json",
 		contentType : "application/json; charset=UTF-8",
 		success : function(detailLocation_list){
-			
+			if(detailLocation_list != null && detailLocation_list.length > 0){
+				for(var i=0; i<detailLocation_list.length; i++){
+					var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
+					$("#type_dl").append(option);
+				}
+			}
 		} 
 	});
 });
+
+$('#type_lo').change();
 </script>
 <script>
 	var editor;
@@ -622,15 +630,15 @@ $('#type').change(function(){
 					<input type="file" class="product_room_img pf" multiple>\
 				</td>\
 				<td class="product_room_intro">\
-					<span>객실이름 : </span> <input type="text" name="product_room_title">\
+					<span>객실이름</span> <input type="text" name="product_room_title">\
 				</td>\
 				<td class="product_room_intro">\
-					<span>객실가격 : </span> <input type="text" name="product_room_price">\
+					<span>객실가격</span> <input type="text" name="product_room_price">\
 				</td>\
 			</tr>\
 			<tr class="product_room_tr">\
 				<td class="product_room_intro">\
-					<span style="display: block;">객실이용안내 : </span> <textarea rows="5" cols="33" name="product_room_detail" style="padding: 5px 5px 5px 10px; width: 500px;"></textarea>\
+					<span style="display: block;">객실이용안내</span> <textarea rows="5" cols="33" name="product_room_detail" style="padding: 5px 5px 5px 10px; width: 500px;"></textarea>\
 				</td>\
 				<td class="product_room_intro">\
 					<button type="button" class="product_room_cancel">취소</button>\
@@ -649,20 +657,25 @@ $('#type').change(function(){
 				files: $(ele).find("input")[0].files
 				, title: $(ele).find("input:eq('1')").val()
 				, price: $(ele).find("input:eq('2')").val()
-				, detail: $(ele).find("textarea:eq('0')").val()
+				, intro: $(ele).find("textarea:eq('0')").val()
 			}
 			rooms.push(rooms_items);
 		});
 		
 		let params = {
 			product_type: $("#sel_product_type").val()
-			, product_title: $("#txt_product_service_title").val()
-			, product_service_type: $("input[name='chk_product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
+			, product_name: $("#txt_product_service_title").val()
+			, product_service: $("input[name='chk_product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
 			, product_images: fileList
-			, product_detail: editor.getData()
+			, product_content: editor.getData()
+			, product_lo_num: $("#type_lo").val()
+			, product_dl_num: $("#type_dl").val()
+			, product_postNum: $("#sample6_postcode").val()
+			, product_mainAddress: $("#sample6_address").val()
+			, product_detailAddress: $("#sample6_detailAddress").val()
+			, product_extraAddress: $("#sample6_extraAddress").val()
 			, product_rooms: rooms
 		}
-		
 		$.ajax({
 			async : true,
 			type : 'POST',
@@ -677,7 +690,7 @@ $('#type').change(function(){
 					alert('실패');
 				}
 			}
-		});		
+		});
 	});
 </script>
 <script>

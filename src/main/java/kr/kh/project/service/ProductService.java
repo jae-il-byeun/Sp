@@ -6,6 +6,7 @@ import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductVO;
 //import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.detailLocationVO;
+//import kr.kh.project.vo.BusinessVO;
 
 public interface ProductService {
 

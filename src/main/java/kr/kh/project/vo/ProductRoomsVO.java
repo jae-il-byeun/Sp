@@ -6,8 +6,11 @@ import lombok.Data;
 
 @Data
 public class ProductRoomsVO {
+	Integer num;
 	MultipartFile[] files;
 	String title;
-	int price;
-	String detail;
+	Integer price;
+	String intro;
+	
+	Integer product_num;
 }
