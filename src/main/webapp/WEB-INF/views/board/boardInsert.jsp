@@ -160,7 +160,7 @@ body{ font-family: 'GyeonggiTitleM';}
 <!-- 				</li> -->
 <!-- 			</ul> -->
 			<div id="board_insertBox">
-				<form action="<c:url value='/board/insert'></c:url>"method="POST" >
+				<form action="<c:url value='/board/insert'></c:url>" method="POST" enctype="multipart/form-data">
 					<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
@@ -182,9 +182,9 @@ body{ font-family: 'GyeonggiTitleM';}
 						<textarea id="editor" class="board_content" name="bo_content"></textarea>
 						<div id="extraFile">
 							<label class="board_insert_label">첨부파일:</label>
-							<input type="file" class="form-control"  name="files">
-							<input type="file" class="form-control"  name="files">
-							<input type="file" class="form-control"  name="files">
+							<input type="file" class="form-control"  name="files" >
+							<input type="file" class="form-control"  name="files" >
+							<input type="file" class="form-control"  name="files" >
 						</div>
 					</div>
 					<div id="image" >
@@ -192,17 +192,17 @@ body{ font-family: 'GyeonggiTitleM';}
 						<div>
 							<div>
 								<div class="file-box">+</div>
-								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
+								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
 								<image class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
-								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
+								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
 								<image class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
-								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
+								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
 								<image class="preview" height="200" width="auto">
 							</div>
 						</div>	
@@ -289,38 +289,9 @@ function readURL(input){
 		input.nextElementSibling.src = e.target.result;
 	}
 	reader.readAsDataURL(input.files[0]);
-	alert(reader);
+
 };
 
 </script>
-<script>
-// 	var fileList = [];
-	
-// 	var va = document.querySelector('[name=files]');
-// 	var inputFile = va.querySelector('.btn-upload');
-	
-// 	allfileUpload = function(files){
-// 		if(files != null && files != undefined && files.length > 0){
-// 			fileList = [];
-// 			var tag = "";
-// 			for(i=0; i<files.length; i++){
-// 				var fi = files[i];
-// 				fileList.push(f);
-// 				var fileName = fi.name;
-// 				var fileSize = fi.size / 1024 / 1024;
-// 				fileSize = fileSize < 1 ? fileSize.toFixed(3) : fileSize.toFixed(1);
-				
-// 				if(fi.size > 1024*1024){
-// 					fileSize = (fi.size / 1024 / 1024).toFixed(1) + " MB";
-// 				}
-// 				else{
-// 					fileSize = (fi.size / 1024).toFixed(fi.size > 1024 ? 1: 3) + " KB";
-// 				}
-// 			}
-			
-// 		}
-// 	}
-</script>
-
 
 </html>

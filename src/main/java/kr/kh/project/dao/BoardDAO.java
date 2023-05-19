@@ -29,7 +29,7 @@ public interface BoardDAO {
 	
 	void sellerInsertBoard(@Param("bo")BoardVO board);
 
-//	void insertFile(@Param("file")FileVO fileVo);
+	void insertFile(@Param("file")FileVO fileVo);
 
 	
 

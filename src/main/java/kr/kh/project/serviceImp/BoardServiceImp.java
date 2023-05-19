@@ -69,9 +69,9 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		String me_id= user.getMe_id();
 		board.setBo_me_id(me_id);
-
+		System.out.println(board);
 		boardDao.userInsertBoard(board);
-//		uploadFiles(files,board.getBo_num());
+		uploadFiles(files,board.getBo_num());
 		return true;
 	}
 
@@ -101,30 +101,33 @@ public class BoardServiceImp implements BoardService {
 		
 		return true;
 	}
-//	private void uploadFiles(MultipartFile [] files,int bo_num) {
-//		//첨부파일 없을 시
-//				if(files ==null || files.length == 0 )
-//					return ;
-//				//반복문
-//				for(MultipartFile file : files) {
-//					if(file == null || file.getOriginalFilename().length()==0)
-//						continue;
-//					String fileName = "";
-//					//첨부파일 서버에 업로드
-//					try {
-//						fileName = UploadFileUtils.uploadFile(uploadPath,
-//								 file.getOriginalFilename(), //파일명
-//								 file.getBytes()); //실제 파일 데이터
-//					} catch(Exception e){
-//						e.printStackTrace();
-//					}
-//					
-//					//첨부파일 객체를 생성
-//					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
-//					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
-//					boardDao.insertFile(fileVo);
-//				}
-//	}
+	
+	private void uploadFiles(MultipartFile [] files,int bo_num) {
+		//첨부파일 없을 시
+				if(files ==null || files.length == 0 )
+					return ;
+				//반복문
+				for(MultipartFile file : files) {
+					if(file == null || file.getOriginalFilename().length()==0)
+						continue;
+					String fileName = "";
+					//첨부파일 서버에 업로드
+					try {
+						fileName = UploadFileUtils.uploadFile(uploadPath,
+								 file.getOriginalFilename(), //파일명
+								 file.getBytes()); //실제 파일 데이터
+					} catch(Exception e){
+						e.printStackTrace();
+					}
+					
+					//첨부파일 객체를 생성
+					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
+					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
+					boardDao.insertFile(fileVo);
+//					int file_num = boardDao.selectFileNum(fileVo);
+//					boardDao.insertBoardFile(fileVo,bo_num);
+				}
+	}
 //	@Override
 //	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
 //		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)

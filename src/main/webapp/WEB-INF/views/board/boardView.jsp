@@ -139,7 +139,7 @@ body{ font-family: 'GyeonggiTitleM';}
 	<div class= "main_innerContainer">
 	
 		<div class="board_titleBox">
-			<h2>게시글 작성</h2>
+			<h2>게시글 수정</h2>
 		</div>
 		<div class="main_contentContainer">	
 <!-- 			<ul class="board_typeBox"> -->
@@ -160,7 +160,6 @@ body{ font-family: 'GyeonggiTitleM';}
 <!-- 				</li> -->
 <!-- 			</ul> -->
 			<div id="board_insertBox">
-				<form action="<c:url value='/board/insert'></c:url>"method="POST" >
 					<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
@@ -207,8 +206,6 @@ body{ font-family: 'GyeonggiTitleM';}
 							</div>
 						</div>	
 					</div>
-					<button type="submit" id="btn_complete">작성완료</button>
-				</form>
 			</div>
 			
 		</div>
