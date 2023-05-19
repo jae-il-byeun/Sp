@@ -6,14 +6,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class FileVO {
-	int fi_num;
-	String fi_ori_name;
-	String fi_name;
-	int fi_bo_num;
-	public FileVO(String fi_ori_name, String fi_name, int fi_bo_num) {
-		this.fi_ori_name = fi_ori_name;
-		this.fi_name = fi_name;
-		this.fi_bo_num = fi_bo_num;
+	int file_num;
+	String file_name;
+	String file_location;
+	String file_originName;
+	long file_size;
+	
+	public FileVO( String file_name, String file_originName, String file_location,long file_size) {
+		this.file_name = file_name;
+		this.file_originName = file_originName;
+		this.file_location = file_location;
+		this.file_size = file_size;
 	}
 	
 }

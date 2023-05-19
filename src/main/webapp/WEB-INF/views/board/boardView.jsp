@@ -4,9 +4,9 @@
 <%@ page session="false" %>
 <html>
 <link rel="stylesheet" href="<c:url value='/resources/css/jquery-ui.min.css'></c:url>">
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
 <!-- ckeditor -->
 <script	src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
@@ -164,21 +164,27 @@ body{ font-family: 'GyeonggiTitleM';}
 					<div class="board_insert_semi">
 						<label for="type" class="board_insert_label">분류 :</label>
 						<select class="" name="bo_bt_num" id="type"  >
-							<option>게시판 선택</option>
-							<c:forEach items="${btList}" var="bt">
-								<option value="${bt.bt_num}">${bt.bt_name}</option>
-							</c:forEach>
+							<option><c:if test="${sbl.bo_bt_num == 0}">공지사항</c:if></option>
+							<option><c:if test="${sbl.bo_bt_num == 1}">자유게시판</c:if></option>
 						</select>
 					</div>
 					<div class="board_insert_semi">
 						<label for="title" class="board_insert_label">제목:</label>
-						<input type="text" class="board_title_text" id="title" name="bo_name">
+						<input type="text" class="board_title_text" id="title" name="bo_name">${sbl.bo_name}
 					</div>
 					<div id="common">
 						<div>
 							<label for="editor" class="board_insert_label">내용:</label>
 						</div>
 						<textarea id="editor" class="board_content" name="bo_content"></textarea>
+						<c:if test="${files.size() != 0 }">
+							<div id="extraFile">
+								<label class="board_insert_label">첨부파일:</label>
+								<c:forEach items ="${files}" var="file">
+									<a class="form-control" href="<c:url value='/download${file.fi_name}'></c:url>" download="${file.fi_ori_name}">${file.fi_ori_name}</a>
+								</c:forEach>
+							</div>
+						</c:if>
 						<div id="extraFile">
 							<label class="board_insert_label">첨부파일:</label>
 							<input type="file" class="form-control"  name="files">
@@ -186,23 +192,43 @@ body{ font-family: 'GyeonggiTitleM';}
 							<input type="file" class="form-control"  name="files">
 						</div>
 					</div>
+					<c:if test="${board.bt_type =='이미지' }">
+						<div id="image">
+							<div class="form-group mt-3">
+								<label>이미지</label>
+								<div class="swiper mySwiper">
+								  <div class="swiper-wrapper">
+								  	<c:forEach items="${files}" var="file">
+								  		<div class="swiper-slide">
+											<img src="<c:url value="/download${file.fi_name}"></c:url>" height="200" width="auto">
+											
+										</div>	
+									</c:forEach>
+								  </div>
+								  <div class="swiper-button-next"></div>
+								  <div class="swiper-button-prev"></div>
+								  <div class="swiper-pagination"></div>
+								</div>
+							</div>
+						</div>
+					</c:if>
 					<div id="image" >
 						<label>이미지:</label>
 						<div>
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);">
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 						</div>	
 					</div>

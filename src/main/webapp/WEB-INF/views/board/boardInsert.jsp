@@ -193,17 +193,17 @@ body{ font-family: 'GyeonggiTitleM';}
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 							<div>
 								<div class="file-box">+</div>
 								<input type="file" class="board_img"  name="files" accept="image/*" onchange="readURL(this);" >
-								<image class="preview" height="200" width="auto">
+								<img class="preview" height="200" width="auto">
 							</div>
 						</div>	
 					</div>
@@ -252,7 +252,7 @@ $('#type').change(function(){
 });
 $('form').submit(function(){
 	let bo_bt_num = $('[name=bo_bt_num]').val();
-	if(bo_bt_num == 0){
+	if(bo_bt_num == null){
 		alert('게시판을 선택하세요.');
 		$('[name=bo_bt_num]').focus();
 		return false;

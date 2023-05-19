@@ -86,8 +86,7 @@ public class BoardController {
 	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-		System.out.println(board);
-		System.out.println(files);
+		//파일 저장시 사이즈를 정해주고 넣어야한다.
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
@@ -95,6 +94,7 @@ public class BoardController {
 			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
 			boardService.insertBoard_User(board, user, 	files);
+//			boardService.insertFile_user(board, user, files);
 		}else if(user == null && seller != null) {
 			int session_au = seller.getBi_authority();
 			mv.addObject("session_au",session_au);

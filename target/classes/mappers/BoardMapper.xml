@@ -67,6 +67,9 @@
 			</if>
 			from board
 	 </insert>
+	<insert id="userInserBoardFile">
+		insert into boardfile (bf_bo_num, bf_fi_num, bf_type) values ( #{bf.bf_bo_num}, #{bf.bf_fi_num}, #{bf.bf_type})
+	 </insert> 
 	 <insert id="sellerInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
 		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_bi_id, bo_bt_num, bo_ori_num)
 		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_bi_id}, #{bo.bo_bt_num},
@@ -82,7 +85,7 @@
 	 
 	 
 	 <insert id="insertFile">
-	 	insert into file(fi_ori_name, fi_name, fi_bo_num) values(#{file.fi_ori_name},#{file.fi_name},#{file.fi_bo_num})
+	 	insert into file(file_name, file_originName, file_location, file_size) values(#{file.file_name}, #{file.file_originName},#{file.file_location},#{file.file_size})
 	 </insert>
 	 
 <!-- 	 <update id="updateBoardViews"> -->
