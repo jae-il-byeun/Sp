@@ -3,34 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="kr.kh.project.dao.ProductDAO">
- 	<resultMap type="kr.kh.project.vo.ProductVO" id="Product">
- 		<id property="bo_num" column="bo_num" />
-		<result  property="bo_title" column="bo_title" />
-		<result  property="bo_content" column="bo_content" />
-		<result  property="bo_record_date" column="bo_record_date" />
-		<result  property="bo_update_date" column="bo_update_date" />
-		<result  property="bo_views" column="bo_views" />
-		<result  property="bo_up" column="bo_up" />
-		<result  property="bo_down" column="bo_down" />
-		<result  property="bo_ori_num" column="bo_ori_num" />
-		<result  property="bo_me_num" column="bo_me_num" />
-		<result  property="bo_bi_num" column="bo_bi_num" />
-		<result  property="bo_bt_num" column="bo_bt_num" />
-<!-- 		<collection property="fileList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/> -->
-<!-- 		<collection property="type" ofType="kr.kh.spring.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/> -->
-	</resultMap>
-	<insert id="insertProduct" useGeneratedKeys="true" keyProperty = "pd.product_num">
-		insert into product(product_num,product_name,product_type,product_content,product_location,product_bi_id,product_service,product_address,product_lo_num)
-		select ifnull(max(product_num),0)+1, #{bo.product_title},#{bo.bo_content},#{bo.bo_me_id}, #{bo.bo_bt_num},
-			<if test="bo.bo_ori_num == 0">
-				ifnull(max(bo_num),0)+1
-			</if>
-			<if test="bo.bo_ori_num != 0">
-				#{bo.bo_ori_num}
-			</if>
-			from board
-	 </insert>
-	 
+	<insert id="insertProduct" useGeneratedKeys="true" keyColumn="product_num" keyProperty = "pd.product_num">
+		insert into product(product_num,product_name,product_type,product_content,product_bi_id,product_service,product_lo_num,product_postNum,product_mainAddress,product_detailAddress,product_extraAddress)
+		select ifnull(max(product_num),0)+1
+			,#{pd.product_name}
+			,#{pd.product_type}
+			,#{pd.product_content}
+			,#{pd.product_bi_id}
+			,#{pd.product_service}
+			,#{pd.product_lo_num}
+			,#{pd.product_postNum}
+			,#{pd.product_mainAddress}
+			,#{pd.product_detailAddress}
+			,#{pd.product_extraAddress}
+			from product
+	 </insert>	 
 	 
 	 <select id="selectLocation" resultType="kr.kh.project.vo.LocationVO">
 	 	<![CDATA[
@@ -48,27 +35,21 @@
 <!-- 	 </select> -->
 
  <!--
-INSERT INTO `project`.`product`
-(product_num,product_name,product_type,product_content,product_location,product_bi_id,product_service,product_address,product_lo_num`)
-VALUES
-(<{product_num: }>,
-<{product_name: }>,
-<{product_type: }>,
-<{product_content: }>,
-<{product_location: }>,
-<{product_bi_id: }>,
-<{product_service: }>,
-<{product_address: }>,
-<{product_lo_num: }>);
+product_num 
+product_name 
+product_type 
+product_content 
+product_location varchar(200) 
+product_bi_id varchar(20) 
+product_service varchar(500) 
+product_lo_num int 
+product_address varchar(50) 
+product_postNum varchar(5) 
+product_mainAddress varchar(100) 
+product_detailAddress varchar(50) 
+product_extraAddress varchar(50)
 
-  
-  
-	String product_type;
-	String product_title;
-	String product_service_type;
-	MultipartFile[] product_images;
-	String product_detail;
-	ProductRoomsVO[] product_rooms;
+
   
   -->
 

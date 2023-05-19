@@ -28,6 +28,8 @@ public interface BoardService {
 
 	String selectBoardWrite(BoardTypeVO bo_bt_num);
 
+	boolean insertFile_user(BoardVO board, MemberVO user, MultipartFile[] files);
+
 	
 
 	

@@ -233,16 +233,16 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 <script>
-let sour = ${board_list}.querySelector();
-alert(sour);
-$('#pagination').pagination({
-    dataSource: 
-		for(var i=1; i <= sour;),
-    callback: function(data, pagination) {
-        // template method of yourself
-        var html = template(data);
-        dataContainer.html(html);
-    }
-})
+// let sour = ${board_list}.querySelector();
+// alert(sour);
+// $('#pagination').pagination({
+//     dataSource: 
+// 		for(var i=1; i <= sour;),
+//     callback: function(data, pagination) {
+//         // template method of yourself
+//         var html = template(data);
+//         dataContainer.html(html);
+//     }
+// })
 </script>
 </html>

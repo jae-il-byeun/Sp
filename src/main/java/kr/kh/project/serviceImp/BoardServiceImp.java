@@ -2,6 +2,7 @@ package kr.kh.project.serviceImp;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.kh.project.dao.BoardDAO;
 import kr.kh.project.pagination.Criteria;
 import kr.kh.project.service.BoardService;
+import kr.kh.project.vo.BoardFileVO;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
@@ -69,12 +71,21 @@ public class BoardServiceImp implements BoardService {
 			return false;
 		String me_id= user.getMe_id();
 		board.setBo_me_id(me_id);
-
+		
+		
 		boardDao.userInsertBoard(board);
-//		uploadFiles(files,board.getBo_num());
+		
+//		boardDao.userInserBoardFile(bf);
 		return true;
 	}
-
+	@Override
+	public boolean insertFile_user(BoardVO board, MemberVO user, MultipartFile[] files) {
+		if(!checkBoard(board))
+			return false;
+		FileVO file = uploadFiles(files, board);
+		BoardFileVO bf = new BoardFileVO();
+		return true;
+	}
 	@Override
 	public boolean insertBoard_Seller(BoardVO board, BusinessVO seller, MultipartFile[] files) {
 		if(seller == null)
@@ -101,30 +112,59 @@ public class BoardServiceImp implements BoardService {
 		
 		return true;
 	}
-//	private void uploadFiles(MultipartFile [] files,int bo_num) {
-//		//첨부파일 없을 시
-//				if(files ==null || files.length == 0 )
-//					return ;
-//				//반복문
-//				for(MultipartFile file : files) {
-//					if(file == null || file.getOriginalFilename().length()==0)
-//						continue;
-//					String fileName = "";
-//					//첨부파일 서버에 업로드
-//					try {
-//						fileName = UploadFileUtils.uploadFile(uploadPath,
-//								 file.getOriginalFilename(), //파일명
-//								 file.getBytes()); //실제 파일 데이터
-//					} catch(Exception e){
-//						e.printStackTrace();
+	
+	private FileVO uploadFiles(MultipartFile [] files,BoardVO board) {
+		//첨부파일 없을 시
+				if(files ==null || files.length == 0 )
+					return null;
+				//반복문
+				FileVO fileVo = new FileVO();
+//				List<FileVO> test = new ArrayList<FileVO>();
+				for(MultipartFile file : files) {
+					if(file == null || file.getOriginalFilename().length()==0)
+						continue;
+					String fileName = "";
+					//첨부파일 서버에 업로드
+					
+					try {
+						fileName = UploadFileUtils.uploadFile(uploadPath,
+								 file.getOriginalFilename(), //파일명
+								 file.getBytes()); //실제 파일 데이터
+								
+					} catch(Exception e){
+						e.printStackTrace();
+					}
+//					if(board.getBo_bt_num() == 0) {
+//						String bf ="";
+//						
+//						if(file.getFile_originName().contains(".jpg") || file.getFile_originName().contains(".png")
+//								|| file.getFile_originName().contains(".gif")|| file.getFile_originName().contains(".jpeg")) {
+//							bf ="이미지";
+//							
+//						}else
+//							bf="첨부파일";
+//						
+//					}else if(board.getBo_bt_num() == 1) {
+//						bf.setBf_bo_num(board.getBo_num());
+//						bf.setBf_fi_num(file.getFile_num());
+//						bf="이미지";
 //					}
-//					
-//					//첨부파일 객체를 생성
-//					FileVO fileVo = new FileVO(file.getOriginalFilename(), fileName, bo_num);
-//					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
-//					boardDao.insertFile(fileVo);
-//				}
-//	}
+					//DB에 파일 속성 더하기  ,   파일 유형 , 게시판번호(외래키)
+					//FileVO 에 String file_type int file_bo_num 추가
+					// fileVo에 객체 추가 
+					//첨부파일 객체를 생성
+					fileVo = new FileVO(fileName,file.getOriginalFilename(), uploadPath, file.getSize());
+
+					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
+					boardDao.insertFile(fileVo);
+					
+					
+				
+//					int file_num = boardDao.selectFileNum(fileVo);
+				}
+//				test = new ArrayList<FileVO>(fileVo.getFile_num());
+				return fileVo;
+	}
 //	@Override
 //	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
 //		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)

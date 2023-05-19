@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,7 +25,9 @@ import kr.kh.project.utils.MessageUtils;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
+import kr.kh.project.vo.FileVO;
 import kr.kh.project.vo.MemberVO;
+
 
 @Controller
 public class BoardController {
@@ -38,19 +42,17 @@ public class BoardController {
 ////		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		
+////		int totalCount = boardService.getBoardTotalCount(cri);
+////		PageMaker page = new PageMaker(totalCount,10, cri);
+		
 		if(user != null && seller != null) {
 			int aunch = (Integer)session.getAttribute("au");
 			mv.addObject("aunch", aunch);
 		}
-		
-//		int aunch =(Integer)session.getAttribute("au");
-//		System.out.println(aunch);
-////		int totalCount = boardService.getBoardTotalCount(cri);
-////		PageMaker page = new PageMaker(totalCount,10, cri);
-//		mv.addObject("aunch",aunch);
+//		mv.addObject("page",page);
 		mv.addObject("btList",btList);
 		mv.addObject("board_list",board_list);
-//		mv.addObject("page",page);
 		mv.setViewName("/board/boardList");
 		return mv;
 	}
@@ -84,7 +86,7 @@ public class BoardController {
 	public ModelAndView boardInsertPost(ModelAndView mv, BoardVO board, HttpSession session, MultipartFile []files) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-//		System.out.println("file :"+files);
+		//파일 저장시 사이즈를 정해주고 넣어야한다.
 		if(user == null && seller == null) {
 			mv.setViewName("redirect:/");
 		}else if(user != null && seller == null) {
@@ -92,6 +94,7 @@ public class BoardController {
 			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
 			boardService.insertBoard_User(board, user, 	files);
+//			boardService.insertFile_user(board, user, files);
 		}else if(user == null && seller != null) {
 			int session_au = seller.getBi_authority();
 			mv.addObject("session_au",session_au);
@@ -101,6 +104,28 @@ public class BoardController {
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
+	@RequestMapping(value = "/board/detail", method=RequestMethod.GET)
+	public ModelAndView boardDetail(ModelAndView mv, HttpSession session,
+			HttpServletResponse response) { //		@PathVariable("bo_num")int bo_num,
 
+
+		int auck = (Integer)session.getAttribute("au");
+		
+//		MemberVO user = (MemberVO)session.getAttribute("user");
+//		BoardVO board = boardService.getBoard(bo_num, user);
+//		ArrayList<FileVO> files = boardService.getFileList(bo_num);
+//		LikesVO likesVo = boardService.getLikes(bo_num, user);
+		
+//		mv.addObject("board", board);
+//		mv.addObject("files", files);
+//		mv.addObject("likes", likesVo);
+		if(auck == 0 || session== null) {
+			MessageUtils.alertAndMovePage(response, 
+					"삭제되거나 조회권한이 없는 게시글입니다.", 
+					"/spring", "/board/list");
+		}else
+			mv.setViewName("/board/boardView");
+		return mv;
+	}
  
 }
