@@ -662,11 +662,16 @@ $('#type_lo').change();
 			rooms.push(rooms_items);
 		});
 		
+		let dataTranster = new DataTransfer();
+		fileList.forEach(file => {
+            dataTranster.items.add(file)
+		});
+		
 		let params = {
 			product_type: $("#sel_product_type").val()
 			, product_name: $("#txt_product_service_title").val()
 			, product_service: $("input[name='chk_product_service']:checked").map(function() { return $(this).val(); }).get().join('|')
-			, product_images: fileList
+			, product_images: dataTranster.files
 			, product_content: editor.getData()
 			, product_lo_num: $("#type_lo").val()
 			, product_dl_num: $("#type_dl").val()

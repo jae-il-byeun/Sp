@@ -86,7 +86,14 @@ public class ProductController {
 		MultipartFile[] product_images = params.getProduct_images();
 		ProductRoomsVO[] product_rooms = params.getProduct_rooms();
 		*/
+		System.out.println(params.getProduct_images());
 		BusinessVO seller = (BusinessVO)session.getAttribute("seller");
+		if(seller == null || seller.getBi_id() == null)
+		{
+			map.put("result", false);
+			map.put("msg", "사업자 로그인 상태가 아닙니다.");
+			return map;
+		}
 		params.setBi_id(seller.getBi_id());	
 		map.put("result", productService.productInsert(params));
 		return map;

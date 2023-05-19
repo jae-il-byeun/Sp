@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.ProductVO;
-import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.detailLocationVO;
+import kr.kh.project.vo.ProductFileVO;
+import kr.kh.project.vo.ProductRoomFileVO;
 
 public interface ProductDAO {
 
@@ -30,8 +31,12 @@ public interface ProductDAO {
 
 	ArrayList<detailLocationVO> selectDetailLocation(@Param("lo_num")int lo_num);
 
-	Integer insertProduct(@Param("param")ProductVO param);
+	ProductVO insertProduct(@Param("param")ProductVO pd);
 	
-	Integer insertProductRooms(@Param("room")ProductRoomsVO room);
+	ProductRoomsVO insertProductRooms(@Param("room")ProductRoomsVO room);
+	
+	void insertFile(@Param("fileVO")ProductFileVO fileVo);
+	
+	void insertRoomFile(@Param("fileVO")ProductRoomFileVO fileVo);
 
 }
