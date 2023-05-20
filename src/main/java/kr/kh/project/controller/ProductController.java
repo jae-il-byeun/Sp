@@ -2,17 +2,20 @@ package kr.kh.project.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+//import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,6 +23,7 @@ import kr.kh.project.vo.ProductVO;
 import kr.kh.project.vo.detailLocationVO;
 import kr.kh.project.service.ProductService;
 import kr.kh.project.vo.LocationVO;
+import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.BusinessVO;
 //import kr.kh.project.vo.ProductRoomsVO;
 
@@ -74,19 +78,15 @@ public class ProductController {
 		return detailLocationList;
 	}
 
-	
 	@ResponseBody
 	@RequestMapping(value="/product/productUploadData",method= RequestMethod.POST)
-	public Map<String, Object> ProductUploadData(@RequestBody ProductVO params,HttpSession session) {
+	public Map<String, Object> ProductUploadData(@RequestPart("params")ProductVO params, @RequestPart("files")MultipartFile[] files, HttpSession session) {
+		System.out.println("productUploadData");
+		System.out.println(params);
+		System.out.println(files);
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		/*
-		String product_name = params.getProduct_name();
-		String product_service_type = params.getProduct_service();
-		String product_detail = params.getProduct_content();
-		MultipartFile[] product_images = params.getProduct_images();
-		ProductRoomsVO[] product_rooms = params.getProduct_rooms();
-		*/
-		System.out.println(params.getProduct_images());
+		
 		BusinessVO seller = (BusinessVO)session.getAttribute("seller");
 		if(seller == null || seller.getBi_id() == null)
 		{
@@ -94,8 +94,25 @@ public class ProductController {
 			map.put("msg", "사업자 로그인 상태가 아닙니다.");
 			return map;
 		}
-		params.setBi_id(seller.getBi_id());	
-		map.put("result", productService.productInsert(params));
+		params.setProduct_bi_id(seller.getBi_id());	
+		map.put("result", true);
+		map.put("product_num", productService.productInsert(params, files).getProduct_num());
+		System.out.println(map);
+		System.out.println("-------------------");
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/product/productRoomUploadData",method= RequestMethod.POST)
+	public Map<String, Object> ProductRoomUploadData(@RequestPart("room")ProductRoomsVO room, @RequestPart("files")MultipartFile[] files, HttpSession session) {
+		System.out.println("ProductRoomUploadData");
+		System.out.println(room);
+		System.out.println(files);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("result", productService.productRoomInsert(room, files).getR_num() > 0 ? true : false);
+		System.out.println(map);
+		System.out.println("-------------------");
 		return map;
 	}
 }

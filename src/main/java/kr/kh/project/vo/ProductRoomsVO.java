@@ -1,16 +1,13 @@
 package kr.kh.project.vo;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.Data;
 
 @Data
 public class ProductRoomsVO {
-	Integer num;
-	MultipartFile[] files;
-	String title;
-	Integer price;
-	String intro;
+	Integer r_num;
+	String r_title;
+	String r_intro;
+	Integer r_price;
 	
-	Integer product_num;
+	Integer r_product_num;
 }
