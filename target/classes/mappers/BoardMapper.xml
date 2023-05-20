@@ -13,12 +13,13 @@
 		<result  property="bo_up" column="bo_up" />
 		<result  property="bo_down" column="bo_down" />
 		<result  property="bo_ori_num" column="bo_ori_num" />
+		<result  property="bo_bt_num" column="bo_bt_num" />
 		<result  property="bo_me_num" column="bo_me_num" />
 		<result  property="bo_bi_num" column="bo_bi_num" />
-		<result  property="bo_bt_num" column="bo_bt_num" />
-		<collection property="fileList" ofType="kr.kh.project.vo.FileVO" column="bo_num" select="selectFileList"/>
-		<collection property="type" ofType="kr.kh.project.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardType"/>
+<!-- 		<collection property="fileList" ofType="kr.kh.project.vo.FileVO" column="bo_num" select="selectFileList"/> -->
+		<collection property="type" ofType="kr.kh.project.vo.BoardTypeVO" column="bo_bt_num" select="selectBoardList"/>
 	</resultMap>
+
 	<select id="selectAllBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
 		<![CDATA[
 			select * from boardType 
@@ -29,25 +30,25 @@
 	</select>
 	
 <!-- 	list -->
-<!-- 	<select id="selectBoardList" resultMap="Board"> -->
-<!-- 		select * from board where (bo_name like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%')) -->
-<!-- 		<if test="cri.type != 0"> -->
-<!-- 			AND bo_bt_num = #{cri.type} -->
-<!-- 		</if> -->
-<!-- 		order by bo_ori_num desc, bo_num asc limit #{cri.pageStart}, #{cri.perPageNum} -->
+	<select id="selectBoardList"  resultType="kr.kh.project.vo.BoardVO">
+		select * from board where (bo_name like concat('%',#{cri.search},'%') or bo_content like concat('%',#{cri.search},'%'))
+		<if test="cri.type != 0">
+			AND bo_bt_num = #{cri.type}
+		</if>
+		order by bo_ori_num desc, bo_num asc, bo_bt_num asc limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+<!-- 	<select id="selectBoardList" resultType="kr.kh.project.vo.BoardVO"> -->
+<!-- 		select * from board join boardType on bo_bt_num = bt_num order by bo_num asc limit #{cri.pageStart}, #{cri.perPageNum} -->
 <!-- 	</select> -->
-		<select id="selectBoardList" resultType="kr.kh.project.vo.BoardVO">
-			select * from board 
-		</select>
-<!-- 	<select id="selectBoardTotalCount" resultType="int"> -->
-<!--   		select count(*) from board -->
-<!--   			where -->
-<!--   				(bo_name like concat('%',#{cri.search} ,'%') -->
-<!--   				or bo_content like concat('%',#{cri.search} ,'%')) -->
-<!--   				<if test="cri.type != 0"> -->
-<!--   					and bo_bt_num = #{cri.type}  				 -->
-<!--   				</if> -->
-<!--   	</select> -->
+	<select id="selectBoardTotalCount" resultType="int">
+  		select count(*) from board
+  			where
+  				(bo_name like concat('%',#{cri.search} ,'%')
+  				or bo_content like concat('%',#{cri.search} ,'%'))
+  				<if test="cri.type != 0">
+  					and bo_bt_num = #{cri.type}  				
+  				</if>
+  	</select>
   	
 	<select id="selectBoardType" resultType="kr.kh.project.vo.BoardTypeVO">
 		select * from boardType where bt_num = #{btn}
@@ -55,7 +56,7 @@
 	<select id="selectBoardListType" resultType="kr.kh.project.vo.BoardTypeVO">
 		select * from boardType 
 	</select>
-	
+<!-- 	BoardInsert -->
 	<insert id="userInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
 		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_me_id, bo_bt_num, bo_ori_num)
 		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num},
@@ -67,9 +68,6 @@
 			</if>
 			from board
 	 </insert>
-	<insert id="userInserBoardFile">
-		insert into boardfile (bf_bo_num, bf_fi_num, bf_type) values ( #{bf.bf_bo_num}, #{bf.bf_fi_num}, #{bf.bf_type})
-	 </insert> 
 	 <insert id="sellerInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
 		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_bi_id, bo_bt_num, bo_ori_num)
 		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_bi_id}, #{bo.bo_bt_num},
@@ -81,12 +79,21 @@
 			</if>
 			from board
 	 </insert>
-	 
-	 
-	 
 	 <insert id="insertFile">
 	 	insert into file(file_name, file_originName, file_location, file_size) values(#{file.file_name}, #{file.file_originName},#{file.file_location},#{file.file_size})
 	 </insert>
+	 <select id="selectBoardFileNum" resultType="kr.kh.project.vo.FileVO">
+	 	select file_num from File where file_name = #{fn}
+	 </select>
+	<insert id="insertBoardFile">
+		insert into boardfile (bf_bo_num, bf_fi_num, bf_type) values ( #{bn}, #{file}, #{ft})
+	 </insert> 
+	 
+	 
+	 
+	 
+	 
+	 
 	 
 <!-- 	 <update id="updateBoardViews"> -->
 <!-- 	 	update board set bo_views = bo_views+1 where bo_num = #{bo_num} -->

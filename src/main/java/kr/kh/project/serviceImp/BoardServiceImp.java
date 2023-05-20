@@ -27,20 +27,18 @@ public class BoardServiceImp implements BoardService {
 	
 	String uploadPath = "D:\\uploadfiles";
 	
-//	@Override
-//	public ArrayList<BoardVO> getBoardList(Criteria cri) {
-//		if(cri == null)
-//			cri = new Criteria();
-//		System.out.println(cri);
-//		
-//		return boardDao.selectBoardList(cri);
-//	}
 	@Override
-	public ArrayList<BoardVO> getBoardList() {
-		ArrayList<BoardVO> testArrayList = boardDao.selectBoardList();
-
-		return testArrayList;
+	public ArrayList<BoardVO> getBoardList(Criteria cri) {
+		if(cri == null)
+			cri = new Criteria();
+		return boardDao.selectBoardList(cri);
 	}
+//	@Override
+//	public ArrayList<BoardVO> getBoardList() {
+//		ArrayList<BoardVO> testArrayList = boardDao.selectBoardList();
+//
+//		return testArrayList;
+//	}
 	@Override
 	public int getBoardTotalCount(Criteria cri) {
 		return boardDao.selectBoardTotalCount(cri);
@@ -74,16 +72,7 @@ public class BoardServiceImp implements BoardService {
 		
 		
 		boardDao.userInsertBoard(board);
-		
-//		boardDao.userInserBoardFile(bf);
-		return true;
-	}
-	@Override
-	public boolean insertFile_user(BoardVO board, MemberVO user, MultipartFile[] files) {
-		if(!checkBoard(board))
-			return false;
-		FileVO file = uploadFiles(files, board);
-		BoardFileVO bf = new BoardFileVO();
+		uploadFiles(files, board);
 		return true;
 	}
 	@Override
@@ -95,6 +84,7 @@ public class BoardServiceImp implements BoardService {
 		String bi_id= seller.getBi_id();
 		board.setBo_bi_id(bi_id);
 		boardDao.sellerInsertBoard(board);
+		uploadFiles(files, board);
 		return true;
 	}
 	
@@ -113,10 +103,10 @@ public class BoardServiceImp implements BoardService {
 		return true;
 	}
 	
-	private FileVO uploadFiles(MultipartFile [] files,BoardVO board) {
+	private boolean uploadFiles(MultipartFile [] files,BoardVO board) {
 		//첨부파일 없을 시
 				if(files ==null || files.length == 0 )
-					return null;
+					return false;
 				//반복문
 				FileVO fileVo = new FileVO();
 //				List<FileVO> test = new ArrayList<FileVO>();
@@ -134,36 +124,35 @@ public class BoardServiceImp implements BoardService {
 					} catch(Exception e){
 						e.printStackTrace();
 					}
-//					if(board.getBo_bt_num() == 0) {
-//						String bf ="";
-//						
-//						if(file.getFile_originName().contains(".jpg") || file.getFile_originName().contains(".png")
-//								|| file.getFile_originName().contains(".gif")|| file.getFile_originName().contains(".jpeg")) {
-//							bf ="이미지";
-//							
-//						}else
-//							bf="첨부파일";
-//						
-//					}else if(board.getBo_bt_num() == 1) {
-//						bf.setBf_bo_num(board.getBo_num());
-//						bf.setBf_fi_num(file.getFile_num());
-//						bf="이미지";
-//					}
-					//DB에 파일 속성 더하기  ,   파일 유형 , 게시판번호(외래키)
-					//FileVO 에 String file_type int file_bo_num 추가
 					// fileVo에 객체 추가 
 					//첨부파일 객체를 생성
 					fileVo = new FileVO(fileName,file.getOriginalFilename(), uploadPath, file.getSize());
 
 					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
 					boardDao.insertFile(fileVo);
+
+					String file_type ="";
+					if(board.getBo_bt_num() == 0) {
 					
+						
+						if(fileVo.getFile_originName().contains(".jpg") || fileVo.getFile_originName().contains(".png")
+								|| fileVo.getFile_originName().contains(".gif")|| fileVo.getFile_originName().contains(".jpeg")) {
+							file_type ="이미지";
+							
+						}else
+							file_type="첨부파일";
+						
+					}else if(board.getBo_bt_num() == 1) {
+						file_type="이미지";
+					};
+					ArrayList<FileVO> te= boardDao.selectBoardFileNum(fileName);
+					FileVO fa_num = te.get(0);
+					int file_num=fa_num.getFile_num();
+					Integer bo_num = board.getBo_num();
 					
-				
-//					int file_num = boardDao.selectFileNum(fileVo);
+					boardDao.insertBoardFile( bo_num, file_num, file_type);
 				}
-//				test = new ArrayList<FileVO>(fileVo.getFile_num());
-				return fileVo;
+				return true;
 	}
 //	@Override
 //	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
@@ -194,22 +183,6 @@ public class BoardServiceImp implements BoardService {
 		System.out.println(bo_bt_num);
 		return "";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

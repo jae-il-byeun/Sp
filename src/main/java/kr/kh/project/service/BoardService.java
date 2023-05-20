@@ -13,7 +13,8 @@ import kr.kh.project.vo.MemberVO;
 public interface BoardService {
 
 
-	ArrayList<BoardVO> getBoardList();
+//	ArrayList<BoardVO> getBoardList();
+	ArrayList<BoardVO> getBoardList(Criteria cri);
 	
 	int getBoardTotalCount(Criteria cri);
 
@@ -28,7 +29,6 @@ public interface BoardService {
 
 	String selectBoardWrite(BoardTypeVO bo_bt_num);
 
-	boolean insertFile_user(BoardVO board, MemberVO user, MultipartFile[] files);
 
 	
 

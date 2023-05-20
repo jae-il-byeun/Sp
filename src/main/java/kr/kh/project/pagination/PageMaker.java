@@ -13,7 +13,22 @@ public class PageMaker {
 	private boolean next;
 	private int displayPageNum;
 	private Criteria cri;
+	private String search;
+	private String type;
 	
+	
+	public String getSearch() {
+	    return search;
+	}
+	public void setSearch(String search) {
+	    this.search = search;
+	}
+	public String getType() {
+	    return type;
+	}
+	public void setType(String type) {
+	    this.type = type;
+	}
 	/* endPage, startPage, prev, next 값 계산 */
 	public void calcData() {
 		/* starPage와 endPage는 현재 페이지 정보인 criteria와 displayPageNum을 이용하여 계산
@@ -34,6 +49,7 @@ public class PageMaker {
 		/* 현재 페이지메이커에 마지막 페이지에 컨텐츠의 마지막이 포함되어 있으면 next가 없어야 함 */
 		next = endPage * cri.getPerPageNum() >= totalCount ? false:true;
 	}
+
 
 	public PageMaker(int totalCount, int displayPageNum, Criteria cri) {
 		this.totalCount = totalCount;

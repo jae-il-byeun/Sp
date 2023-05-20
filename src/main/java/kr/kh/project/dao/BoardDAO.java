@@ -5,15 +5,13 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import kr.kh.project.pagination.Criteria;
-import kr.kh.project.vo.BoardFileVO;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.FileVO;
 
 public interface BoardDAO {
-	
-	ArrayList<BoardVO> selectBoardList();
 
+	ArrayList<BoardVO> selectBoardList(@Param("cri")Criteria cri);
 
 	int selectBoardTotalCount(@Param("cri") Criteria cri);
 
@@ -27,30 +25,13 @@ public interface BoardDAO {
 	
 	
 	void userInsertBoard(@Param("bo")BoardVO board);
-	void userInserBoardFile(@Param("bf")BoardFileVO bf);
-	
 	void sellerInsertBoard(@Param("bo")BoardVO board);
-
-	void insertFile(@Param("file")FileVO fileVo);
-
 	
+	void insertFile(@Param("file")FileVO fileVo);
+	ArrayList<FileVO> selectBoardFileNum(@Param("fn")String fileName);
+	void insertBoardFile(@Param("bn")Integer bo_num, @Param("file")int file_num, @Param("ft")String file_type);
 
 	ArrayList<BoardTypeVO> selectChooseBoardType(@Param("bs_au")int me_authority);
-
-
-
-
-
-
-
-
-
-
-
-	
-
-	
-
 
 
 

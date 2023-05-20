@@ -37,20 +37,17 @@ public class BoardController {
        
 	@RequestMapping(value = "/board/list", method = RequestMethod.GET)
 	public ModelAndView boardList(ModelAndView mv,Criteria cri,HttpSession session) {
-		ArrayList<BoardVO> board_list = boardService.getBoardList();
+//		ArrayList<BoardVO> board_list = boardService.getBoardList();
 		ArrayList<BoardTypeVO> btList= boardService.getBoardListType();
-////		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
-		MemberVO user = (MemberVO)session.getAttribute("user");
-		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		ArrayList<BoardVO> board_list = boardService.getBoardList(cri);
 		
-////		int totalCount = boardService.getBoardTotalCount(cri);
-////		PageMaker page = new PageMaker(totalCount,10, cri);
+		int totalCount = boardService.getBoardTotalCount(cri);
+		PageMaker pm = new PageMaker(totalCount,10, cri);
 		
-		if(user != null && seller != null) {
-			int aunch = (Integer)session.getAttribute("au");
-			mv.addObject("aunch", aunch);
-		}
-//		mv.addObject("page",page);
+		Integer aunch = (Integer)session.getAttribute("au");
+		
+		mv.addObject("aunch", aunch == null ? 0 : aunch);
+		mv.addObject("pm",pm);
 		mv.addObject("btList",btList);
 		mv.addObject("board_list",board_list);
 		mv.setViewName("/board/boardList");
@@ -68,7 +65,7 @@ public class BoardController {
 		int me_authority= (Integer)session.getAttribute("au");
 		// 비회원추가 해야함
 		ArrayList<BoardTypeVO> btList= boardService.getBoardType(me_authority);
-		bo_ori_num = bo_ori_num == null ? 0 : bo_ori_num;
+		bo_ori_num = (bo_ori_num == null ? 0 : bo_ori_num);
 //		BoardVO board = boardService.getBoard(bo_ori_num, user, seller);
 //		if(board == null) {
 //			MessageUtils.alertAndMovePage(response, "게시글이 없습니다.", "/project", "/board/list");		
@@ -94,7 +91,6 @@ public class BoardController {
 			mv.addObject("session_au",session_au);
 			mv.addObject("nu",user);
 			boardService.insertBoard_User(board, user, 	files);
-//			boardService.insertFile_user(board, user, files);
 		}else if(user == null && seller != null) {
 			int session_au = seller.getBi_authority();
 			mv.addObject("session_au",session_au);

@@ -244,8 +244,12 @@ $('#type').change(function(){
 		$('#board_insertBox').css({"height":"900px"});
 	}else if(val == 0){
 		$('#common').show();
+		$('#extraFile').show();
 		$('#board_insertBox').css({"height":"1050px"});
 		$('#image').show();
+	}else{
+		$('#common').hide();
+		$('#image').hide();
 	}
 		
 // 서버 중지 후 디버그 on server 누른 다음 switch 확인 할지 안할지 하고 그다음 파란 점 찍은다음 url로 지정해서 실행시키면 된다.

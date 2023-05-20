@@ -6,6 +6,12 @@
 
 <script src="/project/resources/js/pagination.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
@@ -52,7 +58,7 @@ body{ font-family: 'GyeonggiTitleM';}
 }
 /* 게시판 Box */
 #board_contentBox{
-	width:95%; height:750px;
+	width:95%; height:770px;
 	margin-left:50px;
 	border: 1px solid #ddd; border-radius: 7px; 
 	box-shadow: 1px 1px 1px #ddd;
@@ -99,29 +105,44 @@ body{ font-family: 'GyeonggiTitleM';}
 }
 /* 게시판 리스트 */
 .board_List{
+	height:60px;
 	text-align: center;
 	border-bottom: 1px solid #ddd;
 }
 .list_search{
+	width:100%; height:50px;
  	display: flex;
+ 	box-sizing: border-box; padding-left:30%;
  	
  }
  .search_button_box{
  	width:5%; height:5%;
  }
- .btn_search{
- 	width:100%; height:100%;
- 	border:1px solid #ddd; border-radius: 7px;
- 	background-color: green; color: #fff;
- }
+ 
  .btn_write{
- 	width:5%; height:4.5%;
+ 	width:6%; height:7%;
  	border:1px solid #ddd; border-radius: 7px;
- 	background-color: skyblue; color: #fff;
- 	position: absolute; right: 0px;
+ 	background-color: skyblue; color: #fff; font-size:25px;
+ 	
  	margin-right:10px;
  }
- 
+ .list_type_name{
+ 	width:12%;
+ 	font-size:20px;
+ 	padding-left:2px;
+ }
+ .list_search_text{
+ 	width:40%;
+ }
+ .btn_search{
+ 	width:90px; height:50px;
+ 	border:1px solid #ddd; border-radius: 7px;
+ 	background-color: green; color: #fff;
+ 	font-size:30px;
+ }
+ .paginationBox{
+ 	box-sizing: border-box; padding:0px 200px; margin-top:5px;
+ }
 #border_name{
 }
 #border_w{
@@ -160,11 +181,7 @@ body{ font-family: 'GyeonggiTitleM';}
 			<div id="board_contentBox">
 				<table id="board_Listbox">
 					<thead>
-<!-- 						<tr id="board_HeadText"> -->
-<!-- 							<th> -->
-<!-- 								<h2>게시판</h2> -->
-<!-- 							</th> -->
-<!-- 						</tr> -->
+
 						<tr style="height: 10px;"></tr>
 						<tr class="board_list_header">
 						
@@ -201,8 +218,26 @@ body{ font-family: 'GyeonggiTitleM';}
 						</c:forEach>
 					</tbody>
 				</table>
-				<div class="pagination" id="pagination">
-					
+				<div class="paginationBox" id="pagination">			
+					<ul class="pagination justify-content-center">
+						<c:if test = "${pm.prev}">
+							<li class="page-item"><a class="page-link" href="<c:url value='/board/list?page=${pm.startPage-1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>">이전</a></li>
+<!-- 							 -->
+						</c:if>
+						<c:forEach begin="${pm.startPage}" end= "${pm.endPage}" var="i">
+							<li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+								<a class="page-link" href="<c:url value='/board/list?page=${i}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>">${i}</a>
+<!-- 								 -->
+							</li>
+						</c:forEach>
+						
+						<c:if test = "${pm.next}">
+							<li class="page-item">
+								<a class="page-link" href="<c:url value='/board/list?page=${pm.endPage+1}&search=${pm.cri.search}&type=${pm.cri.type}'></c:url>">다음</a>
+<!-- 								} -->
+							</li>
+						</c:if>
+					</ul>
 				</div>
 				<form class="list_search" action="<c:url value='/board/list'></c:url>">
 					<select class="list_type_name" name="type">
@@ -232,17 +267,5 @@ body{ font-family: 'GyeonggiTitleM';}
 	</div>
 </div>
 </body>
-<script>
-// let sour = ${board_list}.querySelector();
-// alert(sour);
-// $('#pagination').pagination({
-//     dataSource: 
-// 		for(var i=1; i <= sour;),
-//     callback: function(data, pagination) {
-//         // template method of yourself
-//         var html = template(data);
-//         dataContainer.html(html);
-//     }
-// })
-</script>
+
 </html>

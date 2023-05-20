@@ -79,7 +79,7 @@ width:100%; height:35%;
 	
 }
 .product_introImg{
-	width:35%; height:25%;
+	width:40%; height:25%;
 	z-index: 1;
 	box-sizing: border-box;
 	position: relative;
@@ -89,7 +89,7 @@ width:100%; height:35%;
 }
 
 .product_introTitle{
-	width:55%; height:25%;
+	width:60%; height:25%;
 	box-sizing: border-box; margin-top:10px; margin-left: 50px;
 	font-size: 20px;
 	border-bottom: 2px solid #ddd; border-right: 2px solid #ddd;
@@ -116,6 +116,7 @@ width:100%; height:35%;
 .product_introDetail{
 	width:100%; height:30%; 
 	
+	
 }
 
 .product_introDetail h5{
@@ -131,18 +132,19 @@ width:100%; height:35%;
 
 }
 .product_service{
-	width:50%; height:100%;
+	width:49%; height:100%;
 	box-sizing: border-box; padding-left: 10px;
+	margin-right:10px;
 }
 .cp{
-	box-sizing:border-box; padding:5px 50px;
-	border-bottom: 1px solid #ddd;
+	box-sizing:border-box; padding:5px 10px 0px;
 }
 .cp textarea{
 	resize: none;
+	height:150px;
 }
 .product_location{
-	width:45%; height: 200px;
+	width:50%; height: 200px;
 }
 .product_location img{
 	width:100%; height: 200px;
@@ -229,7 +231,7 @@ width:100%; height:35%;
 				</select>				
 			</div>
 		</div>
-
+		
 		<div class="product_contentContainer">
 			<div class="product_content">
 				<div class="product_introMainBox">
@@ -312,22 +314,23 @@ width:100%; height:35%;
 						<span class="product_likeBox">
 							<img src="/project/resources/img/nomal_like.png" class="product_likeimg">
 						</span>
-						<div class="product_detailInfo">
+						<div class="product_detailInfo cp">
 							<img alt="" src="/project/resources/img/star.png"  class="product_starPoint">
 			
 							<span>/평점</span>
 							<span>(<span class="reviewNum" id="rv_star">8.4</span>)></span>
 						</div>
-						<span>10000원</span> 
+						<span id="">10000원</span> 
+						<div class="product_introDetail cp">
+							<h5 >상세셜명</h5>
+							<textarea rows="" cols="" class="product_detailTA" id="product_content"></textarea>
+						</div>
 					</div>
+					
 				</div>
+				<hr>
 
-				<div class="product_introDetail cp">
-					<h5 >상세셜명</h5>
-					<textarea rows="" cols="" class="product_detailTA" id="product_content"></textarea>
-				</div>
-
-				<div class="product_serviceBox cp">
+				<div class="product_serviceBox ">
 					<figure class="product_service" id="product_service">
 						<h5>편의시설</h5>
 						<span></span>
@@ -337,18 +340,20 @@ width:100%; height:35%;
 						<span></span>
 						<span></span>
 					</figure>
-					<div class="product_location cp">
+					<div class="product_location ">
 						<h5>숙소 위치</h5>
 						<img alt="" src="/project/resources/img/ex_map.png">
 					</div>
 				</div>
-			
+				<hr>
+				
 				<div class="product_reviewBox cp">
 					<h2>리뷰</h2>
 					<p>
 						<span>별점</span><img alt="" src="" class="product_starPoint">
 						<span>평점/</span>
 						<span id="rv_star">4.5</span>
+						
 					</p>
 					<textarea rows="" cols="" class="product_reviewText" id="rv_content"></textarea>
 					<button type="submit" class="product_reviewComplete">작성완료</button>
