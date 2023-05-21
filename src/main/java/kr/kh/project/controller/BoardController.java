@@ -164,10 +164,13 @@ public class BoardController {
 		//res - 1: 추천, -1 : 비추천 : 0이면 취소
 		int au= (Integer)session.getAttribute("au");
 		int res = 0;
-		if(au == 1 || au == 9 || au == 2) {
+		if(au == 1 || au == 9) {
 			MemberVO user = (MemberVO)session.getAttribute("user");
+			
+			res = boardService.updateUserLikes(user, bo_num, li_state);
+		}else if( au == 2) {
 			BusinessVO seller =(BusinessVO)session.getAttribute("seller");
-			res = boardService.updateLikes(user,seller, bo_num, li_state);
+			res = boardService.updateSellerLikes(seller, bo_num, li_state);
 		}
 		System.out.println(res);
 //		boardService.updateBoardByLikes(bo_num);

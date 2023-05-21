@@ -256,49 +256,6 @@ body{ font-family: 'GyeonggiTitleM';}
 </div>
 </body>
 
-<script>
-$(function(){
-	$('.btn-up, .btn-down').click(function(){
-		let li_state = 1;
-		if($(this).hasClass('btn-down'))
-			li_state = -1;
-		//ajax를 이용하여 추천/비추천 작업
-		$.ajax({
-			//비동기화 : 사용
-			//동기화는 ajax 작업이 다 끝난 후 아래 코드가 실행
-			//비동기화는 ajax가 작업이 끝나든 말든 아래 코드가 실행
-	        async:true,
-	        type:'GET',
-	        //data:JSON.stringify(obj),
-	        url:"<c:url value='/board/like/"+li_state+"/${board.bo_num}'></c:url>",
-	        //서버에서 받는 데이터 타입
-	        dataType:"json",
-	        //서버에 보내는 데이터 타입
-	        //contentType:"application/json; charset=UTF-8",
-	        success : function(data){
-	        	//추천 버튼 초기 상태로
-	        	$('.btn-up').removeClass('btn-success').addClass('btn-outline-success');
-	        	//비추천 버튼 초기 상태로
-	        	$('.btn-down').removeClass('btn-danger').addClass('btn-outline-danger');
-	            if(data.res == 1){
-	            	alert('추천을 했습니다.');
-	            	$('.btn-up').addClass('btn-success').removeClass('btn-outline-success');
-	            }else if(data.res == -1){
-	            	alert('비추천을 했습니다.');
-	            	$('.btn-down').addClass('btn-danger').removeClass('btn-outline-danger');
-	            }else{
-	            	if(li_state == 1){
-	            		alert('추천을 취소했습니다.')
-	            	}else{
-	            		alert('비추천을 취소했습니다.')
-	            	}
-	            }
-	        }
-	    });
-		
-	});
-})
 
-</script>
 
 </html>

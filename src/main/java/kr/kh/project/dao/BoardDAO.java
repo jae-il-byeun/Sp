@@ -10,7 +10,8 @@ import kr.kh.project.vo.BoardFileVO;
 import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.FileVO;
-import kr.kh.project.vo.LikesVO;
+import kr.kh.project.vo.LikesSellerVO;
+import kr.kh.project.vo.LikesUserVO;
 
 public interface BoardDAO {
 
@@ -53,9 +54,13 @@ public interface BoardDAO {
 
 	void deleteOri(@Param("bo_num")int bo_num);
 
-	LikesVO selectLikesByUserId(@Param("lm")String me_id,@Param("li_bo_num") int bo_num);
+	LikesUserVO selectLikesById(@Param("lm")String me_id,@Param("li_bo_num") int bo_num);
 
-	LikesVO selectLikesBySellerId(@Param("lb")String bi_id,@Param("li_bo_num") int bo_num);
+	LikesSellerVO selectLikesBySellerId(@Param("lb")String bi_id,@Param("li_bo_num") int bo_num);
+
+	void insertUserLikes(@Param("li")LikesUserVO likesVo);
+	
+	void insertSellerLikes(@Param("li")LikesSellerVO likesVo);
 
 
 

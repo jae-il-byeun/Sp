@@ -17,9 +17,10 @@ import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.MemberVO;
-import kr.kh.project.vo.LikesVO;
+import kr.kh.project.vo.LikesUserVO;
 import kr.kh.project.utils.UploadFileUtils;
 import kr.kh.project.vo.FileVO;
+import kr.kh.project.vo.LikesSellerVO;
 
 @Service
 public class BoardServiceImp implements BoardService {
@@ -156,29 +157,6 @@ public class BoardServiceImp implements BoardService {
 				}
 				return true;
 	}
-//	@Override
-//	public BoardVO getBoard(int bo_num, MemberVO user, BusinessVO seller) {
-//		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
-//		boardDao.updateBoardViews(bo_num);
-//		//게시글 가져오기
-//		BoardVO board = boardDao.selectBoard(bo_num);
-//		//권한확인
-//		if(board == null)
-//			return null;
-//		BoardTypeVO boardType = boardDao.selectBoardType(board.getBo_bt_num());
-//		System.out.println(boardType);
-//		//비회원 이상 읽기 가능
-//		if(boardType.getBt_num() != 2 || boardType.getBt_read_authority() != 1)
-//				return board;
-//		//회원 이상인 경우 비회원은 못봄
-//		if(boardType.getBt_read_authority()== 0 && user == null || seller == null)
-//			return null;
-//		//게시글 읽기 권한이 사용자 권한 이하인 경우만 조회가능
-//		if(boardType.getBt_read_authority() <= user.getMe_authority() || boardType.getBt_read_authority() <=seller.getBi_authority())
-//			return board;
-//
-//		return null;
-//	}
 
 	@Override
 	public String selectBoardWrite(BoardTypeVO bo_bt_num) {
@@ -255,30 +233,19 @@ public class BoardServiceImp implements BoardService {
 		
 	}
 	@Override
-	public int updateLikes(MemberVO user, BusinessVO seller, int bo_num, int li_state) {
+	public int updateUserLikes(MemberVO user, int bo_num, int li_state) {
 		// 기존에 추천/비추천을 했는지 확인
-				LikesVO likesVo = new LikesVO(); 
-				if(user != null && seller == null) {
-					likesVo =boardDao.selectLikesByUserId(user.getMe_id(),bo_num);
-				}else if(user == null && seller != null) {
-					likesVo =boardDao.selectLikesBySellerId(seller.getBi_id(),bo_num);
-				}
-				System.out.println("first : " + likesVo);
+				LikesUserVO likesVo = boardDao.selectLikesById(user.getMe_id(),bo_num);
 				//없으면 추가
-				if(likesVo == null) {
+				if(likesVo==null) {
 					//LieksVO 객체를 생성하여 
-					if(user != null && seller == null) {
-						likesVo = new LikesVO(li_state, user.getMe_id(), bo_num);
-					}else if(user == null && seller != null) {
-						likesVo = new LikesVO(li_state, seller.getBi_id(), bo_num);
-					}
-					System.out.println("second : " + likesVo);
-//					//DAO에게 전달해서 inseret하라고 시킴
-//					boardDao.insertLikes(likesVo);
-//					//bo_num를 리턴
-//					return li_state;
+					likesVo = new LikesUserVO(li_state, user.getMe_id(), bo_num);
+					//DAO에게 전달해서 inseret하라고 시킴
+					boardDao.insertUserLikes(likesVo);
+					//bo_num를 리턴
+					return li_state;
 				}
-//				
+				
 //				//있으면 수정
 //				if(li_state != likesVo.getLi_state()) {
 //					//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
@@ -293,8 +260,38 @@ public class BoardServiceImp implements BoardService {
 //					//업데이트
 //					boardDao.updateLikes(likesVo);
 //					//0을 리턴
-					
 					return 0;
+
+	}
+	@Override
+	public int updateSellerLikes(BusinessVO seller, int bo_num, int li_state) {
+		// 기존에 추천/비추천을 했는지 확인
+		LikesSellerVO likesVo = boardDao.selectLikesBySellerId(seller.getBi_id(),bo_num);
+		//없으면 추가
+		if(likesVo==null) {
+			//LieksVO 객체를 생성하여 
+			likesVo = new LikesSellerVO(li_state, seller.getBi_id(), bo_num);
+			//DAO에게 전달해서 inseret하라고 시킴
+			boardDao.insertSellerLikes(likesVo);
+			//bo_num를 리턴
+			return li_state;
+		}
+		
+//		//있으면 수정
+//		if(li_state != likesVo.getLi_state()) {
+//			//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
+//			likesVo.setLi_state(li_state);
+//			//업데이트
+//			boardDao.updateLikes(likesVo);
+//			//bo_num를 리턴
+//			return li_state;
+//		}
+//			//현재 상태와 기존상태가 같으면 => 취소
+//			likesVo.setLi_state(0);
+//			//업데이트
+//			boardDao.updateLikes(likesVo);
+//			//0을 리턴
+			return 0;
 	}
 
 

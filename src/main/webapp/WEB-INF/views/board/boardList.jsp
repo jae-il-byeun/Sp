@@ -112,7 +112,7 @@ body{ font-family: 'GyeonggiTitleM';}
 .list_search{
 	width:100%; height:50px;
  	display: flex;
- 	box-sizing: border-box; padding-left:30%;
+ 	box-sizing: border-box; padding-left:24%;
  	
  }
  .search_button_box{
@@ -120,7 +120,7 @@ body{ font-family: 'GyeonggiTitleM';}
  }
  
  .btn_write{
- 	width:6%; height:7%;
+ 	width:100%; height:100%;
  	border:1px solid #ddd; border-radius: 7px;
  	background-color: skyblue; color: #fff; font-size:25px;
  	
@@ -160,24 +160,7 @@ body{ font-family: 'GyeonggiTitleM';}
 			<h2>게시판</h2>
 		</div>
 		<div class="main_contentContainer">	
-<!-- 				after -->
-<!-- 			<ul class="board_typeBox"> -->
-<!-- 				<li class="board_type"> -->
-<!-- 					<hr> -->
-<!-- 				</li> -->
-<!-- 				<li class="board_type"> -->
-<!-- 					<a>공지사항</a> -->
-<!-- 					<hr> -->
-<!-- 				</li> -->
-<!-- 				<li class="board_type"> -->
-<!-- 					<a>자유게시판</a> -->
-<!-- 					<hr> -->
-<!-- 				</li> -->
-<!-- 				<li class="board_type"> -->
-<!-- 					<a>QnA</a> -->
-<!-- 					<hr> -->
-<!-- 				</li> -->
-<!-- 			</ul> -->
+
 			<div id="board_contentBox">
 				<table id="board_Listbox">
 					<thead>
@@ -241,28 +224,31 @@ body{ font-family: 'GyeonggiTitleM';}
 						</c:if>
 					</ul>
 				</div>
-				<form class="list_search" action="<c:url value='/board/list'></c:url>">
-					<select class="list_type_name" name="type">
-						<c:forEach items="${btList}" var="board" >
-							<c:if test="${board.bt_num == 0 }">
-								<option value="${board.bt_num}">공지사항</option>
-							</c:if>
-							<c:if test="${board.bt_num == 1 }">
-								<option value="${board.bt_num}">자유게시판</option>
-							</c:if>
-							
-						</c:forEach>
-					</select>
-					<input type="text" class="list_search_text" placeholder="Search" name="search" value="${page.cri.search}">
-					<div class="search_button_box">
-						<button class="btn_search" type="submit">검색</button>
-					</div>
-				</form>
-				<c:if test="${aunch != 0}">
-					<a href="<c:url value="/board/insert"></c:url>">
-						<button class="btn_write">글쓰기</button>
-					</a>
-				</c:if>
+				<div style="display: flex;">
+					<c:if test="${aunch != 0}">
+						<a href="<c:url value="/board/insert"></c:url>">
+							<button class="btn_write">글쓰기</button>
+						</a>
+					</c:if>
+					<form class="list_search" action="<c:url value='/board/list'></c:url>">
+						<select class="list_type_name" name="type">
+							<c:forEach items="${btList}" var="board" >
+								<c:if test="${board.bt_num == 0 }">
+									<option value="${board.bt_num}">공지사항</option>
+								</c:if>
+								<c:if test="${board.bt_num == 1 }">
+									<option value="${board.bt_num}">자유게시판</option>
+								</c:if>
+								
+							</c:forEach>
+						</select>
+						<input type="text" class="list_search_text" placeholder="Search" name="search" value="${page.cri.search}">
+						<div class="search_button_box">
+							<button class="btn_search" type="submit">검색</button>
+						</div>
+					</form>
+					
+				</div>
 			</div>
 		</div>
 		

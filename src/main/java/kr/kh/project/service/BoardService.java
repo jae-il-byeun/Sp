@@ -40,7 +40,9 @@ public interface BoardService {
 
 	boolean deleteBoard(int bo_num, MemberVO user, BusinessVO seller);
 
-	int updateLikes(MemberVO user, BusinessVO seller, int bo_num, int li_state);
+	int updateUserLikes(MemberVO user, int bo_num, int li_state);
+
+	int updateSellerLikes(BusinessVO seller, int bo_num, int li_state);
 
 
 

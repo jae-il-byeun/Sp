@@ -105,7 +105,15 @@
 	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesVO">
 		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
 	</select>
-	 
-	 
+	<insert id="insertUserLikes">
+  		insert into
+  			likes(li_state, li_me_id, li_bo_num)
+  			values(#{li.li_state},#{li.li_me_id},#{li.li_bo_num})
+  	</insert>
+	<insert id="insertSellerLikes">
+  		insert into
+  			likes(li_state, li_bi_id, li_bo_num)
+  			values(#{li.li_state},#{li.li_bi_id},#{li.li_bo_num})
+  	</insert>
 
  </mapper>
