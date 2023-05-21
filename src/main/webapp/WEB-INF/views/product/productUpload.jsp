@@ -631,7 +631,7 @@ $('#type_lo').change();
 					<span>객실이름</span> <input type="text" name="product_room_title">\
 				</td>\
 				<td class="product_room_intro">\
-					<span>객실가격</span> <input type="text" name="product_room_price">\
+					<span>객실가격</span> <input type="text" name="product_room_price" maxlength="9">\
 				</td>\
 			</tr>\
 			<tr class="product_room_tr">\
@@ -720,6 +720,7 @@ $('#type_lo').change();
 								if(result.result){
 									if(rooms_count == i)
 										alert("저장완료!");
+										location.replace('<c:url value="/product/hotel"></c:url>');
 								}else{
 									if(result.msg) {
 										alert(result.msg);

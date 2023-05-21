@@ -35,6 +35,7 @@ public class ProductController {
 	
 	@RequestMapping(value="/product/hotel",method=RequestMethod.GET)
     public ModelAndView hotel(ModelAndView mv) {
+		mv.addObject("location_list",productService.getLocationNum());
 		mv.setViewName("/product/hotel");
 		return mv;
     }
@@ -119,7 +120,9 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = "/product/productList", method = RequestMethod.POST)
 	public ArrayList<Map<String, Object>> productList(@RequestBody Map<String, Object> data) {
+		System.out.println(data.get("product_type"));
 		ArrayList<Map<String, Object>> productList = productService.getProductList(data);
+		System.out.println(productList);
 		return productList;
 	}
 }

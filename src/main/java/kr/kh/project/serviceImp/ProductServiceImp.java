@@ -124,7 +124,7 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public ArrayList<Map<String, Object>> getProductList(Map<String, Object> data) {
 		// TODO Auto-generated method stub
-		return null;
+		return productDao.selectProductList(data);
 	}
 
 
