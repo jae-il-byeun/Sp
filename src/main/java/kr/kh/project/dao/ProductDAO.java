@@ -1,6 +1,7 @@
 package kr.kh.project.dao;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -40,5 +41,7 @@ public interface ProductDAO {
 	
 	void insertProductFile(@Param("p_fileVo")ProductFileVO p_fileVo);
 	void insertProductRoomFile(@Param("p_r_fileVo")ProductRoomFileVO p_r_fileVo);
+	
+	ArrayList<Map<String, Object>> selectProductList(@Param("data")Map<String, Object> data);
 
 }

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="kr.kh.project.dao.ProductDAO">
 	<insert id="insertProduct" useGeneratedKeys="true" keyProperty="param.product_num" parameterType="kr.kh.project.vo.ProductVO">
-		insert into product(product_num,product_name,product_type,product_content,product_bi_id,product_service,product_lo_num,product_dl_num,product_postNum,product_mainAddress,product_detailAddress,product_extraAddress)
+		insert into product(product_num,product_name,product_type,product_content,product_bi_id,product_service,product_lo_num,product_dl_num,product_postNum,product_mainAddress,product_detailAddress,product_extraAddress,product_views)
 		select ifnull(max(product_num),0) + 1 
 			,#{param.product_name}
 			,#{param.product_type}
@@ -17,6 +17,7 @@
 			,#{param.product_mainAddress}
 			,#{param.product_detailAddress}
 			,#{param.product_extraAddress}
+			,0
 		from product
 	</insert>	 
 	
@@ -61,6 +62,36 @@
 		<![CDATA[
 			select * from detailLocation where dl_lo_num = #{lo_num}
 		]]>
+	</select>
+	
+	<select id="selectProductList" resultType="map">
+		select product_num
+			, product_name
+			, ifnull(case when b.min_r_price = b.max_r_price then CONCAT(FORMAT(b.min_r_price,0), ' 원') else CONCAT(FORMAT(b.min_r_price,0), ' 원 ~ ', FORMAT(b.max_r_price,0), ' 원') end,'0 원') as 'price'
+		    , (
+				select f1.file_name
+		        from file f1
+					inner join productfile f2 on f1.file_num = f2.pf_file_num
+				where f2.pf_product_num = a.product_num
+				order by f1.file_num
+		        limit 1
+		    ) as product_image
+		    , b.reservation_count
+		from product a
+			left outer join (
+				select r_product_num, min(r_price) min_r_price, max(r_price) max_r_price
+					, sum((select count(*) cnt from reservation b2 where b1.r_num = b2.re_r_num)) as reservation_count
+		        from room b1
+		        group by r_product_num
+		    ) b on b.r_product_num = a.product_num
+		where a.product_type = #{data.product_type}
+			and a.product_lo_num = #{data.product_lo_num}
+		    and a.product_dl_num = #{data.product_dl_num}
+		order by
+			case when #{data.sort} = 1 then a.product_views end desc
+			, case when #{data.sort} = 2 then b.reservation_count end desc
+			, case when #{data.sort} = 3 then b.min_r_price end asc
+			, case when #{data.sort} = 4 then b.max_r_price end desc
 	</select>
 </mapper>
 

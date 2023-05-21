@@ -139,13 +139,13 @@ width:100%; height:35%;
 			<input type="hidden" id="product_type" value="0">
 			<div class="product_placeBox">
 				<select class="product_upload_location" name="lo_num" id="type_lo">
-					<option value="">선택</option>
+					<!-- <option value="">선택</option> -->
 					<c:forEach items="${location_list}" var="lo">
 						<option value="${lo.lo_num}">${lo.lo_name}</option>
 					</c:forEach>
 				</select>
 				<select class="product_upload_location" name="dl_num" id="type_dl">
-					<option value="">선택</option>
+					<!-- <option value="">선택</option> -->
 				</select>
 			</div>
 		</div>
@@ -158,29 +158,13 @@ width:100%; height:35%;
 					<select id="sort_type">
 						<option value="1">조회순</option>
 						<option value="2">예약순</option>
-						<option value="3">가격순</option>					
+						<option value="3">낮은가격순</option>
+						<option value="4">높은가격순</option>					
 					</select>
 				</div>
 				
 				<div class="product_list">
-					<ul class="product_list_content">
-						<li class="product">
-							<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-							<div class="product_semi">
-								<a class="product_title" id="product_name">파라다이스 시티</a>
-								<button class="like_button" >
-									<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
-								</button>
-								
-								<div class="product_detailInfo">
-									별점<img alt="" src="" class="product_starPoint">
-									<span id="rv_star">4.5/평점</span>
-									
-								</div>
-								<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-							</div>
-								
-						</li>
+					<ul class="product_list_content" id="product_list">
 					</ul>					
 				</div>
 			</div>
@@ -194,60 +178,85 @@ width:100%; height:35%;
 	// 교육원
 	$('#type_lo').change(function(){
 		$("#type_dl").empty();
-		$("#type_dl").append($("<option value=''>선택</option>"));
+		//$("#type_dl").append($("<option value=''>선택</option>"));
 		
-		let lo_num = $('[name=lo_num]').val();
+		let lo_num = $('#type_lo').val();
 		
-		$.ajax({
-			type : 'POST',
-			data: lo_num,
-			url : "<c:url value='/product/detailLocation'></c:url>",
-			dataType : "json",
-			contentType : "application/json; charset=UTF-8",
-			success : function(detailLocation_list){
-				if(detailLocation_list != null && detailLocation_list.length > 0){
-					for(var i=0; i<detailLocation_list.length; i++){
-						var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
-						$("#type_dl").append(option);
-					}
-				}
-			} 
-		});
-	});
-	
-	$("#type_dl").change(function() {
-		if($("#type_dl").val() != "") {
-			
-			let data = {
-					lo_num = $('#type_lo').val(),
-					dl_num = $('#type_dl').val(),
-					sort = $("#sort_type").val()
-			}
-			
+		if(lo_num != "") {
 			$.ajax({
 				type : 'POST',
-				data: { data: data },
-				url : "<c:url value='/product/productList'></c:url>",
+				data: lo_num,
+				url : "<c:url value='/product/detailLocation'></c:url>",
 				dataType : "json",
 				contentType : "application/json; charset=UTF-8",
-				success : function(productList){
-					if(productList != null && productList.length > 0){
-						for(var i=0; i<productList.length; i++){
+				success : function(detailLocation_list){
+					if(detailLocation_list != null && detailLocation_list.length > 0){
+						for(var i=0; i<detailLocation_list.length; i++){
 							var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
 							$("#type_dl").append(option);
 						}
 						
-						productList.forEach()
+						$("#type_dl").change();
 					}
 				} 
 			});
 		}
 	});
 	
-	$('#type_lo').change();
-</script>
+	$("#type_lo").change();
+	
+	$("#type_dl").change(function() {
+		if($("#type_dl").val() != "") {
+			
+			let data = {
+					product_type : $("#product_type").val(),
+					product_lo_num : $('#type_lo').val(),
+					product_dl_num : $('#type_dl').val(),
+					sort : $("#sort_type").val()
+			}
 
-<script>
-	$("#product_type").val();	//호텔 : 0
+			$("#product_list").empty();
+			
+			$.ajax({
+				type : 'POST',
+				data: JSON.stringify(data),
+				url : "<c:url value='/product/productList'></c:url>",
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(productList){
+					if(productList != null && productList.length > 0){
+						productList.forEach(item => {
+							let tag = '';
+							tag = tag + '<li class="product">';
+							if(item.product_image != null && item.product_image.length > 0) {
+								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:670px; height:400px;">';
+							}
+							else {
+								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:670px; height:400px;">';
+							}
+							tag = tag + '<div class="product_semi">';
+							tag = tag + '<a class="product_title" name="product_name" href="#" onclick="alert('+item.product_num+');">'+item.product_name+'</a>';
+							tag = tag + '<button class="like_button" >';
+							tag = tag + '<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" name="pf_file_num">';
+							tag = tag + '</button>';
+							tag = tag + '<div class="product_detailInfo">별점<img alt="" src="" class="product_starPoint">0 / 평점 0</span></div>';
+							tag = tag + '<a class="product_priceInsert" name="r_price" href="#">'+item.price+'</a>';
+							tag = tag + '</div>';
+							tag = tag + '</li>';
+							
+							$("#product_list").append(tag);
+						});
+					}
+					else {
+						$("#product_list").append("<p>검색결과가 없습니다.</p>")
+					}
+				} 
+			});
+		}
+	});
+	
+	$("#sort_type").change(function() {
+		$("#type_dl").change();
+	});
 </script>
 </html>
