@@ -3,70 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="kr.kh.project.dao.ProductDAO">
-	<insert id="insertProduct" useGeneratedKeys="true" keyColumn="product_num" >
-		<selectKey keyProperty = "pd.product_num" order="BEFORE">
-			SELECT ifnull(max(product_num),0) + 1 FROM product
-		</selectKey>
-		insert into product(product_num,product_name,product_type,product_content,product_bi_id,product_service,product_lo_num,product_postNum,product_mainAddress,product_detailAddress,product_extraAddress)
-		value(#{pd.product_num}
-			,#{pd.product_name}
-			,#{pd.product_type}
-			,#{pd.product_content}
-			,#{pd.product_bi_id}
-			,#{pd.product_service}
-			,#{pd.product_lo_num}
-			,#{pd.product_postNum}
-			,#{pd.product_mainAddress}
-			,#{pd.product_detailAddress}
-			,#{pd.product_extraAddress}
-			)
+	<insert id="insertProduct" useGeneratedKeys="true" keyProperty="param.product_num" parameterType="kr.kh.project.vo.ProductVO">
+		insert into product(product_num,product_name,product_type,product_content,product_bi_id,product_service,product_lo_num,product_dl_num,product_postNum,product_mainAddress,product_detailAddress,product_extraAddress)
+		select ifnull(max(product_num),0) + 1 
+			,#{param.product_name}
+			,#{param.product_type}
+			,#{param.product_content}
+			,#{param.product_bi_id}
+			,#{param.product_service}
+			,#{param.product_lo_num}
+			,#{param.product_dl_num}
+			,#{param.product_postNum}
+			,#{param.product_mainAddress}
+			,#{param.product_detailAddress}
+			,#{param.product_extraAddress}
+		from product
 	</insert>	 
 	
-	<insert id="insertProductRooms" useGeneratedKeys="true" keyColumn="r_num" >
-		<selectKey keyProperty = "room.r_num" order="BEFORE">
-			SELECT ifnull(max(r_num),0) + 1 FROM room
-		</selectKey>
+	<insert id="insertProductRoom" useGeneratedKeys="true" keyProperty="room.r_num" parameterType="kr.kh.project.vo.ProductRoomsVO">
 		insert into room(r_num,r_title,r_intro,r_price,r_product_num)
-		value(#{room.r_num}
+		select ifnull(max(r_num),0) + 1
 			,#{room.r_title}
 			,#{room.r_intro}
 			,#{room.r_price}
 			,#{room.r_product_num}
-			)
+		from room
 	</insert>
 	
-	<insert id="insertFile">
-		<selectKey keyProperty = "fileVo.file_num" order="BEFORE">
-			SELECT ifnull(max(file_num),0) + 1 FROM file
-		</selectKey>
+	<insert id="insertFile" useGeneratedKeys="true" keyProperty="fileVo.file_num" parameterType="kr.kh.project.vo.ProductFileVO">
 		insert into file(file_num,file_name,file_location,file_originName,file_size)
-		value(#{fileVo.file_num}
+		select ifnull(max(file_num),0) + 1
 			,#{fileVo.file_name}
 			,#{fileVo.file_location}
 			,#{fileVo.file_originName}
 			,#{fileVo.file_size}
-			);
-			
+		from file;
+	</insert>
+	<insert id="insertProductFile" useGeneratedKeys="true" keyProperty="p_fileVo.pf_file_num" parameterType="kr.kh.project.vo.ProductFileVO">
 		insert into productfile(pf_product_num, pf_file_num)
-		values(#{fileVo.pf_product_num}
-			,#{fileVo.file_num}
+		values(#{p_fileVo.pf_product_num}
+			,#{p_fileVo.pf_file_num}
 			);
 	</insert>
-	<insert id="insertRoomFile">
-		<selectKey keyProperty = "fileVo.file_num" order="BEFORE">
-			SELECT ifnull(max(file_num),0) + 1 FROM file
-		</selectKey>
-		insert into file(file_num,file_name,file_location,file_originName,file_size)
-		value(#{fileVo.file_num}
-			,#{fileVo.file_name}
-			,#{fileVo.file_location}
-			,#{fileVo.file_originName}
-			,#{fileVo.file_size}
-			);
-			
-		insert into rommfile(rf_r_num, rf_file_num)
-		values(#{fileVo.rf_r_num}
-			,#{fileVo.file_num}
+	<insert id="insertProductRoomFile" useGeneratedKeys="true" keyProperty="p_r_fileVo.rf_file_num" parameterType="kr.kh.project.vo.ProductRoomFileVO">			
+		insert into roomfile(rf_r_num, rf_file_num)
+		values(#{p_r_fileVo.rf_r_num}
+			,#{p_r_fileVo.rf_file_num}
 			);
 	</insert>
 	

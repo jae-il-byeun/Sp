@@ -135,19 +135,17 @@ width:100%; height:35%;
 <div class="product_outterContainer">
 	<div class="product_innerContainer">
 		<div class="product_titleBox">
-			<h1 id="product_type">호텔</h1>
+			<h1>호텔</h1>
+			<input type="hidden" id="product_type" value="0">
 			<div class="product_placeBox">
-				<select class="product_upload_location" name="lo_num" id="type">
-					<option value="0">지역 선택</option>
-<%-- 					<c:forEach items="${location_list}" var="lo"> --%>
-<%-- 						<option value="${lo.lo_num}">${lo.lo_name}</option> --%>
-<%-- 					</c:forEach> --%>
+				<select class="product_upload_location" name="lo_num" id="type_lo">
+					<option value="">선택</option>
+					<c:forEach items="${location_list}" var="lo">
+						<option value="${lo.lo_num}">${lo.lo_name}</option>
+					</c:forEach>
 				</select>
-				<select class="product_upload_location" name="dl_num" id="type">
-					<option value="0">세부 지역</option>
-	<%-- 				<c:forEach items="${detailLocation_list}" var="dl"> --%>
-	<%-- 					<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
-	<%-- 				</c:forEach> --%>
+				<select class="product_upload_location" name="dl_num" id="type_dl">
+					<option value="">선택</option>
 				</select>
 			</div>
 		</div>
@@ -157,121 +155,33 @@ width:100%; height:35%;
 			<div class="product_listBox">
 				<div class="product_split">
 					<span>정렬기준</span>
-					<select>
-						<option>인기순</option>
-						<option></option>
-						<option></option>
-						<option></option>
-						
+					<select id="sort_type">
+						<option value="1">조회순</option>
+						<option value="2">예약순</option>
+						<option value="3">가격순</option>					
 					</select>
 				</div>
 				
 				<div class="product_list">
 					<ul class="product_list_content">
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
-									</button>
+						<li class="product">
+							<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
+							<div class="product_semi">
+								<a class="product_title" id="product_name">파라다이스 시티</a>
+								<button class="like_button" >
+									<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
+								</button>
+								
+								<div class="product_detailInfo">
+									별점<img alt="" src="" class="product_starPoint">
+									<span id="rv_star">4.5/평점</span>
 									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
 								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon"  id="pf_file_num">
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title" id="product_name">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" id="pf_file_num">
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span id="rv_star">4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
-								</div>
-									
-							</li>
-						</ul>
-					
+								<a class="product_priceInsert" id="r_price" href="#">10000원</a> 
+							</div>
+								
+						</li>
+					</ul>					
 				</div>
 			</div>
 			
@@ -279,4 +189,65 @@ width:100%; height:35%;
 	</div>
 </div>
 </body>
+
+<script>
+	// 교육원
+	$('#type_lo').change(function(){
+		$("#type_dl").empty();
+		$("#type_dl").append($("<option value=''>선택</option>"));
+		
+		let lo_num = $('[name=lo_num]').val();
+		
+		$.ajax({
+			type : 'POST',
+			data: lo_num,
+			url : "<c:url value='/product/detailLocation'></c:url>",
+			dataType : "json",
+			contentType : "application/json; charset=UTF-8",
+			success : function(detailLocation_list){
+				if(detailLocation_list != null && detailLocation_list.length > 0){
+					for(var i=0; i<detailLocation_list.length; i++){
+						var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
+						$("#type_dl").append(option);
+					}
+				}
+			} 
+		});
+	});
+	
+	$("#type_dl").change(function() {
+		if($("#type_dl").val() != "") {
+			
+			let data = {
+					lo_num = $('#type_lo').val(),
+					dl_num = $('#type_dl').val(),
+					sort = $("#sort_type").val()
+			}
+			
+			$.ajax({
+				type : 'POST',
+				data: { data: data },
+				url : "<c:url value='/product/productList'></c:url>",
+				dataType : "json",
+				contentType : "application/json; charset=UTF-8",
+				success : function(productList){
+					if(productList != null && productList.length > 0){
+						for(var i=0; i<productList.length; i++){
+							var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
+							$("#type_dl").append(option);
+						}
+						
+						productList.forEach()
+					}
+				} 
+			});
+		}
+	});
+	
+	$('#type_lo').change();
+</script>
+
+<script>
+	$("#product_type").val();	//호텔 : 0
+</script>
 </html>

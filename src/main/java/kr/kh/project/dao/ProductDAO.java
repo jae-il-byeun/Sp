@@ -8,6 +8,7 @@ import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.ProductVO;
 import kr.kh.project.vo.detailLocationVO;
+import kr.kh.project.vo.FileVO;
 import kr.kh.project.vo.ProductFileVO;
 import kr.kh.project.vo.ProductRoomFileVO;
 
@@ -31,12 +32,13 @@ public interface ProductDAO {
 
 	ArrayList<detailLocationVO> selectDetailLocation(@Param("lo_num")int lo_num);
 
-	ProductVO insertProduct(@Param("param")ProductVO pd);
+	void insertProduct(@Param("param")ProductVO param);
 	
-	ProductRoomsVO insertProductRooms(@Param("room")ProductRoomsVO room);
+	void insertProductRoom(@Param("room")ProductRoomsVO room);
 	
-	void insertFile(@Param("fileVO")ProductFileVO fileVo);
+	void insertFile(@Param("fileVo")FileVO fileVo);
 	
-	void insertRoomFile(@Param("fileVO")ProductRoomFileVO fileVo);
+	void insertProductFile(@Param("p_fileVo")ProductFileVO p_fileVo);
+	void insertProductRoomFile(@Param("p_r_fileVo")ProductRoomFileVO p_r_fileVo);
 
 }
