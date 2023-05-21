@@ -3,6 +3,7 @@ package kr.kh.project.serviceImp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import kr.kh.project.vo.BoardTypeVO;
 import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.MemberVO;
+import kr.kh.project.vo.LikesVO;
 import kr.kh.project.utils.UploadFileUtils;
 import kr.kh.project.vo.FileVO;
 
@@ -182,6 +184,117 @@ public class BoardServiceImp implements BoardService {
 	public String selectBoardWrite(BoardTypeVO bo_bt_num) {
 		System.out.println(bo_bt_num);
 		return "";
+	}
+	@Override
+	public BoardVO getBoard(int bo_num, MemberVO user) {
+		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
+		boardDao.updateBoardViews(bo_num);
+		//게시글 가져오기
+		BoardVO board = boardDao.selectBoard(bo_num);
+		
+		return board;
+	}
+	@Override
+	public BoardVO getBoard(int bo_num, BusinessVO seller) {
+		//조회수 증가 (조회수 증가 먼저 다음 게시글가져오기)
+		boardDao.updateBoardViews(bo_num);
+		//게시글 가져오기
+		BoardVO board = boardDao.selectBoard(bo_num);
+		return board;
+	}
+
+	@Override
+	public ArrayList<Map<String, Object>> getBftnf(int bo_num) {
+		ArrayList<Map<String, Object>> bf = boardDao.selectBftnf(bo_num);
+		return bf;
+	}
+	@Override
+	public boolean deleteBoard(int bo_num, MemberVO user, BusinessVO seller) {
+		if(user == null && seller == null)
+			return false;
+		BoardVO board = boardDao.selectBoard(bo_num);
+		System.out.println("게시판 : "+ board);
+		if(board == null)
+			return false;
+		
+		if(!board.getBo_me_id().equals(user.getMe_id()))
+			return false;
+		
+		ArrayList<Map<String, Object>> fileList = boardDao.selectFileList(bo_num);
+		System.out.println("파일리스트 : "+ fileList);
+		for(Map<String, Object> file : fileList) {
+			System.out.println("file : " +file);
+			Integer fn=(Integer) file.get("file_num");
+			System.out.println("fn : " + fn);
+			boardDao.deleteBoardFile(fn);
+		}
+		deleteFileList(fileList);
+
+		 boolean result = boardDao.deleteBoard(bo_num);
+		 if(result == true)
+			 return true;
+		 else
+			 return false;
+	}
+	private void deleteFileList(ArrayList<Map<String, Object>> fileList) {
+		if(fileList == null || fileList.size() == 0)
+			return;
+		for(Map<String, Object> file : fileList) {
+			if(file == null) 
+				continue;
+			System.out.println("file : " +file);
+			
+			String fn =(String) file.get("file_name");
+			System.out.println("fn" + fn);
+			UploadFileUtils.removeFile(uploadPath, fn);
+			
+			boardDao.deleteFile(file);		
+			
+			
+		}
+		
+	}
+	@Override
+	public int updateLikes(MemberVO user, BusinessVO seller, int bo_num, int li_state) {
+		// 기존에 추천/비추천을 했는지 확인
+				LikesVO likesVo = new LikesVO(); 
+				if(user != null && seller == null) {
+					likesVo =boardDao.selectLikesByUserId(user.getMe_id(),bo_num);
+				}else if(user == null && seller != null) {
+					likesVo =boardDao.selectLikesBySellerId(seller.getBi_id(),bo_num);
+				}
+				System.out.println("first : " + likesVo);
+				//없으면 추가
+				if(likesVo == null) {
+					//LieksVO 객체를 생성하여 
+					if(user != null && seller == null) {
+						likesVo = new LikesVO(li_state, user.getMe_id(), bo_num);
+					}else if(user == null && seller != null) {
+						likesVo = new LikesVO(li_state, seller.getBi_id(), bo_num);
+					}
+					System.out.println("second : " + likesVo);
+//					//DAO에게 전달해서 inseret하라고 시킴
+//					boardDao.insertLikes(likesVo);
+//					//bo_num를 리턴
+//					return li_state;
+				}
+//				
+//				//있으면 수정
+//				if(li_state != likesVo.getLi_state()) {
+//					//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
+//					likesVo.setLi_state(li_state);
+//					//업데이트
+//					boardDao.updateLikes(likesVo);
+//					//bo_num를 리턴
+//					return li_state;
+//				}
+//					//현재 상태와 기존상태가 같으면 => 취소
+//					likesVo.setLi_state(0);
+//					//업데이트
+//					boardDao.updateLikes(likesVo);
+//					//0을 리턴
+					
+					return 0;
 	}
 
 

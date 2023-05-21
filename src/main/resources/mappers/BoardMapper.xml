@@ -35,11 +35,8 @@
 		<if test="cri.type != 0">
 			AND bo_bt_num = #{cri.type}
 		</if>
-		order by bo_ori_num desc, bo_num asc, bo_bt_num asc limit #{cri.pageStart}, #{cri.perPageNum}
+		order by bo_num desc, bo_bt_num asc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
-<!-- 	<select id="selectBoardList" resultType="kr.kh.project.vo.BoardVO"> -->
-<!-- 		select * from board join boardType on bo_bt_num = bt_num order by bo_num asc limit #{cri.pageStart}, #{cri.perPageNum} -->
-<!-- 	</select> -->
 	<select id="selectBoardTotalCount" resultType="int">
   		select count(*) from board
   			where
@@ -58,25 +55,14 @@
 	</select>
 <!-- 	BoardInsert -->
 	<insert id="userInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
-		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_me_id, bo_bt_num, bo_ori_num)
-		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num},
-			<if test="bo.bo_ori_num == 0">
-				ifnull(max(bo_num),0)+1
-			</if>
-			<if test="bo.bo_ori_num != 0">
-				#{bo.bo_ori_num}
-			</if>
+		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_me_id, bo_bt_num)
+		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_me_id}, #{bo.bo_bt_num}
 			from board
 	 </insert>
 	 <insert id="sellerInsertBoard" useGeneratedKeys="true" keyProperty = "bo.bo_num">
-		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_bi_id, bo_bt_num, bo_ori_num)
-		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_bi_id}, #{bo.bo_bt_num},
-			<if test="bo.bo_ori_num == 0">
-				ifnull(max(bo_num),0)+1
-			</if>
-			<if test="bo.bo_ori_num != 0">
-				#{bo.bo_ori_num}
-			</if>
+		insert into board (bo_num, bo_name, bo_content, bo_record_date, bo_views, bo_bi_id, bo_bt_num)
+		select ifnull(max(bo_num),0)+1, #{bo.bo_name}, #{bo.bo_content},now(), 0, #{bo.bo_bi_id}, #{bo.bo_bt_num}
+			
 			from board
 	 </insert>
 	 <insert id="insertFile">
@@ -87,18 +73,39 @@
 	 </select>
 	<insert id="insertBoardFile">
 		insert into boardfile (bf_bo_num, bf_fi_num, bf_type) values ( #{bn}, #{file}, #{ft})
-	 </insert> 
+	 </insert>
+	 
+<!-- 	  BoardDetail -->
+	 <update id="updateBoardViews">
+  		update board set bo_views = bo_views+1 where bo_num = #{bo_num}
+  	 </update>
+	 <select id="selectBoard"  resultType="kr.kh.project.vo.BoardVO">
+  		select * from board 
+  			join boardType on bo_bt_num = bt_num
+  			where bo_num = #{bo_num}
+  	 </select> 
+  	 <select id="selectBftnf" resultType="map">
+		select fi.*, bf.bf_type from project.boardfile bf inner join project.file fi on bf.bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo}  	 
+  	 </select>
+<!--   	 게시판 삭제 -->
+	 <delete id="deleteBoard">
+  		delete from board where bo_num = #{bo_num}
+  	 </delete>
+	 <select id="selectFileList" resultType="map">
+  		select fi.*, bf.bf_fi_num, bf.bf_bo_num from boardfile bf inner join file fi on bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo_num}
+  	</select>
+  	<delete id="deleteFile">
+  		delete from file
+  			where file_num = #{fi.bf_fi_num}
+  	</delete>
+	 <delete id="deleteBoardFile">
+	 	delete from boardfile where bf_fi_num = #{fn}
+	 </delete>
+<!-- 추천 비추천 -->
+	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesVO">
+		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
+	</select>
 	 
 	 
-	 
-	 
-	 
-	 
-	 
-<!-- 	 <update id="updateBoardViews"> -->
-<!-- 	 	update board set bo_views = bo_views+1 where bo_num = #{bo_num} -->
-<!-- 	 </update> -->
-<!-- 	 <select id="selectBoard" resultMap="Board"> -->
-<!-- 	 	select * from board join board_ty	pe on bo_bt_num = bt_num where bo_num =#{bo_num} -->
-<!-- 	 </select> -->
+
  </mapper>

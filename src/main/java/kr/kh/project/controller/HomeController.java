@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.kh.project.service.BusinessService;
 import kr.kh.project.service.MemberService;
+import kr.kh.project.utils.MessageUtils;
 import kr.kh.project.vo.AuNumVO;
 import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.MemberVO;
@@ -79,7 +80,7 @@ public class HomeController {
 	}
 	@ResponseBody
 	@RequestMapping(value = "/login/member", method=RequestMethod.POST)
-	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member,HttpSession session){
+	public Map<String, Object> memberLogin(ModelAndView mv, @RequestBody MemberVO member,HttpSession session,HttpServletResponse response){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		MemberVO user = memberService.login(member);
@@ -96,6 +97,9 @@ public class HomeController {
 			
 		}
 		else {
+			MessageUtils.alertAndMovePage(response, 
+					"잘못된 아이디나 비밀번호입니다.", 
+					"/project", "/");
 			map.put("result", false);
 			return map;
 		}
