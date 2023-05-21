@@ -7,6 +7,8 @@
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+ 
+ <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
@@ -66,7 +68,7 @@ width:100%; height:35%;
 .product_contentContainer{
 	width:100%; height: 100%;
 	box-sizing: border-box; margin-top: 10px;
-	background-color: rgba(226, 225, 225, 0.452);
+	background-color: #fffcf4;
 	box-sizing:border-box; padding: 0px 100px;
 }
 .product_content{
@@ -75,14 +77,14 @@ width:100%; height:35%;
 .product_introMainBox{
 	width:100%; height:30%;
 	display:flex;
-	
-	
 }
+
 .product_introImg{
 	width:40%; height:25%;
 	z-index: 1;
 	box-sizing: border-box;
 	position: relative;
+	margin-top:10px;
 }
 #product_img{
 	display: none;
@@ -98,7 +100,7 @@ width:100%; height:35%;
 }
 .product_introTitle h1{
 	width:90%;
-	font-size:50px;  
+	font-size:60px;  
 	margin: 10px 0px 15px 10px;
 }
 .product_likeBox{
@@ -115,15 +117,17 @@ width:100%; height:35%;
 /* 상품 상세소개Box */
 .product_introDetail{
 	width:100%; height:30%; 
-	
+	box-sizing: border-box; margin-top:10px;
 	
 }
-
+.p_price{
+	float: right; margin-right: 10px;
+}
 .product_introDetail h5{
 	font-size:20px; 
 }
 .product_detailTA{
-	width: 100%; height: 100%;
+	width: 100%; height: 175px;
 	border: 1px solid #ddd;
 }
 .product_serviceBox{
@@ -133,24 +137,69 @@ width:100%; height:35%;
 }
 .product_service{
 	width:49%; height:100%;
-	box-sizing: border-box; padding-left: 10px;
-	margin-right:10px;
+	box-sizing: border-box; padding-left: 10px; margin-right:10px;
+	
 }
 .cp{
 	box-sizing:border-box; padding:5px 10px 0px;
 }
-.cp textarea{
+textarea{
 	resize: none;
-	height:150px;
+	width:90%; height:120px;
+	
 }
+
 .product_location{
 	width:50%; height: 200px;
 }
 .product_location img{
 	width:100%; height: 200px;
 }
+.product_roomContainer{
+	display:flex;
+	box-sizing: border-box; padding:0px 10px;
+}
+.room_textBox{
+	width:55%;
+	margin-left:50px;
+}
+.room_text{
+	display: block;
+}
+.rname{font-size:40px; margin-top: 5px;}
+.rprice{font-size:25px; text-align: right; margin-top: 10px;}
+.rintro{font-size: 20px;}
+.rcontent{
+	width:100%; height: 100px;
+	resize: none;
+}	
+.rr{
+	width:100px; height: 40px;
+	text-align: center; float:right;
+	font-size: 27px;
+	border: 1px solid #fff; border-radius: 7px;
+	margin-top:10px;
+	color: #fff; background-color: tan;
+	
+}
 
+/* 리뷰 */
+.product_review{
+	display: flex;
+	padding: 0px 10px;	
+}
+.product_reviewText{
+	width: 80%;
+	margin-right:10px;
+}
 
+.product_reviewComplete{
+ 	font-size: 20px;
+ 	border: 1px solid #fff; border-radius: 7px; 
+ 	background-color: green; color:#fff;
+}
+.exuser{
+	display: block;
 }
 /*메인소개 이미지 슬라이드 */
 .swiper {
@@ -320,10 +369,10 @@ width:100%; height:35%;
 							<span>/평점</span>
 							<span>(<span class="reviewNum" id="rv_star">8.4</span>)></span>
 						</div>
-						<span id="">10000원</span> 
+						<span class="p_price" id="">10000원</span> 
 						<div class="product_introDetail cp">
 							<h5 >상세셜명</h5>
-							<textarea rows="" cols="" class="product_detailTA" id="product_content"></textarea>
+							<textarea rows="" cols="" class="product_detailTA" id="product_content" readonly></textarea>
 						</div>
 					</div>
 					
@@ -346,17 +395,55 @@ width:100%; height:35%;
 					</div>
 				</div>
 				<hr>
-				
+				<div class="product_roomContainer">
+					<swiper-container class="mySwiper" navigation="true" style=" width: 500px; height: 350px;">
+					    <swiper-slide>Slide 1</swiper-slide>
+					    <swiper-slide>Slide 2</swiper-slide>
+					    <swiper-slide>Slide 3</swiper-slide>
+					    <swiper-slide>Slide 4</swiper-slide>
+					    <swiper-slide>Slide 5</swiper-slide>
+					    <swiper-slide>Slide 6</swiper-slide>
+					    <swiper-slide>Slide 7</swiper-slide>
+					    <swiper-slide>Slide 8</swiper-slide>
+					    <swiper-slide>Slide 9</swiper-slide>
+					</swiper-container>
+					
+					<p class="room_textBox">	
+						<strong class="room_text rname">객실 이름</strong>
+						<span class="room_text rprice">가격 :      <span>1000</span></span>
+						<span class="room_text rintro">상세설명 :</span>
+						<textarea rows="" cols="" class="room_text rcontent"></textarea>
+						<a type="button" class="room_text rr">예약 </a>
+					</p>
+
+				</div>
+				<hr>
 				<div class="product_reviewBox cp">
 					<h2>리뷰</h2>
 					<p>
 						<span>별점</span><img alt="" src="" class="product_starPoint">
 						<span>평점/</span>
 						<span id="rv_star">4.5</span>
-						
+							
 					</p>
-					<textarea rows="" cols="" class="product_reviewText" id="rv_content"></textarea>
-					<button type="submit" class="product_reviewComplete">작성완료</button>
+					<div class="product_review">
+						<textarea rows="" cols="" class="product_reviewText" id="rv_content"></textarea>
+						<button type="submit" class="product_reviewComplete">작성완료</button>
+					</div>
+					<div class="product_review exuser">
+						<hr>
+						<h5>아이디</h5>
+						<p>
+							<span>별점</span><img alt="" src="" class="product_starPoint">
+							<span>평점/</span>
+							<span id="rv_star">4.5</span>
+								
+						</p>	
+						<div class="product_review">
+							<textarea rows="" cols="" class="product_reviewText" id="rv_content" readonly></textarea>
+						</div>
+						<hr>
+					</div>
 				</div>
 			</div>
 		</div>
