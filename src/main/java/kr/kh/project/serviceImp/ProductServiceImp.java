@@ -127,6 +127,30 @@ public class ProductServiceImp implements ProductService {
 		return productDao.selectProductList(data);
 	}
 
+	@Override
+	public ProductVO productSelect(int product_num) {
+		// TODO Auto-generated method stub
+		return productDao.selectProduct(product_num);
+	}
+
+	@Override
+	public ArrayList<FileVO> productFileSelect(int product_num) {
+		// TODO Auto-generated method stub
+		return productDao.selectProductFile(product_num);
+	}
+
+	@Override
+	public ArrayList<ProductRoomsVO> productRoomsSelect(int product_num) {
+		// TODO Auto-generated method stub
+		return productDao.selectProductRooms(product_num);
+	}
+
+	@Override
+	public ArrayList<FileVO> productRoomFileSelect(int r_num) {
+		// TODO Auto-generated method stub
+		return productDao.selectProductRoomFile(r_num);
+	}
+
 
 
 }

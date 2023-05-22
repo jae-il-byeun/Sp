@@ -44,4 +44,8 @@ public interface ProductDAO {
 	
 	ArrayList<Map<String, Object>> selectProductList(@Param("data")Map<String, Object> data);
 
+	ProductVO selectProduct(@Param("product_num") int product_num);
+	ArrayList<FileVO> selectProductFile(@Param("product_num") int product_num);
+	ArrayList<ProductRoomsVO> selectProductRooms(@Param("product_num") int product_num);
+	ArrayList<FileVO> selectProductRoomFile(@Param("r_num") int r_num);
 }

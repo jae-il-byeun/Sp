@@ -1,6 +1,6 @@
 package kr.kh.project.vo;
 
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -10,14 +10,15 @@ public class ProductVO {
 	String product_type;
 	String product_name;
 	String product_service;
-	MultipartFile[] product_images;
+	//MultipartFile[] product_images;
 	String product_content;
 	String product_bi_id;
-	ProductRoomsVO[] product_rooms;
+	//ProductRoomsVO[] product_rooms;
 	Integer product_lo_num;
 	Integer product_dl_num;
 	String product_postNum;
 	String product_mainAddress;
 	String product_detailAddress;
 	String product_extraAddress;
+	String product_price;
 }

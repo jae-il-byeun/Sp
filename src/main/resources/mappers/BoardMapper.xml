@@ -102,7 +102,7 @@
 	 	delete from boardfile where bf_fi_num = #{fn}
 	 </delete>
 <!-- 추천 비추천 -->
-	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesVO">
+	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesUserVO">
 		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
 	</select>
 	<insert id="insertUserLikes">

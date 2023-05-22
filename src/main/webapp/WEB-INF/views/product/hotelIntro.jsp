@@ -128,7 +128,8 @@ width:100%; height:35%;
 }
 .product_detailTA{
 	width: 100%; height: 175px;
-	border: 1px solid #ddd;
+	border: 1px solid #dcdcdc;
+    overflow-y: auto;
 }
 .product_serviceBox{
 	width:100%; height:230px;
@@ -265,101 +266,35 @@ textarea{
 	<div class="product_innerContainer">
 		<div class="product_titleBox">
 			<h1 id="product_type">호텔</h1>
-			<div class="product_placeBox">
-				<select class="product_search_mainPlace" name="lo_num" id="type">
-					<option value="0">지역 선택</option>
-<%-- 					<c:forEach items="${location_list}" var="lo"> --%>
-<%-- 						<option value="${lo.lo_num}">${lo.lo_name}</option> --%>
-<%-- 					</c:forEach> --%>
-				</select>
-				<select class="product_search_subPlace" name="dl_num" id="type">
-					<option value="0">세부 지역</option>
-	<%-- 				<c:forEach items="${detailLocation_list}" var="dl"> --%>
-	<%-- 					<option value="${dl.dl_num}">${dl.dl_name}</option> --%>
-	<%-- 				</c:forEach> --%>
-				</select>				
-			</div>
 		</div>
 		
 		<div class="product_contentContainer">
 			<div class="product_content">
 				<div class="product_introMainBox">
 					<div class="product_introImg">
-							 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-							    <div class="swiper-wrapper">
-							      <div class="swiper-slide ss_first">
-								      	<label for="product_img"></label>
-								      	<input type="file" id="product_img" multiple>
-							      </div>
-							      <div class="swiper-slide">
-										<span>+</span>
-										<input type="file" id="product_img">
-							      </div>
-							      <div class="swiper-slide">
-							       		<input type="file" id="product_img">
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-							      </div>
-							    </div>
-							    <div class="swiper-button-next"></div>
-							    <div class="swiper-button-prev"></div>
-							  </div>
-							  <div thumbsSlider="" class="swiper mySwiper">
-							    <div class="swiper-wrapper">
-							      <div class="swiper-slide">
-							      	 <input type="file" id="product_img">
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-							      </div>
-							      <div class="swiper-slide">
-							        <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-							      </div>
-							    </div>
-							  </div>
+						 <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+						    <div class="swiper-wrapper">
+						    	<c:forEach items="${productFiles}" var="file">
+						    		<div class="swiper-slide">
+							        	<img src='<c:url value="/download${file.file_name}"></c:url>' />
+									</div>
+						    	</c:forEach>
+						    </div>
+						    <div class="swiper-button-next"></div>
+						    <div class="swiper-button-prev"></div>
+						  </div>
+						  <div thumbsSlider="" class="swiper mySwiper">
+						    <div class="swiper-wrapper">
+						    	<c:forEach items="${productFiles}" var="file">
+						    		<div class="swiper-slide">
+							        	<img src='<c:url value="/download${file.file_name}"></c:url>' />
+									</div>
+						    	</c:forEach>
+						    </div>
+						  </div>
 					</div>
 					<div class="product_introTitle">
-						<h1 class="product_title" id="product_name">파라다이스 시티</h1>
+						<h1 class="product_title" id="product_name">${product.product_name}</h1>
 						<span class="product_likeBox">
 							<img src="/project/resources/img/nomal_like.png" class="product_likeimg">
 						</span>
@@ -367,12 +302,12 @@ textarea{
 							<img alt="" src="/project/resources/img/star.png"  class="product_starPoint">
 			
 							<span>/평점</span>
-							<span>(<span class="reviewNum" id="rv_star">8.4</span>)></span>
+							<span>(<span class="reviewNum" id="rv_star">0.0</span>)</span>
 						</div>
-						<span class="p_price" id="">10000원</span> 
+						<span class="p_price" id="">${product.product_price}</span> 
 						<div class="product_introDetail cp">
-							<h5 >상세셜명</h5>
-							<textarea rows="" cols="" class="product_detailTA" id="product_content" readonly></textarea>
+							<h5 >상세설명</h5>
+							<div class="product_detailTA">${product.product_content}</div>
 						</div>
 					</div>
 					
@@ -382,12 +317,9 @@ textarea{
 				<div class="product_serviceBox ">
 					<figure class="product_service" id="product_service">
 						<h5>편의시설</h5>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
+						<c:forEach items="${productServiceList}" var="img">
+							<img src="/project/resources/img/service/${img}.png">
+						</c:forEach>
 					</figure>
 					<div class="product_location ">
 						<h5>숙소 위치</h5>
@@ -395,29 +327,28 @@ textarea{
 					</div>
 				</div>
 				<hr>
-				<div class="product_roomContainer">
-					<swiper-container class="mySwiper" navigation="true" style=" width: 500px; height: 350px;">
-					    <swiper-slide>Slide 1</swiper-slide>
-					    <swiper-slide>Slide 2</swiper-slide>
-					    <swiper-slide>Slide 3</swiper-slide>
-					    <swiper-slide>Slide 4</swiper-slide>
-					    <swiper-slide>Slide 5</swiper-slide>
-					    <swiper-slide>Slide 6</swiper-slide>
-					    <swiper-slide>Slide 7</swiper-slide>
-					    <swiper-slide>Slide 8</swiper-slide>
-					    <swiper-slide>Slide 9</swiper-slide>
-					</swiper-container>
-					
-					<p class="room_textBox">	
-						<strong class="room_text rname">객실 이름</strong>
-						<span class="room_text rprice">가격 :      <span>1000</span></span>
-						<span class="room_text rintro">상세설명 :</span>
-						<textarea rows="" cols="" class="room_text rcontent"></textarea>
-						<a type="button" class="room_text rr">예약 </a>
-					</p>
-
-				</div>
-				<hr>
+				<c:forEach items="${rooms}" var="r">
+					<div class="product_roomContainer">
+						<div class="swiper mySwiper3" style="width:600px; height:350px;">
+						    <div class="swiper-wrapper">
+						      <c:forEach items="${r.r_file}" var="rFile">
+							      <div class="swiper-slide"><img src='<c:url value="/download${rFile.file_name}"></c:url>' /></div>
+						      </c:forEach>
+						    </div>
+						    <div class="swiper-button-next"></div>
+						    <div class="swiper-button-prev"></div>
+					  	</div>
+						
+						<div class="room_textBox">	
+							<strong class="room_text rname">${r.r_title}</strong>
+							<span class="room_text rprice">가격 : ${r.r_price} 원</span>
+							<span class="room_text rintro">상세설명 :</span>
+							<textarea rows="" cols="" class="room_text rcontent">${r.r_intro}</textarea>
+							<a type="button" class="room_text rr">예약</a>
+						</div>
+					</div>				
+					<hr>
+				</c:forEach>
 				<div class="product_reviewBox cp">
 					<h2>리뷰</h2>
 					<p>
@@ -467,6 +398,12 @@ textarea{
       },
       thumbs: {
         swiper: swiper,
+      },
+    });
+    var swiper3 = new Swiper(".mySwiper3", {
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
       },
     });
   </script>
