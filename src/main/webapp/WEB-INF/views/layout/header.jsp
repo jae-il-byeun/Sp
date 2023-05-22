@@ -223,7 +223,7 @@ a{text-decoration: none;}
 				</a>
 			</li>
 			<li class="h_login h_productUpload">
-				<a  class="hl_link" id="myPage">
+				<a  class="hl_link" id="myPage" href="<c:url value="/product/productUpload"></c:url>">
 					<img alt="" src="/project/resources/img/productUpload.png" class="header_loginIcon">
 					<span class="h_cataloglogin_text">상품등록</span> 
 				</a>

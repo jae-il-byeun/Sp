@@ -54,7 +54,7 @@ public class ProductController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/product/hotelIntro/{product_num}", method = RequestMethod.GET)
+	@RequestMapping(value = "/product/productIntro/{product_num}", method = RequestMethod.GET)
 	public ModelAndView hotelIntro(ModelAndView mv, HttpSession session,@PathVariable("product_num")int product_num,HttpServletResponse response) {
 		ProductVO p = productService.productSelect(product_num);
 		ArrayList<FileVO> p_file = productService.productFileSelect(product_num);
@@ -76,7 +76,7 @@ public class ProductController {
 		mv.addObject("productFiles",p_file);
 		mv.addObject("rooms",result_r);
 		
-		mv.setViewName("/product/hotelIntro");
+		mv.setViewName("/product/productIntro");
 		return mv;
 	}
 	@RequestMapping(value="/product/productUpload",method=RequestMethod.GET)

@@ -48,7 +48,7 @@ public class BoardController {
 		PageMaker pm = new PageMaker(totalCount,10, cri);
 		
 		Integer aunch = (Integer)session.getAttribute("au");
-		
+		System.out.println(aunch);
 		mv.addObject("aunch", aunch == null ? 0 : aunch);
 		mv.addObject("pm",pm);
 		mv.addObject("btList",btList);

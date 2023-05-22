@@ -155,7 +155,9 @@ public class HomeController {
 	public Map<String, Object> businessLogin(ModelAndView mv, @RequestBody BusinessVO seller,HttpSession session){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		BusinessVO business = businessService.businesslogin(seller);
-		int bi_au= seller.getBi_authority();
+		System.out.println("business : "+ business);
+		int bi_au= business.getBi_authority();
+		System.out.println(bi_au);
 		mv.addObject("seller",business);
 		if(business != null) {
 			session.setAttribute("seller", business);

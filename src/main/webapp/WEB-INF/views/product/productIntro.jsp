@@ -9,6 +9,8 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
  
  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+ 
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=54bbd430a6ecc9a4c2dcbca00e778399"></script>
 <style>
 *{margin:0px; padding:0px;}
 li{list-style: none;}
@@ -323,7 +325,7 @@ textarea{
 					</figure>
 					<div class="product_location ">
 						<h5>숙소 위치</h5>
-						<img alt="" src="/project/resources/img/ex_map.png">
+						<div id="map" style="width:700px;height: 190px;"></div>
 					</div>
 				</div>
 				<hr>
@@ -416,5 +418,16 @@ textarea{
 			$(".place_hidden").css("display","block");
 		}
 	}) 
+	
+	
   </script>
+ <script>
+ var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+ var options = { //지도를 생성할 때 필요한 기본 옵션
+ 	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+ 	level: 3 //지도의 레벨(확대, 축소 정도)
+ };
+
+ var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+ </script>
 </html>

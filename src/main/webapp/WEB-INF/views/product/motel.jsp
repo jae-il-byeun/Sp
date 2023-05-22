@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false" %>
 <html>
 
@@ -27,7 +28,7 @@ body{font-family: 'GyeonggiTitleM';}
 	box-shadow: 1px 1px 5px gray; font-size: 20px;
 	box-sizing:border-box; padding: 10px 10px 5px 15px; 
 }
-#pt_title{margin:5px 0px 30px 10px;}
+#product_type{margin:5px 0px 30px 10px;}
 .product_placeBox{
 width:100%; height:35%;  
 	box-sizing:border-box; padding: 0px 10px 5px 15px;  display:flex; text-align: center;
@@ -43,12 +44,17 @@ width:100%; height:35%;
 	border: 1px solid #ddd; border-radius: 7px; 
 	box-sizing: border-box; margin-right:10px; 
 }
-
+.product_search_calender{margin-left: 10px;}
+.dayCheck{
+	width:40%; height: 34px;
+	border: 1px solid #ddd; border-radius: 5px;
+	font-size: 15px;
+}
 
 .product_contentBox{
 	width:100%; height:100%; 
-	display:flex;
-	box-sizing: border-box; padding: 2px 1px; margin-top: 10px; 
+
+	box-sizing: border-box; padding: 0px 150px; margin-top: 10px; margin-bottom:30px; 
 }
 .product_mapBox{
 	width:50%; height:80%;
@@ -57,7 +63,7 @@ width:100%; height:35%;
 }
 
 .product_listBox{
-	width:50%; height:100%;
+	width:100%; height:100%;
 	box-sizing: border-box; border-top: none;
 	
 }
@@ -83,7 +89,7 @@ width:100%; height:35%;
 	box-sizing: border-box; padding: 4px; 
 }
 .like_button{
-	width:11%;  
+	width:8%;  
 	border: none; background: none;
 	vertical-align: middle; cursor: pointer;
 	margin-bottom: 7px;
@@ -91,7 +97,7 @@ width:100%; height:35%;
 .like_icon{
 	width:70%; 
 	vertical-align: middle;
-	margin-left: 260px;
+	margin-left: 690%;
 	cursor: pointer;
 }
 
@@ -100,11 +106,12 @@ width:100%; height:35%;
 	box-sizing: border-box; padding: 10px 0px;
 }
 .product_title{
-	font-size: 25px;
+	font-size: 45px;
 }
 .product_detailInfo{
 	display:block;
-	margin-left: 20px;
+	margin-left: 30px;
+	font-size: 25px;
 }
 .product_starPoint{
 	margin-right: 0px;
@@ -113,8 +120,7 @@ width:100%; height:35%;
 	width:40%; 
 	margin: 30px 0px 0px 100px; 
 	float: right; text-align:right; color: #000;
-	font-size: 30px; font-decoration: none; 
-	
+	font-size: 30px; text-decoration: none; 
 }
 
 
@@ -129,151 +135,37 @@ width:100%; height:35%;
 <div class="product_outterContainer">
 	<div class="product_innerContainer">
 		<div class="product_titleBox">
-			<h1 id="pt_title">모텔</h1>
+			<h1>모텔</h1>
+			<input type="hidden" id="product_type" value="0">
 			<div class="product_placeBox">
-				<ul class="product_search_mainPlace">
-				<li>
-					<span>서울</span>
-				</li>
-				<li>
-					
-				</li>
-			</ul>
-			<ul class="product_search_subPlace">
-				<li>
-					<span>종로/명동/을지로</span>
-				</li>
-			</ul>
-			<div class="product_search_calender">
-				<input type="text" class="dayCheck">
-				<span>~</span>
-				<input type="text" class="dayCheck">
-			</div>
+				<select class="product_upload_location" name="lo_num" id="type_lo">
+					<!-- <option value="">선택</option> -->
+					<c:forEach items="${location_list}" var="lo">
+						<option value="${lo.lo_num}">${lo.lo_name}</option>
+					</c:forEach>
+				</select>
+				<select class="product_upload_location" name="dl_num" id="type_dl">
+					<!-- <option value="">선택</option> -->
+				</select>
 			</div>
 		</div>
 		
 		<div class="product_contentBox">
-			<div class="product_mapBox">
-						<img alt="" src="/project/resources/img/ex_map.png" class="map_imege" style="height: 650px;">
-			</div>
+
 			<div class="product_listBox">
 				<div class="product_split">
 					<span>정렬기준</span>
-					<select>
-						<option>인기순</option>
-						<option></option>
-						<option></option>
-						<option></option>
-						
+					<select id="sort_type">
+						<option value="1">조회순</option>
+						<option value="2">예약순</option>
+						<option value="3">낮은가격순</option>
+						<option value="4">높은가격순</option>					
 					</select>
 				</div>
 				
 				<div class="product_list">
-					<ul class="product_list_content">
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege" >
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-							<li class="product">
-								<img alt="" src="/project/resources/img/ex_hotel.jpg" class="product_imege">
-								<div class="product_semi">
-									<a class="product_title">파라다이스 시티</a>
-									<button class="like_button" >
-										<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" >
-									</button>
-									
-									<div class="product_detailInfo">
-										별점<img alt="" src="" class="product_starPoint">
-										<span>4.5/평점</span>
-										
-									</div>
-									<a class="product_priceInsert" href="#">10000원</a> 
-								</div>
-									
-							</li>
-						</ul>
-					
+					<ul class="product_list_content" id="product_list">
+					</ul>					
 				</div>
 			</div>
 			
@@ -281,4 +173,90 @@ width:100%; height:35%;
 	</div>
 </div>
 </body>
+
+<script>
+// 	// 교육원
+// 	$('#type_lo').change(function(){
+// 		$("#type_dl").empty();
+// 		//$("#type_dl").append($("<option value=''>선택</option>"));
+		
+// 		let lo_num = $('#type_lo').val();
+		
+// 		if(lo_num != "") {
+// 			$.ajax({
+// 				type : 'POST',
+// 				data: lo_num,
+// 				url : "<c:url value='/product/detailLocation'></c:url>",
+// 				dataType : "json",
+// 				contentType : "application/json; charset=UTF-8",
+// 				success : function(detailLocation_list){
+// 					if(detailLocation_list != null && detailLocation_list.length > 0){
+// 						for(var i=0; i<detailLocation_list.length; i++){
+// 							var option = $("<option value='"+detailLocation_list[i].dl_num+"''>"+detailLocation_list[i].dl_name+"</option>");  
+// 							$("#type_dl").append(option);
+// 						}
+						
+// 						$("#type_dl").change();
+// 					}
+// 				} 
+// 			});
+// 		}
+// 	});
+	
+// 	$("#type_lo").change();
+	
+// 	$("#type_dl").change(function() {
+// 		if($("#type_dl").val() != "") {
+			
+// 			let data = {
+// 					product_type : $("#product_type").val(),
+// 					product_lo_num : $('#type_lo').val(),
+// 					product_dl_num : $('#type_dl').val(),
+// 					sort : $("#sort_type").val()
+// 			}
+
+// 			$("#product_list").empty();
+			
+// 			$.ajax({
+// 				type : 'POST',
+// 				data: JSON.stringify(data),
+// 				url : "<c:url value='/product/productList'></c:url>",
+// 				dataType : "json",
+// 				contentType : "application/json; charset=UTF-8",
+// 				success : function(productList){
+// 					if(productList != null && productList.length > 0){
+// 						productList.forEach(item => {
+// 							let tag = '';
+// 							tag = tag + '<li class="product">';
+// 							if(item.product_image != null && item.product_image.length > 0) {
+// 								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:670px; height:400px;">';
+// 							}
+// 							else {
+// 								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:670px; height:400px;">';
+// 							}
+// 							tag = tag + '<div class="product_semi">';
+// 							tag = tag + '<a class="product_title" name="product_name" href="#" onclick="alert('+item.product_num+');">'+item.product_name+'</a>';
+// 							tag = tag + '<button class="like_button" >';
+// 							tag = tag + '<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" name="pf_file_num">';
+// 							tag = tag + '</button>';
+// 							tag = tag + '<div class="product_detailInfo">별점<img alt="" src="" class="product_starPoint">0 / 평점 0</span></div>';
+// 							tag = tag + '<a class="product_priceInsert" name="r_price" href="#">'+item.price+'</a>';
+// 							tag = tag + '</div>';
+// 							tag = tag + '</li>';
+							
+// 							$("#product_list").append(tag);
+// 						});
+// 					}
+// 					else {
+// 						$("#product_list").append("<p>검색결과가 없습니다.</p>")
+// 					}
+// 				} 
+// 			});
+// 		}
+// 	});
+	
+// 	$("#sort_type").change(function() {
+// 		$("#type_dl").change();
+// 	});
+</script>
 </html>

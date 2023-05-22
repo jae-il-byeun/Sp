@@ -106,7 +106,7 @@
 	 </delete>
 <!-- 추천 비추천 -->
 	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesUserVO">
-<<<<<<< HEAD
+
 		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{lm}
 	</select>
 	<select id="selectLikesBySellerId" resultType="kr.kh.project.vo.LikesSellerVO">

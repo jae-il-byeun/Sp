@@ -209,7 +209,7 @@ body{ font-family: 'GyeonggiTitleM';}
 				</div>
 			</c:if>
 			<c:if test="${seller != null && seller.bi_id == board.bo_bi_id}">
-				<div class="delteUpdate">
+				<div class="deleteUpdate">
 					<a href="<c:url value='/board/update/${board.bo_num}'></c:url>">
 						<button class="btn  btn-update">수정</button>
 					</a>
