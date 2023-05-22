@@ -80,9 +80,7 @@
   		update board set bo_views = bo_views+1 where bo_num = #{bo_num}
   	 </update>
 	 <select id="selectBoard"  resultType="kr.kh.project.vo.BoardVO">
-  		select * from board 
-  			join boardType on bo_bt_num = bt_num
-  			where bo_num = #{bo_num}
+  		select * from board	join boardType on bo_bt_num = bt_num where bo_num = #{bo_num}
   	 </select> 
   	 <select id="selectBftnf" resultType="map">
 		select fi.*, bf.bf_type from project.boardfile bf inner join project.file fi on bf.bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo}  	 
@@ -92,18 +90,26 @@
   		delete from board where bo_num = #{bo_num}
   	 </delete>
 	 <select id="selectFileList" resultType="map">
-  		select fi.*, bf.bf_fi_num, bf.bf_bo_num from boardfile bf inner join file fi on bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo_num}
+  		select fi.*, bf.* from boardfile bf inner join file fi on bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo_num}
+  	</select>
+  	<select id="selectExtraFileList" resultType="map">
+  		select fi.*, bf.* from boardfile bf inner join file fi on bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo} AND bf.bf_type ='첨부파일'
+  	</select>
+  	<select id="selectImegeFileList" resultType="map">
+  		select fi.*, bf.* from boardfile bf inner join file fi on bf_fi_num = fi.file_num where bf.bf_bo_num = #{bo} AND bf.bf_type ='이미지'
   	</select>
   	<delete id="deleteFile">
-  		delete from file
-  			where file_num = #{fi.bf_fi_num}
+  		delete from file where file_num = #{fi}
   	</delete>
 	 <delete id="deleteBoardFile">
 	 	delete from boardfile where bf_fi_num = #{fn}
 	 </delete>
 <!-- 추천 비추천 -->
-	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesVO">
-		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
+	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesUserVO">
+		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{lm}
+	</select>
+	<select id="selectLikesBySellerId" resultType="kr.kh.project.vo.LikesSellerVO">
+		select * from likes	where li_bo_num = #{li_bo_num} and li_bi_id = #{lb}
 	</select>
 	<insert id="insertUserLikes">
   		insert into
@@ -115,5 +121,38 @@
   			likes(li_state, li_bi_id, li_bo_num)
   			values(#{li.li_state},#{li.li_bi_id},#{li.li_bo_num})
   	</insert>
-
+	<update id="updateUserLikes">
+  		update likes
+  			set
+  				li_state = #{li.li_state}
+  			where
+  				li_num = #{li.li_num}
+  	</update>
+  	<update id="updateSellerLikes">
+  		update likes
+  			set
+  				li_state = #{li.li_state}
+  			where
+  				li_num = #{li.li_num}
+  	</update>
+  	<update id="updateBoardByLikes">
+  		update board
+  			set
+  				bo_up = 
+  					(select count(*) from likes 
+  						where li_bo_num = #{bo_num} and li_state = 1),
+  				bo_down = 
+  					(select count(*) from likes 
+  						where li_bo_num = #{bo_num} and li_state = -1)
+  			where
+  				bo_num = #{bo_num}
+  	</update>
+<!--   	수정 -->
+  	<update id="updateBoard">
+  		update board set bo_name = #{bo.bo_name}, bo_content = #{bo.bo_content}, bo_bt_num = #{bo.bo_bt_num}, bo_update_date = now()
+  			where bo_num = #{bo.bo_num}
+  	</update>
+  	<select id="selectFile" resultType="kr.kh.project.vo.FileVO">
+  		select fi.* from project.file fi inner join boardfile bf where file_num = #{fi} and bf.bf_fi_num = file_num;
+  	</select>
  </mapper>
