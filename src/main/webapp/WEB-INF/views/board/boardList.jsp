@@ -124,7 +124,7 @@ body{ font-family: 'GyeonggiTitleM';}
  	border:1px solid #ddd; border-radius: 7px;
  	background-color: skyblue; color: #fff; font-size:25px;
  	
- 	margin-right:10px;
+ 	margin-left:10px;
  }
  .list_type_name{
  	width:12%;

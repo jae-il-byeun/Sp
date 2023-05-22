@@ -44,7 +44,11 @@ public interface BoardDAO {
 	ArrayList<Map<String, Object>> selectBftnf(@Param("bo")int bo_num);
 
 	ArrayList<Map<String, Object>> selectFileList(@Param("bo_num")int bo_num);
+	
+	ArrayList<Map<String, Object>> selectExtraFileList(@Param("bo")int bo_num);
 
+	ArrayList<Map<String, Object>> selectImegeFileList(@Param("bo")int bo_num);
+	
 	boolean deleteBoard(@Param("bo_num")int bo_num);
 
 
@@ -54,13 +58,27 @@ public interface BoardDAO {
 
 	void deleteOri(@Param("bo_num")int bo_num);
 
-	LikesUserVO selectLikesById(@Param("lm")String me_id,@Param("li_bo_num") int bo_num);
+	LikesUserVO selectLikesByUserId(@Param("li_bo_num") int bo_num, @Param("lm")String me_id);
 
-	LikesSellerVO selectLikesBySellerId(@Param("lb")String bi_id,@Param("li_bo_num") int bo_num);
+	LikesSellerVO selectLikesBySellerId(@Param("li_bo_num") int bo_num, @Param("lb")String bi_id);
 
 	void insertUserLikes(@Param("li")LikesUserVO likesVo);
 	
 	void insertSellerLikes(@Param("li")LikesSellerVO likesVo);
+
+	void updateUserLikes(@Param("li")LikesUserVO likesVo);
+
+	void updateSellerLikes(@Param("li")LikesSellerVO likesVo);
+
+	void updateBoardByLikes(@Param("bo_num")int bo_num);
+
+	int updateBoard(@Param("bo")BoardVO board);
+
+	ArrayList<FileVO> selectFile(@Param("fi")int fileNum);
+
+	void deleteFile(@Param("fi")Integer file_num);
+
+	
 
 
 

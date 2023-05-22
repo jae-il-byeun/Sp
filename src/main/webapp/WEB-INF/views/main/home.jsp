@@ -7,7 +7,7 @@
 <script src="/project/resources/js/jquery.min.js"></script>
 <script src="/project/resources/js/popper.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 <!-- jQuery와 jQuery Modal JavaScript 파일 추가 -->
@@ -120,11 +120,18 @@ body{ font-family: 'GyeonggiTitleM';}
 	margin-bottom: 100px;
 }
 
-.content_product li swiper-container {background: none;
+.content_product li swiper-container {
+
      width: 100%; height: 100%; 
-     box-sizing: border-box;  box-shadow: 2px 2px 2px gray;
+     box-sizing: border-box;  box-shadow: 2px 2px 2px gray; background: none;
      border-radius: 5px;
-    }
+ }
+ 
+ 
+ 
+ .pro_img{
+ 	width:100%; height:150px;"
+ }
 
 swiper-slide {
       text-align: center;
@@ -198,7 +205,6 @@ swiper-slide img {
   background-color: rgba(0,0,0,0.1); /* 모달 외부를 어둡게 처리합니다. */
   overflow: hidden;
 }
-
 
 
 /* 모달 콘텐츠 스타일 */
@@ -294,7 +300,7 @@ swiper-slide img {
 		<ul class="login_box">
 		
 			<li class="login_link">
-				<label>
+				<label style="margin-bottom:0px;">
 					<a href="#">
 						<img alt="" src="resources/img/basket.png" class="login_icon">
 						<span style="color:#fff;">장바구니</span>
@@ -310,12 +316,14 @@ swiper-slide img {
 				</label>		
 			</li>
 			<li class="login_link h_business">
-				<a class="p_login" id="p_modal">
-					<label>
+				
+				<label>
+					<a class="p_login" id="p_modal">
 						<img alt="" src="resources/img/boss.png" class="login_icon">
 						<span>사업자</span>
-					</label>
-				</a>
+					</a>
+				</label>
+				
 			</li>
 			<li class="login_link h_myPage">
 				<a  class="hl_link" id="myPage">
@@ -391,75 +399,93 @@ swiper-slide img {
 			
 		</div>
 	</div>
+	
 	<div class="content_container">
 		<ul class="content_product">
 			<li class="">
 				<h2>인기여행지</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
-				    slides-per-view="4">
-				    <swiper-slide>
-				    	<img src="/project/resources/img/night_sky.jpg">
-				    	<span class="" style="position: absolute;">평점</span>
-				    	<span style="position: absolute; float: right;">10,000</span>
-					</swiper-slide>
-				    <swiper-slide>
-						<img src="/project/resources/img/night_sky.jpg">
-					</swiper-slide>
-				    <swiper-slide>Slide 3</swiper-slide>
-				    <swiper-slide>Slide 4</swiper-slide>
-				    <swiper-slide>Slide 5</swiper-slide>
-				    <swiper-slide>Slide 6</swiper-slide>
-				    <swiper-slide>Slide 7</swiper-slide>
-				    <swiper-slide>Slide 8</swiper-slide>
-				    <swiper-slide>Slide 9</swiper-slide>
-				  </swiper-container>
+				  <div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/night_sky.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+				      <div class="swiper-slide">Slide 2</div>
+				      <div class="swiper-slide">Slide 3</div>
+				      <div class="swiper-slide">Slide 4</div>
+				      <div class="swiper-slide">Slide 5</div>
+				      <div class="swiper-slide">Slide 6</div>
+				      <div class="swiper-slide">Slide 7</div>
+				      <div class="swiper-slide">Slide 8</div>
+				      <div class="swiper-slide">Slide 9</div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				  </div>
 			</li>
 			<li class="">
 				<h2>추천지</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
-				    slides-per-view="4">
-				    <swiper-slide>Slide 1</swiper-slide>
-				    <swiper-slide>Slide 2</swiper-slide>
-				    <swiper-slide>Slide 3</swiper-slide>
-				    <swiper-slide>Slide 4</swiper-slide>
-				    <swiper-slide>Slide 5</swiper-slide>
-				    <swiper-slide>Slide 6</swiper-slide>
-				    <swiper-slide>Slide 7</swiper-slide>
-				    <swiper-slide>Slide 8</swiper-slide>
-				    <swiper-slide>Slide 9</swiper-slide>
-				  </swiper-container>
+				  <div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide">
+				      	
+				    	<span class="" style="position: absolute;">평점</span>
+				    	<span style="position: absolute; float: right;">10,000</span>
+					  </div>
+				      <div class="swiper-slide">Slide 2</div>
+				      <div class="swiper-slide">Slide 3</div>
+				      <div class="swiper-slide">Slide 4</div>
+				      <div class="swiper-slide">Slide 5</div>
+				      <div class="swiper-slide">Slide 6</div>
+				      <div class="swiper-slide">Slide 7</div>
+				      <div class="swiper-slide">Slide 8</div>
+				      <div class="swiper-slide">Slide 9</div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				  </div>
 			</li>
 			<li class="">
 				<h2>여긴?</h2>
-				  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
-				    slides-per-view="4">
-				    <swiper-slide>Slide 1</swiper-slide>
-				    <swiper-slide>Slide 2</swiper-slide>
-				    <swiper-slide>Slide 3</swiper-slide>
-				    <swiper-slide>Slide 4</swiper-slide>
-				    <swiper-slide>Slide 5</swiper-slide>
-				    <swiper-slide>Slide 6</swiper-slide>
-				    <swiper-slide>Slide 7</swiper-slide>
-				    <swiper-slide>Slide 8</swiper-slide>
-				    <swiper-slide>Slide 9</swiper-slide>
-				  </swiper-container>
+				  <div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide">
+				      	
+				    	<span class="" style="position: absolute;">평점</span>
+				    	<span style="position: absolute; float: right;">10,000</span>
+					  </div>
+				      <div class="swiper-slide">Slide 2</div>
+				      <div class="swiper-slide">Slide 3</div>
+				      <div class="swiper-slide">Slide 4</div>
+				      <div class="swiper-slide">Slide 5</div>
+				      <div class="swiper-slide">Slide 6</div>
+				      <div class="swiper-slide">Slide 7</div>
+				      <div class="swiper-slide">Slide 8</div>
+				      <div class="swiper-slide">Slide 9</div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				  </div>
 			</li>
 			<li class="content_coupon">
 	
 				<h3 >이달의 쿠폰</h3>
-				<swiper-container class="mySwiper" pagination="false" pagination-clickable="false" navigation="false" space-between="30"
-				    centered-slides="false" autoplay-delay="4000" autoplay-disable-on-interaction="false"
-				    style=" border:1px solid #ddd; border-radius: 45px;">
-				    <swiper-slide>Slide 1</swiper-slide>
-				    <swiper-slide>Slide 2</swiper-slide>
-				    <swiper-slide>Slide 3</swiper-slide>
-				    <div class="autoplay-progress" slot="container-end">
-				      <svg viewBox="0 0 48 48">
-				        <circle cx="24" cy="24" r="20"></circle>
-				      </svg>
-				      <span></span>
+				<div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide">
+				      	
+				    	<span class="" style="position: absolute;">평점</span>
+				    	<span style="position: absolute; float: right;">10,000</span>
+					  </div>
+				      <div class="swiper-slide">Slide 2</div>
+				      <div class="swiper-slide">Slide 3</div>
+				      <div class="swiper-slide">Slide 4</div>
+				      <div class="swiper-slide">Slide 5</div>
+				      <div class="swiper-slide">Slide 6</div>
+				      <div class="swiper-slide">Slide 7</div>
+				      <div class="swiper-slide">Slide 8</div>
+				      <div class="swiper-slide">Slide 9</div>
 				    </div>
-				  </swiper-container>
+				    <div class="swiper-pagination"></div>
+				  </div>
 			</li>
 			
 		</ul>
@@ -518,22 +544,22 @@ swiper-slide img {
 //멤버 dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("m_modal").onclick = function() {
-document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
-document.getElementById("p-modal").style.display = "none";
+  document.getElementById("modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+  document.getElementById("p-modal").style.display = "none";
 
-
+  
 }
 
 //모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementsByClassName("close")[0].onclick = function() {
-document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
+	document.getElementById("modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
 }
 
 //모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
-if (event.target == document.getElementById("modal")) {
- document.getElementById("modal").style.display = "none";
-}
+	if (event.target == document.getElementById("modal")) {
+	 document.getElementById("modal").style.display = "none";
+	}
 }
 
 //모달 요소 가져오기
@@ -541,17 +567,16 @@ const modal = document.querySelector('#modal');
 
 //모달 외부 클릭 이벤트 핸들러 함수
 function closeModal(e) {
-if (e.target == modal) {
- modal.style.display = 'none';
-}
+	if (e.target == modal) {
+	 modal.style.display = 'none';
+	}
 }
 //사업자 dialog 열기
 //모달을 나타내는 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementById("p_modal").onclick = function() {
-	document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정
-	document.getElementById("modal").style.display = "none";
+	  document.getElementById("p-modal").style.display = "block"; // 모달을 보이도록 설정합니다.
+	  document.getElementById("modal").style.display = "none";
 }
-
 //모달의 닫기 버튼을 찾아서 클릭 이벤트를 추가합니다.
 document.getElementsByClassName("close")[1].onclick = function() {
 	document.getElementById("p-modal").style.display = "none"; // 모달을 숨기도록 설정합니다.
@@ -560,12 +585,9 @@ document.getElementsByClassName("close")[1].onclick = function() {
 
 //모달 외부를 클릭하면 모달을 숨기도록 설정합니다.
 window.onclick = function(event) {
-	if (document.getElementById("p-modal").style.display != "none"
-			//&& event.target != document.getElementById("p-modal")
-			&& event.target.className != "header_loginIcon"
-			&& $("#p-modal").find(event.target).length == 0) {//대게 length는 길이보다는 갯수를 의미.배열에 길이를 찾을 때는 [0](대가로)을 사용
-	 document.getElementById("p-modal").style.display = "none";
-	}
+	if (event.target == document.getElementById("p-modal")) {
+		 document.getElementById("p-modal").style.display = "none";
+		}
 }
 
 let session ="";
@@ -675,5 +697,15 @@ $('#exit').click(function(){
 		});	
 	});
 </script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>
 </html>
 

@@ -29,6 +29,7 @@ import kr.kh.project.vo.BoardVO;
 import kr.kh.project.vo.BusinessVO;
 import kr.kh.project.vo.FileVO;
 import kr.kh.project.vo.MemberVO;
+import kr.kh.project.vo.CommentVO;
 
 
 
@@ -163,19 +164,151 @@ public class BoardController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		//res - 1: 추천, -1 : 비추천 : 0이면 취소
 		int au= (Integer)session.getAttribute("au");
+		System.out.println(au);
 		int res = 0;
 		if(au == 1 || au == 9) {
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			
 			res = boardService.updateUserLikes(user, bo_num, li_state);
+			System.out.println("1 : "+ res);
 		}else if( au == 2) {
 			BusinessVO seller =(BusinessVO)session.getAttribute("seller");
 			res = boardService.updateSellerLikes(seller, bo_num, li_state);
+			System.out.println("2 : "+ res);
 		}
 		System.out.println(res);
-//		boardService.updateBoardByLikes(bo_num);
-//		map.put("res", res);
+		boardService.updateBoardByLikes(bo_num);
+		map.put("res", res);
 		return map;
 	}
+	@RequestMapping(value = "/board/update/{bo_num}", method=RequestMethod.GET)
+	public ModelAndView boardUpdate(ModelAndView mv,
+			HttpSession session,
+			@PathVariable("bo_num")int bo_num,
+			HttpServletResponse response) {
+		//세션에 있는 회원 정보 가져옴. 작성자와 아이디가 같은지 확인하려고
+		int au= (Integer)session.getAttribute("au");
+		MemberVO user = new MemberVO();
+		BusinessVO seller = new BusinessVO();
+		BoardVO board = new BoardVO();
+		ArrayList<BoardTypeVO> btList = new ArrayList<BoardTypeVO>();
+		if(au == 1 || au == 9) {
+			user = (MemberVO)session.getAttribute("user");
+			board = boardService.getBoardByWriteUserAuthority(bo_num, user);
+		}else if( au == 2) {
+			seller =(BusinessVO)session.getAttribute("seller");
+			board = boardService.getBoardByWriteSellerAuthority(bo_num, seller);
+		}
+
+		ArrayList<Map<String, Object>> extraFiles = boardService.getExtraFileLists(bo_num);
+		ArrayList<Map<String, Object>> imgeFiles = boardService.getImegeFileList(bo_num);
+		
+		if(board == null) {
+			MessageUtils.alertAndMovePage(response, 
+					"작성자가 아니거나 존재하지 않은 게시글입니다.", "/project", "/board/list");
+		}else {
+			mv.addObject("board", board);
+			mv.addObject("imgeFiles",imgeFiles);
+			mv.addObject("imgeSize",imgeFiles.size());
+			mv.addObject("extraSize",extraFiles.size());
+			mv.addObject("extraFiles",extraFiles);
+			if(au == 1 || au == 9) {
+				
+				btList = boardService.getBoardType(user.getMe_authority());
+				mv.addObject("btList", btList);
+			}else if( au == 2) {
+				btList = boardService.getBoardType(seller.getBi_authority());
+				mv.addObject("btList", btList);
+			}
+			
+			//작성할 타입이 없으면 작성 페이지로 갈 필요가 없어서 
+			//게시글 리스트로 이동시킴
+			if(btList.size() == 0) {
+				MessageUtils.alertAndMovePage(response, 
+						"권한이 없어서작성할 수 있는 게시판이 없습니다.", "/project", 
+						"/board/list");
+			}else
+				mv.setViewName("/board/boardUpdate");
+		}
+		return mv;
+	}
+	@RequestMapping(value = "/board/update/{bo_num}", method=RequestMethod.POST)
+	public ModelAndView boardUpdatePost(ModelAndView mv,HttpSession session, @PathVariable("bo_num")int bo_num,
+			HttpServletResponse response,
+			BoardVO board,	//수정할 게시글 정보 
+			MultipartFile []files, //추가된 첨부파일
+			int [] fileNums //삭제될 첨부파일
+			) {
+		//세션에 있는 회원 정보 가져옴. 작성자와 아이디가 같은지 확인하려고
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BusinessVO seller =(BusinessVO)session.getAttribute("seller");
+		int au= (Integer)session.getAttribute("au");
+		int r=fileNums.length;
+		System.out.println(r);
+		if(au == 1 || au == 9) {
+			if(boardService.updateUserBoard(board,files,fileNums, user)) {
+				MessageUtils.alertAndMovePage(response, 
+						"게시글을 수정했습니다.", "/project", 
+						"/board/detail/"+bo_num);
+			}else {
+				MessageUtils.alertAndMovePage(response, 
+						"게시글을 수정하지 못했습니다.", "/project", 
+						"/board/list");
+			}
+		}else if( au == 2) {
+			if(boardService.updateSellerBoard(board,files,fileNums, seller)) {
+				MessageUtils.alertAndMovePage(response, 
+						"게시글을 수정했습니다.", "/project", 
+						"/board/detail/"+bo_num);
+			}else {
+				MessageUtils.alertAndMovePage(response, 
+						"게시글을 수정하지 못했습니다.", "/project", 
+						"/board/list");
+			}
+		}
+		
+		return mv;
+	}
+//	@RequestMapping(value = "/comment/insert", method=RequestMethod.POST)
+//	public Map<String, Object> commentInsert(@RequestBody CommentVO comment,
+//			HttpSession session) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		MemberVO user = (MemberVO) session.getAttribute("user");
+//		boolean res = boardService.insertComment(comment, user);
+//		map.put("result", res);
+//		return map;
+//	}
+//	
+//	@RequestMapping(value = "/comment/list/{co_bo_num}", method=RequestMethod.POST)
+//	public Map<String, Object> commentList(@RequestBody Criteria cri,
+//			@PathVariable("co_bo_num") int co_bo_num) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//
+//		ArrayList<CommentVO> list = boardService.getCommentList(cri, co_bo_num);
+//		//PageMaker
+//		int totalCount = boardService.getTotalCountCommentList(co_bo_num);
+//		PageMaker pm = new PageMaker(totalCount, 5, cri);
+//		map.put("list", list);
+//		map.put("pm", pm);
+//		return map;
+//	}
+//	@RequestMapping(value = "/comment/delete", method=RequestMethod.POST)
+//	public Map<String, Object> commentDelete(@RequestBody CommentVO comment,
+//			HttpSession session) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		MemberVO user = (MemberVO) session.getAttribute("user");
+//		boolean res = boardService.deleteComment(comment, user);
+//		map.put("result", res);
+//		return map;
+//	}
+//	@RequestMapping(value = "/comment/update", method=RequestMethod.POST)
+//	public Map<String, Object> commentUpdate(@RequestBody CommentVO comment,
+//			HttpSession session) {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		MemberVO user = (MemberVO) session.getAttribute("user");
+//		boolean res = boardService.updateComment(comment, user);
+//		map.put("result", res);
+//		return map;
+//	}
  
 }

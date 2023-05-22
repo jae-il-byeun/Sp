@@ -106,10 +106,14 @@
 	 </delete>
 <!-- 추천 비추천 -->
 	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesUserVO">
+<<<<<<< HEAD
 		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{lm}
 	</select>
 	<select id="selectLikesBySellerId" resultType="kr.kh.project.vo.LikesSellerVO">
 		select * from likes	where li_bo_num = #{li_bo_num} and li_bi_id = #{lb}
+=======
+		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
+>>>>>>> ec6404168fa156f1eae4d766c5dddce8ddc1a321
 	</select>
 	<insert id="insertUserLikes">
   		insert into

@@ -2,6 +2,7 @@ package kr.kh.project.serviceImp;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,19 +107,25 @@ public class BoardServiceImp implements BoardService {
 		return true;
 	}
 	
-	private boolean uploadFiles(MultipartFile [] files,BoardVO board) {
+	private boolean uploadFiles(MultipartFile [] files, BoardVO board) {
 		//첨부파일 없을 시
+		System.out.println("2+ : " + files);
 				if(files ==null || files.length == 0 )
 					return false;
+				System.out.println("3+ : " + files);
 				//반복문
 				FileVO fileVo = new FileVO();
 //				List<FileVO> test = new ArrayList<FileVO>();
 				for(MultipartFile file : files) {
+					System.out.println("4+ : " + file);
+					System.out.println("origin+name+size : "+ file.getOriginalFilename()+ file.getName()+file.getSize());
+					
 					if(file == null || file.getOriginalFilename().length()==0)
 						continue;
+					System.out.println("5+ : " + file);
 					String fileName = "";
 					//첨부파일 서버에 업로드
-					
+					System.out.println("33");
 					try {
 						fileName = UploadFileUtils.uploadFile(uploadPath,
 								 file.getOriginalFilename(), //파일명
@@ -129,11 +136,12 @@ public class BoardServiceImp implements BoardService {
 					}
 					// fileVo에 객체 추가 
 					//첨부파일 객체를 생성
+					System.out.println("44");
 					fileVo = new FileVO(fileName,file.getOriginalFilename(), uploadPath, file.getSize());
 
 					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
 					boardDao.insertFile(fileVo);
-
+					System.out.println("55");
 					String file_type ="";
 					if(board.getBo_bt_num() == 0) {
 					
@@ -148,13 +156,16 @@ public class BoardServiceImp implements BoardService {
 					}else if(board.getBo_bt_num() == 1) {
 						file_type="이미지";
 					};
+					System.out.println("66");
 					ArrayList<FileVO> te= boardDao.selectBoardFileNum(fileName);
 					FileVO fa_num = te.get(0);
 					int file_num=fa_num.getFile_num();
 					Integer bo_num = board.getBo_num();
-					
+					System.out.println("77");
 					boardDao.insertBoardFile( bo_num, file_num, file_type);
+					System.out.println("88");
 				}
+				
 				return true;
 	}
 
@@ -215,8 +226,10 @@ public class BoardServiceImp implements BoardService {
 			 return false;
 	}
 	private void deleteFileList(ArrayList<Map<String, Object>> fileList) {
+		System.out.println("?? : " +  fileList);
 		if(fileList == null || fileList.size() == 0)
 			return;
+		
 		for(Map<String, Object> file : fileList) {
 			if(file == null) 
 				continue;
@@ -232,41 +245,44 @@ public class BoardServiceImp implements BoardService {
 		}
 		
 	}
+	
 	@Override
 	public int updateUserLikes(MemberVO user, int bo_num, int li_state) {
 		// 기존에 추천/비추천을 했는지 확인
-				LikesUserVO likesVo = boardDao.selectLikesById(user.getMe_id(),bo_num);
+				LikesUserVO likesVo = boardDao.selectLikesByUserId(bo_num, user.getMe_id());
+				System.out.println("11 " + likesVo);
 				//없으면 추가
 				if(likesVo==null) {
 					//LieksVO 객체를 생성하여 
 					likesVo = new LikesUserVO(li_state, user.getMe_id(), bo_num);
+					System.out.println("12 " + likesVo);
 					//DAO에게 전달해서 inseret하라고 시킴
 					boardDao.insertUserLikes(likesVo);
 					//bo_num를 리턴
 					return li_state;
 				}
 				
-//				//있으면 수정
-//				if(li_state != likesVo.getLi_state()) {
-//					//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
-//					likesVo.setLi_state(li_state);
-//					//업데이트
-//					boardDao.updateLikes(likesVo);
-//					//bo_num를 리턴
-//					return li_state;
-//				}
-//					//현재 상태와 기존상태가 같으면 => 취소
-//					likesVo.setLi_state(0);
-//					//업데이트
-//					boardDao.updateLikes(likesVo);
-//					//0을 리턴
+				//있으면 수정
+				if(li_state != likesVo.getLi_state()) {
+					//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
+					likesVo.setLi_state(li_state);
+					//업데이트
+					boardDao.updateUserLikes(likesVo);
+					//bo_num를 리턴
+					return li_state;
+				}
+					//현재 상태와 기존상태가 같으면 => 취소
+					likesVo.setLi_state(0);
+					//업데이트
+					boardDao.updateUserLikes(likesVo);
+					//0을 리턴
 					return 0;
 
 	}
 	@Override
 	public int updateSellerLikes(BusinessVO seller, int bo_num, int li_state) {
 		// 기존에 추천/비추천을 했는지 확인
-		LikesSellerVO likesVo = boardDao.selectLikesBySellerId(seller.getBi_id(),bo_num);
+		LikesSellerVO likesVo = boardDao.selectLikesBySellerId(bo_num,seller.getBi_id());
 		//없으면 추가
 		if(likesVo==null) {
 			//LieksVO 객체를 생성하여 
@@ -277,22 +293,199 @@ public class BoardServiceImp implements BoardService {
 			return li_state;
 		}
 		
-//		//있으면 수정
-//		if(li_state != likesVo.getLi_state()) {
-//			//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
-//			likesVo.setLi_state(li_state);
-//			//업데이트
-//			boardDao.updateLikes(likesVo);
-//			//bo_num를 리턴
-//			return li_state;
-//		}
-//			//현재 상태와 기존상태가 같으면 => 취소
-//			likesVo.setLi_state(0);
-//			//업데이트
-//			boardDao.updateLikes(likesVo);
-//			//0을 리턴
+		//있으면 수정
+		if(li_state != likesVo.getLi_state()) {
+			//현재 상태와 기존 상태가 다르면 => 상태를 바꿔야 한다.
+			likesVo.setLi_state(li_state);
+			//업데이트
+			boardDao.updateSellerLikes(likesVo);
+			//bo_num를 리턴
+			return li_state;
+		}
+			//현재 상태와 기존상태가 같으면 => 취소
+			likesVo.setLi_state(0);
+			//업데이트
+			boardDao.updateSellerLikes(likesVo);
+			//0을 리턴
 			return 0;
 	}
+	@Override
+	public void updateBoardByLikes(int bo_num) {
+		boardDao.updateBoardByLikes(bo_num);
+		
+	}
+	@Override
+	public ArrayList<Map<String, Object>> getFileList(int bo_num) {
+
+		return boardDao.selectFileList(bo_num);
+	}
+	@Override
+	public ArrayList<Map<String, Object>> getExtraFileLists(int bo_num) {
+		
+		return boardDao.selectExtraFileList(bo_num);
+	}
+	@Override
+	public ArrayList<Map<String, Object>> getImegeFileList(int bo_num) {
+		
+		return boardDao.selectImegeFileList(bo_num);
+	}
+	
+	@Override
+	public BoardVO getBoardByWriteUserAuthority(int bo_num, MemberVO user) {
+		BoardVO board = boardDao.selectBoard(bo_num);
+		
+		if(board == null)
+			return null;
+		
+		if(user == null)
+			return null;
+		
+		if(user.getMe_id().equals(board.getBo_me_id()))
+			return board;
+		return null;
+	}
+	@Override
+	public BoardVO getBoardByWriteSellerAuthority(int bo_num, BusinessVO seller) {
+		BoardVO board = boardDao.selectBoard(bo_num);
+		
+		if(board == null)
+			return null;
+		
+		if(seller == null)
+			return null;
+		
+		if(seller.getBi_id().equals(board.getBo_bi_id()))
+			return board;
+		return null;
+	}
+	@Override
+	public boolean updateUserBoard(BoardVO board, MultipartFile[] files, int[] fileNums, MemberVO user) {
+		if(board == null || board.getBo_num()<=0)
+			return false;
+		if(user == null)
+			return false;
+		//게시글 정보를 가져옴
+		int r=fileNums.length;
+		System.out.println(r);
+		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
+		System.out.println("dbBoard(imp) : "+ dbBoard);
+		//가져온 게시글이 null인지 확인
+		if(dbBoard == null)
+			return false;
+		//가져온 게시글에 제목, 내용, 게시글 타입 번호를 수정
+		if(!dbBoard.getBo_me_id().equals(user.getMe_id()))
+			return false;
+		//Dao에게 게시글 정보를 주면서 수정하라고 요청
+		if(boardDao.updateBoard(board) == 0)
+			
+			return false;
+		System.out.println("11");
+		System.out.println("1+" + files);
+		//추가할 첨부파일 업로드
+		uploadFiles(files,board);
+		System.out.println("5+");
+		for(int test : fileNums) {
+			System.out.println("test" + test);
+		}
+		//fileNums를 이용하여 첨부파일 객체를 가져와서 처부파일 리스트에 추가
+		if(fileNums == null || fileNums.length == 0)
+			return true;
+		System.out.println("22");
+		ArrayList<FileVO> fileList = new ArrayList<FileVO>();
+		
+		for(int fileNum : fileNums) {
+			 ArrayList<FileVO> fileVo = boardDao.selectFile(fileNum);
+			 System.out.println("fileVo(imp) : "+ fileVo);
+			if(fileVo != null)
+				fileList.addAll(fileVo);
+		}
+//		for(Map<String, Object> file : fileList) {
+//			if(file == null) 
+//				continue;
+//			System.out.println("file : " +file);
+//			
+//			String fn =(String) file.get("file_name");
+//			System.out.println("fn" + fn);
+//			UploadFileUtils.removeFile(uploadPath, fn);
+//			
+//			boardDao.deleteFile(file);		
+		//삭제 첨부파일 리스트를 이용하여 첨부파일 삭제
+		System.out.println("fileList(imp) : "+ fileList);
+		deleteUpdateFileList(fileList);
+		
+		return true;
+	}
+	private void deleteUpdateFileList(ArrayList<FileVO> fileList) {
+		
+		if(fileList == null || fileList.size()== 0)
+			return;
+		
+		System.out.println("fileList 2 : " + fileList);
+		ArrayList<FileVO> fileVOList = new ArrayList<FileVO>();
+		System.out.println("22");
+		for(FileVO file : fileList) {
+			System.out.println("file 5 : " + file);
+			Integer file_num = file.getFile_num();
+			System.out.println("file_num 5 : " + file_num);
+			UploadFileUtils.removeFile(uploadPath, file.getFile_name());
+			boardDao.deleteBoardFile(file_num);
+			boardDao.deleteFile(file_num);		
+		}
+//		for( Map<String, Object> file : fileList) {
+//			for(FileVO fn : file) {
+//				fn= file.get(fileList);
+//			}
+//			System.out.println("file : " +file);
+//			if(file == null) 
+//				continue;
+			
+			
+//			String te = (String)fn.get("File_name");
+//			System.out.println("fn" + fn);
+			
+//			
+			
+//		}
+		
+	}
+	@Override
+	public boolean updateSellerBoard(BoardVO board, MultipartFile[] files, int[] fileNums, BusinessVO seller) {
+		if(board == null || board.getBo_num()<=0)
+			return false;
+		if(seller == null)
+			return false;
+		//게시글 정보를 가져옴
+		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
+		//가져온 게시글이 null인지 확인
+		if(dbBoard == null)
+			return false;
+		//가져온 게시글에 제목, 내용, 게시글 타입 번호를 수정
+		if(!dbBoard.getBo_me_id().equals(seller.getBi_id()))
+			return false;
+		//Dao에게 게시글 정보를 주면서 수정하라고 요청
+		if(boardDao.updateBoard(board) == 0)
+			return false;
+		
+		//추가할 첨부파일 업로드
+		uploadFiles(files,board);
+		
+		//fileNums를 이용하여 첨부파일 객체를 가져와서 처부파일 리스트에 추가
+		if(fileNums == null || fileNums.length == 0)
+			return true;
+		
+//		ArrayList<Map<String, Object>> fileList = new ArrayList<Map<String, Object>>();
+//		for(int fileNum : fileNums) {
+//			ArrayList<Map<String, Object>> fileVo = boardDao.selectFile(fileNum);
+//			if(fileVo != null)
+//				fileList.add(fileVo);
+//		}
+//		//삭제 첨부파일 리스트를 이용하여 첨부파일 삭제
+//		
+//		deleteFileList(fileList);
+		
+		return true;
+	}
+	
 
 
 }

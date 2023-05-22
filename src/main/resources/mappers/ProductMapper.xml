@@ -93,6 +93,39 @@
 			, case when #{data.sort} = 3 then b.min_r_price end asc
 			, case when #{data.sort} = 4 then b.max_r_price end desc
 	</select>
+	
+	<select id="selectProduct" resultType="kr.kh.project.vo.ProductVO">
+		select a.*
+			, ifnull(case when b.min_r_price = b.max_r_price then CONCAT(FORMAT(b.min_r_price,0), ' 원') else CONCAT(FORMAT(b.min_r_price,0), ' 원 ~ ', FORMAT(b.max_r_price,0), ' 원') end,'0 원') as 'product_price'
+		from product a
+			left outer join (
+				select r_product_num, min(r_price) min_r_price, max(r_price) max_r_price
+					, sum((select count(*) cnt from reservation b2 where b1.r_num = b2.re_r_num)) as reservation_count
+		        from room b1
+		        group by r_product_num
+		    ) b on b.r_product_num = a.product_num
+		where product_num = #{product_num}
+	</select> 
+	<select id="selectProductFile" resultType="kr.kh.project.vo.FileVO">
+		select f1.*
+        from file f1
+			inner join productfile f2 on f1.file_num = f2.pf_file_num
+		where f2.pf_product_num = #{product_num}
+		order by f1.file_num
+	</select> 
+	<select id="selectProductRooms" resultType="kr.kh.project.vo.ProductRoomsVO">
+		select *
+		from room
+		where r_product_num = #{product_num}
+		order by r_num
+	</select> 
+	<select id="selectProductRoomFile" resultType="kr.kh.project.vo.FileVO">
+		select f1.*
+        from file f1
+			inner join roomfile f2 on f1.file_num = f2.rf_file_num			
+		where f2.rf_r_num = #{r_num}
+		order by f1.file_num
+	</select> 
 </mapper>
 
 

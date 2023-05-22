@@ -6,7 +6,7 @@
 
 <style>
 *{margin:0; padding:0; list-style: none; }
-a{text-decoration: none; margin-left: 20px;}
+a{text-decoration: none;}
 
 
 .h_linkIcon{
@@ -32,6 +32,7 @@ a{text-decoration: none; margin-left: 20px;}
 	background-image:url("/project/resources/img/night_sky.jpg");
 }
 .h_link span{color:#fff;}
+.hion{margin-left:20px;}
 #home_link{
 	line-height: 70px; margin-right: 20%; font-size: 30px;
 }
@@ -166,32 +167,32 @@ a{text-decoration: none; margin-left: 20px;}
 			</li>	
 			
 			<li class="h_link">
-				<a href="<c:url value="/product/hotel"></c:url>" >
+				<a href="<c:url value="/product/hotel" ></c:url>" class="hion">
 					<img alt="" src="/project/resources/img/hotel.png" class="h_linkIcon">
 					<span class="h_link_text">호텔</span> 
 				</a>
 			</li>	
 			<li class="h_link">
-				<a href="<c:url value="/product/motel"></c:url>">
+				<a href="<c:url value="/product/motel" ></c:url>" class="hion">
 					<img alt="" src="/project/resources/img/motel.png" class="h_linkIcon">
 					<span class="h_link_text">모텔</span> 
 				</a>
 			</li>
 			<li class="h_link">
-				<a href="<c:url value="/product/pention"></c:url>" >
+				<a href="<c:url value="/product/pention" ></c:url>"  class="hion">
 					<img alt="" src="/project/resources/img/pension.png" class="h_linkIcon">
 					<span class="h_link_text">펜션</span> 
 				</a>
 			</li>
 			<li class="h_link">
-				<a href="<c:url value="/traffic/search"></c:url>">
+				<a href="<c:url value="/traffic/search"></c:url>" class="hion">
 					<img alt="" src="/project/resources/img/bus.png" class="h_linkIcon">
 					<span class="h_link_text">교통</span> 
 				</a>
 			</li>
 			
 			<li  class="h_link" id="h_link_board">
-				<a href="<c:url value="/board/list"></c:url>" >
+				<a href="<c:url value="/board/list"></c:url>"  class="hion">
 					<img alt="" src="/project/resources/img/board.png" class="h_linkIcon">
 					<span class="h_link_textboard">게시판</span> 
 				</a>

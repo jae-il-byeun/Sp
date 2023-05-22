@@ -44,6 +44,26 @@ public interface BoardService {
 
 	int updateSellerLikes(BusinessVO seller, int bo_num, int li_state);
 
+	void updateBoardByLikes(int bo_num);
+
+	ArrayList<Map<String, Object>> getFileList(int bo_num);
+	
+	ArrayList<Map<String, Object>> getExtraFileLists(int bo_num);
+	
+	ArrayList<Map<String, Object>> getImegeFileList(int bo_num);
+
+	BoardVO getBoardByWriteUserAuthority(int bo_num, MemberVO user);
+
+	BoardVO getBoardByWriteSellerAuthority(int bo_num, BusinessVO seller);
+
+	boolean updateUserBoard(BoardVO board, MultipartFile[] files, int[] fileNums, MemberVO user);
+
+	boolean updateSellerBoard(BoardVO board, MultipartFile[] files, int[] fileNums, BusinessVO seller);
+
+	
+
+	
+
 
 
 	

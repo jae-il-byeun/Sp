@@ -1,15 +1,18 @@
 package kr.kh.project.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 //import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,7 @@ import kr.kh.project.vo.LocationVO;
 import kr.kh.project.vo.ProductRoomsVO;
 import kr.kh.project.vo.BusinessVO;
 //import kr.kh.project.vo.ProductRoomsVO;
+import kr.kh.project.vo.FileVO;
 
 @Controller
 public class ProductController {
@@ -50,8 +54,28 @@ public class ProductController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/product/hotelIntro", method = RequestMethod.GET)
-	public ModelAndView hotelIntro(ModelAndView mv) {
+	@RequestMapping(value = "/product/hotelIntro/{product_num}", method = RequestMethod.GET)
+	public ModelAndView hotelIntro(ModelAndView mv, HttpSession session,@PathVariable("product_num")int product_num,HttpServletResponse response) {
+		ProductVO p = productService.productSelect(product_num);
+		ArrayList<FileVO> p_file = productService.productFileSelect(product_num);
+		ArrayList<ProductRoomsVO> r = productService.productRoomsSelect(product_num);
+		ArrayList<HashMap<String, Object>> result_r = new ArrayList<HashMap<String,Object>>();
+		//for(int i=0; i<r.size(); i++) {
+		for(ProductRoomsVO _r : r) {			
+			HashMap<String,Object> map = new HashMap<String,Object>();
+			map.put("r_num", _r.getR_num());
+			map.put("r_title", _r.getR_title());
+			map.put("r_intro", _r.getR_intro());
+			map.put("r_price", new DecimalFormat("###,###").format(Integer.parseInt(_r.getR_price().toString())));
+			map.put("r_product_num", _r.getR_product_num());
+			map.put("r_file", productService.productRoomFileSelect(_r.getR_num()));
+			result_r.add(map);
+		}
+		mv.addObject("product",p);
+		mv.addObject("productServiceList",p.getProduct_service().toString().split("\\|"));
+		mv.addObject("productFiles",p_file);
+		mv.addObject("rooms",result_r);
+		
 		mv.setViewName("/product/hotelIntro");
 		return mv;
 	}
