@@ -235,12 +235,12 @@ width:100%; height:35%;
 								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:670px; height:400px;">';
 							}
 							tag = tag + '<div class="product_semi">';
-							tag = tag + '<a class="product_title" name="product_name" href="#" onclick="alert('+item.product_num+');">'+item.product_name+'</a>';
+							tag = tag + '<a class="product_title" name="product_name" href="#" onclick="location.replace(\'<c:url value="/product/productIntro/' + item.product_num + '"></c:url>\');">'+item.product_name+'</a>';
 							tag = tag + '<button class="like_button" >';
 							tag = tag + '<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" name="pf_file_num">';
 							tag = tag + '</button>';
 							tag = tag + '<div class="product_detailInfo">별점<img alt="" src="" class="product_starPoint">0 / 평점 0</span></div>';
-							tag = tag + '<a class="product_priceInsert" name="r_price" href="#">'+item.price+'</a>';
+							tag = tag + '<a class="product_priceInsert" name="r_price" href="#" onclick="location.replace(\'<c:url value="/product/productIntro/' + item.product_num + '"></c:url>\');">'+item.price+'</a>';
 							tag = tag + '</div>';
 							tag = tag + '</li>';
 							
