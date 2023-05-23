@@ -8,7 +8,7 @@ insert into location(lo_num,lo_name) values(7,'전라');
 insert into location(lo_num,lo_name) values(8,'부산');
 insert into location(lo_num,lo_name) values(9,'제주');
 
-insert into detaillocation(dl_num,dl_name,dl_lo_num) values(1,'종로/ 인사동/동대문/강북',1);
+insert into detaillocation(dl_num,dl_name,dl_lo_num) values(1,'종로/인사동/동대문/강북',1);
 insert into detaillocation(dl_num,dl_name,dl_lo_num) values(2,'강남/역삼/삼성/신사/청담',1);
 insert into detaillocation(dl_num,dl_name,dl_lo_num) values(3,'서초/교대',1);
 insert into detaillocation(dl_num,dl_name,dl_lo_num) values(4,'잠실/송파/왕십리/강동',1);
