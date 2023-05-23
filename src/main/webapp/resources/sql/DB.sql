@@ -1,6 +1,5 @@
-drop database IF EXISTS `project`;
-
-create database `project`;
+drop database if exists project;
+create database if not exists project;
 
 use `project`;
 
@@ -47,7 +46,8 @@ CREATE TABLE `Review` (
 	`rv_star`	int	NULL,
 	`rv_recoed`	datetime	NULL,
 	`rv_content`	longtext	NULL,
-	`rv_me_id`	varchar(20)	NOT NULL
+	`rv_me_id`	varchar(20)	NOT NULL,
+	`product_num`	int	NOT NULL
 );
 
 DROP TABLE IF EXISTS `BusReservation`;
@@ -73,8 +73,8 @@ CREATE TABLE `Board` (
 	`bo_views`	int	NULL,
 	`bo_ori_num`	int	NOT NULL,
 	`bo_bt_num`	int	NOT NULL,
-	`bo_me_id`	varchar(20)	NOT NULL,
-	`bo_bi_id`	varchar(20)	NOT NULL
+	`bo_me_id`	varchar(20)	,
+	`bo_bi_id`	varchar(20) 
 );
 
 DROP TABLE IF EXISTS `Coopon`;
@@ -102,7 +102,7 @@ CREATE TABLE `Reservation` (
 	`re_num`	int auto_increment	NOT NULL primary key,
 	`re_rename`	varchar(20)	NULL,
 	`re_rephone`	varchar(15)	NULL,
-    `re_date`	date	NULL,
+	`re_date`	date	NULL,
 	`re_usename`	varchar(20)	NULL,
 	`re_usephone`	varchar(15)	NULL,
 	`re_totalprice`	int	NULL,
@@ -116,7 +116,7 @@ DROP TABLE IF EXISTS `room`;
 
 CREATE TABLE `room` (
 	`r_num`	int auto_increment	NOT NULL primary key,
-	`r_type`	varchar(50)	NULL,
+	`r_title`	varchar(50)	NULL,
 	`r_intro`	longtext	NULL,
 	`r_price`	int	NULL,
 	`r_product_num`	int	NOT NULL
@@ -134,12 +134,18 @@ DROP TABLE IF EXISTS `Product`;
 
 CREATE TABLE `Product` (
 	`product_num`	int auto_increment	NOT NULL primary key,
-	`product_name`	varchar(50)	NULL,
 	`product_type`	varchar(10)	NULL,
+	`product_name`	varchar(50)	NULL,
 	`product_content`	longtext	NULL,
 	`product_location`	varchar(200)	NULL,
-    `product_service`	varchar(500)	NULL,
-	`product_address`	varchar(50)	NULL,
+	`product_service`	varchar(500)	NULL,
+	`product_postNum`	varchar(5)	NULL,
+	`product_mainAddress`	varchar(100)	NULL,
+	`product_detailAddress`	varchar(50)	NULL,
+	`product_extraAddress`	varchar(50)	NULL,
+	`product_views`	int	NULL,
+	`product_lo_num`	int	NOT NULL,
+	`product_dl_num`	int	NOT NULL,
 	`product_bi_id`	varchar(20)	NOT NULL
 );
 
@@ -162,11 +168,19 @@ CREATE TABLE `File` (
 	`file_size`	varchar(50)	NULL
 );
 
-DROP TABLE IF EXISTS `ProductFile`;
+DROP TABLE IF EXISTS `location`;
 
-CREATE TABLE `ProductFile` (
-	`pf_product_num`	int	NOT NULL,
-	`pf_file_num`	int	NOT NULL
+CREATE TABLE `location` (
+	`lo_num`	int	NOT NULL primary key,
+	`lo_name`	varchar(10)	NULL
+);
+
+DROP TABLE IF EXISTS `detailLocation`;
+
+CREATE TABLE `detailLocation` (
+	`dl_num`	int	NOT NULL primary key,
+	`dl_name`	varchar(50)	NULL,
+	`dl_lo_num`	int	NOT NULL
 );
 
 DROP TABLE IF EXISTS `RoomFile`;
@@ -176,17 +190,42 @@ CREATE TABLE `RoomFile` (
 	`rf_file_num`	int	NOT NULL
 );
 
+DROP TABLE IF EXISTS `ProductFile`;
+
+CREATE TABLE `ProductFile` (
+	`pf_product_num`	int	NOT NULL,
+	`pf_file_num`	int	NOT NULL
+);
+
 DROP TABLE IF EXISTS `BoardFile`;
 
 CREATE TABLE `BoardFile` (
 	`bf_bo_num`	int	NOT NULL,
-	`bf_file_num`	int	NOT NULL
+	`bf_fi_num`	int	NOT NULL,
+	`bf_type`	varchar(4)	NULL
 );
-DROP TABLE IF EXISTS `location`;
 
-CREATE TABLE `location` (
-	`lo_num`	int	NOT NULL primary key,
-	`lo_name`	varchar(10)	NULL
+DROP TABLE IF EXISTS `likes`;
+
+CREATE TABLE `likes` (
+	`li_num`	int auto_increment	NOT NULL primary key,
+	`li_state`	int	NULL,
+	`li_me_id`	varchar(20)	NOT NULL,
+	`li_bi_id`	varchar(20)	NOT NULL,
+	`li_bo_num`	int	NOT NULL
+);
+
+DROP TABLE IF EXISTS `coment`;
+
+CREATE TABLE `coment` (
+	`co_num`	int	NOT NULL primary key,
+	`co_content`	longtext	NULL,
+	`co_register_date`	datetime	NULL,
+	`co_update_date`	datetime	NULL,
+	`co_ori_num`	int	NOT NULL,
+	`co_bo_num`	int	NOT NULL,
+	`co_bi_id`	varchar(20)	NOT NULL,
+	`co_me_id`	varchar(20)	NOT NULL
 );
 
 ALTER TABLE `Review` ADD CONSTRAINT `FK_Member_TO_Review_1` FOREIGN KEY (
@@ -194,6 +233,13 @@ ALTER TABLE `Review` ADD CONSTRAINT `FK_Member_TO_Review_1` FOREIGN KEY (
 )
 REFERENCES `Member` (
 	`me_id`
+);
+
+ALTER TABLE `Review` ADD CONSTRAINT `FK_Product_TO_Review_1` FOREIGN KEY (
+	`product_num`
+)
+REFERENCES `Product` (
+	`product_num`
 );
 
 ALTER TABLE `BusReservation` ADD CONSTRAINT `FK_Member_TO_BusReservation_1` FOREIGN KEY (
@@ -294,12 +340,6 @@ REFERENCES `Member` (
 	`me_id`
 );
 
-ALTER TABLE `Product` ADD CONSTRAINT `FK_Business_TO_Product_1` FOREIGN KEY (
-	`product_bi_id`
-)
-REFERENCES `Business` (
-	`bi_id`
-);
 ALTER TABLE `Product` ADD CONSTRAINT `FK_location_TO_Product_1` FOREIGN KEY (
 	`product_lo_num`
 )
@@ -307,18 +347,25 @@ REFERENCES `location` (
 	`lo_num`
 );
 
-ALTER TABLE `ProductFile` ADD CONSTRAINT `FK_Product_TO_ProductFile_1` FOREIGN KEY (
-	`pf_product_num`
+ALTER TABLE `Product` ADD CONSTRAINT `FK_detailLocation_TO_Product_1` FOREIGN KEY (
+	`product_dl_num`
 )
-REFERENCES `Product` (
-	`product_num`
+REFERENCES `detailLocation` (
+	`dl_num`
 );
 
-ALTER TABLE `ProductFile` ADD CONSTRAINT `FK_File_TO_ProductFile_1` FOREIGN KEY (
-	`pf_file_num`
+ALTER TABLE `Product` ADD CONSTRAINT `FK_Business_TO_Product_1` FOREIGN KEY (
+	`product_bi_id`
 )
-REFERENCES `File` (
-	`file_num`
+REFERENCES `Business` (
+	`bi_id`
+);
+
+ALTER TABLE `detailLocation` ADD CONSTRAINT `FK_location_TO_detailLocation_1` FOREIGN KEY (
+	`dl_lo_num`
+)
+REFERENCES `location` (
+	`lo_num`
 );
 
 ALTER TABLE `RoomFile` ADD CONSTRAINT `FK_room_TO_RoomFile_1` FOREIGN KEY (
@@ -335,6 +382,20 @@ REFERENCES `File` (
 	`file_num`
 );
 
+ALTER TABLE `ProductFile` ADD CONSTRAINT `FK_Product_TO_ProductFile_1` FOREIGN KEY (
+	`pf_product_num`
+)
+REFERENCES `Product` (
+	`product_num`
+);
+
+ALTER TABLE `ProductFile` ADD CONSTRAINT `FK_File_TO_ProductFile_1` FOREIGN KEY (
+	`pf_file_num`
+)
+REFERENCES `File` (
+	`file_num`
+);
+
 ALTER TABLE `BoardFile` ADD CONSTRAINT `FK_Board_TO_BoardFile_1` FOREIGN KEY (
 	`bf_bo_num`
 )
@@ -343,8 +404,50 @@ REFERENCES `Board` (
 );
 
 ALTER TABLE `BoardFile` ADD CONSTRAINT `FK_File_TO_BoardFile_1` FOREIGN KEY (
-	`bf_file_num`
+	`bf_fi_num`
 )
 REFERENCES `File` (
 	`file_num`
+);
+
+ALTER TABLE `likes` ADD CONSTRAINT `FK_Member_TO_likes_1` FOREIGN KEY (
+	`li_me_id`
+)
+REFERENCES `Member` (
+	`me_id`
+);
+
+ALTER TABLE `likes` ADD CONSTRAINT `FK_Business_TO_likes_1` FOREIGN KEY (
+	`li_bi_id`
+)
+REFERENCES `Business` (
+	`bi_id`
+);
+
+ALTER TABLE `likes` ADD CONSTRAINT `FK_Board_TO_likes_1` FOREIGN KEY (
+	`li_bo_num`
+)
+REFERENCES `Board` (
+	`bo_num`
+);
+
+ALTER TABLE `coment` ADD CONSTRAINT `FK_Board_TO_coment_1` FOREIGN KEY (
+	`co_bo_num`
+)
+REFERENCES `Board` (
+	`bo_num`
+);
+
+ALTER TABLE `coment` ADD CONSTRAINT `FK_Business_TO_coment_1` FOREIGN KEY (
+	`co_bi_id`
+)
+REFERENCES `Business` (
+	`bi_id`
+);
+
+ALTER TABLE `coment` ADD CONSTRAINT `FK_Member_TO_coment_1` FOREIGN KEY (
+	`co_me_id`
+)
+REFERENCES `Member` (
+	`me_id`
 );
