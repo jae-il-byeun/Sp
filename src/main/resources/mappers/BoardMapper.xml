@@ -12,7 +12,6 @@
 		<result  property="bo_views" column="bo_views" />
 		<result  property="bo_up" column="bo_up" />
 		<result  property="bo_down" column="bo_down" />
-		<result  property="bo_ori_num" column="bo_ori_num" />
 		<result  property="bo_bt_num" column="bo_bt_num" />
 		<result  property="bo_me_num" column="bo_me_num" />
 		<result  property="bo_bi_num" column="bo_bi_num" />
@@ -111,9 +110,6 @@
 	</select>
 	<select id="selectLikesBySellerId" resultType="kr.kh.project.vo.LikesSellerVO">
 		select * from likes	where li_bo_num = #{li_bo_num} and li_bi_id = #{lb}
-=======
-		select * from likes	where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
->>>>>>> ec6404168fa156f1eae4d766c5dddce8ddc1a321
 	</select>
 	<insert id="insertUserLikes">
   		insert into

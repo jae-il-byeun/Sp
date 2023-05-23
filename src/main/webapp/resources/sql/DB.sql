@@ -71,7 +71,6 @@ CREATE TABLE `Board` (
 	`bo_record_date`	datetime	NULL,
 	`bo_update_date`	datetime	NULL,
 	`bo_views`	int	NULL,
-	`bo_ori_num`	int	NOT NULL,
 	`bo_bt_num`	int	NOT NULL,
 	`bo_me_id`	varchar(20)	,
 	`bo_bi_id`	varchar(20) 

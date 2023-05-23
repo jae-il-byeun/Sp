@@ -15,7 +15,6 @@ public class BoardVO {
 	int bo_views;
 	int bo_up;
 	int bo_down;
-	int bo_ori_num;
 	String bo_me_id;
 	String bo_bi_id;
 	int bo_bt_num;
