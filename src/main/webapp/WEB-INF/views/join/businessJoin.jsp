@@ -190,10 +190,7 @@ input{
 						<input type="text" id="email_id" name="bi_emailId">
 						<span>@</span>
 						<input type="text" id="email_domain" name="bi_domain">
-						<select>
-							<option>naver.com</option>
-							<option>google.com</option>
-						</select>
+
 						<input type="text" id="emailAuCheck">
 						<button type="button" id="bi_sendEmail">인증번호 발송</button>
 						<button type="button" id="bi_emailCheck">인증번호 확인</button>
@@ -293,7 +290,7 @@ $('form').validate({
 	messages:{
 		bi_id : {
 			required : '필수 항목입니다.',
-			regex : '아이디는 영문자로 시작하며, 영문, 숫자, 특수기호 -,_ 를 이용하여 5~20자 까지 가능합니다.'
+			regex : '아이디는 영문자,숫자는 필수로 시작하며, 영문, 숫자, 특수기호 -,_ 를 이용하여 5~20자 까지 가능합니다.'
 		},
 		bi_pw : {
 			required : '필수 항목입니다.',

@@ -125,7 +125,6 @@ CREATE TABLE `room` (
 DROP TABLE IF EXISTS `coo_hold`;
 
 CREATE TABLE `coo_hold` (
-	`coo_num`	int auto_increment	NOT NULL primary key,
 	`coo_co_num`	int	NOT NULL,
 	`coo_me_id`	varchar(20)	NOT NULL
 );
@@ -152,7 +151,7 @@ CREATE TABLE `Product` (
 DROP TABLE IF EXISTS `BoardType`;
 
 CREATE TABLE `BoardType` (
-	`bt_num`	int auto_increment	NOT NULL primary key,
+	`bt_num`	int NOT NULL primary key,
 	`bt_name`	varchar(50)	NULL,
 	`bt_writer_authority`	int	NULL,
 	`bt_read_authority`	int	NULL
@@ -162,7 +161,7 @@ DROP TABLE IF EXISTS `File`;
 
 CREATE TABLE `File` (
 	`file_num`	int auto_increment	NOT NULL primary key,
-	`file_name`	varchar(50)	NULL,
+	`file_name`	varchar(1000)	NULL,
 	`file_location`	varchar(100)	NULL,
 	`file_originName`	varchar(50)	NULL,
 	`file_size`	varchar(50)	NULL

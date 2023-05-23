@@ -120,6 +120,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/join/business", method=RequestMethod.POST)
 	public ModelAndView businessJoinPost(ModelAndView mv, BusinessVO seller) {
+		System.out.println(seller);
 		boolean isSignup = businessService.businessjoin(seller);
 		
 		if(isSignup){
@@ -142,7 +143,6 @@ public class HomeController {
 	@RequestMapping(value = "/check/businessId", method=RequestMethod.POST)
 	public Map<String, Object> BiIdCheck(@RequestBody BusinessVO seller){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		System.out.println(seller);
 		boolean result = businessService.checkBiId(seller);
 		System.out.println(result);
 		map.put("res", result);
