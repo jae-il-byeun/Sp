@@ -171,6 +171,7 @@ body{ font-family: 'GyeonggiTitleM';}
 								  	<c:forEach items="${bff}" var="file">
 								  		<c:if test="${file.bf_type == '이미지'}">
 									  		<div>
+									  			
 												<img src="<c:url value="/download${file.file_name}"></c:url>" height="200" width="auto">
 											</div>	
 										</c:if>
@@ -475,5 +476,20 @@ var swiper = new Swiper(".mySwiper", {
 <!-- 		success : successFunc -->
 <!-- 	}); -->
 <!-- } -->
+function readURL(input){
+	
+	if(!input.files || !input.files[0]){
+		input.nextElementSibling.src ='';
+		input.previousElementSibling.style.display = 'block';
+		return;
+	}
+	let reader = new FileReader();
+	reader.onload = function(e){
+		input.previousElementSibling.style.display = 'none';
+		input.nextElementSibling.src = e.target.result;
+	}
+	reader.readAsDataURL(input.files[0]);
+
+};
 </script>
 </html>

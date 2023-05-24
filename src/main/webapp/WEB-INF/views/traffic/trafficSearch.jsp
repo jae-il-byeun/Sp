@@ -3,7 +3,7 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
   <!-- Link Swiper's CSS -->
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
  
@@ -134,7 +134,7 @@ body{font-family: 'GyeonggiTitleM';}
 .busGrade_text{display:inline-block; text-align:center; width:100%;}
 .traffic_searchComplete{
 	width:100%; height:100%;
-	box-sizing:border-box; padding:0px 250px;
+	box-sizing:border-box; padding:0px 35%;
 }
 #searchComplete{
 	width:100%; height:100%;
@@ -146,7 +146,10 @@ body{font-family: 'GyeonggiTitleM';}
 	border-radius:15px;
 	cursor: pointer;
 }
-			
+ .pro_img{
+ 	width:100%; height:150px;
+ 	border-radius: 7px;
+ }			
 
 /* ---------------광고------------------- */
 .content_container{
@@ -477,37 +480,69 @@ swiper-slide img {
 			<ul class="content_product">
 				<li class="">
 					<h2>뜨는 지역</h2>
-					  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
-					    slides-per-view="4">
-					    <swiper-slide>
-					    	<img src="/project/resources/img/night_sky.jpg">
-						</swiper-slide>
-					    <swiper-slide>Slide 2</swiper-slide>
-					    <swiper-slide>Slide 3</swiper-slide>
-					    <swiper-slide>Slide 4</swiper-slide>
-					    <swiper-slide>Slide 5</swiper-slide>
-					    <swiper-slide>Slide 6</swiper-slide>
-					    <swiper-slide>Slide 7</swiper-slide>
-					    <swiper-slide>Slide 8</swiper-slide>
-					    <swiper-slide>Slide 9</swiper-slide>
-					  </swiper-container>
+					  <div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/5.jpg" >
+				    	<span class="" style="display: block; position: absolute;">에이든 바이베스트 웨스턴</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/6.jpg" >
+				    	<span class="" style="display: block; position: absolute;">호텔 카푸치노</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/7.jpg" >
+				    	<span class="" style="display: block; position: absolute;">신라스테이</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/8.jpg" >
+				    	<span class="" style="display: block; position: absolute;">파크 하얏트</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/9.jpg" >
+				    	<span class="" style="display: block; position: absolute;">글래드 강남 코엑스</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				  </div>
 				</li>
 				<li class="">
 					<h2>풍경 좋은 곳</h2>
-					  <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30" navigation="true"
-					    slides-per-view="4">
-					    <swiper-slide>
-					    	<img src="/project/resources/img/night_sky.jpg">
-						</swiper-slide>
-					    <swiper-slide>Slide 2</swiper-slide>
-					    <swiper-slide>Slide 3</swiper-slide>
-					    <swiper-slide>Slide 4</swiper-slide>
-					    <swiper-slide>Slide 5</swiper-slide>
-					    <swiper-slide>Slide 6</swiper-slide>
-					    <swiper-slide>Slide 7</swiper-slide>
-					    <swiper-slide>Slide 8</swiper-slide>
-					    <swiper-slide>Slide 9</swiper-slide>
-					  </swiper-container>
+					  <div class="swiper mySwiper">
+				    <div class="swiper-wrapper">
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/5.jpg" >
+				    	<span class="" style="display: block; position: absolute;">에이든 바이베스트 웨스턴</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/6.jpg" >
+				    	<span class="" style="display: block; position: absolute;">호텔 카푸치노</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/7.jpg" >
+				    	<span class="" style="display: block; position: absolute;">신라스테이</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/8.jpg" >
+				    	<span class="" style="display: block; position: absolute;">파크 하얏트</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/9.jpg" >
+				    	<span class="" style="display: block; position: absolute;">글래드 강남 코엑스</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+				    </div>
+				    <div class="swiper-pagination"></div>
+				  </div>
 				</li>
 				<li class="content_coupon">
 		
@@ -518,8 +553,6 @@ swiper-slide img {
 					    <swiper-slide>
 					    	 <img src="/project/resources/img/coupon.jpg" style="height:100px;">
 						</swiper-slide>
-					    <swiper-slide>Slide 2</swiper-slide>
-					    <swiper-slide>Slide 3</swiper-slide>
 					    <div class="autoplay-progress" slot="container-end">
 					      <svg viewBox="0 0 48 48">
 					        <circle cx="24" cy="24" r="20"></circle>
@@ -805,5 +838,15 @@ $('#searchComplete').click(function(){
       minDate: new Date()
     });
 </script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>
 </html>
 

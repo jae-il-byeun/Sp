@@ -130,7 +130,13 @@ body{ font-family: 'GyeonggiTitleM';}
  
  
  .pro_img{
- 	width:100%; height:150px;"
+ 	width:100%; height:150px;
+ 	border-radius: 7px;
+ }
+ .ㄴcoo_img{
+ 	width:500px; height:70px;
+ 	border-radius: 50px; 
+ 	border:1px solid gray;
  }
 
 swiper-slide {
@@ -153,7 +159,7 @@ swiper-slide img {
 }
 .content_coupon{
 	
-	width:100%; height:35%; box-sizing:border-box;
+	width:100%; height:45%; box-sizing:border-box;
 
 }
 
@@ -407,18 +413,30 @@ swiper-slide img {
 				  <div class="swiper mySwiper">
 				    <div class="swiper-wrapper">
 				      <div class="swiper-slide" >
-				      	<img class="pro_img" alt="" src="/project/resources/img/night_sky.jpg" >
-				    	<span class="" style="display: block; position: absolute;">평점</span>
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/1.jpg" >
+				    	<span class="" style="display: block; position: absolute;">강남 바이롯데</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">121,000원</span>
+					  </div>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/2.jpg" >
+				    	<span class="" style="display: block; position: absolute;">IHG 호텔</span>
 				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
 					  </div>
-				      <div class="swiper-slide">Slide 2</div>
-				      <div class="swiper-slide">Slide 3</div>
-				      <div class="swiper-slide">Slide 4</div>
-				      <div class="swiper-slide">Slide 5</div>
-				      <div class="swiper-slide">Slide 6</div>
-				      <div class="swiper-slide">Slide 7</div>
-				      <div class="swiper-slide">Slide 8</div>
-				      <div class="swiper-slide">Slide 9</div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/3.jpg" >
+				    	<span class="" style="display: block; position: absolute;">크레센도 서울</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/4.jpg" >
+				    	<span class="" style="display: block; position: absolute;">호텔 리베라</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/11.jpg" >
+				    	<span class="" style="display: block; position: absolute;">노보텔 엠배서더 서울 강남</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
 				    </div>
 				    <div class="swiper-pagination"></div>
 				  </div>
@@ -427,19 +445,31 @@ swiper-slide img {
 				<h2>추천지</h2>
 				  <div class="swiper mySwiper">
 				    <div class="swiper-wrapper">
-				      <div class="swiper-slide">
-				      	
-				    	<span class="" style="position: absolute;">평점</span>
-				    	<span style="position: absolute; float: right;">10,000</span>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/5.jpg" >
+				    	<span class="" style="display: block; position: absolute;">에이든 바이베스트 웨스턴</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
 					  </div>
-				      <div class="swiper-slide">Slide 2</div>
-				      <div class="swiper-slide">Slide 3</div>
-				      <div class="swiper-slide">Slide 4</div>
-				      <div class="swiper-slide">Slide 5</div>
-				      <div class="swiper-slide">Slide 6</div>
-				      <div class="swiper-slide">Slide 7</div>
-				      <div class="swiper-slide">Slide 8</div>
-				      <div class="swiper-slide">Slide 9</div>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/6.jpg" >
+				    	<span class="" style="display: block; position: absolute;">호텔 카푸치노</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/7.jpg" >
+				    	<span class="" style="display: block; position: absolute;">신라스테이</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/8.jpg" >
+				    	<span class="" style="display: block; position: absolute;">파크 하얏트</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/9.jpg" >
+				    	<span class="" style="display: block; position: absolute;">글래드 강남 코엑스</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
 				    </div>
 				    <div class="swiper-pagination"></div>
 				  </div>
@@ -448,19 +478,31 @@ swiper-slide img {
 				<h2>여긴?</h2>
 				  <div class="swiper mySwiper">
 				    <div class="swiper-wrapper">
-				      <div class="swiper-slide">
-				      	
-				    	<span class="" style="position: absolute;">평점</span>
-				    	<span style="position: absolute; float: right;">10,000</span>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/10.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
 					  </div>
-				      <div class="swiper-slide">Slide 2</div>
-				      <div class="swiper-slide">Slide 3</div>
-				      <div class="swiper-slide">Slide 4</div>
-				      <div class="swiper-slide">Slide 5</div>
-				      <div class="swiper-slide">Slide 6</div>
-				      <div class="swiper-slide">Slide 7</div>
-				      <div class="swiper-slide">Slide 8</div>
-				      <div class="swiper-slide">Slide 9</div>
+				      <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/12.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/13.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/14.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
+					  <div class="swiper-slide" >
+				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/15.jpg" >
+				    	<span class="" style="display: block; position: absolute;">평점</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+					  </div>
 				    </div>
 				    <div class="swiper-pagination"></div>
 				  </div>
@@ -471,18 +513,10 @@ swiper-slide img {
 				<div class="swiper mySwiper">
 				    <div class="swiper-wrapper">
 				      <div class="swiper-slide">
-				      	
-				    	<span class="" style="position: absolute;">평점</span>
-				    	<span style="position: absolute; float: right;">10,000</span>
+				      	<img class="coo_img" alt="" src="/project/resources/img/coupon.jpg" >
+				    	
 					  </div>
-				      <div class="swiper-slide">Slide 2</div>
-				      <div class="swiper-slide">Slide 3</div>
-				      <div class="swiper-slide">Slide 4</div>
-				      <div class="swiper-slide">Slide 5</div>
-				      <div class="swiper-slide">Slide 6</div>
-				      <div class="swiper-slide">Slide 7</div>
-				      <div class="swiper-slide">Slide 8</div>
-				      <div class="swiper-slide">Slide 9</div>
+				      
 				    </div>
 				    <div class="swiper-pagination"></div>
 				  </div>
@@ -634,7 +668,7 @@ $('#bl_btn').click(function(){
 		contentType : "application/json; charset=UTF-8",
 		success : function(sellerCheck){
 			if(sellerCheck.result){
-				alert('로그인 되셨습니다.');
+				alert('로그인 성공.');
 				session="business";
 				window.location.reload();
 			}else{
@@ -687,7 +721,7 @@ $('#exit').click(function(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(emailCheck){
 				if(emailCheck.result){
-					alert('로그아웃 되었습니다.');
+					alert('로그아웃 성공.');
 					window.location.reload();
 					session="";
 				}else{

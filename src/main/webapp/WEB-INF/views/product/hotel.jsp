@@ -53,8 +53,7 @@ width:100%; height:35%;
 
 .product_contentBox{
 	width:100%; height:100%; 
-
-	box-sizing: border-box; padding: 0px 150px; margin-top: 10px; margin-bottom:30px; 
+	box-sizing: border-box; padding: 0px 5%; margin-top: 10px; margin-bottom:30px; 
 }
 .product_mapBox{
 	width:50%; height:80%;
@@ -117,7 +116,7 @@ width:100%; height:35%;
 	margin-right: 0px;
 }
 .product_priceInsert{
-	width:40%; 
+	width:43%; 
 	margin: 30px 0px 0px 100px; 
 	float: right; text-align:right; color: #000;
 	font-size: 30px; text-decoration: none; 
@@ -229,17 +228,17 @@ width:100%; height:35%;
 							let tag = '';
 							tag = tag + '<li class="product">';
 							if(item.product_image != null && item.product_image.length > 0) {
-								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:670px; height:400px;">';
+								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:600px; height:400px;">';
 							}
 							else {
-								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:670px; height:400px;">';
+								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:600px; height:400px;">';
 							}
 							tag = tag + '<div class="product_semi">';
 							tag = tag + '<a class="product_title" name="product_name" href="#" onclick="location.replace(\'<c:url value="/product/productIntro/' + item.product_num + '"></c:url>\');">'+item.product_name+'</a>';
 							tag = tag + '<button class="like_button" >';
 							tag = tag + '<img alt="" src="/project/resources/img/nomal_like.png" class="like_icon" name="pf_file_num">';
 							tag = tag + '</button>';
-							tag = tag + '<div class="product_detailInfo">별점<img alt="" src="" class="product_starPoint">0 / 평점 0</span></div>';
+							tag = tag + '<div class="product_detailInfo">별점<img alt="" src="" class="product_starPoint"> / 평점 0 </span></div>';
 							tag = tag + '<a class="product_priceInsert" name="r_price" href="#" onclick="location.replace(\'<c:url value="/product/productIntro/' + item.product_num + '"></c:url>\');">'+item.price+'</a>';
 							tag = tag + '</div>';
 							tag = tag + '</li>';

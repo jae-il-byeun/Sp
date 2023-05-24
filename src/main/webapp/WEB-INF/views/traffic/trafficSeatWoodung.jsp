@@ -281,8 +281,8 @@ body{font-family: 'GyeonggiTitleM';}
     }
     #complete{
       float: right; width: 40%; height: 25%; text-align: center; line-height: 53px;
-      background: #e6e6e6; border-radius: 5px; margin-top: 25px;
-      color: #fff;
+      border-radius: 5px; margin-top: 25px;
+      background-color: rebeccapurple; color: #fff;
     }
 </style>
 <head>

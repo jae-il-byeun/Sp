@@ -1,5 +1,6 @@
 package kr.kh.project.serviceImp;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -117,6 +118,16 @@ public class BoardServiceImp implements BoardService {
 				FileVO fileVo = new FileVO();
 //				List<FileVO> test = new ArrayList<FileVO>();
 				for(MultipartFile file : files) {
+					if(file == null || file.getOriginalFilename().length() == 0)
+						continue;
+					System.out.println(file.isEmpty());
+					try {
+						byte[] arrt = file.getBytes();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					System.out.println("4+ : " + file);
 					System.out.println("origin+name+size : "+ file.getOriginalFilename()+ file.getName()+file.getSize());
 					
@@ -141,7 +152,7 @@ public class BoardServiceImp implements BoardService {
 
 					//DAO에게 첨부파일 정보를 주면서 추가하라고 요청
 					boardDao.insertFile(fileVo);
-					System.out.println("55");
+					System.out.println("55 : " + fileVo);
 					String file_type ="";
 					if(board.getBo_bt_num() == 0) {
 					
@@ -194,7 +205,9 @@ public class BoardServiceImp implements BoardService {
 
 	@Override
 	public ArrayList<Map<String, Object>> getBftnf(int bo_num) {
+		System.out.println(bo_num);
 		ArrayList<Map<String, Object>> bf = boardDao.selectBftnf(bo_num);
+		System.out.println("bf : " + bf);
 		return bf;
 	}
 	@Override
@@ -429,7 +442,7 @@ public class BoardServiceImp implements BoardService {
 			System.out.println("file_num 5 : " + file_num);
 			UploadFileUtils.removeFile(uploadPath, file.getFile_name());
 			boardDao.deleteBoardFile(file_num);
-			boardDao.deleteFile(file_num);		
+			boardDao.deleteFileList(file_num);		
 		}
 //		for( Map<String, Object> file : fileList) {
 //			for(FileVO fn : file) {

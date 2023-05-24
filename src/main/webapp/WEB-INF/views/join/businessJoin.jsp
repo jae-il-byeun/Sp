@@ -35,7 +35,7 @@ input{
 }
 .join_box{
 	width:100%; height:100%; 
-	box-sizing: border-box; padding:10px 150px 10px 250px; margin-top: 130px;
+	box-sizing: border-box; padding:10px 20%; margin-top: 130px;
 }
 .join_form{display:flex; margin-top:15px;}
 .join_table{

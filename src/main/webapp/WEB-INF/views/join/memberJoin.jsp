@@ -38,7 +38,7 @@ select{
 }
 .join_box{
 	width:100%; height:100%;  
-	box-sizing: border-box; padding:10px 250px; margin-top: 130px; 
+	box-sizing: border-box; padding:10px 20%; margin-top: 130px; 
 }
 .join_form{display:flex; margin-top:15px;}
 .join_table{
@@ -247,10 +247,7 @@ select{
 						<input type="text" class="email_id" name="me_emailId">
 						<span>@</span>
 						<input type="text" class="email_domain" name="me_domain">
-						<select id="email_domainKind">
-							<option>naver.com</option>
-							<option>google.com</option>
-						</select>
+						
 						<input type="text" id="emailAuCheck">
 						<button type="button" id="me_sendEmail">인증번호 발송</button>
 						<button type="button" id="me_emailCheck">인증번호 확인</button>

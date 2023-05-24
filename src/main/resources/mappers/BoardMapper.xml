@@ -103,6 +103,9 @@
 	 <delete id="deleteBoardFile">
 	 	delete from boardfile where bf_fi_num = #{fn}
 	 </delete>
+	 <delete id="deleteFileList">
+  		delete from file where file_num = #{fi}
+  	</delete>
 <!-- 추천 비추천 -->
 	<select id="selectLikesByUserId" resultType="kr.kh.project.vo.LikesUserVO">
 

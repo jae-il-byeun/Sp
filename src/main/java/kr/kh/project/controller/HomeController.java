@@ -86,9 +86,9 @@ public class HomeController {
 		MemberVO user = memberService.login(member);
 		//로그인을 세션을 저장 -> 객체에 담고 ->
 
-		int me_au = user.getMe_authority();
-		mv.addObject("user",user);
 		if(user != null) {
+			int me_au = user.getMe_authority();
+			mv.addObject("user",user);
 			session.setAttribute("user", user);
 			session.setAttribute("au", me_au);
 
@@ -156,10 +156,10 @@ public class HomeController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		BusinessVO business = businessService.businesslogin(seller);
 		System.out.println("business : "+ business);
-		int bi_au= business.getBi_authority();
-		System.out.println(bi_au);
-		mv.addObject("seller",business);
+
 		if(business != null) {
+			int bi_au= business.getBi_authority();
+			mv.addObject("seller",business);
 			session.setAttribute("seller", business);
 			session.setAttribute("au", bi_au);
 			map.put("result", true);

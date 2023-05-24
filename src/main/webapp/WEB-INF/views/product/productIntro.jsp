@@ -325,13 +325,13 @@ textarea{
 					</figure>
 					<div class="product_location ">
 						<h5>숙소 위치</h5>
-						<div id="map" style="width:700px;height: 190px;"></div>
+						<div id="map" style="width:600px;height: 190px;"></div>
 					</div>
 				</div>
 				<hr>
 				<c:forEach items="${rooms}" var="r">
 					<div class="product_roomContainer">
-						<div class="swiper mySwiper3" style="width:600px; height:350px;">
+						<div class="swiper mySwiper3" style="width:500px; height:350px;">
 						    <div class="swiper-wrapper">
 						      <c:forEach items="${r.r_file}" var="rFile">
 							      <div class="swiper-slide"><img src='<c:url value="/download${rFile.file_name}"></c:url>' /></div>

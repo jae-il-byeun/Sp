@@ -254,13 +254,6 @@ REFERENCES `Guset` (
 	`gu_name`
 );
 
-ALTER TABLE `Board` ADD CONSTRAINT `FK_Board_TO_Board_1` FOREIGN KEY (
-	`bo_ori_num`
-)
-REFERENCES `Board` (
-	`bo_num`
-);
-
 ALTER TABLE `Board` ADD CONSTRAINT `FK_BoardType_TO_Board_1` FOREIGN KEY (
 	`bo_bt_num`
 )

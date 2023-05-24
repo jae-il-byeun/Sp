@@ -76,7 +76,7 @@ public interface BoardDAO {
 
 	ArrayList<FileVO> selectFile(@Param("fi")int fileNum);
 
-	void deleteFile(@Param("fi")Integer file_num);
+	void deleteFileList(@Param("fi")Integer file_num);
 
 	
 

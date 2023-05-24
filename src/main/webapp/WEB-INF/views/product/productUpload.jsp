@@ -667,8 +667,10 @@ $('#type_lo').change();
 		fileList.forEach(file => {
             //dataTranster.items.add(file)
 			formData.append('files', file);
+            console.log(file);
 		});
-
+		e.preventDefault();
+	
 		//dataTranster.forEach(file => {
 		//	formData.append('files', file);
 		//});
@@ -679,6 +681,7 @@ $('#type_lo').change();
 		
 		$.ajax({
 			type : 'POST',
+			async:false,
 			data : formData,
 			url :'<c:url value="/product/productUploadData"></c:url>',
 			dataType : "json",
@@ -708,6 +711,7 @@ $('#type_lo').change();
 						formRoomData.append('room', new Blob([JSON.stringify(room_item)], {type: "application/json"}));
 
 						$.ajax({
+							async:false,
 							type : 'POST',
 							data : formRoomData,
 							url :'<c:url value="/product/productRoomUploadData"></c:url>',
@@ -742,6 +746,7 @@ $('#type_lo').change();
 				}
 			}
 		});
+		
 	});
 </script>
 <script>

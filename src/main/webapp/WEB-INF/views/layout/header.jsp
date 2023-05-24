@@ -127,8 +127,9 @@ a{text-decoration: none;}
 	
 }
 #ml_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:350px; font-size: 15px;
+	position: absolute; top: 100px; font-size: 15px;
 	background-color: green; color: #fff;  border-radius: 15px;
+	min-width: 60px; left: 70%;
 }
 #ml_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
@@ -145,8 +146,9 @@ a{text-decoration: none;}
 	
 }
 #mp_join{ width: 11%; padding-left: 2px;
-	position: absolute; top: 100px; left:350px; font-size: 15px;
+	position: absolute; top: 100px; font-size: 15px;
 	background-color: teal; color: #fff;  border-radius: 15px;
+	min-width: 60px; left: 70%;
 }
 #bp_loss{
 	position: absolute;  top: 122px; right: 58px; font-size: 13px; color: #000;
@@ -356,7 +358,7 @@ $('#ml_btn').click(function(){
 		contentType : "application/json; charset=UTF-8",
 		success : function(memberCheck){
 			if(memberCheck.result){
-				alert('로그인 되셨습니다.');
+				alert('로그인 성공.');
 				session="member";
 				window.location.reload();
 			}else{
@@ -435,7 +437,7 @@ $('#exit').click(function(){
 			contentType : "application/json; charset=UTF-8",
 			success : function(emailCheck){
 				if(emailCheck.result){
-					alert('로그아웃 되었습니다.');
+					alert('로그아웃 성공.');
 					window.location.reload();
 					session="";
 				}else{

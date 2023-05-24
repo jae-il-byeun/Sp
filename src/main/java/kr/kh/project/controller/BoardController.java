@@ -126,7 +126,9 @@ public class BoardController {
 			mv.addObject("seller", seller);
 		}
 		//보드 파일 및 파일타입
-		ArrayList<Map<String, Object>> boardFile = boardService.getBftnf(bo_num); 
+		System.out.println(bo_num);
+		ArrayList<Map<String, Object>> boardFile = boardService.getBftnf(bo_num);
+		System.out.println(boardFile);
 //		LikesVO likesVo = boardService.getLikes(bo_num, user);
 		mv.addObject("board", board);
 		mv.addObject("bff", boardFile);
