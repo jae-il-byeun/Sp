@@ -115,15 +115,20 @@ body{ font-family: 'GyeonggiTitleM';}
 
 .content_product{
 	width:100%; height: 15%;
+	
 }
 .content_product li{
 	margin-bottom: 100px;
+	box-shadow: 2px 2px 2px gray; 
+	border:1px solid #ddd;
+	border-radius: 5px;
 }
 
 .content_product li swiper-container {
 
      width: 100%; height: 100%; 
-     box-sizing: border-box;  box-shadow: 2px 2px 2px gray; background: none;
+     box-sizing: border-box; background: none;
+   
      border-radius: 5px;
  }
  
@@ -420,22 +425,22 @@ swiper-slide img {
 				      <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/2.jpg" >
 				    	<span class="" style="display: block; position: absolute;">IHG 호텔</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">165,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/3.jpg" >
 				    	<span class="" style="display: block; position: absolute;">크레센도 서울</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">250,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/4.jpg" >
 				    	<span class="" style="display: block; position: absolute;">호텔 리베라</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">220,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/11.jpg" >
 				    	<span class="" style="display: block; position: absolute;">노보텔 엠배서더 서울 강남</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">110,000원</span>
 					  </div>
 				    </div>
 				    <div class="swiper-pagination"></div>
@@ -448,27 +453,27 @@ swiper-slide img {
 				      <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/5.jpg" >
 				    	<span class="" style="display: block; position: absolute;">에이든 바이베스트 웨스턴</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">98,000원</span>
 					  </div>
 				      <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/6.jpg" >
 				    	<span class="" style="display: block; position: absolute;">호텔 카푸치노</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">310,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/7.jpg" >
 				    	<span class="" style="display: block; position: absolute;">신라스테이</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">145,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/8.jpg" >
 				    	<span class="" style="display: block; position: absolute;">파크 하얏트</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">195,000원</span>
 					  </div>
 					  <div class="swiper-slide" >
 				      	<img class="pro_img" alt="" src="/project/resources/img/test/home/9.jpg" >
 				    	<span class="" style="display: block; position: absolute;">글래드 강남 코엑스</span>
-				    	<span style="display: block; position: absolute; float: right; right:5px;">10,000</span>
+				    	<span style="display: block; position: absolute; float: right; right:5px;">226,000원</span>
 					  </div>
 				    </div>
 				    <div class="swiper-pagination"></div>

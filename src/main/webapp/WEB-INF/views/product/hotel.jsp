@@ -228,7 +228,7 @@ width:100%; height:35%;
 							let tag = '';
 							tag = tag + '<li class="product">';
 							if(item.product_image != null && item.product_image.length > 0) {
-								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:600px; height:400px;">';
+								tag = tag + '<img alt="" src="<c:url value="/download'+item.product_image+'"></c:url>" class="product_imege" style="width:40%; height:250px;">';
 							}
 							else {
 								tag = tag + '<img alt="" src="/project/resources/img/image_empty.png" class="product_imege" style="width:600px; height:400px;">';
